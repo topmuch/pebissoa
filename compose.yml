@@ -21,9 +21,7 @@ services:
     volumes:
       # PERSISTENT STORAGE - survive container rebuilds
       - pebissoa-data:/app/data       # Base SQLite
-      - pebissoa-uploads:/app/uploads # Images (production + futures uploads)
     restart: unless-stopped
 
 volumes:
   pebissoa-data:
-  pebissoa-uploads:
