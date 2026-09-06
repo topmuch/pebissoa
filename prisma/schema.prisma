@@ -1,0 +1,196 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String    @id @default(cuid())
+  email         String    @unique
+  password      String
+  name          String
+  role          String    @default("ENTERPRISE") // ADMIN, ENTERPRISE, VISITOR
+  phone         String?
+  avatar        String?
+  isBlocked     Boolean   @default(false)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  business     Business[]
+  reviews      Review[]
+}
+
+model Category {
+  id          String      @id @default(cuid())
+  name        String      @unique
+  slug        String      @unique
+  icon        String?
+  description String?
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+
+  businesses  Business[]
+  ads         Ad[]
+}
+
+model Business {
+  id          String        @id @default(cuid())
+  name        String
+  slug        String        @unique
+  description String?
+  logo        String?
+  coverImage  String?
+  address     String?
+  city        String?
+  region      String?
+  country     String        @default("Guinée-Bissau")
+  phone       String?
+  email       String?
+  website     String?
+  facebook    String?
+  instagram   String?
+  twitter     String?
+  linkedin    String?
+  whatsapp    String?
+  tiktok      String?
+  keywords    String?
+  categoryId  String?
+  ownerId     String
+  isActive    Boolean       @default(true)
+  isSuspended Boolean      @default(false)
+  views       Int           @default(0)
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+
+  owner       User          @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  category    Category?     @relation(fields: [categoryId], references: [id])
+  photos      BusinessPhoto[]
+  products    Product[]
+  services    Service[]
+  reviews     Review[]
+  ads         Ad[]
+  hours       BusinessHour[]
+}
+
+model BusinessPhoto {
+  id        String   @id @default(cuid())
+  url       String
+  businessId String
+  createdAt DateTime @default(now())
+
+  business  Business @relation(fields: [businessId], references: [id], onDelete: Cascade)
+}
+
+model BusinessHour {
+  id         String   @id @default(cuid())
+  dayOfWeek  Int      // 0=Dim, 1=Lun, ..., 6=Sam
+  openTime   String?  // "09:00"
+  closeTime  String?  // "18:00"
+  isClosed   Boolean  @default(false)
+  businessId String
+
+  business   Business @relation(fields: [businessId], references: [id], onDelete: Cascade)
+}
+
+model Product {
+  id          String   @id @default(cuid())
+  name        String
+  description String?
+  price       String?
+  imageUrl    String?
+  businessId  String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  business    Business @relation(fields: [businessId], references: [id], onDelete: Cascade)
+}
+
+model Service {
+  id          String   @id @default(cuid())
+  name        String
+  description String?
+  price       String?
+  businessId  String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  business    Business @relation(fields: [businessId], references: [id], onDelete: Cascade)
+}
+
+model Review {
+  id         String   @id @default(cuid())
+  rating     Int      // 1-5
+  comment    String?
+  businessId String
+  userId     String
+  response   String?
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  business   Business @relation(fields: [businessId], references: [id], onDelete: Cascade)
+  user       User     @relation(fields: [userId], references: [id])
+}
+
+model Ad {
+  id          String    @id @default(cuid())
+  title       String
+  description String?
+  image       String?
+  type        String    @default("SERVICE") // SERVICE, PROMOTION, PRODUCT, EVENT
+  categoryId  String?
+  businessId  String?
+  link        String?
+  position    String    @default("home") // home, enterprise
+  format      String    @default("336x280") // 336x280, 728x90, 300x600, detail_728x90
+  isActive    Boolean   @default(true)
+  startDate   DateTime?
+  endDate     DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  business    Business? @relation(fields: [businessId], references: [id], onDelete: Cascade)
+  category    Category? @relation(fields: [categoryId], references: [id])
+}
+
+model SiteConfig {
+  id             String   @id @default(cuid())
+  siteName       String   @default("Pebiss")
+  logo           String?
+  favicon        String?
+  address        String?
+  phone          String?
+  email          String?
+  seoTitle       String?
+  seoDescription String?
+  seoImage       String?
+  defaultLang    String   @default("pt") // pt, fr
+  facebook       String?
+  instagram      String?
+  twitter        String?
+  linkedin       String?
+  whatsapp       String?
+  tiktok         String?
+  // SMTP
+  smtpHost       String?
+  smtpPort       String?
+  smtpUser       String?
+  smtpPassword   String?
+  smtpFromName   String?
+  smtpFromEmail  String?
+  smtpEncryption String   @default("none") // none, tls, ssl
+  // Notifications
+  notifNewAd       Boolean @default(true)
+  notifNewReview   Boolean @default(true)
+  notifWeeklyReport Boolean @default(false)
+  notifAdApproved  Boolean @default(true)
+  notifWelcome     Boolean @default(true)
+  // Maintenance mode
+  maintenanceMode      Boolean   @default(false)
+  maintenanceMessage   String?
+  maintenanceEndTime   DateTime?
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+}

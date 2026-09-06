@@ -1,0 +1,5731 @@
+{
+ "categories": [
+  {
+   "id": "cmpzfhyqt0009lk01uzqge5fd",
+   "name": "Administration",
+   "slug": "administration",
+   "icon": "Administration",
+   "description": "",
+   "createdAt": "2026-06-04T11:45:17.093Z",
+   "updatedAt": "2026-06-04T11:45:17.093Z",
+   "_count": {
+    "businesses": 11
+   }
+  },
+  {
+   "id": "cmq0xu9su000apd1yth4uyx3z",
+   "name": "Agriculture & Agroalimentaire",
+   "slug": "agriculture-agroalimentaire",
+   "icon": "Wheat",
+   "description": null,
+   "createdAt": "2026-06-05T13:06:30.558Z",
+   "updatedAt": "2026-06-05T13:06:30.558Z",
+   "_count": {
+    "businesses": 0
+   }
+  },
+  {
+   "id": "cmq0xu9tg000cpd1yxaaid7lr",
+   "name": "Arts & Culture",
+   "slug": "arts-culture",
+   "icon": "Palette",
+   "description": null,
+   "createdAt": "2026-06-05T13:06:30.581Z",
+   "updatedAt": "2026-06-05T13:06:30.581Z",
+   "_count": {
+    "businesses": 0
+   }
+  },
+  {
+   "id": "cmpzfg40p0004lk01zyp07axa",
+   "name": "Assurances |  Banques",
+   "slug": "assurances-banques",
+   "icon": "Assurances | Banques",
+   "description": "",
+   "createdAt": "2026-06-04T11:43:50.618Z",
+   "updatedAt": "2026-07-13T10:12:54.922Z",
+   "_count": {
+    "businesses": 1
+   }
+  },
+  {
+   "id": "cmq0xu9sh0009pd1y2s99n7pe",
+   "name": "BTP & Construction",
+   "slug": "btp-construction",
+   "icon": "HardHat",
+   "description": null,
+   "createdAt": "2026-06-05T13:06:30.545Z",
+   "updatedAt": "2026-06-05T13:06:30.545Z",
+   "_count": {
+    "businesses": 2
+   }
+  },
+  {
+   "id": "cmpzfcy910000lk01wos6d6tr",
+   "name": "Banques",
+   "slug": "banques",
+   "icon": "Banque",
+   "description": "Banque",
+   "createdAt": "2026-06-04T11:41:23.174Z",
+   "updatedAt": "2026-06-04T11:41:23.174Z",
+   "_count": {
+    "businesses": 1
+   }
+  },
+  {
+   "id": "cmpzfibz3000alk0157mj77k3",
+   "name": "Barbier | Salon de coiffure",
+   "slug": "barbier-salon-de-coiffure",
+   "icon": "Barbearia | Cabelaleira",
+   "description": "",
+   "createdAt": "2026-06-04T11:45:34.239Z",
+   "updatedAt": "2026-07-13T09:54:15.670Z",
+   "_count": {
+    "businesses": 3
+   }
+  },
+  {
+   "id": "cmq0xu9qt0003pd1y0yjslt5t",
+   "name": "Commerce & Distribution",
+   "slug": "commerce-distribution",
+   "icon": "ShoppingBag",
+   "description": null,
+   "createdAt": "2026-06-05T13:06:30.485Z",
+   "updatedAt": "2026-06-05T13:06:30.485Z",
+   "_count": {
+    "businesses": 1
+   }
+  },
+  {
+   "id": "cmq0xu9u4000epd1y6k96g9fv",
+   "name": "Conseil & Services",
+   "slug": "conseil-services",
+   "icon": "Briefcase",
+   "description": null,
+   "createdAt": "2026-06-05T13:06:30.604Z",
+   "updatedAt": "2026-06-05T13:06:30.604Z",
+   "_count": {
+    "businesses": 1
+   }
+  },
+  {
+   "id": "cmq98wpmy001yln01pqgjratd",
+   "name": "Droite",
+   "slug": "droite",
+   "icon": "Droite",
+   "description": "",
+   "createdAt": "2026-06-11T08:38:29.579Z",
+   "updatedAt": "2026-06-11T08:38:29.579Z",
+   "_count": {
+    "businesses": 1
+   }
+  },
+  {
+   "id": "cmpzfhaf40007lk01lhe91hx8",
+   "name": "Electroniques",
+   "slug": "electroniques",
+   "icon": "Electroniques",
+   "description": "",
+   "createdAt": "2026-06-04T11:44:45.569Z",
+   "updatedAt": "2026-06-04T11:44:45.569Z",
+   "_count": {
+    "businesses": 0
+   }
+  },
+  {
+   "id": "cmq98si5i001wln0168zjpr6m",
+   "name": "Gestion des ressources humaines",
+   "slug": "gestion-des-ressources-humaines",
+   "icon": "Gestion des ressources humaines",
+   "description": "",
+   "createdAt": "2026-06-11T08:35:13.255Z",
+   "updatedAt": "2026-06-11T08:36:13.568Z",
+   "_count": {
+    "businesses": 0
+   }
+  },
+  {
+   "id": "cmq98vsbw001xln0193tbakng",
+   "name": "Génie logiciel",
+   "slug": "genie-logiciel",
+   "icon": "Génie logiciel",
+   "description": "",
+   "createdAt": "2026-06-11T08:37:46.412Z",
+   "updatedAt": "2026-06-11T08:37:46.412Z",
+   "_count": {
+    "businesses": 0
+   }
+  },
+  {
+   "id": "cmpzfefbm0002lk01k0mp5eya",
+   "name": "Hotels",
+   "slug": "hotels",
+   "icon": "Hotels",
+   "description": "",
+   "createdAt": "2026-06-04T11:42:31.955Z",
+   "updatedAt": "2026-07-01T10:01:04.734Z",
+   "_count": {
+    "businesses": 6
+   }
+  },
+  {
+   "id": "cmpzfhnbv0008lk0104bthorw",
+   "name": "Immobilier",
+   "slug": "immobilier",
+   "icon": "Immobilier",
+   "description": "",
+   "createdAt": "2026-06-04T11:45:02.300Z",
+   "updatedAt": "2026-06-04T11:45:02.300Z",
+   "_count": {
+    "businesses": 0
+   }
+  },
+  {
+   "id": "cmpzfgyse0006lk01jaw7fjum",
+   "name": "Informatiques",
+   "slug": "informatiques",
+   "icon": "Informatiques",
+   "description": "",
+   "createdAt": "2026-06-04T11:44:30.495Z",
+   "updatedAt": "2026-06-04T11:44:30.495Z",
+   "_count": {
+    "businesses": 1
+   }
+  },
+  {
+   "id": "cmq98pgna001vln01wai4z6bj",
+   "name": "Marketing | Communication",
+   "slug": "marketing-communication",
+   "icon": "Marketing | Communication",
+   "description": "",
+   "createdAt": "2026-06-11T08:32:51.334Z",
+   "updatedAt": "2026-07-13T10:07:12.145Z",
+   "_count": {
+    "businesses": 3
+   }
+  },
+  {
+   "id": "cmpzfgnb00005lk01vn5iu4f8",
+   "name": "Mode & Accessoires",
+   "slug": "mode-accessoires",
+   "icon": "Mode & Accessoires",
+   "description": "",
+   "createdAt": "2026-06-04T11:44:15.612Z",
+   "updatedAt": "2026-06-04T11:44:15.612Z",
+   "_count": {
+    "businesses": 0
+   }
+  },
+  {
+   "id": "cmq0xu9t5000bpd1yiopldjyf",
+   "name": "Mode & Textile",
+   "slug": "mode-textile",
+   "icon": "Shirt",
+   "description": null,
+   "createdAt": "2026-06-05T13:06:30.569Z",
+   "updatedAt": "2026-06-05T13:06:30.569Z",
+   "_count": {
+    "businesses": 1
+   }
+  },
+  {
+   "id": "cmpzfe3qu0001lk01oioluuwz",
+   "name": "Restaurants",
+   "slug": "restaurants",
+   "icon": "Restaurants",
+   "description": "",
+   "createdAt": "2026-06-04T11:42:16.950Z",
+   "updatedAt": "2026-06-04T11:42:16.950Z",
+   "_count": {
+    "businesses": 0
+   }
+  },
+  {
+   "id": "cmq0xu9pv0000pd1ynr1lhme3",
+   "name": "Restaurants | Alimentation",
+   "slug": "restaurants-alimentation",
+   "icon": "UtensilsCrossed",
+   "description": "",
+   "createdAt": "2026-06-05T13:06:30.451Z",
+   "updatedAt": "2026-07-13T10:06:47.595Z",
+   "_count": {
+    "businesses": 1
+   }
+  },
+  {
+   "id": "cmq0xu9qh0002pd1yny33ufmk",
+   "name": "Santé & Bien-être",
+   "slug": "sante-bien-etre",
+   "icon": "Heart",
+   "description": null,
+   "createdAt": "2026-06-05T13:06:30.474Z",
+   "updatedAt": "2026-06-05T13:06:30.474Z",
+   "_count": {
+    "businesses": 0
+   }
+  },
+  {
+   "id": "cmq0xu9rt0007pd1y5bps7mjf",
+   "name": "Services Financiers",
+   "slug": "services-financiers",
+   "icon": "Landmark",
+   "description": null,
+   "createdAt": "2026-06-05T13:06:30.521Z",
+   "updatedAt": "2026-06-05T13:06:30.521Z",
+   "_count": {
+    "businesses": 0
+   }
+  },
+  {
+   "id": "cmq0xu9ug000fpd1yf44q3zho",
+   "name": "Sport & Loisirs",
+   "slug": "sport-loisirs",
+   "icon": "Dumbbell",
+   "description": null,
+   "createdAt": "2026-06-05T13:06:30.616Z",
+   "updatedAt": "2026-06-05T13:06:30.616Z",
+   "_count": {
+    "businesses": 0
+   }
+  },
+  {
+   "id": "cmq0xu9q60001pd1ycturztaf",
+   "name": "Technologie | Informatique",
+   "slug": "technologie-informatique",
+   "icon": "Monitor",
+   "description": "",
+   "createdAt": "2026-06-05T13:06:30.462Z",
+   "updatedAt": "2026-07-13T10:05:59.409Z",
+   "_count": {
+    "businesses": 2
+   }
+  },
+  {
+   "id": "cmpzffeyb0003lk01dao3lic0",
+   "name": "Tourisme",
+   "slug": "tourisme",
+   "icon": "Tourisme",
+   "description": "",
+   "createdAt": "2026-06-04T11:43:18.132Z",
+   "updatedAt": "2026-06-04T11:43:18.132Z",
+   "_count": {
+    "businesses": 2
+   }
+  },
+  {
+   "id": "cmq0xu9s50008pd1ykdy9g92g",
+   "name": "Tourisme &Hôtellerie",
+   "slug": "tourisme-hotellerie",
+   "icon": "",
+   "description": "",
+   "createdAt": "2026-06-05T13:06:30.533Z",
+   "updatedAt": "2026-07-13T10:11:04.611Z",
+   "_count": {
+    "businesses": 0
+   }
+  },
+  {
+   "id": "cmq0xu9r40004pd1yppb8f3gw",
+   "name": "Transport | Logistique",
+   "slug": "transport-logistique",
+   "icon": "Transport | Logistique",
+   "description": "",
+   "createdAt": "2026-06-05T13:06:30.496Z",
+   "updatedAt": "2026-07-13T10:11:59.770Z",
+   "_count": {
+    "businesses": 0
+   }
+  },
+  {
+   "id": "cmq0ywec30000o901k3095uzf",
+   "name": "Télécom",
+   "slug": "telecom",
+   "icon": "Télécom",
+   "description": "Télécom",
+   "createdAt": "2026-06-05T13:36:09.363Z",
+   "updatedAt": "2026-06-05T13:36:09.363Z",
+   "_count": {
+    "businesses": 2
+   }
+  },
+  {
+   "id": "cmq0xu9rh0006pd1yfcmtl829",
+   "name": "Éducation & Formation",
+   "slug": "education-formation",
+   "icon": "GraduationCap",
+   "description": null,
+   "createdAt": "2026-06-05T13:06:30.510Z",
+   "updatedAt": "2026-06-05T13:06:30.510Z",
+   "_count": {
+    "businesses": 3
+   }
+  },
+  {
+   "id": "cmq0xu9ts000dpd1yq80wjtx5",
+   "name": "Énergie & Environnement",
+   "slug": "energie-environnement",
+   "icon": "Zap",
+   "description": null,
+   "createdAt": "2026-06-05T13:06:30.592Z",
+   "updatedAt": "2026-06-05T13:06:30.592Z",
+   "_count": {
+    "businesses": 0
+   }
+  }
+ ],
+ "businesses": [
+  {
+   "id": "cmtiositg0015ln015vygetcm",
+   "name": "UB | Umaro Balde",
+   "slug": "ub-umaro-balde",
+   "description": "UM: é uma empresa de consultoria e desenvolvimento de negócios que conecta empresas, empreendedores e mercados entre a África Ocidental e parceiros internacionais, oferecendo soluções em comércio, gestão, formação e expansão empresarial.",
+   "logo": "/api/uploads/38008613-a9f0-41a1-ade5-a41428ef71a4.jpeg",
+   "coverImage": "/api/uploads/a13146f3-257b-4f10-a87c-3a2fdd750487.png",
+   "address": "12, biss",
+   "city": "Bissau",
+   "region": null,
+   "country": "Guiné-Bissau",
+   "phone": "00989016117306",
+   "email": "umaro3597@gmail.com",
+   "website": "",
+   "facebook": "",
+   "instagram": "",
+   "twitter": "",
+   "linkedin": "https://www.linkedin.com/in/",
+   "whatsapp": "00989016117306",
+   "tiktok": null,
+   "keywords": "",
+   "categoryId": "cmpzfhyqt0009lk01uzqge5fd",
+   "ownerId": "cmtiosism0013ln017e9wwmmd",
+   "isActive": true,
+   "isSuspended": false,
+   "views": 24,
+   "createdAt": "2026-09-01T13:12:10.564Z",
+   "updatedAt": "2026-09-06T20:32:26.341Z",
+   "category": {
+    "id": "cmpzfhyqt0009lk01uzqge5fd",
+    "name": "Administration",
+    "slug": "administration",
+    "icon": "Administration"
+   },
+   "owner": {
+    "id": "cmtiosism0013ln017e9wwmmd",
+    "name": "UB | Umaro Balde"
+   },
+   "_count": {
+    "reviews": 0,
+    "products": 1,
+    "services": 0
+   }
+  },
+  {
+   "id": "cmt8tkt0j000mln016dt4nhvi",
+   "name": " B & F ADVOGADOS",
+   "slug": "b-f-advogados",
+   "description": "",
+   "logo": "/api/uploads/aa11fb54-c893-4810-b632-6106ec25d757.png",
+   "coverImage": "/api/uploads/8e4519eb-0284-4d98-a569-3a318a10e454.png",
+   "address": "Rua Areolino Cruz ,Nº 39 Bissau",
+   "city": "Bissau",
+   "region": "",
+   "country": "Guiné-Bissau",
+   "phone": "95 534 88 64 ",
+   "email": "banorbatistafonseca@gmail.com",
+   "website": "",
+   "facebook": "",
+   "instagram": "",
+   "twitter": "",
+   "linkedin": "",
+   "whatsapp": "95 518 78 96",
+   "tiktok": null,
+   "keywords": "",
+   "categoryId": "cmq98wpmy001yln01pqgjratd",
+   "ownerId": "cmt8tkt04000kln01hly6nmft",
+   "isActive": true,
+   "isSuspended": false,
+   "views": 17,
+   "createdAt": "2026-08-25T15:28:26.851Z",
+   "updatedAt": "2026-09-05T15:59:37.859Z",
+   "category": {
+    "id": "cmq98wpmy001yln01pqgjratd",
+    "name": "Droite",
+    "slug": "droite",
+    "icon": "Droite"
+   },
+   "owner": {
+    "id": "cmt8tkt04000kln01hly6nmft",
+    "name": "B & F ADVOGADOS"
+   },
+   "_count": {
+    "reviews": 0,
+    "products": 0,
+    "services": 0
+   }
+  },
+  {
+   "id": "cmt8qrdot000hln01ztat0so7",
+   "name": "Soares da Gamas J.R",
+   "slug": "soares-da-gamas-j-r",
+   "description": "Somos uma empresa especializada na compra e venda de automóveis novos e usados, oferecendo aos nossos clientes veículos de qualidade, segurança e confiança. Trabalhamos para proporcionar uma experiência simples e transparente, ajudando cada cliente a encontrar o carro adequado às suas necessidades e ao seu orçamento.\n\nAlém da venda de veículos, prestamos serviços de importação de automóveis, intermediação de compra, avaliação de veículos, documentação e entrega, garantindo acompanhamento durante todo o processo.",
+   "logo": "/api/uploads/674bb177-a124-4587-9da6-8cdea847d3c0.png",
+   "coverImage": "/api/uploads/6a9d8b67-f0fb-4b6b-b2f9-41e3d4849849.png",
+   "address": "Chão de Pepel",
+   "city": "Bissau",
+   "region": "",
+   "country": "Guiné-Bissau",
+   "phone": "955393911",
+   "email": "soaresdagamajunior@gmai.com",
+   "website": "",
+   "facebook": "",
+   "instagram": "",
+   "twitter": "",
+   "linkedin": "",
+   "whatsapp": "969238545",
+   "tiktok": null,
+   "keywords": "",
+   "categoryId": "cmq0xu9qt0003pd1y0yjslt5t",
+   "ownerId": "cmt8qrdoc000fln013ax6ohrz",
+   "isActive": true,
+   "isSuspended": false,
+   "views": 43,
+   "createdAt": "2026-08-25T14:09:34.733Z",
+   "updatedAt": "2026-09-02T10:51:55.978Z",
+   "category": {
+    "id": "cmq0xu9qt0003pd1y0yjslt5t",
+    "name": "Commerce & Distribution",
+    "slug": "commerce-distribution",
+    "icon": "ShoppingBag"
+   },
+   "owner": {
+    "id": "cmt8qrdoc000fln013ax6ohrz",
+    "name": "Soares da Gamas J.R"
+   },
+   "_count": {
+    "reviews": 0,
+    "products": 6,
+    "services": 0
+   }
+  },
+  {
+   "id": "cmt8p45gt0002ln01qtz09qgj",
+   "name": "Centro de Formação Doze Pedras",
+   "slug": "centro-de-formacao-doze-pedras",
+   "description": "O Centro de Formação Doze Pedras (CFDZ) é uma instituição de ensino privada gerida pela ONG Doze Pedras, focada no desenvolvimento intelectual, na formação profissional e na inserção de jovens no mercado de trabalho na Guiné-Bissau.",
+   "logo": "/api/uploads/cd856a63-c34f-49b3-ab32-8feaf1bac885.jfif",
+   "coverImage": "/api/uploads/b267153e-a8a7-4f0a-9d45-205c3f150f79.jfif",
+   "address": "Bairro ,Militar - Rotunda de Plack, Bissau",
+   "city": "Bissau",
+   "region": null,
+   "country": "Guiné-Bissau",
+   "phone": "",
+   "email": "ongdozepedras@gmail.com",
+   "website": "ONG Doze Pedras",
+   "facebook": "",
+   "instagram": "",
+   "twitter": "",
+   "linkedin": "",
+   "whatsapp": "",
+   "tiktok": null,
+   "keywords": "",
+   "categoryId": "cmq0xu9rh0006pd1yfcmtl829",
+   "ownerId": "cmt8p45gc0000ln01zove0m69",
+   "isActive": true,
+   "isSuspended": false,
+   "views": 0,
+   "createdAt": "2026-08-25T13:23:31.373Z",
+   "updatedAt": "2026-08-25T13:29:43.567Z",
+   "category": {
+    "id": "cmq0xu9rh0006pd1yfcmtl829",
+    "name": "Éducation & Formation",
+    "slug": "education-formation",
+    "icon": "GraduationCap"
+   },
+   "owner": {
+    "id": "cmt8p45gc0000ln01zove0m69",
+    "name": "Centro de F.Doze Pedras "
+   },
+   "_count": {
+    "reviews": 0,
+    "products": 0,
+    "services": 0
+   }
+  },
+  {
+   "id": "cmsp8n49p0028ln01ffhczq4l",
+   "name": "DJAO'S BARBER ",
+   "slug": "djao-s-barber",
+   "description": "",
+   "logo": null,
+   "coverImage": "/api/uploads/6d2188a6-1e9d-4b7a-8e27-a1154c321505.jpg",
+   "address": "BAIRRO MILITAR ",
+   "city": "BISSAU ",
+   "region": "",
+   "country": "GUINÉ-BISSAU ",
+   "phone": "",
+   "email": "",
+   "website": "",
+   "facebook": "",
+   "instagram": "",
+   "twitter": "",
+   "linkedin": "",
+   "whatsapp": "+245 955175562",
+   "tiktok": null,
+   "keywords": "",
+   "categoryId": "cmpzfibz3000alk0157mj77k3",
+   "ownerId": "cmsp8n4990026ln01nl0rhi65",
+   "isActive": true,
+   "isSuspended": false,
+   "views": 18,
+   "createdAt": "2026-08-11T22:34:45.469Z",
+   "updatedAt": "2026-08-26T09:22:56.210Z",
+   "category": {
+    "id": "cmpzfibz3000alk0157mj77k3",
+    "name": "Barbier | Salon de coiffure",
+    "slug": "barbier-salon-de-coiffure",
+    "icon": "Barbearia | Cabelaleira"
+   },
+   "owner": {
+    "id": "cmsp8n4990026ln01nl0rhi65",
+    "name": "ABUDO DJAU "
+   },
+   "_count": {
+    "reviews": 0,
+    "products": 1,
+    "services": 1
+   }
+  },
+  {
+   "id": "cmsowgan60025ln01cvskg74b",
+   "name": "SHEPHERD SILAS MULTE-SERVIÇOS ",
+   "slug": "shepherd-silas-multe-servicos",
+   "description": "A Shepherd Silas Multe-Serviços é uma empresa dedicada à prestação de diversos serviços, com foco em construção, comercialização de produtos e serviços de barbearia. A empresa procura oferecer soluções de qualidade, com profissionalismo, confiança e compromisso com os seus clientes.\n\nNossos principais serviços\n\n🏗️ Construção — obras, remodelações e serviços relacionados.\n🛒 Produtos — comercialização de diversos produtos para clientes particulares e empresas.\n💈 Barbearia — cortes de cabelo, cuidados masculinos e serviços de estética.",
+   "logo": null,
+   "coverImage": "/api/uploads/56d9582d-c5c2-439c-ad51-81c644415e4b.jpeg",
+   "address": "Hafia, Bissau",
+   "city": "Bissau",
+   "region": null,
+   "country": "Guinée-Bissau",
+   "phone": " 95 650 30 55",
+   "email": "Silasgangofficial@gmail.com",
+   "website": "",
+   "facebook": "",
+   "instagram": "",
+   "twitter": "",
+   "linkedin": "",
+   "whatsapp": "96 513 92 10",
+   "tiktok": null,
+   "keywords": "",
+   "categoryId": "cmq0xu9sh0009pd1y2s99n7pe",
+   "ownerId": "cmsowgamq0023ln01f9dk7hry",
+   "isActive": true,
+   "isSuspended": false,
+   "views": 7,
+   "createdAt": "2026-08-11T16:53:31.746Z",
+   "updatedAt": "2026-09-03T11:36:06.197Z",
+   "category": {
+    "id": "cmq0xu9sh0009pd1y2s99n7pe",
+    "name": "BTP & Construction",
+    "slug": "btp-construction",
+    "icon": "HardHat"
+   },
+   "owner": {
+    "id": "cmsowgamq0023ln01f9dk7hry",
+    "name": "SHEPHERD SILAS MULTE-SERVIÇOS"
+   },
+   "_count": {
+    "reviews": 0,
+    "products": 0,
+    "services": 0
+   }
+  },
+  {
+   "id": "cmsoo3y00001yln01zjynwf0n",
+   "name": "CANAFISTRA",
+   "slug": "canafistra",
+   "description": "Canafistra é uma localidade da Guiné-Bissau conhecida pelo seu ambiente tranquilo, pela comunidade local e pelas características naturais da região. É um espaço que representa a riqueza cultural e territorial do país, com potencial para o desenvolvimento de atividades económicas, sociais e turísticas.\n\nCanafistra — Um lugar de cultura, comunidade e potencial, onde a tradição e o desenvolvimento caminham juntos.",
+   "logo": null,
+   "coverImage": "/api/uploads/9696faf3-5e64-4eab-a19d-cf0c531f382f.png",
+   "address": "Bidjilin, Safim | Bissalanca",
+   "city": "Bissau",
+   "region": null,
+   "country": "Guiné-Bissau",
+   "phone": "+245 95 595 5551",
+   "email": "lizmyrian@gmail.com",
+   "website": "",
+   "facebook": "",
+   "instagram": "",
+   "twitter": "",
+   "linkedin": "",
+   "whatsapp": "+245 96 622 2121",
+   "tiktok": null,
+   "keywords": "",
+   "categoryId": "cmpzfefbm0002lk01k0mp5eya",
+   "ownerId": "cmsoo3xzm001wln01h6qhql28",
+   "isActive": true,
+   "isSuspended": false,
+   "views": 8,
+   "createdAt": "2026-08-11T12:59:58.560Z",
+   "updatedAt": "2026-08-12T18:37:10.055Z",
+   "category": {
+    "id": "cmpzfefbm0002lk01k0mp5eya",
+    "name": "Hotels",
+    "slug": "hotels",
+    "icon": "Hotels"
+   },
+   "owner": {
+    "id": "cmsoo3xzm001wln01h6qhql28",
+    "name": "CANAFISTRA"
+   },
+   "_count": {
+    "reviews": 0,
+    "products": 0,
+    "services": 0
+   }
+  },
+  {
+   "id": "cmsomvva7001fln01ewm7owqk",
+   "name": "HOTEL IMPERIO",
+   "slug": "hotel-imperio",
+   "description": "O Hôtel Império é uma unidade hoteleira localizada no centro de Bissau, oferecendo um ambiente confortável e adequado tanto para viagens de negócios como para turismo e estadias de curta ou longa duração. O hotel dispõe de quartos climatizados, Wi-Fi, restaurante, bar, serviço de quartos e receção 24 horas.\n\nA sua localização, na Avenida dos Heróis Nacionais, permite fácil acesso a importantes pontos da cidade, incluindo o Palácio Presidencial e a zona histórica de Bissau.\n\nSlogan:\n\nHôtel Império — Conforto, hospitalidade e uma experiência agradável no coração de Bissau.",
+   "logo": "/api/uploads/0b3b1650-0316-4f0c-bc64-48841cc1c26c.jfif",
+   "coverImage": "/api/uploads/1863fca1-3af3-44b9-9e24-5e70e2a4f3d7.jfif",
+   "address": "Praça dos Heróis Nacionais (Avenida dos Heróis Nacionais nº 1), no centro da cidade, em frente ao Palácio",
+   "city": "Bissau",
+   "region": null,
+   "country": "Guiné-Bissau",
+   "phone": "",
+   "email": "hotelelimperiopuntacana@gmail.com",
+   "website": "",
+   "facebook": "",
+   "instagram": "",
+   "twitter": "",
+   "linkedin": "",
+   "whatsapp": "+245 955 767 973",
+   "tiktok": null,
+   "keywords": "",
+   "categoryId": "cmpzfefbm0002lk01k0mp5eya",
+   "ownerId": "cmsomvv9r001dln01nbor0z7k",
+   "isActive": true,
+   "isSuspended": false,
+   "views": 3,
+   "createdAt": "2026-08-11T12:25:42.175Z",
+   "updatedAt": "2026-08-26T14:25:54.035Z",
+   "category": {
+    "id": "cmpzfefbm0002lk01k0mp5eya",
+    "name": "Hotels",
+    "slug": "hotels",
+    "icon": "Hotels"
+   },
+   "owner": {
+    "id": "cmsomvv9r001dln01nbor0z7k",
+    "name": "HOTEL IMPERIO"
+   },
+   "_count": {
+    "reviews": 0,
+    "products": 0,
+    "services": 0
+   }
+  },
+  {
+   "id": "cmsolzqy9000yln011c2y3dhb",
+   "name": "MAG PALACE HOTEL ",
+   "slug": "mag-palace-hotel",
+   "description": null,
+   "logo": "/api/uploads/012f4a40-bcd5-4985-8269-ee01ae346ca7.jfif",
+   "coverImage": "/api/uploads/53e2b6ba-8df8-48b7-a38b-e790d792d511.jfif",
+   "address": "Avenida dos Combatentes da Liberdade da Pátria, em Bissau",
+   "city": "Bissau",
+   "region": null,
+   "country": "Guiné-Bissau",
+   "phone": "+245 957 410 808",
+   "email": "magphotel@gmail.com",
+   "website": "",
+   "facebook": "",
+   "instagram": "",
+   "twitter": "",
+   "linkedin": "",
+   "whatsapp": "+245 956 938 372",
+   "tiktok": null,
+   "keywords": null,
+   "categoryId": "cmpzfefbm0002lk01k0mp5eya",
+   "ownerId": "cmsolzqxq000wln01784l7equ",
+   "isActive": true,
+   "isSuspended": false,
+   "views": 4,
+   "createdAt": "2026-08-11T12:00:43.569Z",
+   "updatedAt": "2026-09-05T00:27:49.677Z",
+   "category": {
+    "id": "cmpzfefbm0002lk01k0mp5eya",
+    "name": "Hotels",
+    "slug": "hotels",
+    "icon": "Hotels"
+   },
+   "owner": {
+    "id": "cmsolzqxq000wln01784l7equ",
+    "name": "MAG PALACE HOTEL "
+   },
+   "_count": {
+    "reviews": 0,
+    "products": 0,
+    "services": 0
+   }
+  },
+  {
+   "id": "cmsofs8ut000fln01ih5bb771",
+   "name": "PAPA LOCA",
+   "slug": "papa-loca",
+   "description": "Papa Loca Restaurante,é um espaço dedicado à gastronomia, onde os clientes podem desfrutar de pratos saborosos, bebidas e um ambiente agradável. O restaurante procura oferecer boa comida, atendimento de qualidade e momentos especiais para famílias, amigos e todos os amantes da boa gastronomia.",
+   "logo": "/api/uploads/873d7d21-8490-45fe-8bba-f4ac5948ce50.jpg",
+   "coverImage": "/api/uploads/01375407-4a82-4b47-b784-1500a686d8fe.webp",
+   "address": "Avenida Francisco Mendes Sede Do Clube Benfica Bissau, Bissau 1000 Guinée Bissau",
+   "city": "Bissau",
+   "region": "",
+   "country": "Guiné-Bissau",
+   "phone": "+245 955 581 226",
+   "email": "",
+   "website": "",
+   "facebook": "",
+   "instagram": "",
+   "twitter": "",
+   "linkedin": "",
+   "whatsapp": "",
+   "tiktok": null,
+   "keywords": "",
+   "categoryId": "cmq0xu9pv0000pd1ynr1lhme3",
+   "ownerId": "cmsofs8uf000dln01x31ib6oo",
+   "isActive": true,
+   "isSuspended": false,
+   "views": 8,
+   "createdAt": "2026-08-11T09:06:55.829Z",
+   "updatedAt": "2026-08-27T11:18:38.375Z",
+   "category": {
+    "id": "cmq0xu9pv0000pd1ynr1lhme3",
+    "name": "Restaurants | Alimentation",
+    "slug": "restaurants-alimentation",
+    "icon": "UtensilsCrossed"
+   },
+   "owner": {
+    "id": "cmsofs8uf000dln01x31ib6oo",
+    "name": "Papa Loca"
+   },
+   "_count": {
+    "reviews": 0,
+    "products": 0,
+    "services": 0
+   }
+  },
+  {
+   "id": "cmsni8cdi0002ln011s6k7xpc",
+   "name": "GRUPO DAF",
+   "slug": "grupo-daf",
+   "description": "Somos uma empresa especializada em contabilidade, gestão financeira e consultoria empresarial, dedicada a apoiar empresas, organizações e empreendedores na gestão eficiente das suas atividades financeiras.\n\nPrestamos serviços de contabilidade geral, elaboração de relatórios financeiros, gestão fiscal, processamento de salários, declaração de impostos, acompanhamento financeiro e consultoria empresarial.",
+   "logo": "/api/uploads/aed9ae5f-b021-4937-9ee1-19767fd0d220.jpeg",
+   "coverImage": "/api/uploads/1c622988-f304-4ccd-984b-c246cce8f7d6.jpeg",
+   "address": "SANTA LUZIA, HOTEL DUNIA ANTIGO AZALAI ",
+   "city": "Bissau",
+   "region": "",
+   "country": "Guiné-Bissau",
+   "phone": "955725560",
+   "email": "",
+   "website": "",
+   "facebook": "",
+   "instagram": "",
+   "twitter": "",
+   "linkedin": "",
+   "whatsapp": "955725560",
+   "tiktok": null,
+   "keywords": "",
+   "categoryId": "cmpzfhyqt0009lk01uzqge5fd",
+   "ownerId": "cmsni8cd20000ln01mowgg8ek",
+   "isActive": true,
+   "isSuspended": false,
+   "views": 19,
+   "createdAt": "2026-08-10T17:27:39.942Z",
+   "updatedAt": "2026-08-25T01:35:46.058Z",
+   "category": {
+    "id": "cmpzfhyqt0009lk01uzqge5fd",
+    "name": "Administration",
+    "slug": "administration",
+    "icon": "Administration"
+   },
+   "owner": {
+    "id": "cmsni8cd20000ln01mowgg8ek",
+    "name": "GRUPO DAF"
+   },
+   "_count": {
+    "reviews": 0,
+    "products": 0,
+    "services": 0
+   }
+  },
+  {
+   "id": "cmrxco3jw0018ln010so8ex6z",
+   "name": "Embaixada da República da Guiné - Conacri | Bissau",
+   "slug": "embaixada-da-republica-da-guine-conacri-bissau",
+   "description": null,
+   "logo": "/api/uploads/98d40360-b53d-4796-8b8f-b65ec8e497c8.jfif",
+   "coverImage": "/api/uploads/78b6d66d-ad1c-4a94-b606-590b25a8c6c1.jfif",
+   "address": "Rua Mariam Gouaby (Rua 14), Bissau, Guiné-Bissau",
+   "city": "Bissau",
+   "region": null,
+   "country": "Guiné-Bissau",
+   "phone": "(+245) 44 320 12 31",
+   "email": "ambaguibissau@mae.gov.gn",
+   "website": "",
+   "facebook": null,
+   "instagram": null,
+   "twitter": null,
+   "linkedin": null,
+   "whatsapp": null,
+   "tiktok": null,
+   "keywords": null,
+   "categoryId": "cmpzfhyqt0009lk01uzqge5fd",
+   "ownerId": "cmrxco3jf0016ln01kr7zc9pf",
+   "isActive": true,
+   "isSuspended": false,
+   "views": 2,
+   "createdAt": "2026-07-23T10:09:56.732Z",
+   "updatedAt": "2026-08-31T12:03:24.654Z",
+   "category": {
+    "id": "cmpzfhyqt0009lk01uzqge5fd",
+    "name": "Administration",
+    "slug": "administration",
+    "icon": "Administration"
+   },
+   "owner": {
+    "id": "cmrxco3jf0016ln01kr7zc9pf",
+    "name": "Embaixada da República da Guiné - Conacri | Bissau"
+   },
+   "_count": {
+    "reviews": 0,
+    "products": 0,
+    "services": 0
+   }
+  },
+  {
+   "id": "cmrxc03c50013ln013ae591h7",
+   "name": "Embaixada da China em Bissau | Guiné-Bissau ",
+   "slug": "embaixada-da-china-em-bissau-guine-bissau",
+   "description": "",
+   "logo": "/api/uploads/ac5a2790-59fa-41aa-a11c-fcadf8bfd8cd.jfif",
+   "coverImage": "/api/uploads/04c01bca-e2e9-46b0-a477-38f0e7d95f71.png",
+   "address": "Bairro de Penha,Bissau ",
+   "city": "Bissau",
+   "region": null,
+   "country": "Guiné-Bissau",
+   "phone": "(+245) 955 508 596",
+   "email": "consulate_gnb@mfa.gov.cn",
+   "website": "gw.china-embassy.gov.cn",
+   "facebook": "",
+   "instagram": "",
+   "twitter": "",
+   "linkedin": "",
+   "whatsapp": "",
+   "tiktok": null,
+   "keywords": "",
+   "categoryId": "cmpzfhyqt0009lk01uzqge5fd",
+   "ownerId": "cmrxc03bn0011ln01ot7z5mj6",
+   "isActive": true,
+   "isSuspended": false,
+   "views": 2,
+   "createdAt": "2026-07-23T09:51:16.709Z",
+   "updatedAt": "2026-08-11T12:17:18.671Z",
+   "category": {
+    "id": "cmpzfhyqt0009lk01uzqge5fd",
+    "name": "Administration",
+    "slug": "administration",
+    "icon": "Administration"
+   },
+   "owner": {
+    "id": "cmrxc03bn0011ln01ot7z5mj6",
+    "name": "Embaixada da China em Bissau"
+   },
+   "_count": {
+    "reviews": 0,
+    "products": 0,
+    "services": 0
+   }
+  },
+  {
+   "id": "cmrtaf0s40010ln01r53luz2i",
+   "name": "Consulado Honorário da Turquia em Bissau, Guiné-Bissau",
+   "slug": "consulado-honorario-da-turquia-em-bissau-guine-bissau",
+   "description": null,
+   "logo": "/api/uploads/fee41ece-13b9-46c5-94ff-541396510988.jfif",
+   "coverImage": "/api/uploads/d7b6ccd8-6de0-4ab5-bce4-99f5e499c216.png",
+   "address": "Zona Industriala de Bolola, Imovel No: 43 Bissau",
+   "city": "Bissau",
+   "region": null,
+   "country": "Guiné-Bissau",
+   "phone": "\t(+245) 95 572 93 93 ",
+   "email": "nelitogomes9@yahoo.com.br",
+   "website": "https://turkey-evisa.it.com",
+   "facebook": null,
+   "instagram": null,
+   "twitter": null,
+   "linkedin": null,
+   "whatsapp": null,
+   "tiktok": null,
+   "keywords": null,
+   "categoryId": "cmpzfhyqt0009lk01uzqge5fd",
+   "ownerId": "cmrtaf0rp000yln01a8z7070q",
+   "isActive": true,
+   "isSuspended": false,
+   "views": 4,
+   "createdAt": "2026-07-20T13:55:49.300Z",
+   "updatedAt": "2026-08-17T23:02:57.345Z",
+   "category": {
+    "id": "cmpzfhyqt0009lk01uzqge5fd",
+    "name": "Administration",
+    "slug": "administration",
+    "icon": "Administration"
+   },
+   "owner": {
+    "id": "cmrtaf0rp000yln01a8z7070q",
+    "name": "Consulado Honorário da Turquia em Bissau, Guiné-Bissau"
+   },
+   "_count": {
+    "reviews": 0,
+    "products": 0,
+    "services": 0
+   }
+  },
+  {
+   "id": "cmrta7u1n000lln011rwj4xel",
+   "name": "Embaixada da França em Dakar",
+   "slug": "embaixada-da-franca-em-dakar",
+   "description": null,
+   "logo": null,
+   "coverImage": "/api/uploads/e79be7b6-6f54-4c19-9001-8bb7ae3eca62.png",
+   "address": "1, rue El Hadji Amadou Assane Ndoye, BP 4035, Dakar",
+   "city": "Dakar",
+   "region": null,
+   "country": "Senegal",
+   "phone": "+221 33 839 51 00",
+   "email": "webmestre.dakar-amba@diplomatie.gouv.fr",
+   "website": "https://sn.ambafrance.org/-Francais-",
+   "facebook": null,
+   "instagram": null,
+   "twitter": null,
+   "linkedin": null,
+   "whatsapp": null,
+   "tiktok": null,
+   "keywords": null,
+   "categoryId": "cmpzfhyqt0009lk01uzqge5fd",
+   "ownerId": "cmrta7u1b000jln015dxi9u2t",
+   "isActive": true,
+   "isSuspended": false,
+   "views": 0,
+   "createdAt": "2026-07-20T13:50:13.980Z",
+   "updatedAt": "2026-07-20T13:51:25.091Z",
+   "category": {
+    "id": "cmpzfhyqt0009lk01uzqge5fd",
+    "name": "Administration",
+    "slug": "administration",
+    "icon": "Administration"
+   },
+   "owner": {
+    "id": "cmrta7u1b000jln015dxi9u2t",
+    "name": "Embaixada da França em Dakar"
+   },
+   "_count": {
+    "reviews": 0,
+    "products": 0,
+    "services": 0
+   }
+  },
+  {
+   "id": "cmrt9r7x0000iln01a1f3ptm7",
+   "name": "Embaixada da Bélgica no Senegal",
+   "slug": "embaixada-da-belgica-no-senegal",
+   "description": "",
+   "logo": null,
+   "coverImage": "/api/uploads/649e2d70-45c0-4151-82a2-dcf3a4860956.jfif",
+   "address": "Avenue des Jambaars  Dakar  Sénégal",
+   "city": "Dakar",
+   "region": null,
+   "country": "Senegal",
+   "phone": "(+221) 33 889 43 90",
+   "email": "",
+   "website": "https://senegal.diplomatie.belgium.be",
+   "facebook": "",
+   "instagram": "",
+   "twitter": "",
+   "linkedin": "",
+   "whatsapp": "",
+   "tiktok": null,
+   "keywords": "",
+   "categoryId": "cmpzfhyqt0009lk01uzqge5fd",
+   "ownerId": "cmrt9r7wo000gln01b26yen7q",
+   "isActive": true,
+   "isSuspended": false,
+   "views": 2,
+   "createdAt": "2026-07-20T13:37:18.805Z",
+   "updatedAt": "2026-08-22T20:10:07.701Z",
+   "category": {
+    "id": "cmpzfhyqt0009lk01uzqge5fd",
+    "name": "Administration",
+    "slug": "administration",
+    "icon": "Administration"
+   },
+   "owner": {
+    "id": "cmrt9r7wo000gln01b26yen7q",
+    "name": "Embaixada da Bélgica no Senegal"
+   },
+   "_count": {
+    "reviews": 0,
+    "products": 0,
+    "services": 0
+   }
+  },
+  {
+   "id": "cmrt8fm6p0002ln01s7zugqkr",
+   "name": "Nampa Service Sarl",
+   "slug": "nampa-service-sarl",
+   "description": "A Nampa Service SARL é uma empresa de tecnologia e serviços informáticos especializada em fornecer soluções digitais e tecnológicas para empresas, organizações e particulares.\n\nA empresa atua nas áreas de manutenção e assistência informática, instalação de software, configuração de redes e sistemas, instalação de Starlink, venda de equipamentos e materiais informáticos, suporte técnico e soluções tecnológicas.",
+   "logo": "/api/uploads/bd5dbe1f-cf01-42dd-bcf7-a70d57a53e73.png",
+   "coverImage": "/api/uploads/5062db32-f654-4df3-bf50-4f5065263af8.png",
+   "address": "Bairro Ministro",
+   "city": "Bissau",
+   "region": "",
+   "country": "Guinée-Bissau",
+   "phone": "+245956200479",
+   "email": "leogms23@gmail.com",
+   "website": "",
+   "facebook": "",
+   "instagram": "",
+   "twitter": "",
+   "linkedin": "",
+   "whatsapp": "955120467",
+   "tiktok": null,
+   "keywords": "",
+   "categoryId": "cmq0xu9q60001pd1ycturztaf",
+   "ownerId": "cmrt8fm670000ln01j6qob213",
+   "isActive": true,
+   "isSuspended": false,
+   "views": 2,
+   "createdAt": "2026-07-20T13:00:17.808Z",
+   "updatedAt": "2026-08-10T17:53:32.541Z",
+   "category": {
+    "id": "cmq0xu9q60001pd1ycturztaf",
+    "name": "Technologie | Informatique",
+    "slug": "technologie-informatique",
+    "icon": "Monitor"
+   },
+   "owner": {
+    "id": "cmrt8fm670000ln01j6qob213",
+    "name": "Nampa Service Sarl"
+   },
+   "_count": {
+    "reviews": 0,
+    "products": 0,
+    "services": 0
+   }
+  },
+  {
+   "id": "cmrersy4g003sln01684t7kka",
+   "name": "Cawa Group | Bissau",
+   "slug": "cawa-group-bissau",
+   "description": "CAWA GROUP apoia as empresas da África Ocidental na gestão de recursos humanos, combinando presença no terreno, profissionalismo e compromisso humano",
+   "logo": "/api/uploads/4a2b603a-af36-4ec8-bf15-265ffbc6d8fb.jpg",
+   "coverImage": "/api/uploads/b2546e22-19e6-472d-8369-8a026f4ea243.jpg",
+   "address": "Cupilum de Baixo, Av. Das Nações Unidas, Bissau, Guinea-Bisáu",
+   "city": "Bissau",
+   "region": null,
+   "country": "Guinea-Bisáu",
+   "phone": "+245 965 241 576",
+   "email": "",
+   "website": "https://cawagroup.com",
+   "facebook": "",
+   "instagram": "",
+   "twitter": "",
+   "linkedin": "",
+   "whatsapp": "",
+   "tiktok": null,
+   "keywords": "",
+   "categoryId": "cmpzfhyqt0009lk01uzqge5fd",
+   "ownerId": "cmrersy3k003qln015g3fgt1u",
+   "isActive": true,
+   "isSuspended": false,
+   "views": 6,
+   "createdAt": "2026-07-10T10:05:59.872Z",
+   "updatedAt": "2026-09-06T10:41:53.496Z",
+   "category": {
+    "id": "cmpzfhyqt0009lk01uzqge5fd",
+    "name": "Administration",
+    "slug": "administration",
+    "icon": "Administration"
+   },
+   "owner": {
+    "id": "cmrersy3k003qln015g3fgt1u",
+    "name": "Cawa Group | Bissau"
+   },
+   "_count": {
+    "reviews": 0,
+    "products": 0,
+    "services": 0
+   }
+  },
+  {
+   "id": "cmr25xnkn003lln01towmfpt2",
+   "name": "Guinebis Seguros S.A ",
+   "slug": "guinebis-seguros-s-a",
+   "description": "A primeira seguradora privada da Guiné-Bissau",
+   "logo": "/api/uploads/b86109e5-b4ef-4b2e-8997-351238b2d74c.jpg",
+   "coverImage": "/api/uploads/70b868a7-3d44-4646-8d11-bee7b8bd493f.jpg",
+   "address": "Rua Severino Gomes de Pina, Bissau, Guiné-Bissau",
+   "city": "Bissau",
+   "region": null,
+   "country": "Guinea-Bisáu",
+   "phone": "955101333",
+   "email": "guineebissau.cartebrune@cartebrune.org",
+   "website": "guinebis.com ",
+   "facebook": "",
+   "instagram": "",
+   "twitter": "",
+   "linkedin": "",
+   "whatsapp": "+245955101333",
+   "tiktok": null,
+   "keywords": "",
+   "categoryId": "cmpzfg40p0004lk01zyp07axa",
+   "ownerId": "cmr25xnk7003jln01u8xqxaou",
+   "isActive": true,
+   "isSuspended": false,
+   "views": 14,
+   "createdAt": "2026-07-01T14:20:33.815Z",
+   "updatedAt": "2026-08-23T01:18:20.658Z",
+   "category": {
+    "id": "cmpzfg40p0004lk01zyp07axa",
+    "name": "Assurances |  Banques",
+    "slug": "assurances-banques",
+    "icon": "Assurances | Banques"
+   },
+   "owner": {
+    "id": "cmr25xnk7003jln01u8xqxaou",
+    "name": "Guinebis Seguros S.A "
+   },
+   "_count": {
+    "reviews": 0,
+    "products": 0,
+    "services": 0
+   }
+  },
+  {
+   "id": "cmr1zhwig003iln0113rpfp40",
+   "name": "BarberShop Aos ",
+   "slug": "barbershop-aos",
+   "description": "",
+   "logo": "/api/uploads/ba08905c-3646-4e27-b872-dc972d569022.jpg",
+   "coverImage": "/api/uploads/9165fcc9-8ddf-4c65-984f-3e255df88010.jpg",
+   "address": "Rua Lamine Injai, Bissau, Guiné-Bissau",
+   "city": "Bissau",
+   "region": "",
+   "country": "Guinea-Bisáu",
+   "phone": "955 115 048",
+   "email": "barbershopaos@hotmail.com",
+   "website": "",
+   "facebook": "",
+   "instagram": "",
+   "twitter": "",
+   "linkedin": "",
+   "whatsapp": "245955115048",
+   "tiktok": null,
+   "keywords": "",
+   "categoryId": "cmpzfibz3000alk0157mj77k3",
+   "ownerId": "cmr1zhwi1003gln010vk278q8",
+   "isActive": true,
+   "isSuspended": false,
+   "views": 16,
+   "createdAt": "2026-07-01T11:20:21.208Z",
+   "updatedAt": "2026-09-05T00:39:03.102Z",
+   "category": {
+    "id": "cmpzfibz3000alk0157mj77k3",
+    "name": "Barbier | Salon de coiffure",
+    "slug": "barbier-salon-de-coiffure",
+    "icon": "Barbearia | Cabelaleira"
+   },
+   "owner": {
+    "id": "cmr1zhwi1003gln010vk278q8",
+    "name": "BarberShop Aos "
+   },
+   "_count": {
+    "reviews": 0,
+    "products": 0,
+    "services": 0
+   }
+  },
+  {
+   "id": "cmr1x46fe002wln014hnm21h0",
+   "name": "Hotel Lisboa Bissau",
+   "slug": "hotel-lisboa-bissau",
+   "description": "",
+   "logo": "/api/uploads/39e83d48-dec0-4a50-ac90-4dcdf60bc612.webp",
+   "coverImage": "/api/uploads/58154247-f73f-4877-9b75-639463b91c3c.webp",
+   "address": "Av.Combatante Libertade Patria, Bissau, Guiné-Bissau",
+   "city": "Bissau",
+   "region": "",
+   "country": "Guinea-Bisáu",
+   "phone": "+245 955 650 000",
+   "email": "",
+   "website": "",
+   "facebook": "",
+   "instagram": "",
+   "twitter": "",
+   "linkedin": "",
+   "whatsapp": "+245 955 650 000",
+   "tiktok": null,
+   "keywords": "",
+   "categoryId": "cmpzfefbm0002lk01k0mp5eya",
+   "ownerId": "cmr1x46f0002uln01uegwp38b",
+   "isActive": true,
+   "isSuspended": false,
+   "views": 6,
+   "createdAt": "2026-07-01T10:13:41.643Z",
+   "updatedAt": "2026-08-10T13:51:12.351Z",
+   "category": {
+    "id": "cmpzfefbm0002lk01k0mp5eya",
+    "name": "Hotels",
+    "slug": "hotels",
+    "icon": "Hotels"
+   },
+   "owner": {
+    "id": "cmr1x46f0002uln01uegwp38b",
+    "name": "Hotel Lisboa Bissau"
+   },
+   "_count": {
+    "reviews": 0,
+    "products": 0,
+    "services": 0
+   }
+  },
+  {
+   "id": "cmr1wtvrh002fln019g5mjveq",
+   "name": "Hotel Ceiba",
+   "slug": "hotel-ceiba",
+   "description": "",
+   "logo": "/api/uploads/e5ff2311-1909-43d0-86f8-991d355c2206.webp",
+   "coverImage": "/api/uploads/bec10bed-78f3-4386-88ae-70c155552a22.jpg",
+   "address": "Avenida Francisco Mendes, Bissau, Guiné-Bissau",
+   "city": "Bissau",
+   "region": null,
+   "country": "Guiné-Bissau",
+   "phone": "+245 969 189 292",
+   "email": "reservations@ceibabissau.com",
+   "website": "https://ceibabissau.com/fr/contact/",
+   "facebook": "",
+   "instagram": "",
+   "twitter": "",
+   "linkedin": "",
+   "whatsapp": "+245969189292",
+   "tiktok": null,
+   "keywords": "",
+   "categoryId": "cmpzfefbm0002lk01k0mp5eya",
+   "ownerId": "cmr1wtvr3002dln01uz06vx4f",
+   "isActive": true,
+   "isSuspended": false,
+   "views": 4,
+   "createdAt": "2026-07-01T10:05:41.261Z",
+   "updatedAt": "2026-08-22T03:34:21.967Z",
+   "category": {
+    "id": "cmpzfefbm0002lk01k0mp5eya",
+    "name": "Hotels",
+    "slug": "hotels",
+    "icon": "Hotels"
+   },
+   "owner": {
+    "id": "cmr1wtvr3002dln01uz06vx4f",
+    "name": "Hotel Ceiba"
+   },
+   "_count": {
+    "reviews": 0,
+    "products": 0,
+    "services": 0
+   }
+  },
+  {
+   "id": "cmr1wacja002cln01bpovnhio",
+   "name": "Satguru Travels guiné-Bissau",
+   "slug": "satguru-travels-guine-bissau",
+   "description": "uma empresa global de gestão de viagens, a Satguru Travel fornece serviços de ponta a ponta ",
+   "logo": "/api/uploads/287fd6cb-7ebc-4016-8b1f-9b0a39adfd1d.jpg",
+   "coverImage": "/api/uploads/9317e444-84fe-4e3b-bb26-5103badcf8cd.png",
+   "address": "Avenue Domingos Ramos Ns19A/21B Bissau, Guiné-Bissau ",
+   "city": "Bissau",
+   "region": null,
+   "country": "Guiné-Bissau",
+   "phone": "955 850 803",
+   "email": "ashish.udasi@satgurutravel.com",
+   "website": "satgurutravel.com/guinea-bissau  ",
+   "facebook": "",
+   "instagram": "",
+   "twitter": "",
+   "linkedin": "",
+   "whatsapp": "955850803",
+   "tiktok": null,
+   "keywords": "",
+   "categoryId": "cmpzffeyb0003lk01dao3lic0",
+   "ownerId": "cmr1wacix002aln01h3ua8x8x",
+   "isActive": true,
+   "isSuspended": false,
+   "views": 6,
+   "createdAt": "2026-07-01T09:50:29.878Z",
+   "updatedAt": "2026-08-30T04:32:44.517Z",
+   "category": {
+    "id": "cmpzffeyb0003lk01dao3lic0",
+    "name": "Tourisme",
+    "slug": "tourisme",
+    "icon": "Tourisme"
+   },
+   "owner": {
+    "id": "cmr1wacix002aln01h3ua8x8x",
+    "name": "Satguru Travels Guiné-Bissau"
+   },
+   "_count": {
+    "reviews": 0,
+    "products": 0,
+    "services": 0
+   }
+  },
+  {
+   "id": "cmr1vshh10029ln01lnzx7opm",
+   "name": "360 V2",
+   "slug": "360-v2",
+   "description": "É uma agência de comunicação, tecnologia e design sediada em Bissau, especializada na criação de identidades visuais e logótipos. Oferece serviços de branding, impressão profissional e segurança a instituições e empresas locais.",
+   "logo": "/api/uploads/491db9f0-a001-4d5a-b821-b924b92afa71.jpg",
+   "coverImage": "/api/uploads/b1dd4cb3-75ce-4669-8115-3d6653803b9e.png",
+   "address": "Av.Pansau na Isna- Coqueiros",
+   "city": "Bissau",
+   "region": "",
+   "country": "Guinea-Bisáu",
+   "phone": "956222323",
+   "email": "360v2guinebissau@gmail.com",
+   "website": "www.360v2sarl.gw",
+   "facebook": "",
+   "instagram": "",
+   "twitter": "",
+   "linkedin": "",
+   "whatsapp": "",
+   "tiktok": null,
+   "keywords": "",
+   "categoryId": "cmq98pgna001vln01wai4z6bj",
+   "ownerId": "cmr1vshgq0027ln01lb051qmx",
+   "isActive": true,
+   "isSuspended": false,
+   "views": 12,
+   "createdAt": "2026-07-01T09:36:36.469Z",
+   "updatedAt": "2026-08-15T14:07:32.993Z",
+   "category": {
+    "id": "cmq98pgna001vln01wai4z6bj",
+    "name": "Marketing | Communication",
+    "slug": "marketing-communication",
+    "icon": "Marketing | Communication"
+   },
+   "owner": {
+    "id": "cmr1vshgq0027ln01lb051qmx",
+    "name": "360 V2"
+   },
+   "_count": {
+    "reviews": 0,
+    "products": 0,
+    "services": 0
+   }
+  },
+  {
+   "id": "cmqzgxrw0001sln01nymt5bdm",
+   "name": "Amirale Archi",
+   "slug": "amirale-archi",
+   "description": " Design arquitetura ,Decoração da casa, Remodelação de casa.",
+   "logo": null,
+   "coverImage": "/api/uploads/348df524-a73a-49cd-a72c-3b6d76de267c.jpeg",
+   "address": "Franca",
+   "city": "Paris",
+   "region": "",
+   "country": "França",
+   "phone": "0033751160463",
+   "email": "amiralearchitecture@gmail.com",
+   "website": "",
+   "facebook": "",
+   "instagram": "",
+   "twitter": "",
+   "linkedin": "",
+   "whatsapp": "",
+   "tiktok": null,
+   "keywords": "",
+   "categoryId": "cmq0xu9sh0009pd1y2s99n7pe",
+   "ownerId": "cmqzgxrvl001qln01xh93tq7d",
+   "isActive": true,
+   "isSuspended": false,
+   "views": 4,
+   "createdAt": "2026-06-29T17:05:16.656Z",
+   "updatedAt": "2026-08-22T00:55:24.211Z",
+   "category": {
+    "id": "cmq0xu9sh0009pd1y2s99n7pe",
+    "name": "BTP & Construction",
+    "slug": "btp-construction",
+    "icon": "HardHat"
+   },
+   "owner": {
+    "id": "cmqzgxrvl001qln01xh93tq7d",
+    "name": "Amirale Archi"
+   },
+   "_count": {
+    "reviews": 0,
+    "products": 0,
+    "services": 0
+   }
+  },
+  {
+   "id": "cmqzgl7qd001pln017gmrx0ec",
+   "name": "Daya Beleza",
+   "slug": "daya-beleza",
+   "description": "",
+   "logo": "/api/uploads/9586635f-5147-45b0-90f1-da9f4163d721.jpeg",
+   "coverImage": "/api/uploads/adf19221-f1de-43d3-95b0-3dab9506b081.jpeg",
+   "address": "Antula , entrada de Lixo ",
+   "city": "Bissau",
+   "region": null,
+   "country": "Guiné-Bissau",
+   "phone": "955482174",
+   "email": "",
+   "website": "",
+   "facebook": "",
+   "instagram": "",
+   "twitter": "",
+   "linkedin": "",
+   "whatsapp": "",
+   "tiktok": null,
+   "keywords": "",
+   "categoryId": "cmpzfibz3000alk0157mj77k3",
+   "ownerId": "cmqzgl7o8001nln014lldo2l2",
+   "isActive": true,
+   "isSuspended": false,
+   "views": 1,
+   "createdAt": "2026-06-29T16:55:30.661Z",
+   "updatedAt": "2026-08-17T12:23:38.257Z",
+   "category": {
+    "id": "cmpzfibz3000alk0157mj77k3",
+    "name": "Barbier | Salon de coiffure",
+    "slug": "barbier-salon-de-coiffure",
+    "icon": "Barbearia | Cabelaleira"
+   },
+   "owner": {
+    "id": "cmqzgl7o8001nln014lldo2l2",
+    "name": "Dayana "
+   },
+   "_count": {
+    "reviews": 0,
+    "products": 0,
+    "services": 0
+   }
+  },
+  {
+   "id": "cmqvo0wfw001mln01x0uqdl2k",
+   "name": "Business international",
+   "slug": "business-international",
+   "description": "",
+   "logo": null,
+   "coverImage": "/api/uploads/ab49a9d0-f3bd-4551-a8c5-da2984f31e21.jpg",
+   "address": "DHAS",
+   "city": "Catió",
+   "region": "",
+   "country": "Guinée-Bissau",
+   "phone": "",
+   "email": "",
+   "website": "",
+   "facebook": "",
+   "instagram": "",
+   "twitter": "",
+   "linkedin": "",
+   "whatsapp": "",
+   "tiktok": null,
+   "keywords": "",
+   "categoryId": "cmq98pgna001vln01wai4z6bj",
+   "ownerId": "cmqvo0wfg001kln01uwg3ygg3",
+   "isActive": true,
+   "isSuspended": false,
+   "views": 6,
+   "createdAt": "2026-06-27T01:12:35.132Z",
+   "updatedAt": "2026-08-17T23:52:05.710Z",
+   "category": {
+    "id": "cmq98pgna001vln01wai4z6bj",
+    "name": "Marketing | Communication",
+    "slug": "marketing-communication",
+    "icon": "Marketing | Communication"
+   },
+   "owner": {
+    "id": "cmqvo0wfg001kln01uwg3ygg3",
+    "name": "Bless Mansaly"
+   },
+   "_count": {
+    "reviews": 0,
+    "products": 0,
+    "services": 0
+   }
+  },
+  {
+   "id": "cmqrzgoyf001jln011llezv1o",
+   "name": "Bimantecs | Bissau",
+   "slug": "bimantecs-bissau",
+   "description": "A Escola de Gestão e Tecnologia de Bissau é um instituto superior de formação localizado em BISSAU.",
+   "logo": null,
+   "coverImage": "/api/uploads/60f0aa86-2a4a-428d-95d0-01b66cf2bce7.png",
+   "address": "Praça, avenida Amílcar Cabral, Rua 7, n12, Bissau, Guiné-Bissau",
+   "city": "Bissau",
+   "region": null,
+   "country": "Guinea-Bisáu",
+   "phone": "955 651 017",
+   "email": "abouathie@bimantecs.com",
+   "website": "",
+   "facebook": "https://www.facebook.com/Bimantecs/",
+   "instagram": "",
+   "twitter": "",
+   "linkedin": "",
+   "whatsapp": "",
+   "tiktok": null,
+   "keywords": "",
+   "categoryId": "cmq0xu9rh0006pd1yfcmtl829",
+   "ownerId": "cmqrzgoxr001hln01dnnytbrp",
+   "isActive": true,
+   "isSuspended": false,
+   "views": 4,
+   "createdAt": "2026-06-24T11:21:42.999Z",
+   "updatedAt": "2026-08-21T15:06:04.910Z",
+   "category": {
+    "id": "cmq0xu9rh0006pd1yfcmtl829",
+    "name": "Éducation & Formation",
+    "slug": "education-formation",
+    "icon": "GraduationCap"
+   },
+   "owner": {
+    "id": "cmqrzgoxr001hln01dnnytbrp",
+    "name": "Bimantecs | Bissau"
+   },
+   "_count": {
+    "reviews": 0,
+    "products": 0,
+    "services": 0
+   }
+  },
+  {
+   "id": "cmqqm21xe001cln01t9e34sfs",
+   "name": "ADESCOM - ONG ",
+   "slug": "adescom-ong",
+   "description": "Agir pour le Développement des Communautés (ADESCOM)** est une Organisation Non Gouvernementale (ONG) dédiée à la transformation sociale et au développement communautaire en Guinée-Bissau.\n\nFondée le 15 janvier 2019, enregistrée sous le numéro 805 (Livre nº 07 SÉRIE C, Bulletin Officiel Nº 19 du 4 mai 2020), ADESCOM est née de la volonté de répondre aux besoins les plus urgents des communautés locales. Elle œuvre pour la promotion du bien-être social, de l'inclusion et du développement durable dans divers aspects de la vie communautaire.\n\nNotre intervention s'articule autour de quatre domaines principaux :\n\n- Santé\n- Droits humains\n- Éducation\n- Agriculture\n\nDepuis sa création, l'ONG s'est distinguée par des actions de sensibilisation, de prise de conscience et de prévention en matière de santé, notamment dans la lutte contre le VIH/SIDA, les Infections Sexuellement Transmissibles (IST), les hépatites, la tuberculose, le cancer du sein, la Covid-19, etc. Dans le domaine de l'éducation, elle s'investit à travers la formation technique professionnelle, les Activités Génératrices de Revenus (AGR) et l'autonomisation globale de la communauté pour le travail et l'indépendance financière.\n\n> Siège social : Bissau, quartier de Cuntum-Madina, entrée de Caju, rue Atlanta. \n\nObjectif: \n\n- Contribuer au développement social et humain des communautés, lutter contre la pauvreté, transformer des vies et stimuler la solidarité sociale.\n\n- ADESCOM s'engage dans une démarche communautaire participative qui vise à améliorer les conditions de vie et le bien-être des populations de la Guinée-Bissau, en encourageant un dynamisme local impliqué dans les actions de développement aux niveaux individuel et collectif.\n\n- L'organisation participe activement à la réalisation des 17 Objectifs de Développement Durable (ODD). Au fil des ans, elle a démontré sa capacité à mobiliser les membres de la communauté, à promouvoir un changement positif des comportements et des mentalités, ainsi qu'à organiser et former les populations pour les aider à devenir des forces participatives du changement global.\n\n* Mission\n\nLa mission d'ADESCOM est de promouvoir le développement social et communautaire à travers des initiatives visant à améliorer les conditions de vie des populations, à renforcer les capacités des jeunes et des femmes, et à promouvoir une société plus juste et équitable. L'ONG s'engage à agir comme un agent de changement, en favorisant l'autonomisation des communautés locales et la transformation positive des mentalités.\n\n* Vision\n\nÊtre une référence en matière d'actions à fort impact social qui transforment les communautés en environnements durables, inclusifs et autosuffisants.\n\n`* Valeurs\n\nADESCOM s'oriente autour de valeurs fondamentales qui guident ses actions et ses projets :\n\n- Solidarité et Inclusion : Nous travaillons à la construction d'un réseau de soutien mutuel entre les communautés, en promouvant l'entraide et le renforcement des liens sociaux. Nous croyons en un monde où chacun a une voix et des chances égales, indépendamment du genre, de l'ethnie, de la race, de la religion ou de la condition sociale.\n\n- Éthique et Transparence : Nous maintenons un engagement de clarté et d'honnêteté dans toutes nos activités, garantissant ainsi la confiance et la crédibilité auprès de nos partenaires et bénéficiaires.\n\n- Durabilité et Innovation : Nos projets sont conçus avec une vision d'impact à long terme, en promouvant l'utilisation responsable des ressources et le renforcement continu des capacités des communautés. Nous recherchons constamment de nouvelles approches et des solutions créatives pour relever les défis du développement communautaire.\n\n- Participation communautaire et Respect de la diversité :  Chaque individu a le droit et le devoir de s'impliquer activement dans les décisions et les actions qui touchent sa communauté. Nous promouvons l'acceptation et la valorisation des différences entre les individus, qu'elles soient culturelles, ethniques, religieuses, de genre, d'orientation sexuelle ou de toute autre caractéristique.",
+   "logo": "/api/uploads/8ed02602-4107-4310-85b1-3bf4df5370f2.png",
+   "coverImage": "/api/uploads/d6356fc0-9bef-4247-8b47-b1f60c1e3c2a.jpg",
+   "address": "Cuntum madina, entrada de caju, rue Atlanta ",
+   "city": "",
+   "region": "",
+   "country": "Guinée-Bissau",
+   "phone": "00245 965017441 ",
+   "email": "adescomo3@gmail.com",
+   "website": "",
+   "facebook": "https://www.facebook.com/adescomgb",
+   "instagram": "",
+   "twitter": "",
+   "linkedin": "https://www.linkedin.com/in/adescom-ong",
+   "whatsapp": "00245 965017441",
+   "tiktok": null,
+   "keywords": "Santé, Droits humains, Éducation, Agriculture",
+   "categoryId": "cmq0xu9rh0006pd1yfcmtl829",
+   "ownerId": "cmqqm21ww001aln01yk2t9toj",
+   "isActive": true,
+   "isSuspended": false,
+   "views": 21,
+   "createdAt": "2026-06-23T12:18:38.786Z",
+   "updatedAt": "2026-08-16T14:46:09.423Z",
+   "category": {
+    "id": "cmq0xu9rh0006pd1yfcmtl829",
+    "name": "Éducation & Formation",
+    "slug": "education-formation",
+    "icon": "GraduationCap"
+   },
+   "owner": {
+    "id": "cmqqm21ww001aln01yk2t9toj",
+    "name": "Erick FOUDA"
+   },
+   "_count": {
+    "reviews": 0,
+    "products": 1,
+    "services": 0
+   }
+  },
+  {
+   "id": "cmqkxmhn9000lln015mvs9uvs",
+   "name": "Ecobank Bissau",
+   "slug": "ecobank-bissau",
+   "description": "Banco The Pan African Bank ",
+   "logo": "/api/uploads/1c739617-7c23-4121-9e3a-cef9e3ce9872.webp",
+   "coverImage": "/api/uploads/b9bdc999-534b-469d-b2c8-45ab075dd1fe.webp",
+   "address": "VC68+CX8, Avenida Amilcar Cabral, Bissau, Guiné-Bissau.",
+   "city": "Bissau",
+   "region": null,
+   "country": "Guiné-Bissau",
+   "phone": "+245 320 73 60",
+   "email": "ecobankgw@ecobank.com",
+   "website": "https://ecobank.com/gw",
+   "facebook": "",
+   "instagram": "",
+   "twitter": "",
+   "linkedin": "",
+   "whatsapp": "",
+   "tiktok": null,
+   "keywords": "",
+   "categoryId": "cmpzfcy910000lk01wos6d6tr",
+   "ownerId": "cmqkxmhms000jln01xktj1y4o",
+   "isActive": true,
+   "isSuspended": false,
+   "views": 7,
+   "createdAt": "2026-06-19T12:55:50.997Z",
+   "updatedAt": "2026-08-15T12:40:31.642Z",
+   "category": {
+    "id": "cmpzfcy910000lk01wos6d6tr",
+    "name": "Banques",
+    "slug": "banques",
+    "icon": "Banque"
+   },
+   "owner": {
+    "id": "cmqkxmhms000jln01xktj1y4o",
+    "name": "Ecobank"
+   },
+   "_count": {
+    "reviews": 0,
+    "products": 0,
+    "services": 0
+   }
+  },
+  {
+   "id": "cmqkr26rn0004ln01bzgz8snx",
+   "name": "Telecel",
+   "slug": "telecel",
+   "description": "",
+   "logo": "/api/uploads/866bb347-e0e9-437f-843b-7325d89752b5.jpg",
+   "coverImage": "/api/uploads/cd71a769-a83a-4790-89c7-f3fbfa66f874.jpg",
+   "address": "Av. Combatentes Liberdade Da Pátria, Bissau, Guiné-Bissau",
+   "city": "Bissau",
+   "region": "",
+   "country": "Guinea-Bisáu",
+   "phone": "+245 95 500 00 00",
+   "email": "info@telecel.gw",
+   "website": "",
+   "facebook": "",
+   "instagram": "",
+   "twitter": "",
+   "linkedin": "",
+   "whatsapp": "",
+   "tiktok": null,
+   "keywords": "",
+   "categoryId": "cmq0ywec30000o901k3095uzf",
+   "ownerId": "cmqkr26r70002ln01r8nypyg9",
+   "isActive": true,
+   "isSuspended": false,
+   "views": 16,
+   "createdAt": "2026-06-19T09:52:06.083Z",
+   "updatedAt": "2026-08-24T11:08:58.322Z",
+   "category": {
+    "id": "cmq0ywec30000o901k3095uzf",
+    "name": "Télécom",
+    "slug": "telecom",
+    "icon": "Télécom"
+   },
+   "owner": {
+    "id": "cmqkr26r70002ln01r8nypyg9",
+    "name": "Telecel Bissau"
+   },
+   "_count": {
+    "reviews": 0,
+    "products": 0,
+    "services": 0
+   }
+  },
+  {
+   "id": "cmqgr6lev002vln0125n5umy9",
+   "name": "Comercio Digital",
+   "slug": "comercio-digital",
+   "description": "A loja COMERCIO DIGITAL oferece uma experiência única para você! \nAqui você escolhe! \nse quer comprar na nossa loja \"COMERCIO DIGITAL\", \nse quer receber o produto por entrega ou recuperar no local e \nSe quer pagar com dinheiro ou por transferência via Orange Money...\nLoja COMERCIO DIGITAL você compra do seu jeito!",
+   "logo": null,
+   "coverImage": "/api/uploads/c95633ac-f8b8-4407-9c60-dab79856016a.png",
+   "address": "HLM Grand Yoff",
+   "city": "Dakar",
+   "region": null,
+   "country": "Senegal",
+   "phone": "",
+   "email": "",
+   "website": "",
+   "facebook": "https://www.facebook.com/profile.php?id=100088150297079",
+   "instagram": "",
+   "twitter": "",
+   "linkedin": "",
+   "whatsapp": "",
+   "tiktok": null,
+   "keywords": "informatica, computador, material,",
+   "categoryId": "cmq0xu9q60001pd1ycturztaf",
+   "ownerId": "cmqgr6lee002tln0132b635xg",
+   "isActive": true,
+   "isSuspended": false,
+   "views": 4,
+   "createdAt": "2026-06-16T14:44:26.983Z",
+   "updatedAt": "2026-08-18T01:54:37.971Z",
+   "category": {
+    "id": "cmq0xu9q60001pd1ycturztaf",
+    "name": "Technologie | Informatique",
+    "slug": "technologie-informatique",
+    "icon": "Monitor"
+   },
+   "owner": {
+    "id": "cmqgr6lee002tln0132b635xg",
+    "name": "Louvi Pedreira"
+   },
+   "_count": {
+    "reviews": 0,
+    "products": 0,
+    "services": 0
+   }
+  },
+  {
+   "id": "cmqggwumi002gln013mn62pxt",
+   "name": "Consulting Pedreira Sarl",
+   "slug": "consulting-pedreira-sarl",
+   "description": "A Consulting Pedreira SARL é uma empresa multidisciplinar dedicada à comunicação, comércio e tecnologia, oferecendo soluções modernas para empresas, instituições e particulares.\n\nNossos serviços\n📢 Comunicação e publicidade\n💻 Soluções tecnológicas\n🌐 Criação e gestão de websites\n📱 Marketing digital e redes sociais\n🛒 Comércio de produtos e equipamentos\n🤝 Consultoria empresarial\n🖥️ Serviços informáticos e suporte técnico",
+   "logo": null,
+   "coverImage": "/api/uploads/767e1083-1816-4064-9619-41fc828002d4.webp",
+   "address": "Bairro Ajuda 1* Fase",
+   "city": "Bissau",
+   "region": "Bissau",
+   "country": "Guiné-Bissau",
+   "phone": "+245 95 620 04 79",
+   "email": "consultingpedreiragb@gmail.com",
+   "website": "www.consultingpedreiragb.com",
+   "facebook": "",
+   "instagram": "",
+   "twitter": "",
+   "linkedin": "",
+   "whatsapp": "956200479",
+   "tiktok": null,
+   "keywords": "",
+   "categoryId": "cmq98pgna001vln01wai4z6bj",
+   "ownerId": "cmqggwum5002eln01wv42rzdu",
+   "isActive": true,
+   "isSuspended": false,
+   "views": 23,
+   "createdAt": "2026-06-16T09:56:56.203Z",
+   "updatedAt": "2026-09-02T15:02:44.161Z",
+   "category": {
+    "id": "cmq98pgna001vln01wai4z6bj",
+    "name": "Marketing | Communication",
+    "slug": "marketing-communication",
+    "icon": "Marketing | Communication"
+   },
+   "owner": {
+    "id": "cmqggwum5002eln01wv42rzdu",
+    "name": "Edilson Pedreira"
+   },
+   "_count": {
+    "reviews": 1,
+    "products": 4,
+    "services": 0
+   }
+  },
+  {
+   "id": "cmqgff2250021ln01gs6zdozh",
+   "name": "Câmara Municipal de Bissau.",
+   "slug": "camara-municipal-de-bissau",
+   "description": "",
+   "logo": "/api/uploads/8485b303-0d5f-4665-957d-6e4fbbfdc3cb.png",
+   "coverImage": "/api/uploads/3c8471d3-b792-41f7-bde4-48727bc14e7a.webp",
+   "address": "Avenida Domingos Ramos",
+   "city": "Bissau",
+   "region": "",
+   "country": "Guiné-Bissau",
+   "phone": "+245 95 556 03 16",
+   "email": "geral@cmbissau-gb.com",
+   "website": "www.cmbissau-gb.com",
+   "facebook": "",
+   "instagram": "",
+   "twitter": "",
+   "linkedin": "",
+   "whatsapp": "",
+   "tiktok": null,
+   "keywords": "",
+   "categoryId": "cmpzfhyqt0009lk01uzqge5fd",
+   "ownerId": "cmqgff21l001zln01mmk0363h",
+   "isActive": true,
+   "isSuspended": false,
+   "views": 21,
+   "createdAt": "2026-06-16T09:15:06.413Z",
+   "updatedAt": "2026-08-13T19:31:24.879Z",
+   "category": {
+    "id": "cmpzfhyqt0009lk01uzqge5fd",
+    "name": "Administration",
+    "slug": "administration",
+    "icon": "Administration"
+   },
+   "owner": {
+    "id": "cmqgff21l001zln01mmk0363h",
+    "name": "Eng.Isalino pedreira"
+   },
+   "_count": {
+    "reviews": 0,
+    "products": 0,
+    "services": 0
+   }
+  },
+  {
+   "id": "cmq83cclw001sln01hpiaayku",
+   "name": "Boladje Consulting Empresarial",
+   "slug": "boladje-consulting-empresarial",
+   "description": "",
+   "logo": null,
+   "coverImage": "/api/uploads/cef15056-9e71-40f5-8d68-98def9ab9b8c.jpg",
+   "address": "Pluba, curva de Djon Cubala",
+   "city": "Bissau",
+   "region": "",
+   "country": "Guiné Bissau ",
+   "phone": "956757634",
+   "email": "",
+   "website": "",
+   "facebook": "",
+   "instagram": "",
+   "twitter": "",
+   "linkedin": "",
+   "whatsapp": "",
+   "tiktok": null,
+   "keywords": "",
+   "categoryId": "cmq0xu9u4000epd1y6k96g9fv",
+   "ownerId": "cmq83ccld001qln017qagvb2c",
+   "isActive": true,
+   "isSuspended": false,
+   "views": 11,
+   "createdAt": "2026-06-10T13:14:55.316Z",
+   "updatedAt": "2026-09-05T11:14:55.222Z",
+   "category": {
+    "id": "cmq0xu9u4000epd1y6k96g9fv",
+    "name": "Conseil & Services",
+    "slug": "conseil-services",
+    "icon": "Briefcase"
+   },
+   "owner": {
+    "id": "cmq83ccld001qln017qagvb2c",
+    "name": "Mumine Embaló "
+   },
+   "_count": {
+    "reviews": 0,
+    "products": 0,
+    "services": 0
+   }
+  },
+  {
+   "id": "cmq7dhaut0005ln01a3bjyugj",
+   "name": "Isatech",
+   "slug": "isatech",
+   "description": "",
+   "logo": null,
+   "coverImage": "/api/uploads/28660ae1-1763-4d58-9690-db8c18939bd2.jpg",
+   "address": "Bissau",
+   "city": "Bissau",
+   "region": "",
+   "country": "Guinee Bissau",
+   "phone": "955140473",
+   "email": "",
+   "website": "",
+   "facebook": "",
+   "instagram": "",
+   "twitter": "",
+   "linkedin": "",
+   "whatsapp": "",
+   "tiktok": null,
+   "keywords": "",
+   "categoryId": "cmpzfgyse0006lk01jaw7fjum",
+   "ownerId": "cmq7dhau20003ln01gy9f8tsk",
+   "isActive": true,
+   "isSuspended": false,
+   "views": 15,
+   "createdAt": "2026-06-10T01:10:56.308Z",
+   "updatedAt": "2026-08-12T08:30:19.324Z",
+   "category": {
+    "id": "cmpzfgyse0006lk01jaw7fjum",
+    "name": "Informatiques",
+    "slug": "informatiques",
+    "icon": "Informatiques"
+   },
+   "owner": {
+    "id": "cmq7dhau20003ln01gy9f8tsk",
+    "name": "Isatech"
+   },
+   "_count": {
+    "reviews": 0,
+    "products": 0,
+    "services": 0
+   }
+  },
+  {
+   "id": "cmq1j26sq000qka01kj3u3loc",
+   "name": "NSIA SEGUROS – NSIA,",
+   "slug": "nsia-seguros-nsia",
+   "description": "NSIA SEGUROS – NSIA,",
+   "logo": "/api/uploads/bc0ae099-2779-4877-8f2d-2d987288dbcd.png",
+   "coverImage": "/api/uploads/4acd578a-f9b3-4409-9ea9-ed7496d2a788.jpg",
+   "address": "Bissau",
+   "city": "Bissau",
+   "region": "",
+   "country": "Guinée-Bissau",
+   "phone": "",
+   "email": "nsiassurances.guineebissaua@groupensia.com",
+   "website": "https://nsiassurancesgb.com",
+   "facebook": "",
+   "instagram": "",
+   "twitter": "",
+   "linkedin": "",
+   "whatsapp": "",
+   "tiktok": null,
+   "keywords": "",
+   "categoryId": null,
+   "ownerId": "cmq1j26sc000oka01v11sqdf5",
+   "isActive": true,
+   "isSuspended": false,
+   "views": 12,
+   "createdAt": "2026-06-05T23:00:31.850Z",
+   "updatedAt": "2026-09-05T06:16:43.606Z",
+   "category": null,
+   "owner": {
+    "id": "cmq1j26sc000oka01v11sqdf5",
+    "name": "NSIA SEGUROS – NSIA,"
+   },
+   "_count": {
+    "reviews": 0,
+    "products": 0,
+    "services": 0
+   }
+  },
+  {
+   "id": "cmq1hrxu3000uta01wv2o40bj",
+   "name": "TGB Televisão da Guiné-Bissau ",
+   "slug": "tgb-televisao-da-guine-bissau",
+   "description": "TGB Televisão da Guiné-Bissau ",
+   "logo": null,
+   "coverImage": "/api/uploads/949b4527-df8b-4ab9-a0fa-c96dfaf54266.jpg",
+   "address": "Bissau, Guinée-Bissau",
+   "city": "Bissau, Guinée-Bissau",
+   "region": null,
+   "country": "Guinée-Bissau",
+   "phone": "+245 956 601 862",
+   "email": "sshopsoldtions@gmail.com",
+   "website": "",
+   "facebook": "",
+   "instagram": "",
+   "twitter": "",
+   "linkedin": "",
+   "whatsapp": "",
+   "tiktok": null,
+   "keywords": "",
+   "categoryId": "cmpzfhyqt0009lk01uzqge5fd",
+   "ownerId": "cmq1hrxtp000sta01hvq1sxtm",
+   "isActive": true,
+   "isSuspended": false,
+   "views": 11,
+   "createdAt": "2026-06-05T22:24:34.059Z",
+   "updatedAt": "2026-08-12T21:39:29.809Z",
+   "category": {
+    "id": "cmpzfhyqt0009lk01uzqge5fd",
+    "name": "Administration",
+    "slug": "administration",
+    "icon": "Administration"
+   },
+   "owner": {
+    "id": "cmq1hrxtp000sta01hvq1sxtm",
+    "name": "TGB Televisão da Guiné-Bissau "
+   },
+   "_count": {
+    "reviews": 0,
+    "products": 0,
+    "services": 0
+   }
+  },
+  {
+   "id": "cmq1hfdel000nta01ziterce3",
+   "name": "Aéroport international Osvaldo Vieira de Bissau",
+   "slug": "aeroport-international-osvaldo-vieira-de-bissau",
+   "description": "Aéroport international Osvaldo Vieira de Bissau",
+   "logo": "/uploads/9a6607b6-6908-4d42-bd5f-7ab2abc72868.webp",
+   "coverImage": "/api/uploads/9fd6625e-0c32-41a2-bd3c-1471971e57a0.webp",
+   "address": "V8QX+GGX, Guinea-Bissau",
+   "city": "Guinea-Bissau",
+   "region": null,
+   "country": "Guinée-Bissau",
+   "phone": null,
+   "email": "settsofutions@gmail.com",
+   "website": null,
+   "facebook": null,
+   "instagram": null,
+   "twitter": null,
+   "linkedin": null,
+   "whatsapp": null,
+   "tiktok": null,
+   "keywords": null,
+   "categoryId": "cmpzfhyqt0009lk01uzqge5fd",
+   "ownerId": "cmq1hfdds000lta016q1pbd16",
+   "isActive": true,
+   "isSuspended": false,
+   "views": 23,
+   "createdAt": "2026-06-05T22:14:47.709Z",
+   "updatedAt": "2026-08-13T16:06:07.762Z",
+   "category": {
+    "id": "cmpzfhyqt0009lk01uzqge5fd",
+    "name": "Administration",
+    "slug": "administration",
+    "icon": "Administration"
+   },
+   "owner": {
+    "id": "cmq1hfdds000lta016q1pbd16",
+    "name": "Aéroport international Osvaldo Vieira de Bissau"
+   },
+   "_count": {
+    "reviews": 0,
+    "products": 0,
+    "services": 0
+   }
+  },
+  {
+   "id": "cmq1h37rj000hta01uy6p1g6t",
+   "name": "Consulmar Travel",
+   "slug": "consulmar-travel",
+   "description": "Consulmar Travel",
+   "logo": "/api/uploads/d0339d2d-eb88-4df9-bf33-016f14819297.png",
+   "coverImage": "/api/uploads/b56b2dfb-988b-4aff-a280-ee6faa10d4a6.jpg",
+   "address": "Bissau",
+   "city": "Bissau",
+   "region": null,
+   "country": "Guinée-Bissau",
+   "phone": null,
+   "email": "ssssolutions@gmail.com",
+   "website": null,
+   "facebook": null,
+   "instagram": null,
+   "twitter": null,
+   "linkedin": null,
+   "whatsapp": null,
+   "tiktok": null,
+   "keywords": null,
+   "categoryId": "cmpzffeyb0003lk01dao3lic0",
+   "ownerId": "cmq1h37on000fta01q0phj5v6",
+   "isActive": true,
+   "isSuspended": false,
+   "views": 5,
+   "createdAt": "2026-06-05T22:05:20.527Z",
+   "updatedAt": "2026-08-15T20:37:29.088Z",
+   "category": {
+    "id": "cmpzffeyb0003lk01dao3lic0",
+    "name": "Tourisme",
+    "slug": "tourisme",
+    "icon": "Tourisme"
+   },
+   "owner": {
+    "id": "cmq1h37on000fta01q0phj5v6",
+    "name": "Consulmar Travel"
+   },
+   "_count": {
+    "reviews": 0,
+    "products": 0,
+    "services": 0
+   }
+  },
+  {
+   "id": "cmq1guaus000eta01k99zc63e",
+   "name": "Orange Bissau",
+   "slug": "orange-bissau",
+   "description": "Orange Bissau",
+   "logo": "/api/uploads/a3b80d69-24c6-4810-9189-2554544f0785.png",
+   "coverImage": "/api/uploads/d206e911-57c2-4331-9d20-15825f9c3cd7.jpg",
+   "address": "Bissau",
+   "city": "Bissau",
+   "region": "",
+   "country": "Guinée-Bissau",
+   "phone": "+245 955 603 060",
+   "email": "senerf@gmail.com",
+   "website": "",
+   "facebook": "",
+   "instagram": "",
+   "twitter": "",
+   "linkedin": "",
+   "whatsapp": "",
+   "tiktok": null,
+   "keywords": "",
+   "categoryId": "cmq0ywec30000o901k3095uzf",
+   "ownerId": "cmq1guaud000cta01c16aila3",
+   "isActive": true,
+   "isSuspended": false,
+   "views": 16,
+   "createdAt": "2026-06-05T21:58:24.628Z",
+   "updatedAt": "2026-08-30T20:05:44.283Z",
+   "category": {
+    "id": "cmq0ywec30000o901k3095uzf",
+    "name": "Télécom",
+    "slug": "telecom",
+    "icon": "Télécom"
+   },
+   "owner": {
+    "id": "cmq1guaud000cta01c16aila3",
+    "name": "Orange Bissau"
+   },
+   "_count": {
+    "reviews": 0,
+    "products": 0,
+    "services": 0
+   }
+  },
+  {
+   "id": "cmq1gn3kw0005ta01o2ydmlhi",
+   "name": "Dunia Hotel",
+   "slug": "dunia-hotel",
+   "description": "Dunia Hotel",
+   "logo": null,
+   "coverImage": "/api/uploads/13369dfb-325f-477c-b67e-b66cbcfbd8dd.jpg",
+   "address": "Bissau",
+   "city": "Bissau",
+   "region": null,
+   "country": "Guinée-Bissau",
+   "phone": null,
+   "email": "sepsolutns@gmail.com",
+   "website": null,
+   "facebook": null,
+   "instagram": null,
+   "twitter": null,
+   "linkedin": null,
+   "whatsapp": null,
+   "tiktok": null,
+   "keywords": null,
+   "categoryId": "cmpzfefbm0002lk01k0mp5eya",
+   "ownerId": "cmq1gn3kj0003ta01pj7up8m1",
+   "isActive": true,
+   "isSuspended": false,
+   "views": 27,
+   "createdAt": "2026-06-05T21:52:48.608Z",
+   "updatedAt": "2026-08-01T15:06:21.883Z",
+   "category": {
+    "id": "cmpzfefbm0002lk01k0mp5eya",
+    "name": "Hotels",
+    "slug": "hotels",
+    "icon": "Hotels"
+   },
+   "owner": {
+    "id": "cmq1gn3kj0003ta01pj7up8m1",
+    "name": "Dunia Hotel"
+   },
+   "_count": {
+    "reviews": 0,
+    "products": 0,
+    "services": 0
+   }
+  },
+  {
+   "id": "cmq12nsej000apr01ew14m38w",
+   "name": "Virgina Wax",
+   "slug": "virgina-wax",
+   "description": "Virgina Wax",
+   "logo": null,
+   "coverImage": "/api/uploads/80495878-b8ab-4bee-8f38-207cfdca7f36.webp",
+   "address": "Bissau",
+   "city": "Bissau",
+   "region": "",
+   "country": "Guiné-Bissau",
+   "phone": "",
+   "email": "sensopsolutins@gmail.com",
+   "website": "",
+   "facebook": "https://www.facebook.com/",
+   "instagram": "https://www.instagram.com",
+   "twitter": "",
+   "linkedin": "https://www.linkedin.com/",
+   "whatsapp": "https://wa.me/c/221785409191",
+   "tiktok": null,
+   "keywords": "",
+   "categoryId": "cmq0xu9t5000bpd1yiopldjyf",
+   "ownerId": "cmq12nsdg0008pr01vopy9147",
+   "isActive": true,
+   "isSuspended": false,
+   "views": 34,
+   "createdAt": "2026-06-05T15:21:26.154Z",
+   "updatedAt": "2026-08-26T11:39:03.042Z",
+   "category": {
+    "id": "cmq0xu9t5000bpd1yiopldjyf",
+    "name": "Mode & Textile",
+    "slug": "mode-textile",
+    "icon": "Shirt"
+   },
+   "owner": {
+    "id": "cmq12nsdg0008pr01vopy9147",
+    "name": "Virgina Wax"
+   },
+   "_count": {
+    "reviews": 0,
+    "products": 0,
+    "services": 0
+   }
+  }
+ ],
+ "details": {
+  "ub-umaro-balde": {
+   "id": "cmtiositg0015ln015vygetcm",
+   "name": "UB | Umaro Balde",
+   "slug": "ub-umaro-balde",
+   "description": "UM: é uma empresa de consultoria e desenvolvimento de negócios que conecta empresas, empreendedores e mercados entre a África Ocidental e parceiros internacionais, oferecendo soluções em comércio, gestão, formação e expansão empresarial.",
+   "logo": "/api/uploads/38008613-a9f0-41a1-ade5-a41428ef71a4.jpeg",
+   "coverImage": "/api/uploads/a13146f3-257b-4f10-a87c-3a2fdd750487.png",
+   "address": "12, biss",
+   "city": "Bissau",
+   "region": null,
+   "country": "Guiné-Bissau",
+   "phone": "00989016117306",
+   "email": "umaro3597@gmail.com",
+   "website": "",
+   "facebook": "",
+   "instagram": "",
+   "twitter": "",
+   "linkedin": "https://www.linkedin.com/in/",
+   "whatsapp": "00989016117306",
+   "tiktok": null,
+   "keywords": "",
+   "categoryId": "cmpzfhyqt0009lk01uzqge5fd",
+   "ownerId": "cmtiosism0013ln017e9wwmmd",
+   "isActive": true,
+   "isSuspended": false,
+   "views": 24,
+   "createdAt": "2026-09-01T13:12:10.564Z",
+   "updatedAt": "2026-09-06T20:32:26.341Z",
+   "category": {
+    "id": "cmpzfhyqt0009lk01uzqge5fd",
+    "name": "Administration",
+    "slug": "administration",
+    "icon": "Administration",
+    "description": "",
+    "createdAt": "2026-06-04T11:45:17.093Z",
+    "updatedAt": "2026-06-04T11:45:17.093Z"
+   },
+   "owner": {
+    "id": "cmtiosism0013ln017e9wwmmd",
+    "name": "UB | Umaro Balde",
+    "avatar": "/api/uploads/008d1b91-c61a-42d3-925f-16c96f8af190.jpg"
+   },
+   "photos": [
+    {
+     "id": "cmtiv54zr001bln01bn668s8h",
+     "url": "/api/uploads/7c9763bb-828c-495c-bdfd-7d8f73c0284c.png",
+     "businessId": "cmtiositg0015ln015vygetcm",
+     "createdAt": "2026-09-01T16:09:56.871Z"
+    }
+   ],
+   "products": [
+    {
+     "id": "cmtip8t7q0017ln01g3lkpqvr",
+     "name": "Consultoria ",
+     "description": "Consultoria Internacional em desenvolvimento Humano e Organizaçao",
+     "price": "50.000 FCFA",
+     "imageUrl": "/api/uploads/2455db2a-aaeb-465b-a0f8-cd676adf04f7.png",
+     "businessId": "cmtiositg0015ln015vygetcm",
+     "createdAt": "2026-09-01T13:24:50.534Z",
+     "updatedAt": "2026-09-01T13:24:50.534Z"
+    }
+   ],
+   "services": [],
+   "hours": [],
+   "reviews": [],
+   "_count": {
+    "reviews": 0,
+    "products": 1,
+    "services": 0
+   },
+   "avgRating": 0
+  },
+  "b-f-advogados": {
+   "id": "cmt8tkt0j000mln016dt4nhvi",
+   "name": " B & F ADVOGADOS",
+   "slug": "b-f-advogados",
+   "description": "",
+   "logo": "/api/uploads/aa11fb54-c893-4810-b632-6106ec25d757.png",
+   "coverImage": "/api/uploads/8e4519eb-0284-4d98-a569-3a318a10e454.png",
+   "address": "Rua Areolino Cruz ,Nº 39 Bissau",
+   "city": "Bissau",
+   "region": "",
+   "country": "Guiné-Bissau",
+   "phone": "95 534 88 64 ",
+   "email": "banorbatistafonseca@gmail.com",
+   "website": "",
+   "facebook": "",
+   "instagram": "",
+   "twitter": "",
+   "linkedin": "",
+   "whatsapp": "95 518 78 96",
+   "tiktok": null,
+   "keywords": "",
+   "categoryId": "cmq98wpmy001yln01pqgjratd",
+   "ownerId": "cmt8tkt04000kln01hly6nmft",
+   "isActive": true,
+   "isSuspended": false,
+   "views": 17,
+   "createdAt": "2026-08-25T15:28:26.851Z",
+   "updatedAt": "2026-09-05T15:59:37.859Z",
+   "category": {
+    "id": "cmq98wpmy001yln01pqgjratd",
+    "name": "Droite",
+    "slug": "droite",
+    "icon": "Droite",
+    "description": "",
+    "createdAt": "2026-06-11T08:38:29.579Z",
+    "updatedAt": "2026-06-11T08:38:29.579Z"
+   },
+   "owner": {
+    "id": "cmt8tkt04000kln01hly6nmft",
+    "name": "B & F ADVOGADOS",
+    "avatar": null
+   },
+   "photos": [],
+   "products": [],
+   "services": [],
+   "hours": [],
+   "reviews": [],
+   "_count": {
+    "reviews": 0,
+    "products": 0,
+    "services": 0
+   },
+   "avgRating": 0
+  },
+  "soares-da-gamas-j-r": {
+   "id": "cmt8qrdot000hln01ztat0so7",
+   "name": "Soares da Gamas J.R",
+   "slug": "soares-da-gamas-j-r",
+   "description": "Somos uma empresa especializada na compra e venda de automóveis novos e usados, oferecendo aos nossos clientes veículos de qualidade, segurança e confiança. Trabalhamos para proporcionar uma experiência simples e transparente, ajudando cada cliente a encontrar o carro adequado às suas necessidades e ao seu orçamento.\n\nAlém da venda de veículos, prestamos serviços de importação de automóveis, intermediação de compra, avaliação de veículos, documentação e entrega, garantindo acompanhamento durante todo o processo.",
+   "logo": "/api/uploads/674bb177-a124-4587-9da6-8cdea847d3c0.png",
+   "coverImage": "/api/uploads/6a9d8b67-f0fb-4b6b-b2f9-41e3d4849849.png",
+   "address": "Chão de Pepel",
+   "city": "Bissau",
+   "region": "",
+   "country": "Guiné-Bissau",
+   "phone": "955393911",
+   "email": "soaresdagamajunior@gmai.com",
+   "website": "",
+   "facebook": "",
+   "instagram": "",
+   "twitter": "",
+   "linkedin": "",
+   "whatsapp": "969238545",
+   "tiktok": null,
+   "keywords": "",
+   "categoryId": "cmq0xu9qt0003pd1y0yjslt5t",
+   "ownerId": "cmt8qrdoc000fln013ax6ohrz",
+   "isActive": true,
+   "isSuspended": false,
+   "views": 43,
+   "createdAt": "2026-08-25T14:09:34.733Z",
+   "updatedAt": "2026-09-02T10:51:55.978Z",
+   "category": {
+    "id": "cmq0xu9qt0003pd1y0yjslt5t",
+    "name": "Commerce & Distribution",
+    "slug": "commerce-distribution",
+    "icon": "ShoppingBag",
+    "description": null,
+    "createdAt": "2026-06-05T13:06:30.485Z",
+    "updatedAt": "2026-06-05T13:06:30.485Z"
+   },
+   "owner": {
+    "id": "cmt8qrdoc000fln013ax6ohrz",
+    "name": "Soares da Gamas J.R",
+    "avatar": null
+   },
+   "photos": [
+    {
+     "id": "cmt90tfqa000oln01f9tjji8p",
+     "url": "/api/uploads/ec97e400-87b3-4984-af57-7bad54f3ea22.png",
+     "businessId": "cmt8qrdot000hln01ztat0so7",
+     "createdAt": "2026-08-25T18:51:06.850Z"
+    }
+   ],
+   "products": [
+    {
+     "id": "cmtin1ajm0012ln01a52ptmo5",
+     "name": "BMW",
+     "description": "gasolina automático\nDespachado",
+     "price": "A negociar",
+     "imageUrl": "/api/uploads/5b59cbc3-aa85-40e0-b8c9-bb1ee218db40.jpg",
+     "businessId": "cmt8qrdot000hln01ztat0so7",
+     "createdAt": "2026-09-01T12:23:00.512Z",
+     "updatedAt": "2026-09-01T12:23:00.512Z"
+    },
+    {
+     "id": "cmtimzgzl0010ln019bjuu7w7",
+     "name": "Bmw",
+     "description": "Gasoleo automático\nSem despacho",
+     "price": "6.500.000",
+     "imageUrl": "/api/uploads/fa1994ab-e3e8-43f1-8f8e-ca62a5c103fd.jpg",
+     "businessId": "cmt8qrdot000hln01ztat0so7",
+     "createdAt": "2026-09-01T12:21:35.553Z",
+     "updatedAt": "2026-09-01T12:21:35.553Z"
+    },
+    {
+     "id": "cmtimxco7000yln01y6echn2i",
+     "name": "Jetour",
+     "description": "Gasolina automático\nPor encomenda",
+     "price": "111111111",
+     "imageUrl": "/api/uploads/29ccd8c3-34f2-414e-8e77-c2230dcc1108.jpg",
+     "businessId": "cmt8qrdot000hln01ztat0so7",
+     "createdAt": "2026-09-01T12:19:56.645Z",
+     "updatedAt": "2026-09-01T12:19:56.645Z"
+    },
+    {
+     "id": "cmtbfh254000wln01pj9f9f48",
+     "name": "Mercedes benzer 190 Taxi",
+     "description": "Gasoleo manual \nDespachado",
+     "price": "3.300.000",
+     "imageUrl": "/api/uploads/5208ec48-c074-403b-bf10-eac2f4e16720.jpg",
+     "businessId": "cmt8qrdot000hln01ztat0so7",
+     "createdAt": "2026-08-27T11:16:55.959Z",
+     "updatedAt": "2026-08-27T11:16:55.959Z"
+    },
+    {
+     "id": "cmtbfebq3000uln01131qpxiy",
+     "name": "Toyota land cruiser prado",
+     "description": "Gasoleo automático climatizado\nDespachado",
+     "price": "20000000",
+     "imageUrl": "/api/uploads/bc80252f-d481-4acd-8fa9-f1027578408c.jpg",
+     "businessId": "cmt8qrdot000hln01ztat0so7",
+     "createdAt": "2026-08-27T11:14:48.408Z",
+     "updatedAt": "2026-08-27T11:14:48.408Z"
+    },
+    {
+     "id": "cmt90w1nj000qln01tz52982t",
+     "name": "Toyata",
+     "description": "Land cruiser prado",
+     "price": "16000000",
+     "imageUrl": "/api/uploads/6aeee136-9007-4304-8abd-6a50a9877495.jpg",
+     "businessId": "cmt8qrdot000hln01ztat0so7",
+     "createdAt": "2026-08-25T18:53:08.575Z",
+     "updatedAt": "2026-08-25T18:53:08.575Z"
+    }
+   ],
+   "services": [],
+   "hours": [],
+   "reviews": [],
+   "_count": {
+    "reviews": 0,
+    "products": 6,
+    "services": 0
+   },
+   "avgRating": 0
+  },
+  "centro-de-formacao-doze-pedras": {
+   "id": "cmt8p45gt0002ln01qtz09qgj",
+   "name": "Centro de Formação Doze Pedras",
+   "slug": "centro-de-formacao-doze-pedras",
+   "description": "O Centro de Formação Doze Pedras (CFDZ) é uma instituição de ensino privada gerida pela ONG Doze Pedras, focada no desenvolvimento intelectual, na formação profissional e na inserção de jovens no mercado de trabalho na Guiné-Bissau.",
+   "logo": "/api/uploads/cd856a63-c34f-49b3-ab32-8feaf1bac885.jfif",
+   "coverImage": "/api/uploads/b267153e-a8a7-4f0a-9d45-205c3f150f79.jfif",
+   "address": "Bairro ,Militar - Rotunda de Plack, Bissau",
+   "city": "Bissau",
+   "region": null,
+   "country": "Guiné-Bissau",
+   "phone": "",
+   "email": "ongdozepedras@gmail.com",
+   "website": "ONG Doze Pedras",
+   "facebook": "",
+   "instagram": "",
+   "twitter": "",
+   "linkedin": "",
+   "whatsapp": "",
+   "tiktok": null,
+   "keywords": "",
+   "categoryId": "cmq0xu9rh0006pd1yfcmtl829",
+   "ownerId": "cmt8p45gc0000ln01zove0m69",
+   "isActive": true,
+   "isSuspended": false,
+   "views": 0,
+   "createdAt": "2026-08-25T13:23:31.373Z",
+   "updatedAt": "2026-08-25T13:29:43.567Z",
+   "category": {
+    "id": "cmq0xu9rh0006pd1yfcmtl829",
+    "name": "Éducation & Formation",
+    "slug": "education-formation",
+    "icon": "GraduationCap",
+    "description": null,
+    "createdAt": "2026-06-05T13:06:30.510Z",
+    "updatedAt": "2026-06-05T13:06:30.510Z"
+   },
+   "owner": {
+    "id": "cmt8p45gc0000ln01zove0m69",
+    "name": "Centro de F.Doze Pedras ",
+    "avatar": null
+   },
+   "photos": [],
+   "products": [],
+   "services": [],
+   "hours": [
+    {
+     "id": "cmt8p985n0004ln018w9khcni",
+     "dayOfWeek": 1,
+     "openTime": "08:00",
+     "closeTime": "18:00",
+     "isClosed": false,
+     "businessId": "cmt8p45gt0002ln01qtz09qgj"
+    },
+    {
+     "id": "cmt8p985p0006ln01ncut17co",
+     "dayOfWeek": 2,
+     "openTime": "08:00",
+     "closeTime": "18:00",
+     "isClosed": false,
+     "businessId": "cmt8p45gt0002ln01qtz09qgj"
+    },
+    {
+     "id": "cmt8p985r0008ln01jo5vs9o9",
+     "dayOfWeek": 3,
+     "openTime": "08:08",
+     "closeTime": "18:00",
+     "isClosed": false,
+     "businessId": "cmt8p45gt0002ln01qtz09qgj"
+    },
+    {
+     "id": "cmt8p985t000aln01cf8j2kwu",
+     "dayOfWeek": 4,
+     "openTime": "08:00",
+     "closeTime": "18:00",
+     "isClosed": false,
+     "businessId": "cmt8p45gt0002ln01qtz09qgj"
+    },
+    {
+     "id": "cmt8p985u000cln01zb0jt2si",
+     "dayOfWeek": 5,
+     "openTime": "08:00",
+     "closeTime": "18:00",
+     "isClosed": false,
+     "businessId": "cmt8p45gt0002ln01qtz09qgj"
+    },
+    {
+     "id": "cmt8p985v000eln01barkn6ld",
+     "dayOfWeek": 6,
+     "openTime": "08:00",
+     "closeTime": "16:00",
+     "isClosed": false,
+     "businessId": "cmt8p45gt0002ln01qtz09qgj"
+    }
+   ],
+   "reviews": [],
+   "_count": {
+    "reviews": 0,
+    "products": 0,
+    "services": 0
+   },
+   "avgRating": 0
+  },
+  "djao-s-barber": {
+   "id": "cmsp8n49p0028ln01ffhczq4l",
+   "name": "DJAO'S BARBER ",
+   "slug": "djao-s-barber",
+   "description": "",
+   "logo": null,
+   "coverImage": "/api/uploads/6d2188a6-1e9d-4b7a-8e27-a1154c321505.jpg",
+   "address": "BAIRRO MILITAR ",
+   "city": "BISSAU ",
+   "region": "",
+   "country": "GUINÉ-BISSAU ",
+   "phone": "",
+   "email": "",
+   "website": "",
+   "facebook": "",
+   "instagram": "",
+   "twitter": "",
+   "linkedin": "",
+   "whatsapp": "+245 955175562",
+   "tiktok": null,
+   "keywords": "",
+   "categoryId": "cmpzfibz3000alk0157mj77k3",
+   "ownerId": "cmsp8n4990026ln01nl0rhi65",
+   "isActive": true,
+   "isSuspended": false,
+   "views": 18,
+   "createdAt": "2026-08-11T22:34:45.469Z",
+   "updatedAt": "2026-08-26T09:22:56.210Z",
+   "category": {
+    "id": "cmpzfibz3000alk0157mj77k3",
+    "name": "Barbier | Salon de coiffure",
+    "slug": "barbier-salon-de-coiffure",
+    "icon": "Barbearia | Cabelaleira",
+    "description": "",
+    "createdAt": "2026-06-04T11:45:34.239Z",
+    "updatedAt": "2026-07-13T09:54:15.670Z"
+   },
+   "owner": {
+    "id": "cmsp8n4990026ln01nl0rhi65",
+    "name": "ABUDO DJAU ",
+    "avatar": null
+   },
+   "photos": [
+    {
+     "id": "cmsp8pggn002cln01tdw8rnbr",
+     "url": "/api/uploads/00e6a6f6-7536-41a1-a3fd-ea1b269f39a9.jpg",
+     "businessId": "cmsp8n49p0028ln01ffhczq4l",
+     "createdAt": "2026-08-11T22:36:34.583Z"
+    },
+    {
+     "id": "cmsp8p1oe002aln01hjgmc2nl",
+     "url": "/api/uploads/4183d5d8-e53d-4f87-b821-8e54bbac2c82.jpg",
+     "businessId": "cmsp8n49p0028ln01ffhczq4l",
+     "createdAt": "2026-08-11T22:36:15.422Z"
+    }
+   ],
+   "products": [
+    {
+     "id": "cmsp8y7x6002eln01ysx2hehz",
+     "name": "WAVES 460",
+     "description": "DJAOS BARBER ",
+     "price": "4000",
+     "imageUrl": "/api/uploads/4186ee55-bfc6-466a-8cea-489fb9a85f64.jpg",
+     "businessId": "cmsp8n49p0028ln01ffhczq4l",
+     "createdAt": "2026-08-11T22:43:23.418Z",
+     "updatedAt": "2026-08-11T22:43:23.418Z"
+    }
+   ],
+   "services": [
+    {
+     "id": "cmsp929ng002gln01hdxunrx8",
+     "name": "Weves",
+     "description": "Sem",
+     "price": "400",
+     "businessId": "cmsp8n49p0028ln01ffhczq4l",
+     "createdAt": "2026-08-11T22:46:32.285Z",
+     "updatedAt": "2026-08-11T22:46:32.285Z"
+    }
+   ],
+   "hours": [],
+   "reviews": [],
+   "_count": {
+    "reviews": 0,
+    "products": 1,
+    "services": 1
+   },
+   "avgRating": 0
+  },
+  "shepherd-silas-multe-servicos": {
+   "id": "cmsowgan60025ln01cvskg74b",
+   "name": "SHEPHERD SILAS MULTE-SERVIÇOS ",
+   "slug": "shepherd-silas-multe-servicos",
+   "description": "A Shepherd Silas Multe-Serviços é uma empresa dedicada à prestação de diversos serviços, com foco em construção, comercialização de produtos e serviços de barbearia. A empresa procura oferecer soluções de qualidade, com profissionalismo, confiança e compromisso com os seus clientes.\n\nNossos principais serviços\n\n🏗️ Construção — obras, remodelações e serviços relacionados.\n🛒 Produtos — comercialização de diversos produtos para clientes particulares e empresas.\n💈 Barbearia — cortes de cabelo, cuidados masculinos e serviços de estética.",
+   "logo": null,
+   "coverImage": "/api/uploads/56d9582d-c5c2-439c-ad51-81c644415e4b.jpeg",
+   "address": "Hafia, Bissau",
+   "city": "Bissau",
+   "region": null,
+   "country": "Guinée-Bissau",
+   "phone": " 95 650 30 55",
+   "email": "Silasgangofficial@gmail.com",
+   "website": "",
+   "facebook": "",
+   "instagram": "",
+   "twitter": "",
+   "linkedin": "",
+   "whatsapp": "96 513 92 10",
+   "tiktok": null,
+   "keywords": "",
+   "categoryId": "cmq0xu9sh0009pd1y2s99n7pe",
+   "ownerId": "cmsowgamq0023ln01f9dk7hry",
+   "isActive": true,
+   "isSuspended": false,
+   "views": 7,
+   "createdAt": "2026-08-11T16:53:31.746Z",
+   "updatedAt": "2026-09-03T11:36:06.197Z",
+   "category": {
+    "id": "cmq0xu9sh0009pd1y2s99n7pe",
+    "name": "BTP & Construction",
+    "slug": "btp-construction",
+    "icon": "HardHat",
+    "description": null,
+    "createdAt": "2026-06-05T13:06:30.545Z",
+    "updatedAt": "2026-06-05T13:06:30.545Z"
+   },
+   "owner": {
+    "id": "cmsowgamq0023ln01f9dk7hry",
+    "name": "SHEPHERD SILAS MULTE-SERVIÇOS",
+    "avatar": null
+   },
+   "photos": [],
+   "products": [],
+   "services": [],
+   "hours": [],
+   "reviews": [],
+   "_count": {
+    "reviews": 0,
+    "products": 0,
+    "services": 0
+   },
+   "avgRating": 0
+  },
+  "canafistra": {
+   "id": "cmsoo3y00001yln01zjynwf0n",
+   "name": "CANAFISTRA",
+   "slug": "canafistra",
+   "description": "Canafistra é uma localidade da Guiné-Bissau conhecida pelo seu ambiente tranquilo, pela comunidade local e pelas características naturais da região. É um espaço que representa a riqueza cultural e territorial do país, com potencial para o desenvolvimento de atividades económicas, sociais e turísticas.\n\nCanafistra — Um lugar de cultura, comunidade e potencial, onde a tradição e o desenvolvimento caminham juntos.",
+   "logo": null,
+   "coverImage": "/api/uploads/9696faf3-5e64-4eab-a19d-cf0c531f382f.png",
+   "address": "Bidjilin, Safim | Bissalanca",
+   "city": "Bissau",
+   "region": null,
+   "country": "Guiné-Bissau",
+   "phone": "+245 95 595 5551",
+   "email": "lizmyrian@gmail.com",
+   "website": "",
+   "facebook": "",
+   "instagram": "",
+   "twitter": "",
+   "linkedin": "",
+   "whatsapp": "+245 96 622 2121",
+   "tiktok": null,
+   "keywords": "",
+   "categoryId": "cmpzfefbm0002lk01k0mp5eya",
+   "ownerId": "cmsoo3xzm001wln01h6qhql28",
+   "isActive": true,
+   "isSuspended": false,
+   "views": 8,
+   "createdAt": "2026-08-11T12:59:58.560Z",
+   "updatedAt": "2026-08-12T18:37:10.055Z",
+   "category": {
+    "id": "cmpzfefbm0002lk01k0mp5eya",
+    "name": "Hotels",
+    "slug": "hotels",
+    "icon": "Hotels",
+    "description": "",
+    "createdAt": "2026-06-04T11:42:31.955Z",
+    "updatedAt": "2026-07-01T10:01:04.734Z"
+   },
+   "owner": {
+    "id": "cmsoo3xzm001wln01h6qhql28",
+    "name": "CANAFISTRA",
+    "avatar": null
+   },
+   "photos": [
+    {
+     "id": "cmsoo8cqf0022ln014ry3ld1d",
+     "url": "/api/uploads/f672d974-c28b-471e-a8b5-fbbf5a22a56c.jfif",
+     "businessId": "cmsoo3y00001yln01zjynwf0n",
+     "createdAt": "2026-08-11T13:03:24.279Z"
+    },
+    {
+     "id": "cmsoo87d10020ln01orqie6s0",
+     "url": "/api/uploads/968725e7-0905-49c2-bb78-dca30ae5c8b4.png",
+     "businessId": "cmsoo3y00001yln01zjynwf0n",
+     "createdAt": "2026-08-11T13:03:17.318Z"
+    }
+   ],
+   "products": [],
+   "services": [],
+   "hours": [],
+   "reviews": [],
+   "_count": {
+    "reviews": 0,
+    "products": 0,
+    "services": 0
+   },
+   "avgRating": 0
+  },
+  "hotel-imperio": {
+   "id": "cmsomvva7001fln01ewm7owqk",
+   "name": "HOTEL IMPERIO",
+   "slug": "hotel-imperio",
+   "description": "O Hôtel Império é uma unidade hoteleira localizada no centro de Bissau, oferecendo um ambiente confortável e adequado tanto para viagens de negócios como para turismo e estadias de curta ou longa duração. O hotel dispõe de quartos climatizados, Wi-Fi, restaurante, bar, serviço de quartos e receção 24 horas.\n\nA sua localização, na Avenida dos Heróis Nacionais, permite fácil acesso a importantes pontos da cidade, incluindo o Palácio Presidencial e a zona histórica de Bissau.\n\nSlogan:\n\nHôtel Império — Conforto, hospitalidade e uma experiência agradável no coração de Bissau.",
+   "logo": "/api/uploads/0b3b1650-0316-4f0c-bc64-48841cc1c26c.jfif",
+   "coverImage": "/api/uploads/1863fca1-3af3-44b9-9e24-5e70e2a4f3d7.jfif",
+   "address": "Praça dos Heróis Nacionais (Avenida dos Heróis Nacionais nº 1), no centro da cidade, em frente ao Palácio",
+   "city": "Bissau",
+   "region": null,
+   "country": "Guiné-Bissau",
+   "phone": "",
+   "email": "hotelelimperiopuntacana@gmail.com",
+   "website": "",
+   "facebook": "",
+   "instagram": "",
+   "twitter": "",
+   "linkedin": "",
+   "whatsapp": "+245 955 767 973",
+   "tiktok": null,
+   "keywords": "",
+   "categoryId": "cmpzfefbm0002lk01k0mp5eya",
+   "ownerId": "cmsomvv9r001dln01nbor0z7k",
+   "isActive": true,
+   "isSuspended": false,
+   "views": 3,
+   "createdAt": "2026-08-11T12:25:42.175Z",
+   "updatedAt": "2026-08-26T14:25:54.035Z",
+   "category": {
+    "id": "cmpzfefbm0002lk01k0mp5eya",
+    "name": "Hotels",
+    "slug": "hotels",
+    "icon": "Hotels",
+    "description": "",
+    "createdAt": "2026-06-04T11:42:31.955Z",
+    "updatedAt": "2026-07-01T10:01:04.734Z"
+   },
+   "owner": {
+    "id": "cmsomvv9r001dln01nbor0z7k",
+    "name": "HOTEL IMPERIO",
+    "avatar": null
+   },
+   "photos": [],
+   "products": [],
+   "services": [],
+   "hours": [
+    {
+     "id": "cmson2mdq001hln01aoiauivf",
+     "dayOfWeek": 0,
+     "openTime": "08:00",
+     "closeTime": "00:00",
+     "isClosed": false,
+     "businessId": "cmsomvva7001fln01ewm7owqk"
+    },
+    {
+     "id": "cmson2mdt001jln01um9ikop4",
+     "dayOfWeek": 1,
+     "openTime": "08:00",
+     "closeTime": "00:00",
+     "isClosed": false,
+     "businessId": "cmsomvva7001fln01ewm7owqk"
+    },
+    {
+     "id": "cmson2mdv001lln01l9lx8hb9",
+     "dayOfWeek": 2,
+     "openTime": "08:00",
+     "closeTime": "00:00",
+     "isClosed": false,
+     "businessId": "cmsomvva7001fln01ewm7owqk"
+    },
+    {
+     "id": "cmson2mdx001nln01cox3xa52",
+     "dayOfWeek": 3,
+     "openTime": "08:08",
+     "closeTime": "00:00",
+     "isClosed": false,
+     "businessId": "cmsomvva7001fln01ewm7owqk"
+    },
+    {
+     "id": "cmson2mdz001pln01f6jzas0j",
+     "dayOfWeek": 4,
+     "openTime": "08:00",
+     "closeTime": "00:00",
+     "isClosed": false,
+     "businessId": "cmsomvva7001fln01ewm7owqk"
+    },
+    {
+     "id": "cmson2me1001rln01zegzag68",
+     "dayOfWeek": 5,
+     "openTime": "09:00",
+     "closeTime": "00:00",
+     "isClosed": false,
+     "businessId": "cmsomvva7001fln01ewm7owqk"
+    },
+    {
+     "id": "cmson2me3001tln018m7b5ak9",
+     "dayOfWeek": 6,
+     "openTime": "08:00",
+     "closeTime": "00:00",
+     "isClosed": false,
+     "businessId": "cmsomvva7001fln01ewm7owqk"
+    }
+   ],
+   "reviews": [],
+   "_count": {
+    "reviews": 0,
+    "products": 0,
+    "services": 0
+   },
+   "avgRating": 0
+  },
+  "mag-palace-hotel": {
+   "id": "cmsolzqy9000yln011c2y3dhb",
+   "name": "MAG PALACE HOTEL ",
+   "slug": "mag-palace-hotel",
+   "description": null,
+   "logo": "/api/uploads/012f4a40-bcd5-4985-8269-ee01ae346ca7.jfif",
+   "coverImage": "/api/uploads/53e2b6ba-8df8-48b7-a38b-e790d792d511.jfif",
+   "address": "Avenida dos Combatentes da Liberdade da Pátria, em Bissau",
+   "city": "Bissau",
+   "region": null,
+   "country": "Guiné-Bissau",
+   "phone": "+245 957 410 808",
+   "email": "magphotel@gmail.com",
+   "website": "",
+   "facebook": "",
+   "instagram": "",
+   "twitter": "",
+   "linkedin": "",
+   "whatsapp": "+245 956 938 372",
+   "tiktok": null,
+   "keywords": null,
+   "categoryId": "cmpzfefbm0002lk01k0mp5eya",
+   "ownerId": "cmsolzqxq000wln01784l7equ",
+   "isActive": true,
+   "isSuspended": false,
+   "views": 4,
+   "createdAt": "2026-08-11T12:00:43.569Z",
+   "updatedAt": "2026-09-05T00:27:49.677Z",
+   "category": {
+    "id": "cmpzfefbm0002lk01k0mp5eya",
+    "name": "Hotels",
+    "slug": "hotels",
+    "icon": "Hotels",
+    "description": "",
+    "createdAt": "2026-06-04T11:42:31.955Z",
+    "updatedAt": "2026-07-01T10:01:04.734Z"
+   },
+   "owner": {
+    "id": "cmsolzqxq000wln01784l7equ",
+    "name": "MAG PALACE HOTEL ",
+    "avatar": null
+   },
+   "photos": [],
+   "products": [],
+   "services": [],
+   "hours": [
+    {
+     "id": "cmsom49810010ln01j7n7wsbf",
+     "dayOfWeek": 0,
+     "openTime": "08:00",
+     "closeTime": "00:00",
+     "isClosed": false,
+     "businessId": "cmsolzqy9000yln011c2y3dhb"
+    },
+    {
+     "id": "cmsom49830012ln01sspwkjst",
+     "dayOfWeek": 1,
+     "openTime": "08:00",
+     "closeTime": "00:00",
+     "isClosed": false,
+     "businessId": "cmsolzqy9000yln011c2y3dhb"
+    },
+    {
+     "id": "cmsom49850014ln01nvn0dwm8",
+     "dayOfWeek": 2,
+     "openTime": "08:00",
+     "closeTime": "00:00",
+     "isClosed": false,
+     "businessId": "cmsolzqy9000yln011c2y3dhb"
+    },
+    {
+     "id": "cmsom49860016ln01q56r81py",
+     "dayOfWeek": 3,
+     "openTime": "08:00",
+     "closeTime": "00:00",
+     "isClosed": false,
+     "businessId": "cmsolzqy9000yln011c2y3dhb"
+    },
+    {
+     "id": "cmsom49880018ln01x4nqiv9i",
+     "dayOfWeek": 4,
+     "openTime": "08:00",
+     "closeTime": "00:00",
+     "isClosed": false,
+     "businessId": "cmsolzqy9000yln011c2y3dhb"
+    },
+    {
+     "id": "cmsom4989001aln01evyo5g72",
+     "dayOfWeek": 5,
+     "openTime": "08:00",
+     "closeTime": "00:00",
+     "isClosed": false,
+     "businessId": "cmsolzqy9000yln011c2y3dhb"
+    },
+    {
+     "id": "cmsom498b001cln019amvro6t",
+     "dayOfWeek": 6,
+     "openTime": "08:00",
+     "closeTime": "00:00",
+     "isClosed": false,
+     "businessId": "cmsolzqy9000yln011c2y3dhb"
+    }
+   ],
+   "reviews": [],
+   "_count": {
+    "reviews": 0,
+    "products": 0,
+    "services": 0
+   },
+   "avgRating": 0
+  },
+  "papa-loca": {
+   "id": "cmsofs8ut000fln01ih5bb771",
+   "name": "PAPA LOCA",
+   "slug": "papa-loca",
+   "description": "Papa Loca Restaurante,é um espaço dedicado à gastronomia, onde os clientes podem desfrutar de pratos saborosos, bebidas e um ambiente agradável. O restaurante procura oferecer boa comida, atendimento de qualidade e momentos especiais para famílias, amigos e todos os amantes da boa gastronomia.",
+   "logo": "/api/uploads/873d7d21-8490-45fe-8bba-f4ac5948ce50.jpg",
+   "coverImage": "/api/uploads/01375407-4a82-4b47-b784-1500a686d8fe.webp",
+   "address": "Avenida Francisco Mendes Sede Do Clube Benfica Bissau, Bissau 1000 Guinée Bissau",
+   "city": "Bissau",
+   "region": "",
+   "country": "Guiné-Bissau",
+   "phone": "+245 955 581 226",
+   "email": "",
+   "website": "",
+   "facebook": "",
+   "instagram": "",
+   "twitter": "",
+   "linkedin": "",
+   "whatsapp": "",
+   "tiktok": null,
+   "keywords": "",
+   "categoryId": "cmq0xu9pv0000pd1ynr1lhme3",
+   "ownerId": "cmsofs8uf000dln01x31ib6oo",
+   "isActive": true,
+   "isSuspended": false,
+   "views": 8,
+   "createdAt": "2026-08-11T09:06:55.829Z",
+   "updatedAt": "2026-08-27T11:18:38.375Z",
+   "category": {
+    "id": "cmq0xu9pv0000pd1ynr1lhme3",
+    "name": "Restaurants | Alimentation",
+    "slug": "restaurants-alimentation",
+    "icon": "UtensilsCrossed",
+    "description": "",
+    "createdAt": "2026-06-05T13:06:30.451Z",
+    "updatedAt": "2026-07-13T10:06:47.595Z"
+   },
+   "owner": {
+    "id": "cmsofs8uf000dln01x31ib6oo",
+    "name": "Papa Loca",
+    "avatar": null
+   },
+   "photos": [],
+   "products": [],
+   "services": [],
+   "hours": [
+    {
+     "id": "cmsofyb5f000hln015xrgph5x",
+     "dayOfWeek": 0,
+     "openTime": "08:00",
+     "closeTime": "00:00",
+     "isClosed": false,
+     "businessId": "cmsofs8ut000fln01ih5bb771"
+    },
+    {
+     "id": "cmsofyb5j000jln01fjeyrh4h",
+     "dayOfWeek": 1,
+     "openTime": "08:00",
+     "closeTime": "00:00",
+     "isClosed": false,
+     "businessId": "cmsofs8ut000fln01ih5bb771"
+    },
+    {
+     "id": "cmsofyb5l000lln01ru9bup4d",
+     "dayOfWeek": 2,
+     "openTime": "08:00",
+     "closeTime": "00:00",
+     "isClosed": false,
+     "businessId": "cmsofs8ut000fln01ih5bb771"
+    },
+    {
+     "id": "cmsofyb5n000nln01oqu2bioo",
+     "dayOfWeek": 3,
+     "openTime": "08:00",
+     "closeTime": "00:00",
+     "isClosed": false,
+     "businessId": "cmsofs8ut000fln01ih5bb771"
+    },
+    {
+     "id": "cmsofyb5p000pln01jvumokpn",
+     "dayOfWeek": 4,
+     "openTime": "08:00",
+     "closeTime": "00:00",
+     "isClosed": false,
+     "businessId": "cmsofs8ut000fln01ih5bb771"
+    },
+    {
+     "id": "cmsofyb5r000rln01dmrljjha",
+     "dayOfWeek": 5,
+     "openTime": "08:00",
+     "closeTime": "00:00",
+     "isClosed": false,
+     "businessId": "cmsofs8ut000fln01ih5bb771"
+    },
+    {
+     "id": "cmsofyb5t000tln01bw3zf5nj",
+     "dayOfWeek": 6,
+     "openTime": "08:00",
+     "closeTime": "00:00",
+     "isClosed": false,
+     "businessId": "cmsofs8ut000fln01ih5bb771"
+    }
+   ],
+   "reviews": [],
+   "_count": {
+    "reviews": 0,
+    "products": 0,
+    "services": 0
+   },
+   "avgRating": 0
+  },
+  "grupo-daf": {
+   "id": "cmsni8cdi0002ln011s6k7xpc",
+   "name": "GRUPO DAF",
+   "slug": "grupo-daf",
+   "description": "Somos uma empresa especializada em contabilidade, gestão financeira e consultoria empresarial, dedicada a apoiar empresas, organizações e empreendedores na gestão eficiente das suas atividades financeiras.\n\nPrestamos serviços de contabilidade geral, elaboração de relatórios financeiros, gestão fiscal, processamento de salários, declaração de impostos, acompanhamento financeiro e consultoria empresarial.",
+   "logo": "/api/uploads/aed9ae5f-b021-4937-9ee1-19767fd0d220.jpeg",
+   "coverImage": "/api/uploads/1c622988-f304-4ccd-984b-c246cce8f7d6.jpeg",
+   "address": "SANTA LUZIA, HOTEL DUNIA ANTIGO AZALAI ",
+   "city": "Bissau",
+   "region": "",
+   "country": "Guiné-Bissau",
+   "phone": "955725560",
+   "email": "",
+   "website": "",
+   "facebook": "",
+   "instagram": "",
+   "twitter": "",
+   "linkedin": "",
+   "whatsapp": "955725560",
+   "tiktok": null,
+   "keywords": "",
+   "categoryId": "cmpzfhyqt0009lk01uzqge5fd",
+   "ownerId": "cmsni8cd20000ln01mowgg8ek",
+   "isActive": true,
+   "isSuspended": false,
+   "views": 19,
+   "createdAt": "2026-08-10T17:27:39.942Z",
+   "updatedAt": "2026-08-25T01:35:46.058Z",
+   "category": {
+    "id": "cmpzfhyqt0009lk01uzqge5fd",
+    "name": "Administration",
+    "slug": "administration",
+    "icon": "Administration",
+    "description": "",
+    "createdAt": "2026-06-04T11:45:17.093Z",
+    "updatedAt": "2026-06-04T11:45:17.093Z"
+   },
+   "owner": {
+    "id": "cmsni8cd20000ln01mowgg8ek",
+    "name": "GRUPO DAF",
+    "avatar": null
+   },
+   "photos": [],
+   "products": [],
+   "services": [],
+   "hours": [
+    {
+     "id": "cmsnii9o10004ln0114gznbw7",
+     "dayOfWeek": 1,
+     "openTime": "08:00",
+     "closeTime": "18:00",
+     "isClosed": false,
+     "businessId": "cmsni8cdi0002ln011s6k7xpc"
+    },
+    {
+     "id": "cmsnii9o50006ln01hns2w0sh",
+     "dayOfWeek": 2,
+     "openTime": "08:00",
+     "closeTime": "18:00",
+     "isClosed": false,
+     "businessId": "cmsni8cdi0002ln011s6k7xpc"
+    },
+    {
+     "id": "cmsnii9o70008ln01ix4c2n1u",
+     "dayOfWeek": 3,
+     "openTime": "08:00",
+     "closeTime": "18:00",
+     "isClosed": false,
+     "businessId": "cmsni8cdi0002ln011s6k7xpc"
+    },
+    {
+     "id": "cmsnii9o8000aln01mkogr7jw",
+     "dayOfWeek": 4,
+     "openTime": "08:00",
+     "closeTime": "18:00",
+     "isClosed": false,
+     "businessId": "cmsni8cdi0002ln011s6k7xpc"
+    },
+    {
+     "id": "cmsnii9oa000cln01v6jpook6",
+     "dayOfWeek": 5,
+     "openTime": "08:00",
+     "closeTime": "18:00",
+     "isClosed": false,
+     "businessId": "cmsni8cdi0002ln011s6k7xpc"
+    }
+   ],
+   "reviews": [],
+   "_count": {
+    "reviews": 0,
+    "products": 0,
+    "services": 0
+   },
+   "avgRating": 0
+  },
+  "embaixada-da-republica-da-guine-conacri-bissau": {
+   "id": "cmrxco3jw0018ln010so8ex6z",
+   "name": "Embaixada da República da Guiné - Conacri | Bissau",
+   "slug": "embaixada-da-republica-da-guine-conacri-bissau",
+   "description": null,
+   "logo": "/api/uploads/98d40360-b53d-4796-8b8f-b65ec8e497c8.jfif",
+   "coverImage": "/api/uploads/78b6d66d-ad1c-4a94-b606-590b25a8c6c1.jfif",
+   "address": "Rua Mariam Gouaby (Rua 14), Bissau, Guiné-Bissau",
+   "city": "Bissau",
+   "region": null,
+   "country": "Guiné-Bissau",
+   "phone": "(+245) 44 320 12 31",
+   "email": "ambaguibissau@mae.gov.gn",
+   "website": "",
+   "facebook": null,
+   "instagram": null,
+   "twitter": null,
+   "linkedin": null,
+   "whatsapp": null,
+   "tiktok": null,
+   "keywords": null,
+   "categoryId": "cmpzfhyqt0009lk01uzqge5fd",
+   "ownerId": "cmrxco3jf0016ln01kr7zc9pf",
+   "isActive": true,
+   "isSuspended": false,
+   "views": 2,
+   "createdAt": "2026-07-23T10:09:56.732Z",
+   "updatedAt": "2026-08-31T12:03:24.654Z",
+   "category": {
+    "id": "cmpzfhyqt0009lk01uzqge5fd",
+    "name": "Administration",
+    "slug": "administration",
+    "icon": "Administration",
+    "description": "",
+    "createdAt": "2026-06-04T11:45:17.093Z",
+    "updatedAt": "2026-06-04T11:45:17.093Z"
+   },
+   "owner": {
+    "id": "cmrxco3jf0016ln01kr7zc9pf",
+    "name": "Embaixada da República da Guiné - Conacri | Bissau",
+    "avatar": null
+   },
+   "photos": [],
+   "products": [],
+   "services": [],
+   "hours": [
+    {
+     "id": "cmrxcup60001cln01f5hnbxle",
+     "dayOfWeek": 6,
+     "openTime": null,
+     "closeTime": null,
+     "isClosed": true,
+     "businessId": "cmrxco3jw0018ln010so8ex6z"
+    }
+   ],
+   "reviews": [],
+   "_count": {
+    "reviews": 0,
+    "products": 0,
+    "services": 0
+   },
+   "avgRating": 0
+  },
+  "embaixada-da-china-em-bissau-guine-bissau": {
+   "id": "cmrxc03c50013ln013ae591h7",
+   "name": "Embaixada da China em Bissau | Guiné-Bissau ",
+   "slug": "embaixada-da-china-em-bissau-guine-bissau",
+   "description": "",
+   "logo": "/api/uploads/ac5a2790-59fa-41aa-a11c-fcadf8bfd8cd.jfif",
+   "coverImage": "/api/uploads/04c01bca-e2e9-46b0-a477-38f0e7d95f71.png",
+   "address": "Bairro de Penha,Bissau ",
+   "city": "Bissau",
+   "region": null,
+   "country": "Guiné-Bissau",
+   "phone": "(+245) 955 508 596",
+   "email": "consulate_gnb@mfa.gov.cn",
+   "website": "gw.china-embassy.gov.cn",
+   "facebook": "",
+   "instagram": "",
+   "twitter": "",
+   "linkedin": "",
+   "whatsapp": "",
+   "tiktok": null,
+   "keywords": "",
+   "categoryId": "cmpzfhyqt0009lk01uzqge5fd",
+   "ownerId": "cmrxc03bn0011ln01ot7z5mj6",
+   "isActive": true,
+   "isSuspended": false,
+   "views": 2,
+   "createdAt": "2026-07-23T09:51:16.709Z",
+   "updatedAt": "2026-08-11T12:17:18.671Z",
+   "category": {
+    "id": "cmpzfhyqt0009lk01uzqge5fd",
+    "name": "Administration",
+    "slug": "administration",
+    "icon": "Administration",
+    "description": "",
+    "createdAt": "2026-06-04T11:45:17.093Z",
+    "updatedAt": "2026-06-04T11:45:17.093Z"
+   },
+   "owner": {
+    "id": "cmrxc03bn0011ln01ot7z5mj6",
+    "name": "Embaixada da China em Bissau",
+    "avatar": null
+   },
+   "photos": [],
+   "products": [],
+   "services": [],
+   "hours": [
+    {
+     "id": "cmrxc615e0015ln017x6vamp7",
+     "dayOfWeek": 6,
+     "openTime": null,
+     "closeTime": null,
+     "isClosed": true,
+     "businessId": "cmrxc03c50013ln013ae591h7"
+    }
+   ],
+   "reviews": [],
+   "_count": {
+    "reviews": 0,
+    "products": 0,
+    "services": 0
+   },
+   "avgRating": 0
+  },
+  "consulado-honorario-da-turquia-em-bissau-guine-bissau": {
+   "id": "cmrtaf0s40010ln01r53luz2i",
+   "name": "Consulado Honorário da Turquia em Bissau, Guiné-Bissau",
+   "slug": "consulado-honorario-da-turquia-em-bissau-guine-bissau",
+   "description": null,
+   "logo": "/api/uploads/fee41ece-13b9-46c5-94ff-541396510988.jfif",
+   "coverImage": "/api/uploads/d7b6ccd8-6de0-4ab5-bce4-99f5e499c216.png",
+   "address": "Zona Industriala de Bolola, Imovel No: 43 Bissau",
+   "city": "Bissau",
+   "region": null,
+   "country": "Guiné-Bissau",
+   "phone": "\t(+245) 95 572 93 93 ",
+   "email": "nelitogomes9@yahoo.com.br",
+   "website": "https://turkey-evisa.it.com",
+   "facebook": null,
+   "instagram": null,
+   "twitter": null,
+   "linkedin": null,
+   "whatsapp": null,
+   "tiktok": null,
+   "keywords": null,
+   "categoryId": "cmpzfhyqt0009lk01uzqge5fd",
+   "ownerId": "cmrtaf0rp000yln01a8z7070q",
+   "isActive": true,
+   "isSuspended": false,
+   "views": 4,
+   "createdAt": "2026-07-20T13:55:49.300Z",
+   "updatedAt": "2026-08-17T23:02:57.345Z",
+   "category": {
+    "id": "cmpzfhyqt0009lk01uzqge5fd",
+    "name": "Administration",
+    "slug": "administration",
+    "icon": "Administration",
+    "description": "",
+    "createdAt": "2026-06-04T11:45:17.093Z",
+    "updatedAt": "2026-06-04T11:45:17.093Z"
+   },
+   "owner": {
+    "id": "cmrtaf0rp000yln01a8z7070q",
+    "name": "Consulado Honorário da Turquia em Bissau, Guiné-Bissau",
+    "avatar": null
+   },
+   "photos": [],
+   "products": [],
+   "services": [],
+   "hours": [],
+   "reviews": [],
+   "_count": {
+    "reviews": 0,
+    "products": 0,
+    "services": 0
+   },
+   "avgRating": 0
+  },
+  "embaixada-da-franca-em-dakar": {
+   "id": "cmrta7u1n000lln011rwj4xel",
+   "name": "Embaixada da França em Dakar",
+   "slug": "embaixada-da-franca-em-dakar",
+   "description": null,
+   "logo": null,
+   "coverImage": "/api/uploads/e79be7b6-6f54-4c19-9001-8bb7ae3eca62.png",
+   "address": "1, rue El Hadji Amadou Assane Ndoye, BP 4035, Dakar",
+   "city": "Dakar",
+   "region": null,
+   "country": "Senegal",
+   "phone": "+221 33 839 51 00",
+   "email": "webmestre.dakar-amba@diplomatie.gouv.fr",
+   "website": "https://sn.ambafrance.org/-Francais-",
+   "facebook": null,
+   "instagram": null,
+   "twitter": null,
+   "linkedin": null,
+   "whatsapp": null,
+   "tiktok": null,
+   "keywords": null,
+   "categoryId": "cmpzfhyqt0009lk01uzqge5fd",
+   "ownerId": "cmrta7u1b000jln015dxi9u2t",
+   "isActive": true,
+   "isSuspended": false,
+   "views": 0,
+   "createdAt": "2026-07-20T13:50:13.980Z",
+   "updatedAt": "2026-07-20T13:51:25.091Z",
+   "category": {
+    "id": "cmpzfhyqt0009lk01uzqge5fd",
+    "name": "Administration",
+    "slug": "administration",
+    "icon": "Administration",
+    "description": "",
+    "createdAt": "2026-06-04T11:45:17.093Z",
+    "updatedAt": "2026-06-04T11:45:17.093Z"
+   },
+   "owner": {
+    "id": "cmrta7u1b000jln015dxi9u2t",
+    "name": "Embaixada da França em Dakar",
+    "avatar": null
+   },
+   "photos": [],
+   "products": [],
+   "services": [],
+   "hours": [
+    {
+     "id": "cmrtaavmp000nln01ebcvmpux",
+     "dayOfWeek": 1,
+     "openTime": "08:00",
+     "closeTime": "17:00",
+     "isClosed": false,
+     "businessId": "cmrta7u1n000lln011rwj4xel"
+    },
+    {
+     "id": "cmrtaavms000pln0143k7t1ks",
+     "dayOfWeek": 2,
+     "openTime": "08:00",
+     "closeTime": "17:00",
+     "isClosed": false,
+     "businessId": "cmrta7u1n000lln011rwj4xel"
+    },
+    {
+     "id": "cmrtaavmu000rln01ablg13kh",
+     "dayOfWeek": 3,
+     "openTime": "08:00",
+     "closeTime": "17:00",
+     "isClosed": false,
+     "businessId": "cmrta7u1n000lln011rwj4xel"
+    },
+    {
+     "id": "cmrtaavmw000tln01fmz1p8cp",
+     "dayOfWeek": 4,
+     "openTime": "08:00",
+     "closeTime": "17:00",
+     "isClosed": false,
+     "businessId": "cmrta7u1n000lln011rwj4xel"
+    },
+    {
+     "id": "cmrtaavmy000vln014309cs8i",
+     "dayOfWeek": 5,
+     "openTime": "08:00",
+     "closeTime": "12:00",
+     "isClosed": false,
+     "businessId": "cmrta7u1n000lln011rwj4xel"
+    },
+    {
+     "id": "cmrtaavn0000xln01223c6k17",
+     "dayOfWeek": 6,
+     "openTime": null,
+     "closeTime": null,
+     "isClosed": true,
+     "businessId": "cmrta7u1n000lln011rwj4xel"
+    }
+   ],
+   "reviews": [],
+   "_count": {
+    "reviews": 0,
+    "products": 0,
+    "services": 0
+   },
+   "avgRating": 0
+  },
+  "embaixada-da-belgica-no-senegal": {
+   "id": "cmrt9r7x0000iln01a1f3ptm7",
+   "name": "Embaixada da Bélgica no Senegal",
+   "slug": "embaixada-da-belgica-no-senegal",
+   "description": "",
+   "logo": null,
+   "coverImage": "/api/uploads/649e2d70-45c0-4151-82a2-dcf3a4860956.jfif",
+   "address": "Avenue des Jambaars  Dakar  Sénégal",
+   "city": "Dakar",
+   "region": null,
+   "country": "Senegal",
+   "phone": "(+221) 33 889 43 90",
+   "email": "",
+   "website": "https://senegal.diplomatie.belgium.be",
+   "facebook": "",
+   "instagram": "",
+   "twitter": "",
+   "linkedin": "",
+   "whatsapp": "",
+   "tiktok": null,
+   "keywords": "",
+   "categoryId": "cmpzfhyqt0009lk01uzqge5fd",
+   "ownerId": "cmrt9r7wo000gln01b26yen7q",
+   "isActive": true,
+   "isSuspended": false,
+   "views": 2,
+   "createdAt": "2026-07-20T13:37:18.805Z",
+   "updatedAt": "2026-08-22T20:10:07.701Z",
+   "category": {
+    "id": "cmpzfhyqt0009lk01uzqge5fd",
+    "name": "Administration",
+    "slug": "administration",
+    "icon": "Administration",
+    "description": "",
+    "createdAt": "2026-06-04T11:45:17.093Z",
+    "updatedAt": "2026-06-04T11:45:17.093Z"
+   },
+   "owner": {
+    "id": "cmrt9r7wo000gln01b26yen7q",
+    "name": "Embaixada da Bélgica no Senegal",
+    "avatar": null
+   },
+   "photos": [],
+   "products": [],
+   "services": [],
+   "hours": [],
+   "reviews": [],
+   "_count": {
+    "reviews": 0,
+    "products": 0,
+    "services": 0
+   },
+   "avgRating": 0
+  },
+  "nampa-service-sarl": {
+   "id": "cmrt8fm6p0002ln01s7zugqkr",
+   "name": "Nampa Service Sarl",
+   "slug": "nampa-service-sarl",
+   "description": "A Nampa Service SARL é uma empresa de tecnologia e serviços informáticos especializada em fornecer soluções digitais e tecnológicas para empresas, organizações e particulares.\n\nA empresa atua nas áreas de manutenção e assistência informática, instalação de software, configuração de redes e sistemas, instalação de Starlink, venda de equipamentos e materiais informáticos, suporte técnico e soluções tecnológicas.",
+   "logo": "/api/uploads/bd5dbe1f-cf01-42dd-bcf7-a70d57a53e73.png",
+   "coverImage": "/api/uploads/5062db32-f654-4df3-bf50-4f5065263af8.png",
+   "address": "Bairro Ministro",
+   "city": "Bissau",
+   "region": "",
+   "country": "Guinée-Bissau",
+   "phone": "+245956200479",
+   "email": "leogms23@gmail.com",
+   "website": "",
+   "facebook": "",
+   "instagram": "",
+   "twitter": "",
+   "linkedin": "",
+   "whatsapp": "955120467",
+   "tiktok": null,
+   "keywords": "",
+   "categoryId": "cmq0xu9q60001pd1ycturztaf",
+   "ownerId": "cmrt8fm670000ln01j6qob213",
+   "isActive": true,
+   "isSuspended": false,
+   "views": 2,
+   "createdAt": "2026-07-20T13:00:17.808Z",
+   "updatedAt": "2026-08-10T17:53:32.541Z",
+   "category": {
+    "id": "cmq0xu9q60001pd1ycturztaf",
+    "name": "Technologie | Informatique",
+    "slug": "technologie-informatique",
+    "icon": "Monitor",
+    "description": "",
+    "createdAt": "2026-06-05T13:06:30.462Z",
+    "updatedAt": "2026-07-13T10:05:59.409Z"
+   },
+   "owner": {
+    "id": "cmrt8fm670000ln01j6qob213",
+    "name": "Nampa Service Sarl",
+    "avatar": null
+   },
+   "photos": [],
+   "products": [],
+   "services": [],
+   "hours": [
+    {
+     "id": "cmrt8l3bg0004ln01n0brre6x",
+     "dayOfWeek": 1,
+     "openTime": "08:00",
+     "closeTime": "18:00",
+     "isClosed": false,
+     "businessId": "cmrt8fm6p0002ln01s7zugqkr"
+    },
+    {
+     "id": "cmrt8l3bi0006ln01hxpu3j27",
+     "dayOfWeek": 2,
+     "openTime": "08:00",
+     "closeTime": "18:00",
+     "isClosed": false,
+     "businessId": "cmrt8fm6p0002ln01s7zugqkr"
+    },
+    {
+     "id": "cmrt8l3bk0008ln01fpuzt7fu",
+     "dayOfWeek": 3,
+     "openTime": "08:00",
+     "closeTime": "18:00",
+     "isClosed": false,
+     "businessId": "cmrt8fm6p0002ln01s7zugqkr"
+    },
+    {
+     "id": "cmrt8l3bm000aln01ws6i9szb",
+     "dayOfWeek": 4,
+     "openTime": "08:00",
+     "closeTime": "18:00",
+     "isClosed": false,
+     "businessId": "cmrt8fm6p0002ln01s7zugqkr"
+    },
+    {
+     "id": "cmrt8l3bn000cln01w85qcbs8",
+     "dayOfWeek": 5,
+     "openTime": "08:00",
+     "closeTime": "18:00",
+     "isClosed": false,
+     "businessId": "cmrt8fm6p0002ln01s7zugqkr"
+    }
+   ],
+   "reviews": [],
+   "_count": {
+    "reviews": 0,
+    "products": 0,
+    "services": 0
+   },
+   "avgRating": 0
+  },
+  "cawa-group-bissau": {
+   "id": "cmrersy4g003sln01684t7kka",
+   "name": "Cawa Group | Bissau",
+   "slug": "cawa-group-bissau",
+   "description": "CAWA GROUP apoia as empresas da África Ocidental na gestão de recursos humanos, combinando presença no terreno, profissionalismo e compromisso humano",
+   "logo": "/api/uploads/4a2b603a-af36-4ec8-bf15-265ffbc6d8fb.jpg",
+   "coverImage": "/api/uploads/b2546e22-19e6-472d-8369-8a026f4ea243.jpg",
+   "address": "Cupilum de Baixo, Av. Das Nações Unidas, Bissau, Guinea-Bisáu",
+   "city": "Bissau",
+   "region": null,
+   "country": "Guinea-Bisáu",
+   "phone": "+245 965 241 576",
+   "email": "",
+   "website": "https://cawagroup.com",
+   "facebook": "",
+   "instagram": "",
+   "twitter": "",
+   "linkedin": "",
+   "whatsapp": "",
+   "tiktok": null,
+   "keywords": "",
+   "categoryId": "cmpzfhyqt0009lk01uzqge5fd",
+   "ownerId": "cmrersy3k003qln015g3fgt1u",
+   "isActive": true,
+   "isSuspended": false,
+   "views": 6,
+   "createdAt": "2026-07-10T10:05:59.872Z",
+   "updatedAt": "2026-09-06T10:41:53.496Z",
+   "category": {
+    "id": "cmpzfhyqt0009lk01uzqge5fd",
+    "name": "Administration",
+    "slug": "administration",
+    "icon": "Administration",
+    "description": "",
+    "createdAt": "2026-06-04T11:45:17.093Z",
+    "updatedAt": "2026-06-04T11:45:17.093Z"
+   },
+   "owner": {
+    "id": "cmrersy3k003qln015g3fgt1u",
+    "name": "Cawa Group | Bissau",
+    "avatar": null
+   },
+   "photos": [],
+   "products": [],
+   "services": [],
+   "hours": [],
+   "reviews": [],
+   "_count": {
+    "reviews": 0,
+    "products": 0,
+    "services": 0
+   },
+   "avgRating": 0
+  },
+  "guinebis-seguros-s-a": {
+   "id": "cmr25xnkn003lln01towmfpt2",
+   "name": "Guinebis Seguros S.A ",
+   "slug": "guinebis-seguros-s-a",
+   "description": "A primeira seguradora privada da Guiné-Bissau",
+   "logo": "/api/uploads/b86109e5-b4ef-4b2e-8997-351238b2d74c.jpg",
+   "coverImage": "/api/uploads/70b868a7-3d44-4646-8d11-bee7b8bd493f.jpg",
+   "address": "Rua Severino Gomes de Pina, Bissau, Guiné-Bissau",
+   "city": "Bissau",
+   "region": null,
+   "country": "Guinea-Bisáu",
+   "phone": "955101333",
+   "email": "guineebissau.cartebrune@cartebrune.org",
+   "website": "guinebis.com ",
+   "facebook": "",
+   "instagram": "",
+   "twitter": "",
+   "linkedin": "",
+   "whatsapp": "+245955101333",
+   "tiktok": null,
+   "keywords": "",
+   "categoryId": "cmpzfg40p0004lk01zyp07axa",
+   "ownerId": "cmr25xnk7003jln01u8xqxaou",
+   "isActive": true,
+   "isSuspended": false,
+   "views": 14,
+   "createdAt": "2026-07-01T14:20:33.815Z",
+   "updatedAt": "2026-08-23T01:18:20.658Z",
+   "category": {
+    "id": "cmpzfg40p0004lk01zyp07axa",
+    "name": "Assurances |  Banques",
+    "slug": "assurances-banques",
+    "icon": "Assurances | Banques",
+    "description": "",
+    "createdAt": "2026-06-04T11:43:50.618Z",
+    "updatedAt": "2026-07-13T10:12:54.922Z"
+   },
+   "owner": {
+    "id": "cmr25xnk7003jln01u8xqxaou",
+    "name": "Guinebis Seguros S.A ",
+    "avatar": null
+   },
+   "photos": [
+    {
+     "id": "cmr26bghy003pln01ed0dimj6",
+     "url": "/api/uploads/2d6d3f73-e4c3-4943-a1bd-1e22289581f6.jpg",
+     "businessId": "cmr25xnkn003lln01towmfpt2",
+     "createdAt": "2026-07-01T14:31:17.831Z"
+    }
+   ],
+   "products": [],
+   "services": [],
+   "hours": [],
+   "reviews": [],
+   "_count": {
+    "reviews": 0,
+    "products": 0,
+    "services": 0
+   },
+   "avgRating": 0
+  },
+  "barbershop-aos": {
+   "id": "cmr1zhwig003iln0113rpfp40",
+   "name": "BarberShop Aos ",
+   "slug": "barbershop-aos",
+   "description": "",
+   "logo": "/api/uploads/ba08905c-3646-4e27-b872-dc972d569022.jpg",
+   "coverImage": "/api/uploads/9165fcc9-8ddf-4c65-984f-3e255df88010.jpg",
+   "address": "Rua Lamine Injai, Bissau, Guiné-Bissau",
+   "city": "Bissau",
+   "region": "",
+   "country": "Guinea-Bisáu",
+   "phone": "955 115 048",
+   "email": "barbershopaos@hotmail.com",
+   "website": "",
+   "facebook": "",
+   "instagram": "",
+   "twitter": "",
+   "linkedin": "",
+   "whatsapp": "245955115048",
+   "tiktok": null,
+   "keywords": "",
+   "categoryId": "cmpzfibz3000alk0157mj77k3",
+   "ownerId": "cmr1zhwi1003gln010vk278q8",
+   "isActive": true,
+   "isSuspended": false,
+   "views": 16,
+   "createdAt": "2026-07-01T11:20:21.208Z",
+   "updatedAt": "2026-09-05T00:39:03.102Z",
+   "category": {
+    "id": "cmpzfibz3000alk0157mj77k3",
+    "name": "Barbier | Salon de coiffure",
+    "slug": "barbier-salon-de-coiffure",
+    "icon": "Barbearia | Cabelaleira",
+    "description": "",
+    "createdAt": "2026-06-04T11:45:34.239Z",
+    "updatedAt": "2026-07-13T09:54:15.670Z"
+   },
+   "owner": {
+    "id": "cmr1zhwi1003gln010vk278q8",
+    "name": "BarberShop Aos ",
+    "avatar": null
+   },
+   "photos": [],
+   "products": [],
+   "services": [],
+   "hours": [],
+   "reviews": [],
+   "_count": {
+    "reviews": 0,
+    "products": 0,
+    "services": 0
+   },
+   "avgRating": 0
+  },
+  "hotel-lisboa-bissau": {
+   "id": "cmr1x46fe002wln014hnm21h0",
+   "name": "Hotel Lisboa Bissau",
+   "slug": "hotel-lisboa-bissau",
+   "description": "",
+   "logo": "/api/uploads/39e83d48-dec0-4a50-ac90-4dcdf60bc612.webp",
+   "coverImage": "/api/uploads/58154247-f73f-4877-9b75-639463b91c3c.webp",
+   "address": "Av.Combatante Libertade Patria, Bissau, Guiné-Bissau",
+   "city": "Bissau",
+   "region": "",
+   "country": "Guinea-Bisáu",
+   "phone": "+245 955 650 000",
+   "email": "",
+   "website": "",
+   "facebook": "",
+   "instagram": "",
+   "twitter": "",
+   "linkedin": "",
+   "whatsapp": "+245 955 650 000",
+   "tiktok": null,
+   "keywords": "",
+   "categoryId": "cmpzfefbm0002lk01k0mp5eya",
+   "ownerId": "cmr1x46f0002uln01uegwp38b",
+   "isActive": true,
+   "isSuspended": false,
+   "views": 6,
+   "createdAt": "2026-07-01T10:13:41.643Z",
+   "updatedAt": "2026-08-10T13:51:12.351Z",
+   "category": {
+    "id": "cmpzfefbm0002lk01k0mp5eya",
+    "name": "Hotels",
+    "slug": "hotels",
+    "icon": "Hotels",
+    "description": "",
+    "createdAt": "2026-06-04T11:42:31.955Z",
+    "updatedAt": "2026-07-01T10:01:04.734Z"
+   },
+   "owner": {
+    "id": "cmr1x46f0002uln01uegwp38b",
+    "name": "Hotel Lisboa Bissau",
+    "avatar": null
+   },
+   "photos": [],
+   "products": [],
+   "services": [],
+   "hours": [
+    {
+     "id": "cmr1x670y002yln01w87thbif",
+     "dayOfWeek": 0,
+     "openTime": "09:00",
+     "closeTime": "18:00",
+     "isClosed": false,
+     "businessId": "cmr1x46fe002wln014hnm21h0"
+    }
+   ],
+   "reviews": [],
+   "_count": {
+    "reviews": 0,
+    "products": 0,
+    "services": 0
+   },
+   "avgRating": 0
+  },
+  "hotel-ceiba": {
+   "id": "cmr1wtvrh002fln019g5mjveq",
+   "name": "Hotel Ceiba",
+   "slug": "hotel-ceiba",
+   "description": "",
+   "logo": "/api/uploads/e5ff2311-1909-43d0-86f8-991d355c2206.webp",
+   "coverImage": "/api/uploads/bec10bed-78f3-4386-88ae-70c155552a22.jpg",
+   "address": "Avenida Francisco Mendes, Bissau, Guiné-Bissau",
+   "city": "Bissau",
+   "region": null,
+   "country": "Guiné-Bissau",
+   "phone": "+245 969 189 292",
+   "email": "reservations@ceibabissau.com",
+   "website": "https://ceibabissau.com/fr/contact/",
+   "facebook": "",
+   "instagram": "",
+   "twitter": "",
+   "linkedin": "",
+   "whatsapp": "+245969189292",
+   "tiktok": null,
+   "keywords": "",
+   "categoryId": "cmpzfefbm0002lk01k0mp5eya",
+   "ownerId": "cmr1wtvr3002dln01uz06vx4f",
+   "isActive": true,
+   "isSuspended": false,
+   "views": 4,
+   "createdAt": "2026-07-01T10:05:41.261Z",
+   "updatedAt": "2026-08-22T03:34:21.967Z",
+   "category": {
+    "id": "cmpzfefbm0002lk01k0mp5eya",
+    "name": "Hotels",
+    "slug": "hotels",
+    "icon": "Hotels",
+    "description": "",
+    "createdAt": "2026-06-04T11:42:31.955Z",
+    "updatedAt": "2026-07-01T10:01:04.734Z"
+   },
+   "owner": {
+    "id": "cmr1wtvr3002dln01uz06vx4f",
+    "name": "Hotel Ceiba",
+    "avatar": null
+   },
+   "photos": [],
+   "products": [],
+   "services": [],
+   "hours": [
+    {
+     "id": "cmr1wzsaw002hln01ey006rhy",
+     "dayOfWeek": 0,
+     "openTime": "08:00",
+     "closeTime": "18:00",
+     "isClosed": false,
+     "businessId": "cmr1wtvrh002fln019g5mjveq"
+    },
+    {
+     "id": "cmr1wzsay002jln016w84d7vn",
+     "dayOfWeek": 1,
+     "openTime": "07:00",
+     "closeTime": "18:00",
+     "isClosed": false,
+     "businessId": "cmr1wtvrh002fln019g5mjveq"
+    },
+    {
+     "id": "cmr1wzsb0002lln01or1lo3hs",
+     "dayOfWeek": 2,
+     "openTime": "07:00",
+     "closeTime": "18:00",
+     "isClosed": false,
+     "businessId": "cmr1wtvrh002fln019g5mjveq"
+    },
+    {
+     "id": "cmr1wzsb1002nln011jf9wz9q",
+     "dayOfWeek": 3,
+     "openTime": "07:00",
+     "closeTime": "18:00",
+     "isClosed": false,
+     "businessId": "cmr1wtvrh002fln019g5mjveq"
+    },
+    {
+     "id": "cmr1wzsb3002pln01xbn0kh90",
+     "dayOfWeek": 4,
+     "openTime": "07:00",
+     "closeTime": "18:00",
+     "isClosed": false,
+     "businessId": "cmr1wtvrh002fln019g5mjveq"
+    },
+    {
+     "id": "cmr1wzsb4002rln0148bckhlq",
+     "dayOfWeek": 5,
+     "openTime": "07:00",
+     "closeTime": "18:00",
+     "isClosed": false,
+     "businessId": "cmr1wtvrh002fln019g5mjveq"
+    },
+    {
+     "id": "cmr1wzsb6002tln01kqtg2me4",
+     "dayOfWeek": 6,
+     "openTime": "07:00",
+     "closeTime": "18:00",
+     "isClosed": false,
+     "businessId": "cmr1wtvrh002fln019g5mjveq"
+    }
+   ],
+   "reviews": [],
+   "_count": {
+    "reviews": 0,
+    "products": 0,
+    "services": 0
+   },
+   "avgRating": 0
+  },
+  "satguru-travels-guine-bissau": {
+   "id": "cmr1wacja002cln01bpovnhio",
+   "name": "Satguru Travels guiné-Bissau",
+   "slug": "satguru-travels-guine-bissau",
+   "description": "uma empresa global de gestão de viagens, a Satguru Travel fornece serviços de ponta a ponta ",
+   "logo": "/api/uploads/287fd6cb-7ebc-4016-8b1f-9b0a39adfd1d.jpg",
+   "coverImage": "/api/uploads/9317e444-84fe-4e3b-bb26-5103badcf8cd.png",
+   "address": "Avenue Domingos Ramos Ns19A/21B Bissau, Guiné-Bissau ",
+   "city": "Bissau",
+   "region": null,
+   "country": "Guiné-Bissau",
+   "phone": "955 850 803",
+   "email": "ashish.udasi@satgurutravel.com",
+   "website": "satgurutravel.com/guinea-bissau  ",
+   "facebook": "",
+   "instagram": "",
+   "twitter": "",
+   "linkedin": "",
+   "whatsapp": "955850803",
+   "tiktok": null,
+   "keywords": "",
+   "categoryId": "cmpzffeyb0003lk01dao3lic0",
+   "ownerId": "cmr1wacix002aln01h3ua8x8x",
+   "isActive": true,
+   "isSuspended": false,
+   "views": 6,
+   "createdAt": "2026-07-01T09:50:29.878Z",
+   "updatedAt": "2026-08-30T04:32:44.517Z",
+   "category": {
+    "id": "cmpzffeyb0003lk01dao3lic0",
+    "name": "Tourisme",
+    "slug": "tourisme",
+    "icon": "Tourisme",
+    "description": "",
+    "createdAt": "2026-06-04T11:43:18.132Z",
+    "updatedAt": "2026-06-04T11:43:18.132Z"
+   },
+   "owner": {
+    "id": "cmr1wacix002aln01h3ua8x8x",
+    "name": "Satguru Travels Guiné-Bissau",
+    "avatar": null
+   },
+   "photos": [],
+   "products": [],
+   "services": [],
+   "hours": [],
+   "reviews": [],
+   "_count": {
+    "reviews": 0,
+    "products": 0,
+    "services": 0
+   },
+   "avgRating": 0
+  },
+  "360-v2": {
+   "id": "cmr1vshh10029ln01lnzx7opm",
+   "name": "360 V2",
+   "slug": "360-v2",
+   "description": "É uma agência de comunicação, tecnologia e design sediada em Bissau, especializada na criação de identidades visuais e logótipos. Oferece serviços de branding, impressão profissional e segurança a instituições e empresas locais.",
+   "logo": "/api/uploads/491db9f0-a001-4d5a-b821-b924b92afa71.jpg",
+   "coverImage": "/api/uploads/b1dd4cb3-75ce-4669-8115-3d6653803b9e.png",
+   "address": "Av.Pansau na Isna- Coqueiros",
+   "city": "Bissau",
+   "region": "",
+   "country": "Guinea-Bisáu",
+   "phone": "956222323",
+   "email": "360v2guinebissau@gmail.com",
+   "website": "www.360v2sarl.gw",
+   "facebook": "",
+   "instagram": "",
+   "twitter": "",
+   "linkedin": "",
+   "whatsapp": "",
+   "tiktok": null,
+   "keywords": "",
+   "categoryId": "cmq98pgna001vln01wai4z6bj",
+   "ownerId": "cmr1vshgq0027ln01lb051qmx",
+   "isActive": true,
+   "isSuspended": false,
+   "views": 12,
+   "createdAt": "2026-07-01T09:36:36.469Z",
+   "updatedAt": "2026-08-15T14:07:32.993Z",
+   "category": {
+    "id": "cmq98pgna001vln01wai4z6bj",
+    "name": "Marketing | Communication",
+    "slug": "marketing-communication",
+    "icon": "Marketing | Communication",
+    "description": "",
+    "createdAt": "2026-06-11T08:32:51.334Z",
+    "updatedAt": "2026-07-13T10:07:12.145Z"
+   },
+   "owner": {
+    "id": "cmr1vshgq0027ln01lb051qmx",
+    "name": "360 V2",
+    "avatar": null
+   },
+   "photos": [],
+   "products": [],
+   "services": [],
+   "hours": [],
+   "reviews": [],
+   "_count": {
+    "reviews": 0,
+    "products": 0,
+    "services": 0
+   },
+   "avgRating": 0
+  },
+  "amirale-archi": {
+   "id": "cmqzgxrw0001sln01nymt5bdm",
+   "name": "Amirale Archi",
+   "slug": "amirale-archi",
+   "description": " Design arquitetura ,Decoração da casa, Remodelação de casa.",
+   "logo": null,
+   "coverImage": "/api/uploads/348df524-a73a-49cd-a72c-3b6d76de267c.jpeg",
+   "address": "Franca",
+   "city": "Paris",
+   "region": "",
+   "country": "França",
+   "phone": "0033751160463",
+   "email": "amiralearchitecture@gmail.com",
+   "website": "",
+   "facebook": "",
+   "instagram": "",
+   "twitter": "",
+   "linkedin": "",
+   "whatsapp": "",
+   "tiktok": null,
+   "keywords": "",
+   "categoryId": "cmq0xu9sh0009pd1y2s99n7pe",
+   "ownerId": "cmqzgxrvl001qln01xh93tq7d",
+   "isActive": true,
+   "isSuspended": false,
+   "views": 4,
+   "createdAt": "2026-06-29T17:05:16.656Z",
+   "updatedAt": "2026-08-22T00:55:24.211Z",
+   "category": {
+    "id": "cmq0xu9sh0009pd1y2s99n7pe",
+    "name": "BTP & Construction",
+    "slug": "btp-construction",
+    "icon": "HardHat",
+    "description": null,
+    "createdAt": "2026-06-05T13:06:30.545Z",
+    "updatedAt": "2026-06-05T13:06:30.545Z"
+   },
+   "owner": {
+    "id": "cmqzgxrvl001qln01xh93tq7d",
+    "name": "Amirale Archi",
+    "avatar": null
+   },
+   "photos": [],
+   "products": [],
+   "services": [],
+   "hours": [
+    {
+     "id": "cmqzh51tv001uln017p6b3vrp",
+     "dayOfWeek": 0,
+     "openTime": "09:00",
+     "closeTime": "12:00",
+     "isClosed": false,
+     "businessId": "cmqzgxrw0001sln01nymt5bdm"
+    },
+    {
+     "id": "cmqzh51u1001wln015fx1rn0x",
+     "dayOfWeek": 1,
+     "openTime": "08:00",
+     "closeTime": "19:00",
+     "isClosed": false,
+     "businessId": "cmqzgxrw0001sln01nymt5bdm"
+    },
+    {
+     "id": "cmqzh51u3001yln01lz390hov",
+     "dayOfWeek": 2,
+     "openTime": "08:00",
+     "closeTime": "19:00",
+     "isClosed": false,
+     "businessId": "cmqzgxrw0001sln01nymt5bdm"
+    },
+    {
+     "id": "cmqzh51u50020ln01577cv75m",
+     "dayOfWeek": 3,
+     "openTime": "08:00",
+     "closeTime": "19:00",
+     "isClosed": false,
+     "businessId": "cmqzgxrw0001sln01nymt5bdm"
+    },
+    {
+     "id": "cmqzh51u60022ln01fviowwzg",
+     "dayOfWeek": 4,
+     "openTime": "08:00",
+     "closeTime": "19:00",
+     "isClosed": false,
+     "businessId": "cmqzgxrw0001sln01nymt5bdm"
+    },
+    {
+     "id": "cmqzh51u80024ln0161tkrh8i",
+     "dayOfWeek": 5,
+     "openTime": "08:00",
+     "closeTime": "19:00",
+     "isClosed": false,
+     "businessId": "cmqzgxrw0001sln01nymt5bdm"
+    },
+    {
+     "id": "cmqzh51u90026ln01vygf23ss",
+     "dayOfWeek": 6,
+     "openTime": "08:00",
+     "closeTime": "19:00",
+     "isClosed": false,
+     "businessId": "cmqzgxrw0001sln01nymt5bdm"
+    }
+   ],
+   "reviews": [],
+   "_count": {
+    "reviews": 0,
+    "products": 0,
+    "services": 0
+   },
+   "avgRating": 0
+  },
+  "daya-beleza": {
+   "id": "cmqzgl7qd001pln017gmrx0ec",
+   "name": "Daya Beleza",
+   "slug": "daya-beleza",
+   "description": "",
+   "logo": "/api/uploads/9586635f-5147-45b0-90f1-da9f4163d721.jpeg",
+   "coverImage": "/api/uploads/adf19221-f1de-43d3-95b0-3dab9506b081.jpeg",
+   "address": "Antula , entrada de Lixo ",
+   "city": "Bissau",
+   "region": null,
+   "country": "Guiné-Bissau",
+   "phone": "955482174",
+   "email": "",
+   "website": "",
+   "facebook": "",
+   "instagram": "",
+   "twitter": "",
+   "linkedin": "",
+   "whatsapp": "",
+   "tiktok": null,
+   "keywords": "",
+   "categoryId": "cmpzfibz3000alk0157mj77k3",
+   "ownerId": "cmqzgl7o8001nln014lldo2l2",
+   "isActive": true,
+   "isSuspended": false,
+   "views": 1,
+   "createdAt": "2026-06-29T16:55:30.661Z",
+   "updatedAt": "2026-08-17T12:23:38.257Z",
+   "category": {
+    "id": "cmpzfibz3000alk0157mj77k3",
+    "name": "Barbier | Salon de coiffure",
+    "slug": "barbier-salon-de-coiffure",
+    "icon": "Barbearia | Cabelaleira",
+    "description": "",
+    "createdAt": "2026-06-04T11:45:34.239Z",
+    "updatedAt": "2026-07-13T09:54:15.670Z"
+   },
+   "owner": {
+    "id": "cmqzgl7o8001nln014lldo2l2",
+    "name": "Dayana ",
+    "avatar": null
+   },
+   "photos": [],
+   "products": [],
+   "services": [],
+   "hours": [],
+   "reviews": [],
+   "_count": {
+    "reviews": 0,
+    "products": 0,
+    "services": 0
+   },
+   "avgRating": 0
+  },
+  "business-international": {
+   "id": "cmqvo0wfw001mln01x0uqdl2k",
+   "name": "Business international",
+   "slug": "business-international",
+   "description": "",
+   "logo": null,
+   "coverImage": "/api/uploads/ab49a9d0-f3bd-4551-a8c5-da2984f31e21.jpg",
+   "address": "DHAS",
+   "city": "Catió",
+   "region": "",
+   "country": "Guinée-Bissau",
+   "phone": "",
+   "email": "",
+   "website": "",
+   "facebook": "",
+   "instagram": "",
+   "twitter": "",
+   "linkedin": "",
+   "whatsapp": "",
+   "tiktok": null,
+   "keywords": "",
+   "categoryId": "cmq98pgna001vln01wai4z6bj",
+   "ownerId": "cmqvo0wfg001kln01uwg3ygg3",
+   "isActive": true,
+   "isSuspended": false,
+   "views": 6,
+   "createdAt": "2026-06-27T01:12:35.132Z",
+   "updatedAt": "2026-08-17T23:52:05.710Z",
+   "category": {
+    "id": "cmq98pgna001vln01wai4z6bj",
+    "name": "Marketing | Communication",
+    "slug": "marketing-communication",
+    "icon": "Marketing | Communication",
+    "description": "",
+    "createdAt": "2026-06-11T08:32:51.334Z",
+    "updatedAt": "2026-07-13T10:07:12.145Z"
+   },
+   "owner": {
+    "id": "cmqvo0wfg001kln01uwg3ygg3",
+    "name": "Bless Mansaly",
+    "avatar": null
+   },
+   "photos": [],
+   "products": [],
+   "services": [],
+   "hours": [],
+   "reviews": [],
+   "_count": {
+    "reviews": 0,
+    "products": 0,
+    "services": 0
+   },
+   "avgRating": 0
+  },
+  "bimantecs-bissau": {
+   "id": "cmqrzgoyf001jln011llezv1o",
+   "name": "Bimantecs | Bissau",
+   "slug": "bimantecs-bissau",
+   "description": "A Escola de Gestão e Tecnologia de Bissau é um instituto superior de formação localizado em BISSAU.",
+   "logo": null,
+   "coverImage": "/api/uploads/60f0aa86-2a4a-428d-95d0-01b66cf2bce7.png",
+   "address": "Praça, avenida Amílcar Cabral, Rua 7, n12, Bissau, Guiné-Bissau",
+   "city": "Bissau",
+   "region": null,
+   "country": "Guinea-Bisáu",
+   "phone": "955 651 017",
+   "email": "abouathie@bimantecs.com",
+   "website": "",
+   "facebook": "https://www.facebook.com/Bimantecs/",
+   "instagram": "",
+   "twitter": "",
+   "linkedin": "",
+   "whatsapp": "",
+   "tiktok": null,
+   "keywords": "",
+   "categoryId": "cmq0xu9rh0006pd1yfcmtl829",
+   "ownerId": "cmqrzgoxr001hln01dnnytbrp",
+   "isActive": true,
+   "isSuspended": false,
+   "views": 4,
+   "createdAt": "2026-06-24T11:21:42.999Z",
+   "updatedAt": "2026-08-21T15:06:04.910Z",
+   "category": {
+    "id": "cmq0xu9rh0006pd1yfcmtl829",
+    "name": "Éducation & Formation",
+    "slug": "education-formation",
+    "icon": "GraduationCap",
+    "description": null,
+    "createdAt": "2026-06-05T13:06:30.510Z",
+    "updatedAt": "2026-06-05T13:06:30.510Z"
+   },
+   "owner": {
+    "id": "cmqrzgoxr001hln01dnnytbrp",
+    "name": "Bimantecs | Bissau",
+    "avatar": null
+   },
+   "photos": [],
+   "products": [],
+   "services": [],
+   "hours": [],
+   "reviews": [],
+   "_count": {
+    "reviews": 0,
+    "products": 0,
+    "services": 0
+   },
+   "avgRating": 0
+  },
+  "adescom-ong": {
+   "id": "cmqqm21xe001cln01t9e34sfs",
+   "name": "ADESCOM - ONG ",
+   "slug": "adescom-ong",
+   "description": "Agir pour le Développement des Communautés (ADESCOM)** est une Organisation Non Gouvernementale (ONG) dédiée à la transformation sociale et au développement communautaire en Guinée-Bissau.\n\nFondée le 15 janvier 2019, enregistrée sous le numéro 805 (Livre nº 07 SÉRIE C, Bulletin Officiel Nº 19 du 4 mai 2020), ADESCOM est née de la volonté de répondre aux besoins les plus urgents des communautés locales. Elle œuvre pour la promotion du bien-être social, de l'inclusion et du développement durable dans divers aspects de la vie communautaire.\n\nNotre intervention s'articule autour de quatre domaines principaux :\n\n- Santé\n- Droits humains\n- Éducation\n- Agriculture\n\nDepuis sa création, l'ONG s'est distinguée par des actions de sensibilisation, de prise de conscience et de prévention en matière de santé, notamment dans la lutte contre le VIH/SIDA, les Infections Sexuellement Transmissibles (IST), les hépatites, la tuberculose, le cancer du sein, la Covid-19, etc. Dans le domaine de l'éducation, elle s'investit à travers la formation technique professionnelle, les Activités Génératrices de Revenus (AGR) et l'autonomisation globale de la communauté pour le travail et l'indépendance financière.\n\n> Siège social : Bissau, quartier de Cuntum-Madina, entrée de Caju, rue Atlanta. \n\nObjectif: \n\n- Contribuer au développement social et humain des communautés, lutter contre la pauvreté, transformer des vies et stimuler la solidarité sociale.\n\n- ADESCOM s'engage dans une démarche communautaire participative qui vise à améliorer les conditions de vie et le bien-être des populations de la Guinée-Bissau, en encourageant un dynamisme local impliqué dans les actions de développement aux niveaux individuel et collectif.\n\n- L'organisation participe activement à la réalisation des 17 Objectifs de Développement Durable (ODD). Au fil des ans, elle a démontré sa capacité à mobiliser les membres de la communauté, à promouvoir un changement positif des comportements et des mentalités, ainsi qu'à organiser et former les populations pour les aider à devenir des forces participatives du changement global.\n\n* Mission\n\nLa mission d'ADESCOM est de promouvoir le développement social et communautaire à travers des initiatives visant à améliorer les conditions de vie des populations, à renforcer les capacités des jeunes et des femmes, et à promouvoir une société plus juste et équitable. L'ONG s'engage à agir comme un agent de changement, en favorisant l'autonomisation des communautés locales et la transformation positive des mentalités.\n\n* Vision\n\nÊtre une référence en matière d'actions à fort impact social qui transforment les communautés en environnements durables, inclusifs et autosuffisants.\n\n`* Valeurs\n\nADESCOM s'oriente autour de valeurs fondamentales qui guident ses actions et ses projets :\n\n- Solidarité et Inclusion : Nous travaillons à la construction d'un réseau de soutien mutuel entre les communautés, en promouvant l'entraide et le renforcement des liens sociaux. Nous croyons en un monde où chacun a une voix et des chances égales, indépendamment du genre, de l'ethnie, de la race, de la religion ou de la condition sociale.\n\n- Éthique et Transparence : Nous maintenons un engagement de clarté et d'honnêteté dans toutes nos activités, garantissant ainsi la confiance et la crédibilité auprès de nos partenaires et bénéficiaires.\n\n- Durabilité et Innovation : Nos projets sont conçus avec une vision d'impact à long terme, en promouvant l'utilisation responsable des ressources et le renforcement continu des capacités des communautés. Nous recherchons constamment de nouvelles approches et des solutions créatives pour relever les défis du développement communautaire.\n\n- Participation communautaire et Respect de la diversité :  Chaque individu a le droit et le devoir de s'impliquer activement dans les décisions et les actions qui touchent sa communauté. Nous promouvons l'acceptation et la valorisation des différences entre les individus, qu'elles soient culturelles, ethniques, religieuses, de genre, d'orientation sexuelle ou de toute autre caractéristique.",
+   "logo": "/api/uploads/8ed02602-4107-4310-85b1-3bf4df5370f2.png",
+   "coverImage": "/api/uploads/d6356fc0-9bef-4247-8b47-b1f60c1e3c2a.jpg",
+   "address": "Cuntum madina, entrada de caju, rue Atlanta ",
+   "city": "",
+   "region": "",
+   "country": "Guinée-Bissau",
+   "phone": "00245 965017441 ",
+   "email": "adescomo3@gmail.com",
+   "website": "",
+   "facebook": "https://www.facebook.com/adescomgb",
+   "instagram": "",
+   "twitter": "",
+   "linkedin": "https://www.linkedin.com/in/adescom-ong",
+   "whatsapp": "00245 965017441",
+   "tiktok": null,
+   "keywords": "Santé, Droits humains, Éducation, Agriculture",
+   "categoryId": "cmq0xu9rh0006pd1yfcmtl829",
+   "ownerId": "cmqqm21ww001aln01yk2t9toj",
+   "isActive": true,
+   "isSuspended": false,
+   "views": 21,
+   "createdAt": "2026-06-23T12:18:38.786Z",
+   "updatedAt": "2026-08-16T14:46:09.423Z",
+   "category": {
+    "id": "cmq0xu9rh0006pd1yfcmtl829",
+    "name": "Éducation & Formation",
+    "slug": "education-formation",
+    "icon": "GraduationCap",
+    "description": null,
+    "createdAt": "2026-06-05T13:06:30.510Z",
+    "updatedAt": "2026-06-05T13:06:30.510Z"
+   },
+   "owner": {
+    "id": "cmqqm21ww001aln01yk2t9toj",
+    "name": "Erick FOUDA",
+    "avatar": null
+   },
+   "photos": [
+    {
+     "id": "cmqqolgtu001gln01o4puwivh",
+     "url": "/api/uploads/93e79435-e86b-4a91-b4d0-b680746c9fd3.png",
+     "businessId": "cmqqm21xe001cln01t9e34sfs",
+     "createdAt": "2026-06-23T13:29:43.794Z"
+    }
+   ],
+   "products": [
+    {
+     "id": "cmqqof1tj001eln01n4mp7bux",
+     "name": "Centre de Formation et d'Intégration Professionnelle (CEFIP)",
+     "description": "Le CEFIP propose un large catalogue de **formations professionnelles intensives\n",
+     "price": "0",
+     "imageUrl": "/api/uploads/54de1bf8-1557-482b-815f-c8744ca84d13.jpg",
+     "businessId": "cmqqm21xe001cln01t9e34sfs",
+     "createdAt": "2026-06-23T13:24:44.407Z",
+     "updatedAt": "2026-06-23T13:24:44.407Z"
+    }
+   ],
+   "services": [],
+   "hours": [],
+   "reviews": [],
+   "_count": {
+    "reviews": 0,
+    "products": 1,
+    "services": 0
+   },
+   "avgRating": 0
+  },
+  "ecobank-bissau": {
+   "id": "cmqkxmhn9000lln015mvs9uvs",
+   "name": "Ecobank Bissau",
+   "slug": "ecobank-bissau",
+   "description": "Banco The Pan African Bank ",
+   "logo": "/api/uploads/1c739617-7c23-4121-9e3a-cef9e3ce9872.webp",
+   "coverImage": "/api/uploads/b9bdc999-534b-469d-b2c8-45ab075dd1fe.webp",
+   "address": "VC68+CX8, Avenida Amilcar Cabral, Bissau, Guiné-Bissau.",
+   "city": "Bissau",
+   "region": null,
+   "country": "Guiné-Bissau",
+   "phone": "+245 320 73 60",
+   "email": "ecobankgw@ecobank.com",
+   "website": "https://ecobank.com/gw",
+   "facebook": "",
+   "instagram": "",
+   "twitter": "",
+   "linkedin": "",
+   "whatsapp": "",
+   "tiktok": null,
+   "keywords": "",
+   "categoryId": "cmpzfcy910000lk01wos6d6tr",
+   "ownerId": "cmqkxmhms000jln01xktj1y4o",
+   "isActive": true,
+   "isSuspended": false,
+   "views": 7,
+   "createdAt": "2026-06-19T12:55:50.997Z",
+   "updatedAt": "2026-08-15T12:40:31.642Z",
+   "category": {
+    "id": "cmpzfcy910000lk01wos6d6tr",
+    "name": "Banques",
+    "slug": "banques",
+    "icon": "Banque",
+    "description": "Banque",
+    "createdAt": "2026-06-04T11:41:23.174Z",
+    "updatedAt": "2026-06-04T11:41:23.174Z"
+   },
+   "owner": {
+    "id": "cmqkxmhms000jln01xktj1y4o",
+    "name": "Ecobank",
+    "avatar": null
+   },
+   "photos": [],
+   "products": [],
+   "services": [],
+   "hours": [
+    {
+     "id": "cmql009ct000zln014m0yzs2s",
+     "dayOfWeek": 1,
+     "openTime": "07:30",
+     "closeTime": "18:00",
+     "isClosed": false,
+     "businessId": "cmqkxmhn9000lln015mvs9uvs"
+    },
+    {
+     "id": "cmql009cv0011ln01cfi4s905",
+     "dayOfWeek": 2,
+     "openTime": "07:30",
+     "closeTime": "18:00",
+     "isClosed": false,
+     "businessId": "cmqkxmhn9000lln015mvs9uvs"
+    },
+    {
+     "id": "cmql009cw0013ln01fqrzu4zm",
+     "dayOfWeek": 3,
+     "openTime": "07:30",
+     "closeTime": "18:00",
+     "isClosed": false,
+     "businessId": "cmqkxmhn9000lln015mvs9uvs"
+    },
+    {
+     "id": "cmql009cy0015ln01mqr1jrna",
+     "dayOfWeek": 4,
+     "openTime": "07:30",
+     "closeTime": "18:00",
+     "isClosed": false,
+     "businessId": "cmqkxmhn9000lln015mvs9uvs"
+    },
+    {
+     "id": "cmql009cz0017ln01xssxdyv4",
+     "dayOfWeek": 5,
+     "openTime": "07:30",
+     "closeTime": "18:00",
+     "isClosed": false,
+     "businessId": "cmqkxmhn9000lln015mvs9uvs"
+    },
+    {
+     "id": "cmql009d10019ln015x7mgktp",
+     "dayOfWeek": 6,
+     "openTime": "07:30",
+     "closeTime": "18:00",
+     "isClosed": false,
+     "businessId": "cmqkxmhn9000lln015mvs9uvs"
+    }
+   ],
+   "reviews": [],
+   "_count": {
+    "reviews": 0,
+    "products": 0,
+    "services": 0
+   },
+   "avgRating": 0
+  },
+  "telecel": {
+   "id": "cmqkr26rn0004ln01bzgz8snx",
+   "name": "Telecel",
+   "slug": "telecel",
+   "description": "",
+   "logo": "/api/uploads/866bb347-e0e9-437f-843b-7325d89752b5.jpg",
+   "coverImage": "/api/uploads/cd71a769-a83a-4790-89c7-f3fbfa66f874.jpg",
+   "address": "Av. Combatentes Liberdade Da Pátria, Bissau, Guiné-Bissau",
+   "city": "Bissau",
+   "region": "",
+   "country": "Guinea-Bisáu",
+   "phone": "+245 95 500 00 00",
+   "email": "info@telecel.gw",
+   "website": "",
+   "facebook": "",
+   "instagram": "",
+   "twitter": "",
+   "linkedin": "",
+   "whatsapp": "",
+   "tiktok": null,
+   "keywords": "",
+   "categoryId": "cmq0ywec30000o901k3095uzf",
+   "ownerId": "cmqkr26r70002ln01r8nypyg9",
+   "isActive": true,
+   "isSuspended": false,
+   "views": 16,
+   "createdAt": "2026-06-19T09:52:06.083Z",
+   "updatedAt": "2026-08-24T11:08:58.322Z",
+   "category": {
+    "id": "cmq0ywec30000o901k3095uzf",
+    "name": "Télécom",
+    "slug": "telecom",
+    "icon": "Télécom",
+    "description": "Télécom",
+    "createdAt": "2026-06-05T13:36:09.363Z",
+    "updatedAt": "2026-06-05T13:36:09.363Z"
+   },
+   "owner": {
+    "id": "cmqkr26r70002ln01r8nypyg9",
+    "name": "Telecel Bissau",
+    "avatar": null
+   },
+   "photos": [],
+   "products": [],
+   "services": [],
+   "hours": [
+    {
+     "id": "cmqkr3zab0006ln01f67cwrxy",
+     "dayOfWeek": 1,
+     "openTime": "08:00",
+     "closeTime": "16:00",
+     "isClosed": false,
+     "businessId": "cmqkr26rn0004ln01bzgz8snx"
+    },
+    {
+     "id": "cmqkr3zae0008ln01g3z14gyv",
+     "dayOfWeek": 2,
+     "openTime": "08:00",
+     "closeTime": "16:00",
+     "isClosed": false,
+     "businessId": "cmqkr26rn0004ln01bzgz8snx"
+    },
+    {
+     "id": "cmqkr3zaf000aln018du2ps3w",
+     "dayOfWeek": 3,
+     "openTime": "08:00",
+     "closeTime": "16:00",
+     "isClosed": false,
+     "businessId": "cmqkr26rn0004ln01bzgz8snx"
+    },
+    {
+     "id": "cmqkr3zah000cln01a1bgj4x6",
+     "dayOfWeek": 4,
+     "openTime": "08:00",
+     "closeTime": "16:00",
+     "isClosed": false,
+     "businessId": "cmqkr26rn0004ln01bzgz8snx"
+    },
+    {
+     "id": "cmqkr3zai000eln0175r54oku",
+     "dayOfWeek": 5,
+     "openTime": "08:00",
+     "closeTime": "16:00",
+     "isClosed": false,
+     "businessId": "cmqkr26rn0004ln01bzgz8snx"
+    },
+    {
+     "id": "cmqkr3zak000gln01oz8620oy",
+     "dayOfWeek": 6,
+     "openTime": "08:00",
+     "closeTime": "15:08",
+     "isClosed": false,
+     "businessId": "cmqkr26rn0004ln01bzgz8snx"
+    }
+   ],
+   "reviews": [],
+   "_count": {
+    "reviews": 0,
+    "products": 0,
+    "services": 0
+   },
+   "avgRating": 0
+  },
+  "comercio-digital": {
+   "id": "cmqgr6lev002vln0125n5umy9",
+   "name": "Comercio Digital",
+   "slug": "comercio-digital",
+   "description": "A loja COMERCIO DIGITAL oferece uma experiência única para você! \nAqui você escolhe! \nse quer comprar na nossa loja \"COMERCIO DIGITAL\", \nse quer receber o produto por entrega ou recuperar no local e \nSe quer pagar com dinheiro ou por transferência via Orange Money...\nLoja COMERCIO DIGITAL você compra do seu jeito!",
+   "logo": null,
+   "coverImage": "/api/uploads/c95633ac-f8b8-4407-9c60-dab79856016a.png",
+   "address": "HLM Grand Yoff",
+   "city": "Dakar",
+   "region": null,
+   "country": "Senegal",
+   "phone": "",
+   "email": "",
+   "website": "",
+   "facebook": "https://www.facebook.com/profile.php?id=100088150297079",
+   "instagram": "",
+   "twitter": "",
+   "linkedin": "",
+   "whatsapp": "",
+   "tiktok": null,
+   "keywords": "informatica, computador, material,",
+   "categoryId": "cmq0xu9q60001pd1ycturztaf",
+   "ownerId": "cmqgr6lee002tln0132b635xg",
+   "isActive": true,
+   "isSuspended": false,
+   "views": 4,
+   "createdAt": "2026-06-16T14:44:26.983Z",
+   "updatedAt": "2026-08-18T01:54:37.971Z",
+   "category": {
+    "id": "cmq0xu9q60001pd1ycturztaf",
+    "name": "Technologie | Informatique",
+    "slug": "technologie-informatique",
+    "icon": "Monitor",
+    "description": "",
+    "createdAt": "2026-06-05T13:06:30.462Z",
+    "updatedAt": "2026-07-13T10:05:59.409Z"
+   },
+   "owner": {
+    "id": "cmqgr6lee002tln0132b635xg",
+    "name": "Louvi Pedreira",
+    "avatar": "/api/uploads/365d5eff-6a48-42d3-b5f8-06ea0917f48d.png"
+   },
+   "photos": [
+    {
+     "id": "cmqgrdoxk002xln01rgckh8o2",
+     "url": "/api/uploads/b23d50dd-632d-458c-9dfa-2ac10ecd678c.png",
+     "businessId": "cmqgr6lev002vln0125n5umy9",
+     "createdAt": "2026-06-16T14:49:58.136Z"
+    }
+   ],
+   "products": [],
+   "services": [],
+   "hours": [],
+   "reviews": [],
+   "_count": {
+    "reviews": 0,
+    "products": 0,
+    "services": 0
+   },
+   "avgRating": 0
+  },
+  "consulting-pedreira-sarl": {
+   "id": "cmqggwumi002gln013mn62pxt",
+   "name": "Consulting Pedreira Sarl",
+   "slug": "consulting-pedreira-sarl",
+   "description": "A Consulting Pedreira SARL é uma empresa multidisciplinar dedicada à comunicação, comércio e tecnologia, oferecendo soluções modernas para empresas, instituições e particulares.\n\nNossos serviços\n📢 Comunicação e publicidade\n💻 Soluções tecnológicas\n🌐 Criação e gestão de websites\n📱 Marketing digital e redes sociais\n🛒 Comércio de produtos e equipamentos\n🤝 Consultoria empresarial\n🖥️ Serviços informáticos e suporte técnico",
+   "logo": null,
+   "coverImage": "/api/uploads/767e1083-1816-4064-9619-41fc828002d4.webp",
+   "address": "Bairro Ajuda 1* Fase",
+   "city": "Bissau",
+   "region": "Bissau",
+   "country": "Guiné-Bissau",
+   "phone": "+245 95 620 04 79",
+   "email": "consultingpedreiragb@gmail.com",
+   "website": "www.consultingpedreiragb.com",
+   "facebook": "",
+   "instagram": "",
+   "twitter": "",
+   "linkedin": "",
+   "whatsapp": "956200479",
+   "tiktok": null,
+   "keywords": "",
+   "categoryId": "cmq98pgna001vln01wai4z6bj",
+   "ownerId": "cmqggwum5002eln01wv42rzdu",
+   "isActive": true,
+   "isSuspended": false,
+   "views": 23,
+   "createdAt": "2026-06-16T09:56:56.203Z",
+   "updatedAt": "2026-09-02T15:02:44.161Z",
+   "category": {
+    "id": "cmq98pgna001vln01wai4z6bj",
+    "name": "Marketing | Communication",
+    "slug": "marketing-communication",
+    "icon": "Marketing | Communication",
+    "description": "",
+    "createdAt": "2026-06-11T08:32:51.334Z",
+    "updatedAt": "2026-07-13T10:07:12.145Z"
+   },
+   "owner": {
+    "id": "cmqggwum5002eln01wv42rzdu",
+    "name": "Edilson Pedreira",
+    "avatar": null
+   },
+   "photos": [],
+   "products": [
+    {
+     "id": "cmtk6nmk2001lln01g6qnhxyj",
+     "name": "Serviço de Transp EP",
+     "description": "venda de Bilhetes de Barco , venda de bilhetes de aviao ,Seguro de vigem e envio de carga para portugal, Senegal ,Cabo verde e Maroco ",
+     "price": "18.500 a 700.000",
+     "imageUrl": "/api/uploads/9ea5dd6e-568d-4688-8ded-2e117b6039df.jpeg",
+     "businessId": "cmqggwumi002gln013mn62pxt",
+     "createdAt": "2026-09-02T14:20:01.394Z",
+     "updatedAt": "2026-09-02T14:20:01.394Z"
+    },
+    {
+     "id": "cmtk6j658001jln01d2r8mavx",
+     "name": "Comunicacao Global",
+     "description": "Os serviçcos mais comuns oferecidos por uma GRAFICA RAPIDA ",
+     "price": "3.500 a 150.000",
+     "imageUrl": "/api/uploads/b15c737f-b6dc-46cf-8b8a-d48c5870bcf1.jpeg",
+     "businessId": "cmqggwumi002gln013mn62pxt",
+     "createdAt": "2026-09-02T14:16:33.500Z",
+     "updatedAt": "2026-09-02T14:16:33.500Z"
+    },
+    {
+     "id": "cmtk6fnz4001hln01cqv8i2g5",
+     "name": "Serviço Informatico",
+     "description": "Serviço de orçamento STARLINK",
+     "price": "2.000 FCFA",
+     "imageUrl": "/api/uploads/702973e5-746f-475f-aca6-edf0661f827e.jpeg",
+     "businessId": "cmqggwumi002gln013mn62pxt",
+     "createdAt": "2026-09-02T14:13:49.984Z",
+     "updatedAt": "2026-09-02T14:13:49.984Z"
+    },
+    {
+     "id": "cmtk6cu51001fln01vbh8xg4o",
+     "name": "Consultoria ",
+     "description": "Consultoria em deferente areas, Comercio Geral, Informatica e Contabilidade  ",
+     "price": "50.000 FCFA",
+     "imageUrl": "/api/uploads/6b08460e-9d86-4350-990e-f0ade779dd98.jpeg",
+     "businessId": "cmqggwumi002gln013mn62pxt",
+     "createdAt": "2026-09-02T14:11:38.003Z",
+     "updatedAt": "2026-09-02T14:11:38.003Z"
+    }
+   ],
+   "services": [],
+   "hours": [
+    {
+     "id": "cmqggyv6l002iln01m5qa2uqv",
+     "dayOfWeek": 1,
+     "openTime": "08:30",
+     "closeTime": "16:00",
+     "isClosed": false,
+     "businessId": "cmqggwumi002gln013mn62pxt"
+    },
+    {
+     "id": "cmqggyv6o002kln01txp8zjqg",
+     "dayOfWeek": 2,
+     "openTime": "08:20",
+     "closeTime": "16:00",
+     "isClosed": false,
+     "businessId": "cmqggwumi002gln013mn62pxt"
+    },
+    {
+     "id": "cmqggyv6q002mln01lcm3qx8y",
+     "dayOfWeek": 3,
+     "openTime": "08:20",
+     "closeTime": "16:00",
+     "isClosed": false,
+     "businessId": "cmqggwumi002gln013mn62pxt"
+    },
+    {
+     "id": "cmqggyv6s002oln01giqhty4a",
+     "dayOfWeek": 4,
+     "openTime": "08:00",
+     "closeTime": "16:20",
+     "isClosed": false,
+     "businessId": "cmqggwumi002gln013mn62pxt"
+    },
+    {
+     "id": "cmqggyv6u002qln010lm7f2ky",
+     "dayOfWeek": 5,
+     "openTime": "08:00",
+     "closeTime": "16:02",
+     "isClosed": false,
+     "businessId": "cmqggwumi002gln013mn62pxt"
+    },
+    {
+     "id": "cmqggyv6v002sln01bps85v3c",
+     "dayOfWeek": 6,
+     "openTime": "09:00",
+     "closeTime": "14:00",
+     "isClosed": false,
+     "businessId": "cmqggwumi002gln013mn62pxt"
+    }
+   ],
+   "reviews": [
+    {
+     "id": "cmtjznvor001dln01x8rtohpc",
+     "rating": 5,
+     "comment": "",
+     "businessId": "cmqggwumi002gln013mn62pxt",
+     "userId": "cmq29lhqs000snz012yu8wik8",
+     "response": null,
+     "createdAt": "2026-09-02T11:04:15.914Z",
+     "updatedAt": "2026-09-02T11:04:15.914Z",
+     "user": {
+      "id": "cmq29lhqs000snz012yu8wik8",
+      "name": "Pebiss",
+      "avatar": null
+     }
+    }
+   ],
+   "_count": {
+    "reviews": 1,
+    "products": 4,
+    "services": 0
+   },
+   "avgRating": 5
+  },
+  "camara-municipal-de-bissau": {
+   "id": "cmqgff2250021ln01gs6zdozh",
+   "name": "Câmara Municipal de Bissau.",
+   "slug": "camara-municipal-de-bissau",
+   "description": "",
+   "logo": "/api/uploads/8485b303-0d5f-4665-957d-6e4fbbfdc3cb.png",
+   "coverImage": "/api/uploads/3c8471d3-b792-41f7-bde4-48727bc14e7a.webp",
+   "address": "Avenida Domingos Ramos",
+   "city": "Bissau",
+   "region": "",
+   "country": "Guiné-Bissau",
+   "phone": "+245 95 556 03 16",
+   "email": "geral@cmbissau-gb.com",
+   "website": "www.cmbissau-gb.com",
+   "facebook": "",
+   "instagram": "",
+   "twitter": "",
+   "linkedin": "",
+   "whatsapp": "",
+   "tiktok": null,
+   "keywords": "",
+   "categoryId": "cmpzfhyqt0009lk01uzqge5fd",
+   "ownerId": "cmqgff21l001zln01mmk0363h",
+   "isActive": true,
+   "isSuspended": false,
+   "views": 21,
+   "createdAt": "2026-06-16T09:15:06.413Z",
+   "updatedAt": "2026-08-13T19:31:24.879Z",
+   "category": {
+    "id": "cmpzfhyqt0009lk01uzqge5fd",
+    "name": "Administration",
+    "slug": "administration",
+    "icon": "Administration",
+    "description": "",
+    "createdAt": "2026-06-04T11:45:17.093Z",
+    "updatedAt": "2026-06-04T11:45:17.093Z"
+   },
+   "owner": {
+    "id": "cmqgff21l001zln01mmk0363h",
+    "name": "Eng.Isalino pedreira",
+    "avatar": null
+   },
+   "photos": [],
+   "products": [],
+   "services": [],
+   "hours": [
+    {
+     "id": "cmqgfv1ec0023ln013tx8o2fl",
+     "dayOfWeek": 1,
+     "openTime": "08:20",
+     "closeTime": "16:20",
+     "isClosed": false,
+     "businessId": "cmqgff2250021ln01gs6zdozh"
+    },
+    {
+     "id": "cmqgfv1ef0025ln01x7v1vus8",
+     "dayOfWeek": 2,
+     "openTime": "08:20",
+     "closeTime": "16:20",
+     "isClosed": false,
+     "businessId": "cmqgff2250021ln01gs6zdozh"
+    },
+    {
+     "id": "cmqgfv1eh0027ln01u7mcycag",
+     "dayOfWeek": 3,
+     "openTime": "08:20",
+     "closeTime": "16:20",
+     "isClosed": false,
+     "businessId": "cmqgff2250021ln01gs6zdozh"
+    },
+    {
+     "id": "cmqgfv1ei0029ln01jcmsbej8",
+     "dayOfWeek": 4,
+     "openTime": "08:20",
+     "closeTime": "16:20",
+     "isClosed": false,
+     "businessId": "cmqgff2250021ln01gs6zdozh"
+    },
+    {
+     "id": "cmqgfv1ej002bln01p5vl7rcp",
+     "dayOfWeek": 5,
+     "openTime": "08:20",
+     "closeTime": "16:20",
+     "isClosed": false,
+     "businessId": "cmqgff2250021ln01gs6zdozh"
+    },
+    {
+     "id": "cmqgfv1el002dln016e9vrva9",
+     "dayOfWeek": 6,
+     "openTime": null,
+     "closeTime": null,
+     "isClosed": true,
+     "businessId": "cmqgff2250021ln01gs6zdozh"
+    }
+   ],
+   "reviews": [],
+   "_count": {
+    "reviews": 0,
+    "products": 0,
+    "services": 0
+   },
+   "avgRating": 0
+  },
+  "boladje-consulting-empresarial": {
+   "id": "cmq83cclw001sln01hpiaayku",
+   "name": "Boladje Consulting Empresarial",
+   "slug": "boladje-consulting-empresarial",
+   "description": "",
+   "logo": null,
+   "coverImage": "/api/uploads/cef15056-9e71-40f5-8d68-98def9ab9b8c.jpg",
+   "address": "Pluba, curva de Djon Cubala",
+   "city": "Bissau",
+   "region": "",
+   "country": "Guiné Bissau ",
+   "phone": "956757634",
+   "email": "",
+   "website": "",
+   "facebook": "",
+   "instagram": "",
+   "twitter": "",
+   "linkedin": "",
+   "whatsapp": "",
+   "tiktok": null,
+   "keywords": "",
+   "categoryId": "cmq0xu9u4000epd1y6k96g9fv",
+   "ownerId": "cmq83ccld001qln017qagvb2c",
+   "isActive": true,
+   "isSuspended": false,
+   "views": 11,
+   "createdAt": "2026-06-10T13:14:55.316Z",
+   "updatedAt": "2026-09-05T11:14:55.222Z",
+   "category": {
+    "id": "cmq0xu9u4000epd1y6k96g9fv",
+    "name": "Conseil & Services",
+    "slug": "conseil-services",
+    "icon": "Briefcase",
+    "description": null,
+    "createdAt": "2026-06-05T13:06:30.604Z",
+    "updatedAt": "2026-06-05T13:06:30.604Z"
+   },
+   "owner": {
+    "id": "cmq83ccld001qln017qagvb2c",
+    "name": "Mumine Embaló ",
+    "avatar": null
+   },
+   "photos": [],
+   "products": [],
+   "services": [],
+   "hours": [],
+   "reviews": [],
+   "_count": {
+    "reviews": 0,
+    "products": 0,
+    "services": 0
+   },
+   "avgRating": 0
+  },
+  "isatech": {
+   "id": "cmq7dhaut0005ln01a3bjyugj",
+   "name": "Isatech",
+   "slug": "isatech",
+   "description": "",
+   "logo": null,
+   "coverImage": "/api/uploads/28660ae1-1763-4d58-9690-db8c18939bd2.jpg",
+   "address": "Bissau",
+   "city": "Bissau",
+   "region": "",
+   "country": "Guinee Bissau",
+   "phone": "955140473",
+   "email": "",
+   "website": "",
+   "facebook": "",
+   "instagram": "",
+   "twitter": "",
+   "linkedin": "",
+   "whatsapp": "",
+   "tiktok": null,
+   "keywords": "",
+   "categoryId": "cmpzfgyse0006lk01jaw7fjum",
+   "ownerId": "cmq7dhau20003ln01gy9f8tsk",
+   "isActive": true,
+   "isSuspended": false,
+   "views": 15,
+   "createdAt": "2026-06-10T01:10:56.308Z",
+   "updatedAt": "2026-08-12T08:30:19.324Z",
+   "category": {
+    "id": "cmpzfgyse0006lk01jaw7fjum",
+    "name": "Informatiques",
+    "slug": "informatiques",
+    "icon": "Informatiques",
+    "description": "",
+    "createdAt": "2026-06-04T11:44:30.495Z",
+    "updatedAt": "2026-06-04T11:44:30.495Z"
+   },
+   "owner": {
+    "id": "cmq7dhau20003ln01gy9f8tsk",
+    "name": "Isatech",
+    "avatar": null
+   },
+   "photos": [],
+   "products": [],
+   "services": [],
+   "hours": [],
+   "reviews": [],
+   "_count": {
+    "reviews": 0,
+    "products": 0,
+    "services": 0
+   },
+   "avgRating": 0
+  },
+  "nsia-seguros-nsia": {
+   "id": "cmq1j26sq000qka01kj3u3loc",
+   "name": "NSIA SEGUROS – NSIA,",
+   "slug": "nsia-seguros-nsia",
+   "description": "NSIA SEGUROS – NSIA,",
+   "logo": "/api/uploads/bc0ae099-2779-4877-8f2d-2d987288dbcd.png",
+   "coverImage": "/api/uploads/4acd578a-f9b3-4409-9ea9-ed7496d2a788.jpg",
+   "address": "Bissau",
+   "city": "Bissau",
+   "region": "",
+   "country": "Guinée-Bissau",
+   "phone": "",
+   "email": "nsiassurances.guineebissaua@groupensia.com",
+   "website": "https://nsiassurancesgb.com",
+   "facebook": "",
+   "instagram": "",
+   "twitter": "",
+   "linkedin": "",
+   "whatsapp": "",
+   "tiktok": null,
+   "keywords": "",
+   "categoryId": null,
+   "ownerId": "cmq1j26sc000oka01v11sqdf5",
+   "isActive": true,
+   "isSuspended": false,
+   "views": 12,
+   "createdAt": "2026-06-05T23:00:31.850Z",
+   "updatedAt": "2026-09-05T06:16:43.606Z",
+   "category": null,
+   "owner": {
+    "id": "cmq1j26sc000oka01v11sqdf5",
+    "name": "NSIA SEGUROS – NSIA,",
+    "avatar": null
+   },
+   "photos": [],
+   "products": [],
+   "services": [],
+   "hours": [],
+   "reviews": [],
+   "_count": {
+    "reviews": 0,
+    "products": 0,
+    "services": 0
+   },
+   "avgRating": 0
+  },
+  "tgb-televisao-da-guine-bissau": {
+   "id": "cmq1hrxu3000uta01wv2o40bj",
+   "name": "TGB Televisão da Guiné-Bissau ",
+   "slug": "tgb-televisao-da-guine-bissau",
+   "description": "TGB Televisão da Guiné-Bissau ",
+   "logo": null,
+   "coverImage": "/api/uploads/949b4527-df8b-4ab9-a0fa-c96dfaf54266.jpg",
+   "address": "Bissau, Guinée-Bissau",
+   "city": "Bissau, Guinée-Bissau",
+   "region": null,
+   "country": "Guinée-Bissau",
+   "phone": "+245 956 601 862",
+   "email": "sshopsoldtions@gmail.com",
+   "website": "",
+   "facebook": "",
+   "instagram": "",
+   "twitter": "",
+   "linkedin": "",
+   "whatsapp": "",
+   "tiktok": null,
+   "keywords": "",
+   "categoryId": "cmpzfhyqt0009lk01uzqge5fd",
+   "ownerId": "cmq1hrxtp000sta01hvq1sxtm",
+   "isActive": true,
+   "isSuspended": false,
+   "views": 11,
+   "createdAt": "2026-06-05T22:24:34.059Z",
+   "updatedAt": "2026-08-12T21:39:29.809Z",
+   "category": {
+    "id": "cmpzfhyqt0009lk01uzqge5fd",
+    "name": "Administration",
+    "slug": "administration",
+    "icon": "Administration",
+    "description": "",
+    "createdAt": "2026-06-04T11:45:17.093Z",
+    "updatedAt": "2026-06-04T11:45:17.093Z"
+   },
+   "owner": {
+    "id": "cmq1hrxtp000sta01hvq1sxtm",
+    "name": "TGB Televisão da Guiné-Bissau ",
+    "avatar": null
+   },
+   "photos": [],
+   "products": [],
+   "services": [],
+   "hours": [],
+   "reviews": [],
+   "_count": {
+    "reviews": 0,
+    "products": 0,
+    "services": 0
+   },
+   "avgRating": 0
+  },
+  "aeroport-international-osvaldo-vieira-de-bissau": {
+   "id": "cmq1hfdel000nta01ziterce3",
+   "name": "Aéroport international Osvaldo Vieira de Bissau",
+   "slug": "aeroport-international-osvaldo-vieira-de-bissau",
+   "description": "Aéroport international Osvaldo Vieira de Bissau",
+   "logo": "/uploads/9a6607b6-6908-4d42-bd5f-7ab2abc72868.webp",
+   "coverImage": "/api/uploads/9fd6625e-0c32-41a2-bd3c-1471971e57a0.webp",
+   "address": "V8QX+GGX, Guinea-Bissau",
+   "city": "Guinea-Bissau",
+   "region": null,
+   "country": "Guinée-Bissau",
+   "phone": null,
+   "email": "settsofutions@gmail.com",
+   "website": null,
+   "facebook": null,
+   "instagram": null,
+   "twitter": null,
+   "linkedin": null,
+   "whatsapp": null,
+   "tiktok": null,
+   "keywords": null,
+   "categoryId": "cmpzfhyqt0009lk01uzqge5fd",
+   "ownerId": "cmq1hfdds000lta016q1pbd16",
+   "isActive": true,
+   "isSuspended": false,
+   "views": 23,
+   "createdAt": "2026-06-05T22:14:47.709Z",
+   "updatedAt": "2026-08-13T16:06:07.762Z",
+   "category": {
+    "id": "cmpzfhyqt0009lk01uzqge5fd",
+    "name": "Administration",
+    "slug": "administration",
+    "icon": "Administration",
+    "description": "",
+    "createdAt": "2026-06-04T11:45:17.093Z",
+    "updatedAt": "2026-06-04T11:45:17.093Z"
+   },
+   "owner": {
+    "id": "cmq1hfdds000lta016q1pbd16",
+    "name": "Aéroport international Osvaldo Vieira de Bissau",
+    "avatar": null
+   },
+   "photos": [
+    {
+     "id": "cmq7dm2j20007ln01hsnotm9w",
+     "url": "/api/uploads/ae419c6c-06ad-4472-b907-f9866a59bf57.jpg",
+     "businessId": "cmq1hfdel000nta01ziterce3",
+     "createdAt": "2026-06-10T01:14:38.798Z"
+    }
+   ],
+   "products": [],
+   "services": [],
+   "hours": [],
+   "reviews": [],
+   "_count": {
+    "reviews": 0,
+    "products": 0,
+    "services": 0
+   },
+   "avgRating": 0
+  },
+  "consulmar-travel": {
+   "id": "cmq1h37rj000hta01uy6p1g6t",
+   "name": "Consulmar Travel",
+   "slug": "consulmar-travel",
+   "description": "Consulmar Travel",
+   "logo": "/api/uploads/d0339d2d-eb88-4df9-bf33-016f14819297.png",
+   "coverImage": "/api/uploads/b56b2dfb-988b-4aff-a280-ee6faa10d4a6.jpg",
+   "address": "Bissau",
+   "city": "Bissau",
+   "region": null,
+   "country": "Guinée-Bissau",
+   "phone": null,
+   "email": "ssssolutions@gmail.com",
+   "website": null,
+   "facebook": null,
+   "instagram": null,
+   "twitter": null,
+   "linkedin": null,
+   "whatsapp": null,
+   "tiktok": null,
+   "keywords": null,
+   "categoryId": "cmpzffeyb0003lk01dao3lic0",
+   "ownerId": "cmq1h37on000fta01q0phj5v6",
+   "isActive": true,
+   "isSuspended": false,
+   "views": 5,
+   "createdAt": "2026-06-05T22:05:20.527Z",
+   "updatedAt": "2026-08-15T20:37:29.088Z",
+   "category": {
+    "id": "cmpzffeyb0003lk01dao3lic0",
+    "name": "Tourisme",
+    "slug": "tourisme",
+    "icon": "Tourisme",
+    "description": "",
+    "createdAt": "2026-06-04T11:43:18.132Z",
+    "updatedAt": "2026-06-04T11:43:18.132Z"
+   },
+   "owner": {
+    "id": "cmq1h37on000fta01q0phj5v6",
+    "name": "Consulmar Travel",
+    "avatar": null
+   },
+   "photos": [],
+   "products": [],
+   "services": [],
+   "hours": [],
+   "reviews": [],
+   "_count": {
+    "reviews": 0,
+    "products": 0,
+    "services": 0
+   },
+   "avgRating": 0
+  },
+  "orange-bissau": {
+   "id": "cmq1guaus000eta01k99zc63e",
+   "name": "Orange Bissau",
+   "slug": "orange-bissau",
+   "description": "Orange Bissau",
+   "logo": "/api/uploads/a3b80d69-24c6-4810-9189-2554544f0785.png",
+   "coverImage": "/api/uploads/d206e911-57c2-4331-9d20-15825f9c3cd7.jpg",
+   "address": "Bissau",
+   "city": "Bissau",
+   "region": "",
+   "country": "Guinée-Bissau",
+   "phone": "+245 955 603 060",
+   "email": "senerf@gmail.com",
+   "website": "",
+   "facebook": "",
+   "instagram": "",
+   "twitter": "",
+   "linkedin": "",
+   "whatsapp": "",
+   "tiktok": null,
+   "keywords": "",
+   "categoryId": "cmq0ywec30000o901k3095uzf",
+   "ownerId": "cmq1guaud000cta01c16aila3",
+   "isActive": true,
+   "isSuspended": false,
+   "views": 16,
+   "createdAt": "2026-06-05T21:58:24.628Z",
+   "updatedAt": "2026-08-30T20:05:44.283Z",
+   "category": {
+    "id": "cmq0ywec30000o901k3095uzf",
+    "name": "Télécom",
+    "slug": "telecom",
+    "icon": "Télécom",
+    "description": "Télécom",
+    "createdAt": "2026-06-05T13:36:09.363Z",
+    "updatedAt": "2026-06-05T13:36:09.363Z"
+   },
+   "owner": {
+    "id": "cmq1guaud000cta01c16aila3",
+    "name": "Orange Bissau",
+    "avatar": null
+   },
+   "photos": [
+    {
+     "id": "cmq1k98a70005nz0142djv2ig",
+     "url": "/uploads/32c6c05f-8c19-47d4-b80c-35d0a8325c20.jpg",
+     "businessId": "cmq1guaus000eta01k99zc63e",
+     "createdAt": "2026-06-05T23:33:59.983Z"
+    }
+   ],
+   "products": [],
+   "services": [],
+   "hours": [],
+   "reviews": [],
+   "_count": {
+    "reviews": 0,
+    "products": 0,
+    "services": 0
+   },
+   "avgRating": 0
+  },
+  "dunia-hotel": {
+   "id": "cmq1gn3kw0005ta01o2ydmlhi",
+   "name": "Dunia Hotel",
+   "slug": "dunia-hotel",
+   "description": "Dunia Hotel",
+   "logo": null,
+   "coverImage": "/api/uploads/13369dfb-325f-477c-b67e-b66cbcfbd8dd.jpg",
+   "address": "Bissau",
+   "city": "Bissau",
+   "region": null,
+   "country": "Guinée-Bissau",
+   "phone": null,
+   "email": "sepsolutns@gmail.com",
+   "website": null,
+   "facebook": null,
+   "instagram": null,
+   "twitter": null,
+   "linkedin": null,
+   "whatsapp": null,
+   "tiktok": null,
+   "keywords": null,
+   "categoryId": "cmpzfefbm0002lk01k0mp5eya",
+   "ownerId": "cmq1gn3kj0003ta01pj7up8m1",
+   "isActive": true,
+   "isSuspended": false,
+   "views": 27,
+   "createdAt": "2026-06-05T21:52:48.608Z",
+   "updatedAt": "2026-08-01T15:06:21.883Z",
+   "category": {
+    "id": "cmpzfefbm0002lk01k0mp5eya",
+    "name": "Hotels",
+    "slug": "hotels",
+    "icon": "Hotels",
+    "description": "",
+    "createdAt": "2026-06-04T11:42:31.955Z",
+    "updatedAt": "2026-07-01T10:01:04.734Z"
+   },
+   "owner": {
+    "id": "cmq1gn3kj0003ta01pj7up8m1",
+    "name": "Dunia Hotel",
+    "avatar": null
+   },
+   "photos": [
+    {
+     "id": "cmq7dwy68000fln01qsvoejln",
+     "url": "/api/uploads/453c995c-02fd-4985-b960-92c5414d389f.jpg",
+     "businessId": "cmq1gn3kw0005ta01o2ydmlhi",
+     "createdAt": "2026-06-10T01:23:06.369Z"
+    }
+   ],
+   "products": [],
+   "services": [],
+   "hours": [],
+   "reviews": [],
+   "_count": {
+    "reviews": 0,
+    "products": 0,
+    "services": 0
+   },
+   "avgRating": 0
+  },
+  "virgina-wax": {
+   "id": "cmq12nsej000apr01ew14m38w",
+   "name": "Virgina Wax",
+   "slug": "virgina-wax",
+   "description": "Virgina Wax",
+   "logo": null,
+   "coverImage": "/api/uploads/80495878-b8ab-4bee-8f38-207cfdca7f36.webp",
+   "address": "Bissau",
+   "city": "Bissau",
+   "region": "",
+   "country": "Guiné-Bissau",
+   "phone": "",
+   "email": "sensopsolutins@gmail.com",
+   "website": "",
+   "facebook": "https://www.facebook.com/",
+   "instagram": "https://www.instagram.com",
+   "twitter": "",
+   "linkedin": "https://www.linkedin.com/",
+   "whatsapp": "https://wa.me/c/221785409191",
+   "tiktok": null,
+   "keywords": "",
+   "categoryId": "cmq0xu9t5000bpd1yiopldjyf",
+   "ownerId": "cmq12nsdg0008pr01vopy9147",
+   "isActive": true,
+   "isSuspended": false,
+   "views": 34,
+   "createdAt": "2026-06-05T15:21:26.154Z",
+   "updatedAt": "2026-08-26T11:39:03.042Z",
+   "category": {
+    "id": "cmq0xu9t5000bpd1yiopldjyf",
+    "name": "Mode & Textile",
+    "slug": "mode-textile",
+    "icon": "Shirt",
+    "description": null,
+    "createdAt": "2026-06-05T13:06:30.569Z",
+    "updatedAt": "2026-06-05T13:06:30.569Z"
+   },
+   "owner": {
+    "id": "cmq12nsdg0008pr01vopy9147",
+    "name": "Virgina Wax",
+    "avatar": null
+   },
+   "photos": [
+    {
+     "id": "cmq7du2td000dln01jbgdhgb5",
+     "url": "/api/uploads/d8a2a6e6-8de0-43f1-b180-f15e0a28fe94.webp",
+     "businessId": "cmq12nsej000apr01ew14m38w",
+     "createdAt": "2026-06-10T01:20:52.418Z"
+    },
+    {
+     "id": "cmq7dtqh2000bln01qu7d2ccu",
+     "url": "/api/uploads/28975d61-a3f8-4468-9df6-69077f2be32b.jpg",
+     "businessId": "cmq12nsej000apr01ew14m38w",
+     "createdAt": "2026-06-10T01:20:36.422Z"
+    },
+    {
+     "id": "cmq7dtd1s0009ln01osa1r2f7",
+     "url": "/api/uploads/bcde187a-a0a4-4a38-ae16-8b002b37ada0.webp",
+     "businessId": "cmq12nsej000apr01ew14m38w",
+     "createdAt": "2026-06-10T01:20:19.024Z"
+    }
+   ],
+   "products": [],
+   "services": [],
+   "hours": [],
+   "reviews": [],
+   "_count": {
+    "reviews": 0,
+    "products": 0,
+    "services": 0
+   },
+   "avgRating": 0
+  }
+ },
+ "ads": [
+  {
+   "id": "cmsolazrv000vln01re6ztw68",
+   "title": "GRUPO DAF EM PROMO",
+   "description": "Somos uma empresa especializada em contabilidade, gestão financeira e consultoria empresarial, dedicada a apoiar empresas, organizações e empreendedores na gestão eficiente das suas atividades financeiras.",
+   "image": "/api/uploads/415a24bd-fdfc-482e-a87c-2260351af618.jpeg",
+   "type": "PROMOTION",
+   "categoryId": "cmpzfhyqt0009lk01uzqge5fd",
+   "businessId": null,
+   "link": null,
+   "position": "home",
+   "format": "336x280",
+   "isActive": true,
+   "startDate": "2026-08-10T00:00:00.000Z",
+   "endDate": "2027-01-12T00:00:00.000Z",
+   "createdAt": "2026-08-11T11:41:28.603Z",
+   "updatedAt": "2026-08-11T11:41:28.603Z",
+   "business": null,
+   "category": {
+    "id": "cmpzfhyqt0009lk01uzqge5fd",
+    "name": "Administration",
+    "slug": "administration"
+   }
+  },
+  {
+   "id": "cmq7z18ln001lln018en6dblz",
+   "title": "Boladje Consulting Empresarial ",
+   "description": "",
+   "image": "/api/uploads/9e76f649-158b-4bd1-8472-a9c18d955c91.jpg",
+   "type": "SERVICE",
+   "categoryId": null,
+   "businessId": null,
+   "link": null,
+   "position": "home",
+   "format": "336x280",
+   "isActive": true,
+   "startDate": null,
+   "endDate": "2026-12-10T00:00:00.000Z",
+   "createdAt": "2026-06-10T11:14:18.443Z",
+   "updatedAt": "2026-06-10T11:14:18.443Z",
+   "business": null,
+   "category": null
+  },
+  {
+   "id": "cmq7x44l5001fln01qijh7jsb",
+   "title": "Guinebis",
+   "description": "",
+   "image": "/api/uploads/925d14e2-a9c1-496d-9ed6-6970fd5f4135.jpg",
+   "type": "SERVICE",
+   "categoryId": "cmpzfg40p0004lk01zyp07axa",
+   "businessId": null,
+   "link": null,
+   "position": "home",
+   "format": "336x280",
+   "isActive": true,
+   "startDate": null,
+   "endDate": "2026-12-10T00:00:00.000Z",
+   "createdAt": "2026-06-10T10:20:33.977Z",
+   "updatedAt": "2026-06-10T10:20:33.977Z",
+   "business": null,
+   "category": {
+    "id": "cmpzfg40p0004lk01zyp07axa",
+    "name": "Assurances |  Banques",
+    "slug": "assurances-banques"
+   }
+  },
+  {
+   "id": "cmq7wdfjl001bln010r5cae63",
+   "title": "Buelojobs",
+   "description": "",
+   "image": "/api/uploads/65961a94-d248-4b17-be69-ffab7764ecf0.jpg",
+   "type": "SERVICE",
+   "categoryId": "cmq0xu9q60001pd1ycturztaf",
+   "businessId": null,
+   "link": null,
+   "position": "home",
+   "format": "336x280",
+   "isActive": true,
+   "startDate": null,
+   "endDate": "2026-12-10T00:00:00.000Z",
+   "createdAt": "2026-06-10T09:59:48.466Z",
+   "updatedAt": "2026-06-10T09:59:48.466Z",
+   "business": null,
+   "category": {
+    "id": "cmq0xu9q60001pd1ycturztaf",
+    "name": "Technologie | Informatique",
+    "slug": "technologie-informatique"
+   }
+  },
+  {
+   "id": "cmq7trh5z0011ln01vyhlrvyl",
+   "title": "Coris Bank International GB",
+   "description": "",
+   "image": "/api/uploads/733f8058-a03d-4da9-b538-38c788f494bb.png",
+   "type": "SERVICE",
+   "categoryId": null,
+   "businessId": null,
+   "link": null,
+   "position": "home",
+   "format": "336x280",
+   "isActive": true,
+   "startDate": null,
+   "endDate": "2026-12-10T00:00:00.000Z",
+   "createdAt": "2026-06-10T08:46:44.903Z",
+   "updatedAt": "2026-06-10T08:46:44.903Z",
+   "business": null,
+   "category": null
+  },
+  {
+   "id": "cmq7th8mn000xln01kongy3i7",
+   "title": "Ecobank GB",
+   "description": "Banco",
+   "image": "/api/uploads/1f5f0baa-e9db-4250-853c-11c628d47306.jpg",
+   "type": "SERVICE",
+   "categoryId": "cmpzfcy910000lk01wos6d6tr",
+   "businessId": null,
+   "link": null,
+   "position": "home",
+   "format": "336x280",
+   "isActive": true,
+   "startDate": null,
+   "endDate": "2026-12-10T00:00:00.000Z",
+   "createdAt": "2026-06-10T08:38:47.279Z",
+   "updatedAt": "2026-06-10T08:38:47.279Z",
+   "business": null,
+   "category": {
+    "id": "cmpzfcy910000lk01wos6d6tr",
+    "name": "Banques",
+    "slug": "banques"
+   }
+  }
+ ],
+ "banners": [
+  {
+   "id": "cmsolazrv000vln01re6ztw68",
+   "title": "GRUPO DAF EM PROMO",
+   "description": "Somos uma empresa especializada em contabilidade, gestão financeira e consultoria empresarial, dedicada a apoiar empresas, organizações e empreendedores na gestão eficiente das suas atividades financeiras.",
+   "image": "/api/uploads/415a24bd-fdfc-482e-a87c-2260351af618.jpeg",
+   "link": null,
+   "type": "PROMOTION",
+   "position": "home",
+   "format": "336x280",
+   "createdAt": "2026-08-11T11:41:28.603Z"
+  },
+  {
+   "id": "cmq7z18ln001lln018en6dblz",
+   "title": "Boladje Consulting Empresarial ",
+   "description": "",
+   "image": "/api/uploads/9e76f649-158b-4bd1-8472-a9c18d955c91.jpg",
+   "link": null,
+   "type": "SERVICE",
+   "position": "home",
+   "format": "336x280",
+   "createdAt": "2026-06-10T11:14:18.443Z"
+  },
+  {
+   "id": "cmq7x44l5001fln01qijh7jsb",
+   "title": "Guinebis",
+   "description": "",
+   "image": "/api/uploads/925d14e2-a9c1-496d-9ed6-6970fd5f4135.jpg",
+   "link": null,
+   "type": "SERVICE",
+   "position": "home",
+   "format": "336x280",
+   "createdAt": "2026-06-10T10:20:33.977Z"
+  },
+  {
+   "id": "cmq7wdfjl001bln010r5cae63",
+   "title": "Buelojobs",
+   "description": "",
+   "image": "/api/uploads/65961a94-d248-4b17-be69-ffab7764ecf0.jpg",
+   "link": null,
+   "type": "SERVICE",
+   "position": "home",
+   "format": "336x280",
+   "createdAt": "2026-06-10T09:59:48.466Z"
+  },
+  {
+   "id": "cmq7trh5z0011ln01vyhlrvyl",
+   "title": "Coris Bank International GB",
+   "description": "",
+   "image": "/api/uploads/733f8058-a03d-4da9-b538-38c788f494bb.png",
+   "link": null,
+   "type": "SERVICE",
+   "position": "home",
+   "format": "336x280",
+   "createdAt": "2026-06-10T08:46:44.903Z"
+  },
+  {
+   "id": "cmq7th8mn000xln01kongy3i7",
+   "title": "Ecobank GB",
+   "description": "Banco",
+   "image": "/api/uploads/1f5f0baa-e9db-4250-853c-11c628d47306.jpg",
+   "link": null,
+   "type": "SERVICE",
+   "position": "home",
+   "format": "336x280",
+   "createdAt": "2026-06-10T08:38:47.279Z"
+  }
+ ]
+}
