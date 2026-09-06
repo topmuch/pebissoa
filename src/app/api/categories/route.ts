@@ -198,7 +198,17 @@ export async function DELETE(request: NextRequest) {
     }
 
     const { searchParams } = new URL(request.url);
-    const id = searchParams.get('id');
+    let id = searchParams.get('id');
+
+    // Fallback : accepter l'id depuis le body JSON (compatibilité frontend)
+    if (!id) {
+      try {
+        const body = await request.json();
+        if (body?.id) id = body.id;
+      } catch {
+        // pas de body JSON
+      }
+    }
 
     if (!id) {
       return NextResponse.json(
