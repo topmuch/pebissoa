@@ -1,6 +1,8 @@
 'use client';
 
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 // Banner format definitions — 4 placements only
 export const BANNER_FORMATS: Record<string, { label: string; w: number; h: number; usage: string; isWide: boolean }> = {
@@ -88,10 +90,30 @@ export function useBanners(position: string, format?: string) {
   });
 }
 
-// HomepageMidBanner — all 336x280 banners below categories on homepage
-// Displays a responsive grid with "Offres Sponsorisées" title
+// HomepageMidBanner — horizontal sliding banner (carousel) below the hero on homepage
+// Auto-slides every 4s, pause on hover, arrows + dots + touch swipe support
 export function HomepageMidBanner() {
   const { data: banners, isLoading } = useBanners('home', '336x280');
+  const [index, setIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+  const touchStartX = useRef<number | null>(null);
+  const movedRef = useRef(false);
+  const count = banners?.length ?? 0;
+
+  const next = useCallback(() => setIndex((i) => (count > 0 ? (i + 1) % count : 0)), [count]);
+  const prev = useCallback(() => setIndex((i) => (count > 0 ? (i - 1 + count) % count : 0)), [count]);
+
+  // Auto-slide every 4 seconds (paused on hover / touch)
+  useEffect(() => {
+    if (count <= 1 || isPaused) return;
+    const timer = setInterval(next, 4000);
+    return () => clearInterval(timer);
+  }, [count, isPaused, next]);
+
+  // Reset index when the banner list shrinks
+  useEffect(() => {
+    if (index >= count) setIndex(0);
+  }, [count, index]);
 
   if (isLoading) return null;
   if (!banners || banners.length === 0) return null;
@@ -107,10 +129,137 @@ export function HomepageMidBanner() {
           <div className="h-px flex-1 bg-gradient-to-l from-orange-300 to-transparent" />
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
-          {banners.map((banner) => (
-            <BannerCard key={banner.id} banner={banner} />
-          ))}
+        <div
+          className="group relative overflow-hidden rounded-lg shadow-sm select-none"
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
+          onTouchStart={(e) => {
+            touchStartX.current = e.touches[0].clientX;
+            movedRef.current = false;
+            setIsPaused(true);
+          }}
+          onTouchMove={(e) => {
+            if (touchStartX.current !== null && Math.abs(e.touches[0].clientX - touchStartX.current) > 10) {
+              movedRef.current = true;
+            }
+          }}
+          onTouchEnd={(e) => {
+            if (touchStartX.current !== null && count > 1) {
+              const dx = e.changedTouches[0].clientX - touchStartX.current;
+              if (Math.abs(dx) > 40) {
+                if (dx < 0) next(); else prev();
+                // Suppress the accidental tap on the slide link right after a swipe
+                setTimeout(() => { movedRef.current = false; }, 100);
+              }
+            }
+            touchStartX.current = null;
+            setIsPaused(false);
+          }}
+          onClickCapture={(e) => {
+            if (movedRef.current) {
+              e.preventDefault();
+              e.stopPropagation();
+            }
+          }}
+        >
+          {/* Sliding track */}
+          <div
+            className="flex transition-transform duration-700 ease-out"
+            style={{ transform: `translateX(-${index * 100}%)` }}
+          >
+            {banners.map((banner) => {
+              const slide = (
+                <div className="relative w-full h-44 sm:h-56 md:h-64 overflow-hidden">
+                  {banner.image ? (
+                    <>
+                      <img
+                        src={banner.image}
+                        alt={banner.title}
+                        className="w-full h-full object-cover"
+                        loading="lazy"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
+                      <div className="absolute bottom-2 left-0 right-0 p-3 pr-24">
+                        <span className="inline-block bg-orange-500 text-white text-[10px] font-semibold uppercase tracking-wide px-2 py-0.5 rounded mb-1.5">
+                          Sponsorisé
+                        </span>
+                        <h3 className="text-white font-semibold text-base md:text-lg leading-tight drop-shadow-md">
+                          {banner.title}
+                        </h3>
+                        {banner.description && (
+                          <p className="text-white/80 text-xs md:text-sm mt-1 line-clamp-1">
+                            {banner.description}
+                          </p>
+                        )}
+                      </div>
+                    </>
+                  ) : (
+                    <div className="w-full h-full bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center p-4">
+                      <div className="text-center">
+                        <span className="text-[10px] text-white/40 uppercase font-medium">Publicité</span>
+                        <h3 className="text-white font-semibold text-lg mt-1">{banner.title}</h3>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              );
+
+              return banner.link ? (
+                <a
+                  key={banner.id}
+                  href={banner.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block w-full shrink-0"
+                >
+                  {slide}
+                </a>
+              ) : (
+                <div key={banner.id} className="w-full shrink-0">
+                  {slide}
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Arrows (desktop, visible on hover) */}
+          {count > 1 && (
+            <>
+              <button
+                type="button"
+                onClick={prev}
+                aria-label="Bannière précédente"
+                className="absolute left-2 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/60 text-white rounded-full p-2 opacity-0 group-hover:opacity-100 focus:opacity-100 transition-opacity min-w-[36px] min-h-[36px] items-center justify-center hidden sm:flex"
+              >
+                <ChevronLeft className="h-4 w-4" />
+              </button>
+              <button
+                type="button"
+                onClick={next}
+                aria-label="Bannière suivante"
+                className="absolute right-2 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/60 text-white rounded-full p-2 opacity-0 group-hover:opacity-100 focus:opacity-100 transition-opacity min-w-[36px] min-h-[36px] items-center justify-center hidden sm:flex"
+              >
+                <ChevronRight className="h-4 w-4" />
+              </button>
+            </>
+          )}
+
+          {/* Dots */}
+          {count > 1 && (
+            <div className="absolute bottom-3 right-3 flex gap-1.5">
+              {banners.map((_, i) => (
+                <button
+                  key={i}
+                  type="button"
+                  onClick={() => setIndex(i)}
+                  aria-label={`Aller à la bannière ${i + 1}`}
+                  className={`h-1.5 rounded-full transition-all duration-300 ${
+                    i === index ? 'w-5 bg-white' : 'w-1.5 bg-white/50 hover:bg-white/80'
+                  }`}
+                />
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </section>
