@@ -2,7 +2,6 @@
 
 import { useState } from 'react';
 import { signIn, getCsrfToken, getSession } from 'next-auth/react';
-import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -13,7 +12,6 @@ import { LogIn, Mail, Lock, Building2, Loader2 } from 'lucide-react';
 import { useTranslation } from '@/lib/i18n';
 
 export default function LoginPage() {
-  const router = useRouter();
   const { toast } = useToast();
   const { t } = useTranslation();
   const [email, setEmail] = useState('');
@@ -44,12 +42,14 @@ export default function LoginPage() {
           title: t('login_success_title'),
           description: t('login_success_msg'),
         });
+        // Redirection dure (window.location) : évite le cache client useSession
+        // qui provoque un retour immédiat vers /login après connexion
         if (session?.user?.role === 'ADMIN') {
-          router.push('/admin');
+          window.location.href = '/admin';
         } else if (session?.user?.role === 'ENTERPRISE') {
-          router.push('/dashboard');
+          window.location.href = '/dashboard';
         } else {
-          router.push('/');
+          window.location.href = '/';
         }
       }
     } catch {
