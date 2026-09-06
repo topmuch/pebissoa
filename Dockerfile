@@ -1,16 +1,15 @@
 # ============================================================
-# PebissOa - Dockerfile adapté
+# PebissOa - Dockerfile AUTONOME
 # ============================================================
-# ⚠️  Ce Dockerfile doit être construit depuis la RACINE du repo
-#     topmuch/pebissoa (qui contient package.json, src/, uploads/).
-#     Ne déployez PAS le zip "docker seul" sans le code source.
+# Ce Dockerfile récupère le code source TOUT SEUL :
+#   1) Si le contexte de build contient le code (package.json présent)
+#      → il l'utilise directement (build local, plus rapide)
+#   2) Sinon → il clone automatiquement le repo GitHub
+#      https://github.com/topmuch/pebissoa (branche main)
 #
-# Changements vs version originale (topmuch/pebiss) :
-#   - Plus de `git clone` au build : utilise le contexte local (COPY . .)
-#   - Les 105 images de production sont embarquées (/app/.bundled-uploads)
-#     et copiées vers le volume /app/uploads au premier démarrage
-#   - Seed des données de production via scripts/init-production.cjs
-#     (43 entreprises, 31 catégories, 6 publicités, photos, produits...)
+# Vous pouvez donc le déployer dans Coolify SANS aucune config
+# particulière : il télécharge lui-même le repo, les 105 images
+# de production et les données réelles.
 # ============================================================
 FROM node:20-alpine
 
@@ -20,19 +19,27 @@ RUN npm install -g bun
 
 WORKDIR /app
 
-# Garde-fou : vérifier que le contexte de build est bien la racine du projet
-RUN if [ ! -f ./package.json ]; then \
-      echo "" && \
-      echo "❌❌❌ ERREUR DE CONTEXTE DE BUILD ❌❌❌" && \
-      echo "package.json introuvable à la racine du contexte Docker." && \
-      echo "→ Déployez depuis la racine du repo GitHub : topmuch/pebissoa (branche main)" && \
-      echo "→ Dans Coolify : Root Directory = / (vide) et Dockerfile = /Dockerfile" && \
-      echo "→ N'utilisez PAS le zip 'pebissoa-docker.zip' seul (il ne contient pas le code)." && \
-      echo "" && exit 1; fi
+# ------------------------------------------------------------
+# RÉCUPÉRATION DU CODE SOURCE (automatique)
+# ------------------------------------------------------------
+COPY . /tmp/build-context
+RUN if [ -f /tmp/build-context/package.json ]; then \
+      echo "📦 Source : contexte de build local détecté"; \
+      cp -a /tmp/build-context/. /app/; \
+    else \
+      echo "📦 Contexte vide → clonage de https://github.com/topmuch/pebissoa.git"; \
+      git clone --depth 1 https://github.com/topmuch/pebissoa.git /app; \
+    fi \
+    && rm -rf /tmp/build-context /app/.git \
+    && if [ ! -f /app/package.json ]; then \
+      echo "❌ ERREUR : impossible d'obtenir le code source (contexte vide + clone GitHub échoué)"; \
+      exit 1; \
+    fi \
+    && echo "✅ Code source prêt : $(ls /app | head -5 | tr '\n' ' ')..."
 
-# Copie du code local (au lieu de cloner l'ancien repo)
-COPY . .
-
+# ------------------------------------------------------------
+# INSTALLATION & BUILD
+# ------------------------------------------------------------
 # Install dependencies
 RUN bun install
 
@@ -49,12 +56,13 @@ RUN mkdir -p /app/data && npx prisma db push --skip-generate && bun run build
 RUN cp -r public .next/standalone/public
 RUN cp -r .next/static .next/standalone/.next/static
 
-# Images de production embarquées dans l'image
-# (copiées vers /app/uploads au démarrage par copy-bundled-uploads.cjs)
-RUN mkdir -p /app/.bundled-uploads && cp -r uploads/. /app/.bundled-uploads/
-
-# Create persistent directories
-RUN mkdir -p /app/data /app/uploads
+# ------------------------------------------------------------
+# IMAGES DE PRODUCTION EMBARQUÉES (105 images du repo)
+# Copiées vers /app/uploads au démarrage par copy-bundled-uploads.cjs
+# ------------------------------------------------------------
+RUN mkdir -p /app/.bundled-uploads /app/uploads \
+    && { cp -r uploads/. /app/.bundled-uploads/ 2>/dev/null || echo "⚠️ Dossier uploads absent — pas d'images embarquées"; } \
+    && echo "🖼️  Images embarquées : $(ls /app/.bundled-uploads | wc -l) fichiers"
 
 EXPOSE 3000
 
