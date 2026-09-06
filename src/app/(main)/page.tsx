@@ -9,7 +9,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { BusinessCard } from '@/components/shared/business-card';
 import { BusinessCardSkeleton } from '@/components/shared/business-card-skeleton';
 import { useTranslation, categoryTranslations } from '@/lib/i18n';
-import { HomepageMidBanner, HomepageFooterBanner } from '@/components/shared/banner-placement';
+import { PromoDuoBanners, HomepageFooterBanner } from '@/components/shared/banner-placement';
 import {
   Search,
   MapPin,
@@ -333,6 +333,9 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ============ 2 BANNIÈRES PROMO — style PagesJaunes (sous le hero) ============ */}
+      <PromoDuoBanners />
+
       {/* ============ CATEGORIES SECTION — Auto-Slide Multicolor Gradient Squares ============ */}
       <section className="pb-12 md:pb-16 overflow-hidden">
         <div className="container mx-auto px-4">
@@ -391,9 +394,6 @@ export default function HomePage() {
           </div>
         )}
       </section>
-
-      {/* ============ BANNER — 336x280 Après Catégories ============ */}
-      <HomepageMidBanner />
 
       {/* ============ CURRENT LISTINGS ============ */}
       <section className="py-12 md:py-16">

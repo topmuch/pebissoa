@@ -1,8 +1,7 @@
 'use client';
 
-import { useCallback, useEffect, useRef, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { ArrowRight, Sparkles, Store } from 'lucide-react';
 
 // Banner format definitions — 4 placements only
 export const BANNER_FORMATS: Record<string, { label: string; w: number; h: number; usage: string; isWide: boolean }> = {
@@ -90,176 +89,78 @@ export function useBanners(position: string, format?: string) {
   });
 }
 
-// HomepageMidBanner — horizontal sliding banner (carousel) below the hero on homepage
-// Auto-slides every 4s, pause on hover, arrows + dots + touch swipe support
-export function HomepageMidBanner() {
-  const { data: banners, isLoading } = useBanners('home', '336x280');
-  const [index, setIndex] = useState(0);
-  const [isPaused, setIsPaused] = useState(false);
-  const touchStartX = useRef<number | null>(null);
-  const movedRef = useRef(false);
-  const count = banners?.length ?? 0;
-
-  const next = useCallback(() => setIndex((i) => (count > 0 ? (i + 1) % count : 0)), [count]);
-  const prev = useCallback(() => setIndex((i) => (count > 0 ? (i - 1 + count) % count : 0)), [count]);
-
-  // Auto-slide every 4 seconds (paused on hover / touch)
-  useEffect(() => {
-    if (count <= 1 || isPaused) return;
-    const timer = setInterval(next, 4000);
-    return () => clearInterval(timer);
-  }, [count, isPaused, next]);
-
-  // Reset index when the banner list shrinks
-  useEffect(() => {
-    if (index >= count) setIndex(0);
-  }, [count, index]);
-
-  if (isLoading) return null;
-  if (!banners || banners.length === 0) return null;
-
+// PromoDuoBanners — 2 bannières côte à côte sous le hero (style PagesJaunes)
+// Gauche : promo inscription entreprise (photo claire + bloc rouge + CTA blanc)
+// Droite : professionnels / visibilité (photo sombre + titre centré + CTA bleu)
+export function PromoDuoBanners() {
   return (
-    <section className="py-8 md:py-12">
+    <section className="py-6 md:py-8">
       <div className="container mx-auto px-4">
-        <div className="flex items-center gap-3 mb-6">
-          <div className="h-px flex-1 bg-gradient-to-r from-orange-300 to-transparent" />
-          <h2 className="text-lg md:text-xl font-bold text-orange-600 whitespace-nowrap">
-            ⭐ Offres Sponsorisées
-          </h2>
-          <div className="h-px flex-1 bg-gradient-to-l from-orange-300 to-transparent" />
-        </div>
-
-        <div
-          className="group relative overflow-hidden rounded-lg shadow-sm select-none"
-          onMouseEnter={() => setIsPaused(true)}
-          onMouseLeave={() => setIsPaused(false)}
-          onTouchStart={(e) => {
-            touchStartX.current = e.touches[0].clientX;
-            movedRef.current = false;
-            setIsPaused(true);
-          }}
-          onTouchMove={(e) => {
-            if (touchStartX.current !== null && Math.abs(e.touches[0].clientX - touchStartX.current) > 10) {
-              movedRef.current = true;
-            }
-          }}
-          onTouchEnd={(e) => {
-            if (touchStartX.current !== null && count > 1) {
-              const dx = e.changedTouches[0].clientX - touchStartX.current;
-              if (Math.abs(dx) > 40) {
-                if (dx < 0) next(); else prev();
-                // Suppress the accidental tap on the slide link right after a swipe
-                setTimeout(() => { movedRef.current = false; }, 100);
-              }
-            }
-            touchStartX.current = null;
-            setIsPaused(false);
-          }}
-          onClickCapture={(e) => {
-            if (movedRef.current) {
-              e.preventDefault();
-              e.stopPropagation();
-            }
-          }}
-        >
-          {/* Sliding track */}
-          <div
-            className="flex transition-transform duration-700 ease-out"
-            style={{ transform: `translateX(-${index * 100}%)` }}
+        <div className="grid grid-cols-1 md:grid-cols-[7fr_5fr] gap-4">
+          {/* ============ Bannière gauche — Inscription entreprise ============ */}
+          <a
+            href="/register"
+            className="group relative block overflow-hidden rounded-xl h-44 sm:h-52 md:h-60"
           >
-            {banners.map((banner) => {
-              const slide = (
-                <div className="relative w-full h-44 sm:h-56 md:h-64 overflow-hidden">
-                  {banner.image ? (
-                    <>
-                      <img
-                        src={banner.image}
-                        alt={banner.title}
-                        className="w-full h-full object-cover"
-                        loading="lazy"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
-                      <div className="absolute bottom-2 left-0 right-0 p-3 pr-24">
-                        <span className="inline-block bg-orange-500 text-white text-[10px] font-semibold uppercase tracking-wide px-2 py-0.5 rounded mb-1.5">
-                          Sponsorisé
-                        </span>
-                        <h3 className="text-white font-semibold text-base md:text-lg leading-tight drop-shadow-md">
-                          {banner.title}
-                        </h3>
-                        {banner.description && (
-                          <p className="text-white/80 text-xs md:text-sm mt-1 line-clamp-1">
-                            {banner.description}
-                          </p>
-                        )}
-                      </div>
-                    </>
-                  ) : (
-                    <div className="w-full h-full bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center p-4">
-                      <div className="text-center">
-                        <span className="text-[10px] text-white/40 uppercase font-medium">Publicité</span>
-                        <h3 className="text-white font-semibold text-lg mt-1">{banner.title}</h3>
-                      </div>
-                    </div>
-                  )}
-                </div>
-              );
+            <img
+              src="/banners/promo-business.jpg"
+              alt="Entrepreneure africaine dans sa boutique — inscrivez votre entreprise sur PebissOa"
+              className="absolute inset-0 w-full h-full object-cover object-right transition-transform duration-500 group-hover:scale-[1.03]"
+              loading="eager"
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/45 to-transparent" />
 
-              return banner.link ? (
-                <a
-                  key={banner.id}
-                  href={banner.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block w-full shrink-0"
-                >
-                  {slide}
-                </a>
-              ) : (
-                <div key={banner.id} className="w-full shrink-0">
-                  {slide}
-                </div>
-              );
-            })}
-          </div>
+            <div className="absolute inset-0 p-4 sm:p-5 md:p-6 flex flex-col items-start">
+              <span className="bg-red-600 text-white font-extrabold text-xs sm:text-sm md:text-base px-2.5 py-1 leading-none inline-flex items-center gap-1 rounded-sm">
+                PEBISSOA <Sparkles className="h-3 w-3 md:h-3.5 md:w-3.5" />
+              </span>
 
-          {/* Arrows (desktop, visible on hover) */}
-          {count > 1 && (
-            <>
-              <button
-                type="button"
-                onClick={prev}
-                aria-label="Bannière précédente"
-                className="absolute left-2 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/60 text-white rounded-full p-2 opacity-0 group-hover:opacity-100 focus:opacity-100 transition-opacity min-w-[36px] min-h-[36px] items-center justify-center hidden sm:flex"
-              >
-                <ChevronLeft className="h-4 w-4" />
-              </button>
-              <button
-                type="button"
-                onClick={next}
-                aria-label="Bannière suivante"
-                className="absolute right-2 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/60 text-white rounded-full p-2 opacity-0 group-hover:opacity-100 focus:opacity-100 transition-opacity min-w-[36px] min-h-[36px] items-center justify-center hidden sm:flex"
-              >
-                <ChevronRight className="h-4 w-4" />
-              </button>
-            </>
-          )}
+              <p className="mt-2 sm:mt-3 text-white font-extrabold uppercase leading-tight text-base sm:text-lg md:text-2xl drop-shadow-md max-w-[75%]">
+                Référencez votre entreprise{' '}
+                <span className="text-yellow-400">100% gratuitement</span>
+              </p>
 
-          {/* Dots */}
-          {count > 1 && (
-            <div className="absolute bottom-3 right-3 flex gap-1.5">
-              {banners.map((_, i) => (
-                <button
-                  key={i}
-                  type="button"
-                  onClick={() => setIndex(i)}
-                  aria-label={`Aller à la bannière ${i + 1}`}
-                  className={`h-1.5 rounded-full transition-all duration-300 ${
-                    i === index ? 'w-5 bg-white' : 'w-1.5 bg-white/50 hover:bg-white/80'
-                  }`}
-                />
-              ))}
+              <span className="mt-3 sm:mt-auto inline-flex items-center gap-2 bg-white text-gray-900 text-[11px] sm:text-xs md:text-sm font-bold px-3.5 sm:px-4 py-2 rounded-full group-hover:bg-gray-100 transition-colors">
+                J&apos;INSCRIS MON ENTREPRISE
+                <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
+              </span>
             </div>
-          )}
+
+            <p className="absolute bottom-2 right-3 text-[9px] sm:text-[10px] text-white/70 hidden sm:block">
+              Visible par des milliers de visiteurs chaque mois
+            </p>
+          </a>
+
+          {/* ============ Bannière droite — Professionnels / visibilité ============ */}
+          <a
+            href="/publicite"
+            className="group relative block overflow-hidden rounded-xl h-44 sm:h-52 md:h-60"
+          >
+            <img
+              src="/banners/pro-dark.jpg"
+              alt="Commerce illuminé la nuit — donnez plus de visibilité à votre entreprise"
+              className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+              loading="lazy"
+            />
+            <div className="absolute inset-0 bg-black/55 group-hover:bg-black/45 transition-colors" />
+
+            <div className="absolute inset-0 p-4 sm:p-5 md:p-6 flex flex-col items-center text-center">
+              <p className="text-white font-extrabold text-sm sm:text-base md:text-xl leading-tight drop-shadow">
+                Professionnels,<br />donnez plus de visibilité<br className="hidden sm:block" /> à votre entreprise sur PebissOa
+              </p>
+
+              <div className="mt-2 sm:mt-3 bg-white/95 rounded-md px-3 py-2 flex items-center gap-2 shadow-lg">
+                <Store className="h-4 w-4 md:h-5 md:w-5 text-orange-600 shrink-0" />
+                <p className="text-[10px] sm:text-xs text-gray-900 font-semibold leading-tight text-left">
+                  Votre entreprise<br />s&apos;affiche en grand
+                </p>
+              </div>
+
+              <span className="mt-auto inline-flex items-center gap-1.5 bg-blue-600 group-hover:bg-blue-700 text-white text-[11px] sm:text-xs md:text-sm font-bold px-3.5 sm:px-4 py-2 rounded-full transition-colors">
+                Bénéficier de PebissOa +
+              </span>
+            </div>
+          </a>
         </div>
       </div>
     </section>
