@@ -22,16 +22,21 @@ WORKDIR /app
 # ------------------------------------------------------------
 # RÉCUPÉRATION DU CODE SOURCE (automatique)
 # ------------------------------------------------------------
+# ⚠️ On détecte un contexte COMPLET (next.config.ts + src/), pas
+# juste package.json : une copie Docker partielle (Dockerfile +
+# compose seulement) doit déclencher le clonage automatique.
 COPY . /tmp/build-context
-RUN if [ -f /tmp/build-context/package.json ]; then \
-      echo "📦 Source : contexte de build local détecté"; \
+RUN if [ -f /tmp/build-context/next.config.ts ] && [ -d /tmp/build-context/src ]; then \
+      echo "📦 Source : contexte de build local complet détecté"; \
       cp -a /tmp/build-context/. /app/; \
     else \
-      echo "📦 Contexte vide → clonage de https://github.com/topmuch/pebissoa.git"; \
-      git clone --depth 1 https://github.com/topmuch/pebissoa.git /app; \
+      echo "📦 Contexte partiel/vide → clonage de https://github.com/topmuch/pebissoa.git"; \
+      git clone --depth 1 https://github.com/topmuch/pebissoa.git /tmp/repo \
+        && cp -a /tmp/repo/. /app/ \
+        && rm -rf /tmp/repo; \
     fi \
     && rm -rf /tmp/build-context /app/.git \
-    && if [ ! -f /app/package.json ]; then \
+    && if [ ! -f /app/package.json ] || [ ! -d /app/src ]; then \
       echo "❌ ERREUR : impossible d'obtenir le code source (contexte vide + clone GitHub échoué)"; \
       exit 1; \
     fi \
