@@ -4,10 +4,9 @@ import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { useQuery } from '@tanstack/react-query';
 import { Button } from '@/components/ui/button';
-import { Skeleton } from '@/components/ui/skeleton';
 import { useTranslation, categoryTranslations } from '@/lib/i18n';
 import { RUBRIQUES } from '@/lib/rubriques';
-import { PromoDuoBanners, HomepageSponsoredGrid, HomepageFooterBanner } from '@/components/shared/banner-placement';
+import { PromoDuoBanners, HomepageFooterBanner } from '@/components/shared/banner-placement';
 import {
   Search,
   MapPin,
@@ -21,8 +20,6 @@ import {
   ShoppingBag,
   Palette,
   ArrowRight,
-  ChevronRight,
-  ChevronLeft,
   UserPlus,
   Heart,
   Eye,
@@ -64,40 +61,11 @@ const fallbackIcons: LucideIcon[] = [
   Briefcase, Car, Layers, Monitor, Music, Camera, Flame, Zap, Truck, Megaphone, Calendar, Heart, Eye, Star,
 ];
 
-// Dynamic gradient assignment based on category index
-const gradientPalette = [
-  'from-pink-500 to-rose-600',
-  'from-orange-400 to-red-500',
-  'from-cyan-400 to-blue-500',
-  'from-emerald-400 to-green-600',
-  'from-lime-400 to-green-500',
-  'from-violet-500 to-purple-700',
-  'from-amber-400 to-orange-600',
-  'from-teal-400 to-emerald-600',
-  'from-sky-400 to-indigo-500',
-  'from-fuchsia-400 to-pink-600',
-  'from-red-400 to-rose-700',
-  'from-green-400 to-teal-600',
-  'from-yellow-400 to-amber-600',
-  'from-indigo-400 to-blue-600',
-  'from-rose-400 to-red-600',
-  'from-emerald-500 to-cyan-600',
-];
+// Dynamic gradient assignment — kept minimal (rubriques cards use their own gradients)
 
 function getCategoryIcon(slug: string | undefined, index: number): LucideIcon {
   if (!slug) return Building2;
   return categoryIconMap[slug] || fallbackIcons[index % fallbackIcons.length];
-}
-
-function getCategoryGradient(slug: string | undefined, index: number): string {
-  if (slug && categoryIconMap[slug]) {
-    // For known categories, use a fixed gradient based on their position in the icon map
-    const keys = Object.keys(categoryIconMap);
-    const idx = keys.indexOf(slug);
-    if (idx >= 0) return gradientPalette[idx % gradientPalette.length];
-  }
-  // For new/unknown categories, use index-based gradient
-  return gradientPalette[index % gradientPalette.length];
 }
 
 // Image with loading skeleton to prevent blue/empty flash
@@ -153,7 +121,6 @@ export default function HomePage() {
   const [searchQuery, setSearchQuery] = useState('');
   const [searchCity, setSearchCity] = useState('');
   const [searchCategory, setSearchCategory] = useState('');
-  const catScrollRef = useRef<HTMLDivElement>(null);
 
   const { data: categories } = useQuery<Category[]>({
     queryKey: ['categories-home'],
@@ -210,13 +177,6 @@ export default function HomePage() {
     }, interval);
     return () => clearInterval(timer);
   }, [totalBusinessesCount, totalCategories, uniqueCities, totalReviews]);
-
-  const scrollContainer = (ref: React.RefObject<HTMLDivElement | null>, direction: 'left' | 'right') => {
-    if (ref.current) {
-      const amount = direction === 'left' ? -300 : 300;
-      ref.current.scrollBy({ left: amount, behavior: 'smooth' });
-    }
-  };
 
   // Build a slug->index map for consistent gradient/icon assignment
   const categoryIndexMap = useRef<Record<string, number>>({});
@@ -332,82 +292,20 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ============ CATEGORIES SECTION — Auto-Slide Multicolor Gradient Squares ============ */}
-      <section className="pb-12 md:pb-16 overflow-hidden">
-        <div className="container mx-auto px-4">
-          <div className="flex items-center justify-between mb-6">
-            <h2 className="text-xl md:text-2xl font-semibold text-foreground">
-              {t('browse_categories')}
-            </h2>
-            <div className="hidden sm:flex gap-2">
-              <button onClick={() => scrollContainer(catScrollRef, 'left')} className="p-2 bg-white border border-border hover:bg-muted transition-colors">
-                <ChevronLeft className="h-4 w-4" />
-              </button>
-              <button onClick={() => scrollContainer(catScrollRef, 'right')} className="p-2 bg-white border border-border hover:bg-muted transition-colors">
-                <ChevronRight className="h-4 w-4" />
-              </button>
-            </div>
-          </div>
-        </div>
-
-        {/* Infinite sliding track */}
-        {!categories ? (
-          <div className="flex gap-4 overflow-hidden px-4">
-            {Array.from({ length: 14 }, (_, i) => (
-              <div key={i} className="shrink-0 w-[130px] md:w-[150px]">
-                <Skeleton className="w-[130px] h-[130px] md:w-[150px] md:h-[150px] rounded-2xl" />
-              </div>
-            ))}
-          </div>
-        ) : (
-          <div className="group relative">
-            <div className="flex gap-4 animate-slide-categories">
-              {[...categories, ...categories, ...categories]
-                .map((cat, idx) => {
-                  const catIdx = getCategoryIndex(cat.slug);
-                  const Icon = getCategoryIcon(cat.slug, catIdx);
-                  const gradient = getCategoryGradient(cat.slug, catIdx);
-                  return (
-                    <Link key={`${cat.id}-${idx}`} href={`/annuaire?category=${cat.slug}`} className="shrink-0 group/card">
-                      <div className={`w-[130px] md:w-[150px] h-[130px] md:h-[150px] rounded-2xl bg-gradient-to-br ${gradient} flex flex-col items-center justify-center gap-2 transition-all duration-300 group-hover/card:scale-105 group-hover/card:shadow-xl`}>
-                        <div className="w-10 h-10 md:w-12 md:h-12 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center">
-                          <Icon className="h-5 w-5 md:h-6 md:w-6 text-white" />
-                        </div>
-                        <h3 className="text-white text-xs md:text-sm font-semibold text-center leading-tight px-2">
-                          {cat.slug && categoryTranslations[cat.slug] ? categoryTranslations[cat.slug][locale] : cat.name}
-                        </h3>
-                        <span className="text-white/70 text-[10px]">
-                          {cat._count.businesses} {t(cat._count.businesses > 1 ? 'cat_annonces' : 'cat_annonce')}
-                        </span>
-                      </div>
-                    </Link>
-                  );
-                })}
-            </div>
-            {/* Fade edges */}
-            <div className="absolute left-0 top-0 bottom-0 w-8 bg-gradient-to-r from-[#F6F6F6] to-transparent pointer-events-none z-10" />
-            <div className="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-[#F6F6F6] to-transparent pointer-events-none z-10" />
-          </div>
-        )}
-      </section>
-
-      {/* ============ 2 BANNIÈRES PROMO — style PagesJaunes (sous les catégories) ============ */}
+      {/* ============ 2 BANNIÈRES PROMO — style PagesJaunes (sous le hero) ============ */}
       <PromoDuoBanners />
 
-      {/* ============ BANNIÈRES SPONSORISÉES — publiées depuis l'admin (Annonces) ============ */}
-      <HomepageSponsoredGrid />
-
-      {/* ============ RUBRIQUES — grands carrés avec images réelles (sous les bannières pub) ============ */}
+      {/* ============ VOS COMMERCES DE PROXIMITÉ — 8 grands carrés avec images réelles ============ */}
       <section className="py-12 md:py-16">
         <div className="container mx-auto px-4">
           <div className="mb-6 md:mb-8">
             <h2 className="text-xl md:text-2xl font-semibold text-foreground">
-              {locale === 'pt' ? 'Nossas rubricas' : 'Nos rubriques'}
+              {locale === 'pt' ? 'Os seus comércios de proximidade' : 'Vos commerces de proximité'}
             </h2>
             <p className="text-sm text-muted-foreground mt-1">
               {locale === 'pt'
-                ? 'Boas ofertas, restaurantes, hotéis e compras — clique para ver os anúncios'
-                : 'Bons plans, restos, hôtels et shoppings — cliquez pour voir les annonces'}
+                ? 'Bons planos, restaurantes, hotéis, compras, saúde, imobiliário… — clique para ver os anúncios'
+                : 'Bons plans, restos, hôtels, shoppings, santé, immobilier… — cliquez pour voir les annonces'}
             </p>
           </div>
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-5">

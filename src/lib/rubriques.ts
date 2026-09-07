@@ -2,7 +2,7 @@
 // Chaque rubrique regroupe une ou plusieurs catégories de la base.
 // "Bons plans" n'a pas de catégories : il pointe vers toutes les annonces.
 import type { LucideIcon } from 'lucide-react';
-import { Flame, UtensilsCrossed, BedDouble, ShoppingBag } from 'lucide-react';
+import { Flame, UtensilsCrossed, BedDouble, ShoppingBag, HeartPulse, Home, Car, HardHat } from 'lucide-react';
 import type { Locale } from '@/lib/i18n';
 
 export interface Rubrique {
@@ -60,6 +60,46 @@ export const RUBRIQUES: Rubrique[] = [
     image: '/rubriques/shoppings.jpg',
     gradient: 'from-fuchsia-500 via-pink-500 to-rose-500',
     href: '/annuaire?category=mode-textile,mode-accessoires,commerce-distribution,electroniques',
+  },
+  {
+    key: 'sante',
+    labels: { fr: 'Santé', pt: 'Saúde' },
+    subtitles: { fr: 'Pharmacies & bien-être', pt: 'Farmácias & bem-estar' },
+    categories: ['sante-bien-etre'],
+    icon: HeartPulse,
+    image: '/rubriques/sante.jpg',
+    gradient: 'from-sky-500 via-cyan-500 to-teal-500',
+    href: '/annuaire?category=sante-bien-etre',
+  },
+  {
+    key: 'immobilier',
+    labels: { fr: 'Immobilier', pt: 'Imobiliário' },
+    subtitles: { fr: 'Logements & agences', pt: 'Casas & agências' },
+    categories: ['immobilier'],
+    icon: Home,
+    image: '/rubriques/immobilier.jpg',
+    gradient: 'from-violet-500 via-purple-500 to-fuchsia-500',
+    href: '/annuaire?category=immobilier',
+  },
+  {
+    key: 'transport',
+    labels: { fr: 'Auto & transport', pt: 'Auto & transporte' },
+    subtitles: { fr: 'Taxis, bus & logistique', pt: 'Táxis & logística' },
+    categories: ['transport-logistique'],
+    icon: Car,
+    image: '/rubriques/transport.jpg',
+    gradient: 'from-yellow-500 via-amber-500 to-orange-500',
+    href: '/annuaire?category=transport-logistique',
+  },
+  {
+    key: 'travaux',
+    labels: { fr: 'Travaux & services', pt: 'Obras & serviços' },
+    subtitles: { fr: 'Bâtiment & artisans', pt: 'Construção & artesãos' },
+    categories: ['btp-construction'],
+    icon: HardHat,
+    image: '/rubriques/travaux.jpg',
+    gradient: 'from-slate-500 via-gray-600 to-zinc-700',
+    href: '/annuaire?category=btp-construction',
   },
 ];
 
