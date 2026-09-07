@@ -902,6 +902,14 @@ const fr: Record<string, string> = {
   'admin_settings_maintenance_end_time': 'Date/heure de fin estimée',
   'admin_settings_maintenance_end_time_hint': 'Laissez vide pour une durée indéterminée. Le minuteur s\'arrêtera automatiquement à l\'heure indiquée.',
   'admin_settings_maintenance_warning': 'Attention : quand le mode maintenance est activé, seuls les administrateurs et le tableau de bord restent accessibles.',
+  // Page Catégories
+  'categories_page': 'Catégories',
+  'categories_page_title': 'Toutes les catégories',
+  'categories_page_desc': 'Explorez tous les secteurs d\'activité disponibles sur PebissOa et trouvez les professionnels qu\'il vous faut.',
+  'categories_page_count': '{count} catégories',
+  'categories_page_businesses': '{count} entreprise(s)',
+  'categories_page_explore': 'Voir les entreprises',
+  'categories_page_empty': 'Aucune entreprise dans cette catégorie pour le moment',
 };
 
 // Portuguese translations
@@ -1791,6 +1799,14 @@ const pt: Record<string, string> = {
   'admin_settings_maintenance_end_time': 'Data/hora prevista de fim',
   'admin_settings_maintenance_end_time_hint': 'Deixe vazio para duração indeterminada. O temporizador parará automaticamente na hora indicada.',
   'admin_settings_maintenance_warning': 'Atenção : quando o modo manutenção está ativado, apenas os administradores e o painel permanecem acessíveis.',
+  // Page Categorias
+  'categories_page': 'Categorias',
+  'categories_page_title': 'Todas as categorias',
+  'categories_page_desc': 'Explore todos os setores de atividade disponíveis na PebissOa e encontre os profissionais de que precisa.',
+  'categories_page_count': '{count} categorias',
+  'categories_page_businesses': '{count} empresa(s)',
+  'categories_page_explore': 'Ver as empresas',
+  'categories_page_empty': 'Nenhuma empresa nesta categoria por agora',
 };
 
 // Category name translation map: slug -> { fr: string, pt: string }
@@ -1815,6 +1831,26 @@ export const categoryTranslations: Record<string, { fr: string; pt: string }> = 
   'justice-droit': { fr: 'Justice & Droit', pt: 'Justiça & Direito' },
   'media-communication': { fr: 'Média & Communication', pt: 'Média & Comunicação' },
   'ngo-assoc': { fr: 'ONG & Associations', pt: 'ONG & Associações' },
+  // Catégories de la base (complément)
+  'administration': { fr: 'Administration', pt: 'Administração' },
+  'arts-culture': { fr: 'Arts & Culture', pt: 'Artes & Cultura' },
+  'assurances-banques': { fr: 'Assurances & Banques', pt: 'Seguros & Bancos' },
+  'banques': { fr: 'Banques', pt: 'Bancos' },
+  'barbier-salon-de-coiffure': { fr: 'Barbier & Salon de coiffure', pt: 'Barbearia & Cabeleireiro' },
+  'conseil-services': { fr: 'Conseil & Services', pt: 'Consultoria & Serviços' },
+  'droite': { fr: 'Droit & Justice', pt: 'Direito & Justiça' },
+  'electroniques': { fr: 'Électroniques', pt: 'Eletrónica' },
+  'gestion-des-ressources-humaines': { fr: 'Gestion des ressources humaines', pt: 'Gestão de Recursos Humanos' },
+  'genie-logiciel': { fr: 'Génie logiciel', pt: 'Engenharia de Software' },
+  'hotels': { fr: 'Hôtels', pt: 'Hotéis' },
+  'informatiques': { fr: 'Informatique', pt: 'Informática' },
+  'marketing-communication': { fr: 'Marketing & Communication', pt: 'Marketing & Comunicação' },
+  'mode-accessoires': { fr: 'Mode & Accessoires', pt: 'Moda & Acessórios' },
+  'restaurants': { fr: 'Restaurants', pt: 'Restaurantes' },
+  'sport-loisirs': { fr: 'Sport & Loisirs', pt: 'Desporto & Lazer' },
+  'tourisme': { fr: 'Tourisme', pt: 'Turismo' },
+  'telecom': { fr: 'Télécom', pt: 'Telecomunicações' },
+  'energie-environnement': { fr: 'Énergie & Environnement', pt: 'Energia & Ambiente' },
 };
 
 const translations: Record<Locale, Record<string, string>> = { fr, pt };

@@ -47,6 +47,7 @@ export function Header() {
   const navLinks = [
     { href: '/', label: t('home') },
     { href: '/annuaire', label: t('directory') },
+    { href: '/categories', label: t('categories_page') },
     { href: '/annonces', label: t('ads') },
     { href: '/contact', label: t('contact_page_title') },
   ];

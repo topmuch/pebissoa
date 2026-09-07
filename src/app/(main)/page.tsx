@@ -222,8 +222,8 @@ export default function HomePage() {
               {t('hero_desc')}
             </p>
 
-            {/* Search Bar */}
-            <form onSubmit={handleHeroSearch} className="bg-white p-3 md:p-4 shadow-lg max-w-4xl mx-4 md:mx-auto mb-4 sm:mb-6">
+            {/* Search Bar — masquée sur mobile (demande utilisateur) */}
+            <form onSubmit={handleHeroSearch} className="hidden md:block bg-white p-3 md:p-4 shadow-lg max-w-4xl mx-4 md:mx-auto mb-4 sm:mb-6">
               <div className="flex flex-col sm:flex-row gap-2 items-stretch">
                 <div className="flex-1">
                   <label className="block text-[11px] text-muted-foreground mb-1 font-medium">{t('search_what')}</label>
