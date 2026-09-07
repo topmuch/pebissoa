@@ -125,23 +125,29 @@ function AnnuaireContent() {
 
   return (
     <div className="min-h-[60vh]">
-      {/* Page Header */}
-      <div className="pebiss-gradient py-12 md:py-16">
-        <div className="container mx-auto px-4 text-center">
-          <h1 className="text-3xl md:text-4xl font-bold text-white mb-3">
+      {/* Page Header — dégradé + cercles décoratifs */}
+      <div className="pebiss-gradient relative overflow-hidden">
+        <div className="absolute -top-24 -right-16 h-64 w-64 rounded-full bg-white/10 pointer-events-none" />
+        <div className="absolute -bottom-28 -left-10 h-72 w-72 rounded-full bg-white/5 pointer-events-none" />
+        <div className="absolute top-8 right-1/3 h-14 w-14 rounded-full bg-white/10 hidden md:block pointer-events-none" />
+        <div className="container mx-auto px-4 pt-12 pb-16 md:pt-16 md:pb-20 text-center relative">
+          <span className="inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-white/15 backdrop-blur-sm mb-4 shadow-inner">
+            <Building2 className="h-7 w-7 text-white" />
+          </span>
+          <h1 className="text-3xl md:text-4xl font-extrabold text-white mb-2 drop-shadow-sm">
             {t('annuaire_title')}
           </h1>
-          <p className="text-white/80 text-lg">
+          <p className="text-white/85 text-base md:text-lg max-w-xl mx-auto">
             {t('annuaire_subtitle')}
           </p>
         </div>
       </div>
 
-      <div className="container mx-auto px-4 py-8">
-        {/* Search Bar */}
-        <Card className="mb-6 border-border/40 shadow-sm">
-          <CardContent className="p-4 md:p-6">
-            <form onSubmit={handleSearch} className="space-y-4">
+      <div className="container mx-auto px-4 pb-8">
+        {/* Search Bar — carte flottante qui chevauche l'en-tête */}
+        <Card className="mb-6 border border-border/40 shadow-xl shadow-black/5 rounded-2xl -mt-8 md:-mt-10 relative z-10">
+          <CardContent className="p-4 md:p-5">
+            <form onSubmit={handleSearch} className="space-y-3">
               <div className="flex flex-col md:flex-row gap-3">
                 <div className="flex-1 relative">
                   <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
@@ -149,7 +155,7 @@ function AnnuaireContent() {
                     placeholder={t('annuaire_search_placeholder')}
                     value={query}
                     onChange={(e) => setQuery(e.target.value)}
-                    className="pl-10"
+                    className="pl-10 h-11 rounded-xl"
                   />
                 </div>
                 <div className="flex-1 relative">
@@ -158,21 +164,21 @@ function AnnuaireContent() {
                     placeholder={t('annuaire_city_placeholder')}
                     value={city}
                     onChange={(e) => setCity(e.target.value)}
-                    className="pl-10"
+                    className="pl-10 h-11 rounded-xl"
                   />
                 </div>
                 <Select value={category} onValueChange={(v) => { setCategory(v === 'all' ? '' : v); setPage(1); }}>
-                  <SelectTrigger className="w-full md:w-48">
+                  <SelectTrigger className="w-full md:w-48 h-11 rounded-xl">
                     <SelectValue placeholder={t('search_category')} />
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="all">{t('annuaire_all_categories')}</SelectItem>
-                    {/* Rubriques d'accueil — regroupent plusieurs catégories */}
+                    {/* Rubriques d'accueil — uniquement multi-catégories (les mono dupliquent les catégories → clés Radix en conflit) */}
                     <SelectGroup>
                       <SelectLabel className="text-xs font-semibold text-muted-foreground">
                         {locale === 'pt' ? 'Rubricas' : 'Rubriques'}
                       </SelectLabel>
-                      {RUBRIQUES.filter((r) => r.categories.length > 0).map((r) => (
+                      {RUBRIQUES.filter((r) => r.categories.length > 1).map((r) => (
                         <SelectItem key={r.key} value={r.categories.join(',')}>
                           {r.labels[locale]}
                         </SelectItem>
@@ -186,7 +192,7 @@ function AnnuaireContent() {
                   </SelectContent>
                 </Select>
                 <Select value={region} onValueChange={(v) => { setRegion(v === 'all' ? '' : v); setPage(1); }}>
-                  <SelectTrigger className="w-full md:w-48">
+                  <SelectTrigger className="w-full md:w-48 h-11 rounded-xl">
                     <SelectValue placeholder={t('annuaire_region')} />
                   </SelectTrigger>
                   <SelectContent>
@@ -198,7 +204,7 @@ function AnnuaireContent() {
                     ))}
                   </SelectContent>
                 </Select>
-                <Button type="submit" className="bg-pebiss-orange hover:bg-pebiss-orange/90 text-white">
+                <Button type="submit" className="bg-pebiss-orange hover:bg-pebiss-orange/90 text-white h-11 rounded-xl px-5">
                   <Search className="h-4 w-4" />
                   <span className="hidden sm:inline ml-2">{t('annuaire_search_button')}</span>
                 </Button>
@@ -211,30 +217,30 @@ function AnnuaireContent() {
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mb-6">
           <div className="flex items-center gap-2 flex-wrap">
             {hasActiveFilters && (
-              <Button variant="ghost" size="sm" onClick={clearFilters} className="text-destructive">
+              <Button variant="ghost" size="sm" onClick={clearFilters} className="text-destructive rounded-full">
                 <X className="h-3.5 w-3.5 mr-1" />
                 {t('annuaire_clear')}
               </Button>
             )}
             {query && (
-              <Badge variant="secondary" className="gap-1">
+              <Badge variant="secondary" className="gap-1 rounded-full px-3">
                 « {query} »
-                <button onClick={() => setQuery('')}>
+                <button onClick={() => setQuery('')} aria-label="X">
                   <X className="h-3 w-3" />
                 </button>
               </Badge>
             )}
             {city && (
-              <Badge variant="secondary" className="gap-1">
+              <Badge variant="secondary" className="gap-1 rounded-full px-3">
                 <MapPin className="h-3 w-3" />
                 {city}
-                <button onClick={() => setCity('')}>
+                <button onClick={() => setCity('')} aria-label="X">
                   <X className="h-3 w-3" />
                 </button>
               </Badge>
             )}
             {category && (
-              <Badge variant="secondary" className="gap-1">
+              <Badge variant="secondary" className="gap-1 rounded-full px-3">
                 {(() => {
                   // Rubrique multi-catégories (ex: Restos, Hôtels, Shoppings)
                   const rubrique = findRubriqueByCategory(category);
@@ -242,35 +248,37 @@ function AnnuaireContent() {
                   const cat = categories?.find((c) => c.slug === category);
                   return cat?.slug && categoryTranslations[cat.slug] ? categoryTranslations[cat.slug][locale] : cat?.name ?? category;
                 })()}
-                <button onClick={() => setCategory('')}>
+                <button onClick={() => setCategory('')} aria-label="X">
                   <X className="h-3 w-3" />
                 </button>
               </Badge>
             )}
             {region && (
-              <Badge variant="secondary" className="gap-1">
+              <Badge variant="secondary" className="gap-1 rounded-full px-3">
                 {region}
-                <button onClick={() => setRegion('')}>
+                <button onClick={() => setRegion('')} aria-label="X">
                   <X className="h-3 w-3" />
                 </button>
               </Badge>
             )}
           </div>
 
-          <div className="flex items-center gap-2">
-            <span className="text-sm text-muted-foreground mr-1">
+          <div className="flex items-center gap-3">
+            <span className="text-sm text-muted-foreground">
               {t('annuaire_count', { count: pagination?.total || 0 })}
             </span>
-            <div className="flex border rounded-lg overflow-hidden">
+            <div className="flex border border-border rounded-full overflow-hidden p-0.5 bg-muted/50">
               <button
                 onClick={() => setViewMode('grid')}
-                className={`p-2 ${viewMode === 'grid' ? 'bg-primary text-primary-foreground' : 'bg-background text-muted-foreground hover:bg-muted'}`}
+                aria-label="Grille"
+                className={`p-2 rounded-full transition-all ${viewMode === 'grid' ? 'bg-primary text-primary-foreground shadow-sm' : 'text-muted-foreground hover:text-foreground'}`}
               >
                 <Grid3X3 className="h-4 w-4" />
               </button>
               <button
                 onClick={() => setViewMode('list')}
-                className={`p-2 ${viewMode === 'list' ? 'bg-primary text-primary-foreground' : 'bg-background text-muted-foreground hover:bg-muted'}`}
+                aria-label="Liste"
+                className={`p-2 rounded-full transition-all ${viewMode === 'list' ? 'bg-primary text-primary-foreground shadow-sm' : 'text-muted-foreground hover:text-foreground'}`}
               >
                 <List className="h-4 w-4" />
               </button>
@@ -289,9 +297,11 @@ function AnnuaireContent() {
 
         {/* Empty State */}
         {!isLoading && businesses.length === 0 && (
-          <Card className="border-border/40">
+          <Card className="border-border/40 rounded-2xl">
             <CardContent className="py-16 px-6 text-center">
-              <Building2 className="h-16 w-16 text-muted-foreground/20 mx-auto mb-6" />
+              <span className="inline-flex h-20 w-20 items-center justify-center rounded-full bg-muted mb-5">
+                <Building2 className="h-9 w-9 text-muted-foreground/40" />
+              </span>
               <h3 className="text-xl font-semibold text-foreground mb-2">
                 {t('annuaire_no_results')}
               </h3>
@@ -299,7 +309,7 @@ function AnnuaireContent() {
                 {t('annuaire_no_results_desc')}
               </p>
               {hasActiveFilters && (
-                <Button variant="outline" onClick={clearFilters}>
+                <Button variant="outline" onClick={clearFilters} className="rounded-full">
                   <SlidersHorizontal className="h-4 w-4 mr-2" />
                   {t('annuaire_reset')}
                 </Button>
@@ -311,13 +321,13 @@ function AnnuaireContent() {
         {/* Results Grid */}
         {!isLoading && businesses.length > 0 && (
           <>
-            <div className={viewMode === 'grid' ? 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6' : 'space-y-4'}>
+            <div className={viewMode === 'grid' ? 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6' : 'space-y-4'}>
               {businesses.map((business) => (
                 <BusinessCard key={business.id} business={business} variant={viewMode} />
               ))}
             </div>
 
-            {/* Pagination */}
+            {/* Pagination — pastilles arrondies */}
             {pagination && pagination.totalPages > 1 && (
               <div className="flex items-center justify-center gap-2 mt-10">
                 <Button
@@ -325,31 +335,33 @@ function AnnuaireContent() {
                   size="sm"
                   disabled={!pagination.hasPrev}
                   onClick={() => setPage((p) => Math.max(1, p - 1))}
+                  className="rounded-full h-9"
                 >
                   <ChevronLeft className="h-4 w-4" />
-                  {t('annuaire_previous')}
+                  <span className="hidden sm:inline">{t('annuaire_previous')}</span>
                 </Button>
 
-                <div className="flex items-center gap-1">
+                <div className="flex items-center gap-1.5">
                   {pageNumbers[0] > 1 && (
                     <>
                       <button
                         onClick={() => setPage(1)}
-                        className="w-8 h-8 rounded flex items-center justify-center text-sm hover:bg-muted"
+                        className="w-9 h-9 rounded-full flex items-center justify-center text-sm font-medium text-muted-foreground hover:bg-muted transition-colors"
                       >
                         1
                       </button>
-                      {pageNumbers[0] > 2 && <span className="px-1 text-muted-foreground">...</span>}
+                      {pageNumbers[0] > 2 && <span className="px-0.5 text-muted-foreground">…</span>}
                     </>
                   )}
                   {pageNumbers.map((p) => (
                     <button
                       key={p}
                       onClick={() => setPage(p)}
-                      className={`w-8 h-8 rounded flex items-center justify-center text-sm font-medium transition-colors ${
+                      aria-current={p === page ? 'page' : undefined}
+                      className={`w-9 h-9 rounded-full flex items-center justify-center text-sm font-semibold transition-all ${
                         p === page
-                          ? 'bg-primary text-primary-foreground'
-                          : 'hover:bg-muted text-muted-foreground'
+                          ? 'bg-pebiss-orange text-white shadow-md scale-105'
+                          : 'text-muted-foreground hover:bg-muted hover:text-foreground'
                       }`}
                     >
                       {p}
@@ -358,11 +370,11 @@ function AnnuaireContent() {
                   {pageNumbers[pageNumbers.length - 1] < pagination.totalPages && (
                     <>
                       {pageNumbers[pageNumbers.length - 1] < pagination.totalPages - 1 && (
-                        <span className="px-1 text-muted-foreground">...</span>
+                        <span className="px-0.5 text-muted-foreground">…</span>
                       )}
                       <button
                         onClick={() => setPage(pagination.totalPages)}
-                        className="w-8 h-8 rounded flex items-center justify-center text-sm hover:bg-muted"
+                        className="w-9 h-9 rounded-full flex items-center justify-center text-sm font-medium text-muted-foreground hover:bg-muted transition-colors"
                       >
                         {pagination.totalPages}
                       </button>
@@ -375,8 +387,9 @@ function AnnuaireContent() {
                   size="sm"
                   disabled={!pagination.hasNext}
                   onClick={() => setPage((p) => p + 1)}
+                  className="rounded-full h-9"
                 >
-                  {t('annuaire_next')}
+                  <span className="hidden sm:inline">{t('annuaire_next')}</span>
                   <ChevronRight className="h-4 w-4" />
                 </Button>
               </div>

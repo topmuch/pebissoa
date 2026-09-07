@@ -3,15 +3,14 @@
 import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { useTranslation } from '@/lib/i18n';
-import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
 import { Skeleton } from '@/components/ui/skeleton';
 import {
   Megaphone,
   ExternalLink,
   ImageOff,
   LayoutGrid,
+  ArrowRight,
 } from 'lucide-react';
 
 interface Banner {
@@ -34,7 +33,7 @@ const BANNER_FORMATS: Record<string, { label: string; w: number; h: number; usag
 };
 
 export default function AnnoncesPage() {
-  const { t } = useTranslation();
+  const { t, locale } = useTranslation();
   const [activeFilter, setActiveFilter] = useState('all');
 
   const { data: banners, isLoading } = useQuery<Banner[]>({
@@ -59,62 +58,65 @@ export default function AnnoncesPage() {
 
   return (
     <div className="min-h-[60vh]">
-      {/* Page Header */}
-      <div className="pebiss-gradient py-12 md:py-16">
-        <div className="container mx-auto px-4 text-center">
-          <div className="flex items-center justify-center gap-3 mb-4">
-            <LayoutGrid className="h-8 w-8 text-white/80" />
-            <h1 className="text-3xl md:text-4xl font-bold text-white">
-              {t('banners_page_title')}
-            </h1>
-          </div>
-          <p className="text-white/80 text-lg max-w-2xl mx-auto">
+      {/* Page Header — dégradé + cercles décoratifs */}
+      <div className="pebiss-gradient relative overflow-hidden">
+        <div className="absolute -top-24 -right-16 h-64 w-64 rounded-full bg-white/10 pointer-events-none" />
+        <div className="absolute -bottom-28 -left-10 h-72 w-72 rounded-full bg-white/5 pointer-events-none" />
+        <div className="absolute top-8 right-1/4 h-14 w-14 rounded-full bg-white/10 hidden md:block pointer-events-none" />
+        <div className="container mx-auto px-4 pt-12 pb-16 md:pt-16 md:pb-20 text-center relative">
+          <span className="inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-white/15 backdrop-blur-sm mb-4 shadow-inner">
+            <Megaphone className="h-7 w-7 text-white" />
+          </span>
+          <h1 className="text-3xl md:text-4xl font-extrabold text-white mb-2 drop-shadow-sm">
+            {t('banners_page_title')}
+          </h1>
+          <p className="text-white/85 text-base md:text-lg max-w-xl mx-auto">
             {t('banners_page_subtitle')}
           </p>
         </div>
       </div>
 
-      <div className="container mx-auto px-4 py-8">
-        {/* Filter Tabs */}
-        <div className="flex flex-wrap gap-2 mb-8">
-          {formatTabs.map((tab) => (
-            <Button
-              key={tab.value}
-              variant={activeFilter === tab.value ? 'default' : 'outline'}
-              size="sm"
-              onClick={() => setActiveFilter(tab.value)}
-              className={
-                activeFilter === tab.value
-                  ? 'bg-pebiss-orange hover:bg-pebiss-orange/90 text-white'
-                  : ''
-              }
-            >
-              {tab.label}
-            </Button>
-          ))}
+      <div className="container mx-auto px-4 pb-10">
+        {/* Toolbar — pastilles de filtre + compteur */}
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mt-6 mb-6">
+          <div className="flex flex-wrap gap-2">
+            {formatTabs.map((tab) => (
+              <button
+                key={tab.value}
+                onClick={() => setActiveFilter(tab.value)}
+                aria-pressed={activeFilter === tab.value}
+                className={`h-9 px-4 rounded-full text-sm font-medium border transition-all duration-300 ${
+                  activeFilter === tab.value
+                    ? 'bg-pebiss-orange text-white border-pebiss-orange shadow-md'
+                    : 'bg-white dark:bg-card text-muted-foreground border-border hover:border-pebiss-orange/50 hover:text-foreground'
+                }`}
+              >
+                {tab.label}
+              </button>
+            ))}
+          </div>
+          <p className="text-sm text-muted-foreground font-medium">
+            {t('banners_count', { count: filteredBanners.length })}
+          </p>
         </div>
-
-        {/* Results Count */}
-        <p className="text-sm text-muted-foreground mb-6">
-          {t('banners_count', { count: filteredBanners.length })}
-        </p>
 
         {/* Loading State */}
         {isLoading && (
           <div className="space-y-6">
-            <Skeleton className="w-full h-[90px] md:h-[100px] rounded-lg" />
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <Skeleton className="w-full h-28 sm:h-36 md:h-44 rounded-2xl" />
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
               {Array.from({ length: 6 }, (_, i) => (
-                <Card key={i} className="border-border/40">
-                  <CardContent className="p-0">
-                    <Skeleton className="w-full aspect-[4/3] rounded-t-lg" />
-                    <div className="p-5 space-y-3">
-                      <Skeleton className="h-4 w-24 rounded-full" />
-                      <Skeleton className="h-5 w-3/4" />
-                      <Skeleton className="h-9 w-28 rounded-lg" />
+                <div key={i} className="bg-white dark:bg-card rounded-2xl border border-border/50 overflow-hidden shadow-sm">
+                  <Skeleton className="w-full aspect-[6/5] rounded-none" />
+                  <div className="p-4 space-y-2.5">
+                    <Skeleton className="h-4 w-3/4" />
+                    <Skeleton className="h-3 w-full" />
+                    <div className="flex items-center justify-between pt-2">
+                      <Skeleton className="h-6 w-20 rounded-full" />
+                      <Skeleton className="h-8 w-24 rounded-full" />
                     </div>
-                  </CardContent>
-                </Card>
+                  </div>
+                </div>
               ))}
             </div>
           </div>
@@ -122,17 +124,23 @@ export default function AnnoncesPage() {
 
         {/* Empty State */}
         {!isLoading && filteredBanners.length === 0 && (
-          <Card className="border-border/40">
-            <CardContent className="py-20 px-6 text-center">
-              <Megaphone className="h-16 w-16 text-muted-foreground/20 mx-auto mb-6" />
-              <h3 className="text-xl font-semibold text-foreground mb-2">
-                {t('banners_no_results')}
-              </h3>
-              <p className="text-muted-foreground">
-                {t('banners_no_results_desc')}
-              </p>
-            </CardContent>
-          </Card>
+          <div className="rounded-2xl border-2 border-dashed border-border bg-white dark:bg-card py-16 px-6 text-center">
+            <span className="inline-flex h-20 w-20 items-center justify-center rounded-full bg-muted mb-5">
+              <Megaphone className="h-9 w-9 text-muted-foreground/40" />
+            </span>
+            <h3 className="text-xl font-semibold text-foreground mb-2">
+              {t('banners_no_results')}
+            </h3>
+            <p className="text-muted-foreground mb-6 max-w-md mx-auto">
+              {t('banners_no_results_desc')}
+            </p>
+            <a href="/publicite">
+              <Button className="bg-pebiss-orange hover:bg-pebiss-orange/90 text-white rounded-full h-10 px-6">
+                {locale === 'pt' ? 'Quero anunciar' : 'Je veux faire ma publicité'}
+                <ArrowRight className="h-4 w-4 ml-2" />
+              </Button>
+            </a>
+          </div>
         )}
 
         {/* Banners Display */}
@@ -142,16 +150,16 @@ export default function AnnoncesPage() {
             {wideBanners.length > 0 && (
               <div className="space-y-4">
                 {wideBanners.map((banner) => (
-                  <BannerCard key={banner.id} banner={banner} isWide />
+                  <WideBannerCard key={banner.id} banner={banner} />
                 ))}
               </div>
             )}
 
             {/* Grid banners (square/rectangle formats) */}
             {gridBanners.length > 0 && (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
                 {gridBanners.map((banner) => (
-                  <BannerCard key={banner.id} banner={banner} />
+                  <GridBannerCard key={banner.id} banner={banner} />
                 ))}
               </div>
             )}
@@ -162,81 +170,134 @@ export default function AnnoncesPage() {
   );
 }
 
-function BannerCard({ banner, isWide = false }: { banner: Banner; isWide?: boolean }) {
+/* ============ Bannière large (728x90) — pleine largeur, overlay à gauche ============ */
+function WideBannerCard({ banner }: { banner: Banner }) {
   const { t } = useTranslation();
-  const fmt = BANNER_FORMATS[banner.format] || { label: banner.format, w: 300, h: 250, usage: '', isWide: false };
-  const aspectRatio = `${fmt.w}/${fmt.h}`;
+  const fmt = BANNER_FORMATS[banner.format] || { label: banner.format, w: 728, h: 90, usage: '', isWide: true };
 
   const content = (
-    <Card className="group hover:shadow-lg transition-all duration-300 border-border/40 overflow-hidden h-full">
-      <CardContent className="p-0">
-        {/* Image */}
+    <div className="group relative overflow-hidden rounded-2xl border border-border/50 shadow-sm hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 bg-white dark:bg-card cursor-pointer">
+      <div className="relative h-28 sm:h-36 md:h-44 overflow-hidden bg-muted">
         {banner.image ? (
-          <div className="relative overflow-hidden" style={{
-            aspectRatio: isWide ? undefined : aspectRatio,
-            maxHeight: isWide ? '200px' : undefined,
-          }}>
-            <img
-              src={banner.image}
-              alt={banner.title}
-              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-              style={isWide ? { aspectRatio, width: '100%', height: '100%' } : undefined}
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-            <div className="absolute top-3 left-3 flex gap-2">
-              <Badge variant="secondary" className="bg-white/90 backdrop-blur-sm text-xs font-medium">
-                {fmt.label}
-              </Badge>
-              <Badge variant="secondary" className="bg-black/50 backdrop-blur-sm text-white text-[10px] font-medium">
-                {fmt.usage}
-              </Badge>
-            </div>
-            <div className="absolute bottom-3 left-3 right-3">
-              <h3 className="text-white font-semibold text-sm md:text-base drop-shadow-md">{banner.title}</h3>
-            </div>
-          </div>
+          <img
+            src={banner.image}
+            alt={banner.title}
+            className="absolute inset-0 w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-500"
+          />
         ) : (
-          <div className="bg-muted flex items-center justify-center" style={{ aspectRatio, minHeight: '120px' }}>
-            <div className="text-center">
-              <ImageOff className="h-10 w-10 text-muted-foreground/30 mx-auto mb-2" />
-              <span className="text-xs text-muted-foreground">{fmt.label}</span>
-            </div>
+          <div className="absolute inset-0 bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center">
+            <ImageOff className="h-8 w-8 text-white/30" />
           </div>
         )}
+        {/* Voile pour la lisibilité */}
+        <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/30 to-transparent" />
 
-        {/* Description + CTA */}
-        <div className="p-4">
+        {/* Texte */}
+        <div className="absolute inset-0 p-4 sm:p-6 flex flex-col items-start justify-center">
+          <span className="inline-flex items-center gap-1 bg-white/95 dark:bg-card/95 text-foreground text-[10px] font-bold px-2.5 py-1 rounded-full shadow-sm mb-2">
+            <LayoutGrid className="h-3 w-3" />
+            {fmt.label}
+          </span>
+          <h3 className="text-white font-extrabold text-lg sm:text-xl md:text-2xl leading-tight drop-shadow-md max-w-[75%]">
+            {banner.title}
+          </h3>
           {banner.description && (
-            <p className="text-sm text-muted-foreground line-clamp-2 mb-3">
+            <p className="text-white/80 text-xs md:text-sm line-clamp-1 mt-1 max-w-[65%]">
               {banner.description}
             </p>
           )}
-          {banner.link && (
-            <Button
-              variant="outline"
-              size="sm"
-              className="bg-pebiss-orange hover:bg-pebiss-orange/90 text-white border-pebiss-orange text-xs"
-              onClick={(e) => {
-                e.stopPropagation();
-                window.open(banner.link!, '_blank');
-              }}
-            >
-              {t('banners_view_details')}
-              <ExternalLink className="h-3 w-3 ml-1" />
-            </Button>
-          )}
         </div>
-      </CardContent>
-    </Card>
+
+        {/* Flèche CTA à droite (desktop) */}
+        <span className="hidden md:flex absolute right-5 top-1/2 -translate-y-1/2 h-11 w-11 rounded-full bg-white text-pebiss-orange items-center justify-center shadow-lg group-hover:translate-x-1 group-hover:bg-pebiss-orange group-hover:text-white transition-all duration-300">
+          <ArrowRight className="h-5 w-5" />
+        </span>
+      </div>
+    </div>
   );
 
   if (banner.link && !banner.link.startsWith('#')) {
     return (
-      <a href={banner.link} target="_blank" rel="noopener noreferrer" className="block">
+      <a href={banner.link} target="_blank" rel="noopener noreferrer" className="block" aria-label={banner.title}>
         {content}
       </a>
     );
   }
+  return content;
+}
 
+/* ============ Bannière grille (336x280 / 300x600) — carte avec image + corps ============ */
+function GridBannerCard({ banner }: { banner: Banner }) {
+  const { t, locale } = useTranslation();
+  const fmt = BANNER_FORMATS[banner.format] || { label: banner.format, w: 300, h: 250, usage: '', isWide: false };
+  // Bannières hautes (300x600) : hauteur plafonnée pour ne pas écraser la grille
+  const isTall = fmt.h / fmt.w >= 2;
+
+  const content = (
+    <div className="group h-full flex flex-col bg-white dark:bg-card rounded-2xl border border-border/50 overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 cursor-pointer">
+      {/* Image au ratio du format */}
+      <div
+        className="relative overflow-hidden bg-muted"
+        style={isTall ? { height: '400px' } : { aspectRatio: `${fmt.w} / ${fmt.h}` }}
+      >
+        {banner.image ? (
+          <img
+            src={banner.image}
+            alt={banner.title}
+            className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+          />
+        ) : (
+          <div className="absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-br from-muted to-accent/40">
+            <ImageOff className="h-9 w-9 text-muted-foreground/30 mb-2" />
+            <span className="text-xs text-muted-foreground font-medium">{fmt.label}</span>
+          </div>
+        )}
+        {/* Voile bas */}
+        <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-black/40 to-transparent pointer-events-none" />
+        {/* Format — pastille en haut à gauche */}
+        <span className="absolute top-3 left-3 inline-flex items-center gap-1 bg-white/95 dark:bg-card/95 backdrop-blur-sm text-foreground text-[10px] font-bold px-2.5 py-1 rounded-full shadow-sm">
+          {fmt.label}
+        </span>
+        {/* Titre sur l'image */}
+        <h3 className="absolute bottom-3 left-3 right-3 text-white font-bold text-sm md:text-base leading-tight drop-shadow-md line-clamp-2">
+          {banner.title}
+        </h3>
+      </div>
+
+      {/* Corps */}
+      <div className="flex-1 flex flex-col p-4">
+        {banner.description ? (
+          <p className="text-sm text-muted-foreground line-clamp-2 leading-relaxed">
+            {banner.description}
+          </p>
+        ) : (
+          <p className="text-sm text-muted-foreground/60 italic">
+            {locale === 'pt' ? 'Anúncio patrocinado' : 'Annonce sponsorisée'}
+          </p>
+        )}
+
+        {/* Pied : usage + CTA */}
+        <div className="mt-auto pt-3 flex items-center justify-between gap-2">
+          <span className="text-[10px] text-muted-foreground/70 font-medium truncate">
+            {fmt.usage}
+          </span>
+          {banner.link && (
+            <span className="inline-flex shrink-0 items-center gap-1.5 bg-pebiss-orange/10 text-pebiss-orange text-xs font-bold px-3.5 py-2 rounded-full group-hover:bg-pebiss-orange group-hover:text-white transition-all duration-300">
+              {t('banners_view_details')}
+              <ExternalLink className="h-3 w-3" />
+            </span>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+
+  if (banner.link && !banner.link.startsWith('#')) {
+    return (
+      <a href={banner.link} target="_blank" rel="noopener noreferrer" className="block h-full" aria-label={banner.title}>
+        {content}
+      </a>
+    );
+  }
   return content;
 }

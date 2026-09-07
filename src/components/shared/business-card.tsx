@@ -2,9 +2,7 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
-import { Card } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { Building2, MapPin, Eye, Plus, Heart } from 'lucide-react';
+import { Building2, MapPin, Eye, Heart, ArrowRight, ChevronRight } from 'lucide-react';
 import { RatingStars } from './rating-stars';
 import { useTranslation, categoryTranslations } from '@/lib/i18n';
 
@@ -50,13 +48,13 @@ function CoverImage({ src, alt, className }: { src: string; alt: string; classNa
 
   if (error) {
     return (
-      <div className={`bg-muted flex items-center justify-center ${className}`}>
+      <div className={`bg-muted flex items-center justify-center ${className ?? ''}`}>
         <Building2 className="h-10 w-10 text-muted-foreground/20" />
       </div>
     );
   }
   return (
-    <div className={`relative overflow-hidden ${className}`}>
+    <div className={`overflow-hidden ${className ?? ''}`}>
       {!loaded && (
         <div className="absolute inset-0 bg-muted animate-pulse" />
       )}
@@ -80,119 +78,153 @@ function CoverImage({ src, alt, className }: { src: string; alt: string; classNa
 
 export function BusinessCard({ business, variant = 'grid' }: BusinessCardProps) {
   const { locale } = useTranslation();
+  const categoryLabel = business.category
+    ? (business.category.slug && categoryTranslations[business.category.slug]
+        ? categoryTranslations[business.category.slug][locale]
+        : business.category.name)
+    : null;
 
+  /* ============ VARIANTE LISTE ============ */
   if (variant === 'list') {
     return (
-      <Card className="group hover:shadow-lg transition-all duration-300 border-border/60 overflow-hidden">
-        <Link href={`/entreprise/${business.slug}`} className="block">
-          <div className="flex">
-            {/* Cover Image */}
-            <div className="relative w-40 sm:w-52 flex-shrink-0 bg-muted">
-              {business.coverImage ? (
-                <CoverImage src={business.coverImage} alt={business.name} className="w-full h-full" />
-              ) : (
-                <div className="w-full h-full bg-muted flex items-center justify-center">
-                  <Building2 className="h-10 w-10 text-muted-foreground/30" />
-                </div>
-              )}
+      <Link href={`/entreprise/${business.slug}`} className="group block">
+        <article className="flex bg-white dark:bg-card rounded-2xl border border-border/50 overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300">
+          {/* Image */}
+          <div className="relative w-40 sm:w-52 shrink-0 bg-muted overflow-hidden">
+            {business.coverImage ? (
+              <CoverImage src={business.coverImage} alt={business.name} className="absolute inset-0 w-full h-full" />
+            ) : (
+              <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-muted to-accent/40">
+                <Building2 className="h-10 w-10 text-muted-foreground/25" />
+              </div>
+            )}
+            {/* Petit logo arrondi en bas de l'image */}
+            {business.logo && (
+              <img
+                src={business.logo}
+                alt=""
+                className="absolute bottom-2.5 left-2.5 h-9 w-9 rounded-lg object-cover ring-2 ring-white/90 shadow-md"
+              />
+            )}
+          </div>
+
+          {/* Contenu */}
+          <div className="flex-1 p-4 sm:p-5 flex flex-col min-w-0">
+            <div className="flex items-start justify-between gap-3">
+              <div className="min-w-0">
+                {categoryLabel && (
+                  <span className="inline-flex items-center gap-1.5 text-[11px] font-semibold text-pebiss-orange bg-pebiss-orange/10 px-2.5 py-0.5 rounded-full mb-1.5">
+                    <span className="h-1.5 w-1.5 rounded-full bg-pebiss-orange" />
+                    {categoryLabel}
+                  </span>
+                )}
+                <h3 className="font-bold text-base text-foreground leading-snug group-hover:text-pebiss-orange transition-colors truncate">
+                  {business.name}
+                </h3>
+              </div>
+              {/* Flèche révélée au survol (desktop) */}
+              <span className="hidden sm:flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-border text-muted-foreground opacity-0 group-hover:opacity-100 group-hover:bg-pebiss-orange group-hover:text-white group-hover:border-pebiss-orange transition-all duration-300">
+                <ChevronRight className="h-4 w-4" />
+              </span>
             </div>
 
-            {/* Content */}
-            <div className="flex-1 p-4 sm:p-5 flex flex-col justify-between min-w-0">
-              <div>
-                <div className="flex items-center gap-2 mb-1 flex-wrap">
-                  <h3 className="font-semibold text-foreground group-hover:text-primary transition-colors truncate">
-                    {business.name}
-                  </h3>
-                  {business.category && (
-                    <Badge variant="secondary" className="text-xs flex-shrink-0">
-                      {business.category.slug && categoryTranslations[business.category.slug] ? categoryTranslations[business.category.slug][locale] : business.category.name}
-                    </Badge>
-                  )}
-                </div>
-                {business.description && (
-                  <p className="text-sm text-muted-foreground line-clamp-2 mb-2">
-                    {business.description}
-                  </p>
-                )}
-              </div>
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-3 text-sm text-muted-foreground">
-                  {business.city && (
-                    <span className="flex items-center gap-1">
-                      <MapPin className="h-3.5 w-3.5" />
-                      {business.city}
-                    </span>
-                  )}
+            {business.description && (
+              <p className="text-sm text-muted-foreground line-clamp-2 mt-1 leading-relaxed">
+                {business.description}
+              </p>
+            )}
+
+            <div className="mt-auto pt-3 flex items-center justify-between gap-2 flex-wrap">
+              <div className="flex items-center gap-3 text-xs text-muted-foreground">
+                {business.city && (
                   <span className="flex items-center gap-1">
-                    <Eye className="h-3.5 w-3.5" />
-                    {business.views}
+                    <MapPin className="h-3.5 w-3.5" />
+                    {business.city}
                   </span>
-                </div>
-                <RatingStars
-                  rating={business.avgRating || 0}
-                  reviewCount={business._count?.reviews}
-                  size="sm"
-                />
+                )}
+                <span className="flex items-center gap-1">
+                  <Eye className="h-3.5 w-3.5" />
+                  {business.views}
+                </span>
               </div>
+              <RatingStars
+                rating={business.avgRating || 0}
+                reviewCount={business._count?.reviews}
+                size="sm"
+              />
             </div>
           </div>
-        </Link>
-      </Card>
+        </article>
+      </Link>
     );
   }
 
-  // Grid variant — square card with image top, content bottom
+  /* ============ VARIANTE GRILLE ============ */
   return (
-    <Link href={`/entreprise/${business.slug}`} className="group block">
-      <Card className="overflow-hidden hover:shadow-xl transition-all duration-300 border border-border/50 hover:border-border bg-white">
-        {/* Image area — square */}
-        <div className="relative overflow-hidden">
+    <Link href={`/entreprise/${business.slug}`} className="group block h-full">
+      <article className="h-full flex flex-col bg-white dark:bg-card rounded-2xl border border-border/50 overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+        {/* Image 4:3 */}
+        <div className="relative aspect-[4/3] overflow-hidden bg-muted">
           {business.coverImage ? (
-            <CoverImage src={business.coverImage} alt={business.name} className="aspect-square" />
+            <CoverImage src={business.coverImage} alt={business.name} className="absolute inset-0 w-full h-full" />
           ) : (
-            <div className="aspect-square bg-muted flex items-center justify-center">
-              <Building2 className="h-16 w-16 text-muted-foreground/15" />
+            <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-muted to-accent/40">
+              <Building2 className="h-14 w-14 text-muted-foreground/20" />
             </div>
           )}
-          {/* Category badge — top left */}
-          {business.category && (
-            <div className="absolute top-2.5 left-2.5">
-              <Badge className="bg-white/90 text-foreground backdrop-blur-sm border-0 text-[11px] font-medium shadow-sm">
-                {business.category.slug && categoryTranslations[business.category.slug] ? categoryTranslations[business.category.slug][locale] : business.category.name}
-              </Badge>
-            </div>
+          {/* Voile bas pour la lisibilité */}
+          <div className="absolute inset-x-0 bottom-0 h-14 bg-gradient-to-t from-black/35 to-transparent pointer-events-none" />
+
+          {/* Catégorie — pastille en haut à gauche */}
+          {categoryLabel && (
+            <span className="absolute top-3 left-3 inline-flex items-center gap-1.5 bg-white/95 dark:bg-card/95 backdrop-blur-sm text-[11px] font-semibold text-foreground px-2.5 py-1 rounded-full shadow-sm">
+              <span className="h-1.5 w-1.5 rounded-full bg-pebiss-orange" />
+              {categoryLabel}
+            </span>
           )}
-          {/* Views + favorite — top right */}
-          <div className="absolute top-2.5 right-2.5 flex items-center gap-1.5">
-            <span className="flex items-center gap-1 bg-black/40 backdrop-blur-sm text-white text-[10px] px-2 py-1 rounded-full">
-              <Eye className="h-2.5 w-2.5" />
+
+          {/* Vues + favori — en haut à droite */}
+          <div className="absolute top-3 right-3 flex items-center gap-1.5">
+            <span className="flex items-center gap-1 bg-black/45 backdrop-blur-sm text-white text-[10px] font-medium px-2 py-1 rounded-full">
+              <Eye className="h-3 w-3" />
               {business.views}
             </span>
-            <span className="flex items-center justify-center h-7 w-7 rounded-full bg-white/20 backdrop-blur-sm text-white hover:bg-white/40 transition-colors">
+            <span className="flex h-7 w-7 items-center justify-center rounded-full bg-white/95 dark:bg-card/95 text-muted-foreground shadow-sm hover:text-destructive transition-colors cursor-pointer">
               <Heart className="h-3.5 w-3.5" />
             </span>
           </div>
         </div>
 
-        {/* Content area */}
-        <div className="p-3 flex flex-col gap-1.5">
-          {/* Business name */}
-          <h3 className="font-semibold text-foreground text-sm leading-snug group-hover:text-primary transition-colors line-clamp-1">
+        {/* Contenu avec logo chevauchant */}
+        <div className="relative flex-1 flex flex-col p-4">
+          {business.logo ? (
+            <img
+              src={business.logo}
+              alt=""
+              className="h-12 w-12 rounded-xl object-cover ring-2 ring-white dark:ring-card shadow-md -mt-9 mb-2.5 bg-white relative z-10"
+            />
+          ) : (
+            <span className="h-12 w-12 rounded-xl bg-pebiss-blue/10 text-pebiss-blue flex items-center justify-center ring-2 ring-white dark:ring-card shadow-md -mt-9 mb-2.5 relative z-10">
+              <Building2 className="h-5 w-5" />
+            </span>
+          )}
+
+          <h3 className="font-bold text-[15px] text-foreground leading-snug group-hover:text-pebiss-orange transition-colors line-clamp-1">
             {business.name}
           </h3>
-          {/* Description */}
+
           {business.description && (
-            <p className="text-xs text-muted-foreground leading-relaxed line-clamp-1">
+            <p className="text-xs text-muted-foreground leading-relaxed line-clamp-2 mt-1">
               {business.description}
             </p>
           )}
-          {/* City + Rating row */}
-          <div className="flex items-center justify-between mt-auto">
+
+          {/* Pied : ville + note */}
+          <div className="mt-auto pt-3 flex items-center justify-between gap-2">
             {business.city && (
-              <span className="flex items-center gap-1 text-xs text-muted-foreground">
-                <MapPin className="h-3 w-3" />
-                {business.city}
+              <span className="flex items-center gap-1 text-xs text-muted-foreground truncate min-w-0">
+                <MapPin className="h-3 w-3 shrink-0" />
+                <span className="truncate">{business.city}</span>
               </span>
             )}
             <RatingStars
@@ -201,8 +233,14 @@ export function BusinessCard({ business, variant = 'grid' }: BusinessCardProps) 
               size="sm"
             />
           </div>
+
+          {/* CTA révélé au survol (desktop) — espace réservé pour aligner les cartes */}
+          <div className="hidden sm:flex items-center justify-center gap-1.5 mt-3 h-8 rounded-xl bg-pebiss-orange/10 text-pebiss-orange text-xs font-semibold opacity-0 -translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
+            {locale === 'pt' ? 'Ver a ficha' : 'Voir la fiche'}
+            <ArrowRight className="h-3.5 w-3.5" />
+          </div>
         </div>
-      </Card>
+      </article>
     </Link>
   );
 }
