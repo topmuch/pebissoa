@@ -332,52 +332,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ============ RUBRIQUES — raccourcis vers les annonces (Bons plans / Restos / Hôtels / Shoppings) ============ */}
-      <section className="pt-10 md:pt-14 pb-2">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-5">
-            {RUBRIQUES.map((rubrique) => {
-              const RubriqueIcon = rubrique.icon;
-              const count = categories
-                ? rubrique.categories.length > 0
-                  ? rubrique.categories.reduce((sum, slug) => sum + (categories.find((c) => c.slug === slug)?._count.businesses ?? 0), 0)
-                  : categories.reduce((sum, c) => sum + c._count.businesses, 0)
-                : null;
-              return (
-                <Link
-                  key={rubrique.key}
-                  href={rubrique.href}
-                  className={`group relative overflow-hidden rounded-2xl bg-gradient-to-br ${rubrique.gradient} p-4 md:p-7 shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1`}
-                >
-                  {/* Cercle décoratif */}
-                  <div className="absolute -right-6 -top-6 w-24 h-24 md:w-28 md:h-28 rounded-full bg-white/10 group-hover:scale-125 transition-transform duration-500" />
-                  <div className="relative">
-                    <div className="w-11 h-11 md:w-14 md:h-14 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center mb-3 md:mb-4 group-hover:scale-110 transition-transform duration-300">
-                      <RubriqueIcon className="h-5 w-5 md:h-7 md:w-7 text-white" />
-                    </div>
-                    <h3 className="text-white font-bold text-base md:text-xl leading-tight">
-                      {rubrique.labels[locale]}
-                    </h3>
-                    <p className="text-white/75 text-[11px] md:text-xs mt-0.5 md:mt-1">
-                      {rubrique.subtitles[locale]}
-                    </p>
-                    <div className="flex items-center justify-between mt-3 md:mt-5">
-                      <span className="text-white/90 text-[11px] md:text-xs font-medium">
-                        {count !== null ? `${count} ${t(count > 1 ? 'cat_annonces' : 'cat_annonce')}` : '…'}
-                      </span>
-                      <span className="inline-flex items-center gap-1 bg-white/20 group-hover:bg-white text-white group-hover:text-gray-900 text-[10px] md:text-xs font-bold px-2.5 md:px-3 py-1 md:py-1.5 rounded-full transition-colors">
-                        {locale === 'pt' ? 'Ver' : 'Explorer'}
-                        <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-0.5" />
-                      </span>
-                    </div>
-                  </div>
-                </Link>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
       {/* ============ CATEGORIES SECTION — Auto-Slide Multicolor Gradient Squares ============ */}
       <section className="pb-12 md:pb-16 overflow-hidden">
         <div className="container mx-auto px-4">
@@ -442,6 +396,66 @@ export default function HomePage() {
 
       {/* ============ BANNIÈRES SPONSORISÉES — publiées depuis l'admin (Annonces) ============ */}
       <HomepageSponsoredGrid />
+
+      {/* ============ RUBRIQUES — grands carrés avec images réelles (sous les bannières pub) ============ */}
+      <section className="py-12 md:py-16">
+        <div className="container mx-auto px-4">
+          <div className="mb-6 md:mb-8">
+            <h2 className="text-xl md:text-2xl font-semibold text-foreground">
+              {locale === 'pt' ? 'Nossas rubricas' : 'Nos rubriques'}
+            </h2>
+            <p className="text-sm text-muted-foreground mt-1">
+              {locale === 'pt'
+                ? 'Boas ofertas, restaurantes, hotéis e compras — clique para ver os anúncios'
+                : 'Bons plans, restos, hôtels et shoppings — cliquez pour voir les annonces'}
+            </p>
+          </div>
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-5">
+            {RUBRIQUES.map((rubrique) => {
+              const count = categories
+                ? rubrique.categories.length > 0
+                  ? rubrique.categories.reduce((sum, slug) => sum + (categories.find((c) => c.slug === slug)?._count.businesses ?? 0), 0)
+                  : categories.reduce((sum, c) => sum + c._count.businesses, 0)
+                : null;
+              return (
+                <Link
+                  key={rubrique.key}
+                  href={rubrique.href}
+                  aria-label={`${rubrique.labels[locale]} — ${rubrique.subtitles[locale]}`}
+                  className={`group relative block aspect-square overflow-hidden rounded-2xl bg-gradient-to-br ${rubrique.gradient} shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1`}
+                >
+                  {/* Image réelle */}
+                  <img
+                    src={rubrique.image}
+                    alt={`${rubrique.labels[locale]} — ${rubrique.subtitles[locale]}`}
+                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    loading="lazy"
+                  />
+                  {/* Voile dégradé pour la lisibilité */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-black/10 transition-colors group-hover:from-black/90" />
+                  {/* Compteur d'annonces */}
+                  <span className="absolute top-2.5 right-2.5 md:top-3 md:right-3 bg-white/90 backdrop-blur-sm text-gray-900 text-[10px] md:text-xs font-bold px-2 md:px-2.5 py-0.5 md:py-1 rounded-full shadow-sm">
+                    {count !== null ? `${count} ${t(count > 1 ? 'cat_annonces' : 'cat_annonce')}` : '…'}
+                  </span>
+                  {/* Titre + CTA */}
+                  <div className="absolute bottom-0 left-0 right-0 p-3 md:p-5">
+                    <h3 className="text-white font-extrabold text-lg md:text-2xl leading-tight drop-shadow-md">
+                      {rubrique.labels[locale]}
+                    </h3>
+                    <p className="text-white/80 text-[10px] md:text-sm mt-0.5 md:mt-1">
+                      {rubrique.subtitles[locale]}
+                    </p>
+                    <span className="inline-flex items-center gap-1 mt-2 md:mt-3 bg-white text-gray-900 text-[10px] md:text-xs font-bold px-2.5 md:px-3.5 py-1 md:py-1.5 rounded-full transition-colors group-hover:bg-primary group-hover:text-white">
+                      {locale === 'pt' ? 'Ver' : 'Explorer'}
+                      <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-0.5" />
+                    </span>
+                  </div>
+                </Link>
+              );
+            })}
+          </div>
+        </div>
+      </section>
 
       {/* ============ ABOUT / EXPERIENCE SECTION ============ */}
       <section className="py-16 md:py-20">

@@ -12,7 +12,9 @@ export interface Rubrique {
   /** Slugs de catégories regroupés — vide = toutes les annonces */
   categories: string[];
   icon: LucideIcon;
-  /** Classes gradient Tailwind (bg-gradient-to-br ...) */
+  /** Image réelle affichée sur la grande carte carrée (dans /public) */
+  image: string;
+  /** Classes gradient Tailwind (fallback de fond sous l'image) */
   gradient: string;
   /** URL de destination */
   href: string;
@@ -25,6 +27,7 @@ export const RUBRIQUES: Rubrique[] = [
     subtitles: { fr: 'Toutes les bonnes affaires', pt: 'Todos os bons negócios' },
     categories: [],
     icon: Flame,
+    image: '/rubriques/bons-plans.jpg',
     gradient: 'from-red-500 via-orange-500 to-amber-500',
     href: '/annuaire',
   },
@@ -34,6 +37,7 @@ export const RUBRIQUES: Rubrique[] = [
     subtitles: { fr: 'Restaurants & alimentation', pt: 'Restaurantes & alimentação' },
     categories: ['restaurants', 'restaurants-alimentation'],
     icon: UtensilsCrossed,
+    image: '/rubriques/restos.jpg',
     gradient: 'from-amber-500 via-orange-500 to-orange-600',
     href: '/annuaire?category=restaurants,restaurants-alimentation',
   },
@@ -43,6 +47,7 @@ export const RUBRIQUES: Rubrique[] = [
     subtitles: { fr: 'Hôtels & tourisme', pt: 'Hotéis & turismo' },
     categories: ['hotels', 'tourisme-hotellerie', 'tourisme'],
     icon: BedDouble,
+    image: '/rubriques/hotels.jpg',
     gradient: 'from-teal-500 via-emerald-500 to-green-600',
     href: '/annuaire?category=hotels,tourisme-hotellerie,tourisme',
   },
@@ -52,6 +57,7 @@ export const RUBRIQUES: Rubrique[] = [
     subtitles: { fr: 'Mode & boutiques', pt: 'Moda & lojas' },
     categories: ['mode-textile', 'mode-accessoires', 'commerce-distribution', 'electroniques'],
     icon: ShoppingBag,
+    image: '/rubriques/shoppings.jpg',
     gradient: 'from-fuchsia-500 via-pink-500 to-rose-500',
     href: '/annuaire?category=mode-textile,mode-accessoires,commerce-distribution,electroniques',
   },
