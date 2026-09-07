@@ -6,6 +6,7 @@ import { useQuery } from '@tanstack/react-query';
 import { Button } from '@/components/ui/button';
 import { useTranslation, categoryTranslations } from '@/lib/i18n';
 import { RUBRIQUES } from '@/lib/rubriques';
+import { SocialIconsRow } from '@/components/shared/social-icons';
 import { PromoDuoBanners, HomepageFooterBanner } from '@/components/shared/banner-placement';
 import {
   Search,
@@ -190,11 +191,11 @@ export default function HomePage() {
   return (
     <div className="bg-[#F6F6F6] dark:bg-[#0F0F1A]">
       {/* ============ HERO SECTION — Full-Width Banner ============ */}
-      <section className="relative w-full min-h-[520px] md:min-h-0 md:aspect-[1842/652] lg:aspect-[1842/652]">
+      <section className="relative w-full min-h-[680px] md:min-h-0 md:aspect-[1842/652] lg:aspect-[1842/652]">
         {/* Background Image */}
         <img
-          src="/hero-banner.png"
-          alt="Pebiss - Annuaire d'entreprises en Guiné-Bissau"
+          src="/hero-banner.jpg"
+          alt="Équipe d'entrepreneurs africains se serrant la main — Pebiss, annuaire d'entreprises en Guinée-Bissau"
           className="absolute inset-0 w-full h-full object-cover"
           loading="eager"
         />
@@ -287,6 +288,14 @@ export default function HomePage() {
                   </Link>
                 );
               })}
+            </div>
+
+            {/* Réseaux sociaux — gros icônes ronds */}
+            <div className="mt-5 sm:mt-6 flex flex-col items-center gap-2.5">
+              <span className="text-white/50 text-[10px] sm:text-xs font-semibold uppercase tracking-[0.2em]">
+                {locale === 'pt' ? 'Siga-nos' : 'Suivez-nous'}
+              </span>
+              <SocialIconsRow />
             </div>
           </div>
         </div>
