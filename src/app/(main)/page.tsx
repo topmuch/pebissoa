@@ -8,6 +8,7 @@ import { useTranslation, categoryTranslations } from '@/lib/i18n';
 import { RUBRIQUES } from '@/lib/rubriques';
 import { SocialIconsRow } from '@/components/shared/social-icons';
 import { PromoDuoBanners, HomepageFooterBanner } from '@/components/shared/banner-placement';
+import { ProAdvantages } from '@/components/shared/pro-advantages';
 import {
   Search,
   MapPin,
@@ -498,6 +499,10 @@ export default function HomePage() {
 
       {/* ============ BANNER 728x90 Avant Footer ============ */}
       <HomepageFooterBanner />
+
+      {/* ============ POURQUOI PEBISSOA — 4 cartes avantages (juste avant le footer) ============ */}
+      <ProAdvantages />
+
       {/* ============ FLOATING WHATSAPP BUTTON ============ */}
       <a
         href="https://wa.me/245956007371"
