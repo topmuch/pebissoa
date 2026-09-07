@@ -4,11 +4,9 @@ import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { useQuery } from '@tanstack/react-query';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
-import { BusinessCard } from '@/components/shared/business-card';
-import { BusinessCardSkeleton } from '@/components/shared/business-card-skeleton';
 import { useTranslation, categoryTranslations } from '@/lib/i18n';
+import { RUBRIQUES } from '@/lib/rubriques';
 import { PromoDuoBanners, HomepageSponsoredGrid, HomepageFooterBanner } from '@/components/shared/banner-placement';
 import {
   Search,
@@ -162,6 +160,7 @@ export default function HomePage() {
     queryFn: () => fetch('/api/categories').then((r) => r.json()),
   });
 
+  // Requête conservée uniquement pour alimenter les statistiques animées (villes, avis)
   const { data: businessesData } = useQuery<{ businesses: Business[] }>({
     queryKey: ['businesses-featured'],
     queryFn: () => fetch('/api/businesses?limit=8&sortBy=createdAt&sortOrder=desc').then((r) => r.json()),
@@ -333,6 +332,52 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ============ RUBRIQUES — raccourcis vers les annonces (Bons plans / Restos / Hôtels / Shoppings) ============ */}
+      <section className="pt-10 md:pt-14 pb-2">
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-5">
+            {RUBRIQUES.map((rubrique) => {
+              const RubriqueIcon = rubrique.icon;
+              const count = categories
+                ? rubrique.categories.length > 0
+                  ? rubrique.categories.reduce((sum, slug) => sum + (categories.find((c) => c.slug === slug)?._count.businesses ?? 0), 0)
+                  : categories.reduce((sum, c) => sum + c._count.businesses, 0)
+                : null;
+              return (
+                <Link
+                  key={rubrique.key}
+                  href={rubrique.href}
+                  className={`group relative overflow-hidden rounded-2xl bg-gradient-to-br ${rubrique.gradient} p-4 md:p-7 shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1`}
+                >
+                  {/* Cercle décoratif */}
+                  <div className="absolute -right-6 -top-6 w-24 h-24 md:w-28 md:h-28 rounded-full bg-white/10 group-hover:scale-125 transition-transform duration-500" />
+                  <div className="relative">
+                    <div className="w-11 h-11 md:w-14 md:h-14 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center mb-3 md:mb-4 group-hover:scale-110 transition-transform duration-300">
+                      <RubriqueIcon className="h-5 w-5 md:h-7 md:w-7 text-white" />
+                    </div>
+                    <h3 className="text-white font-bold text-base md:text-xl leading-tight">
+                      {rubrique.labels[locale]}
+                    </h3>
+                    <p className="text-white/75 text-[11px] md:text-xs mt-0.5 md:mt-1">
+                      {rubrique.subtitles[locale]}
+                    </p>
+                    <div className="flex items-center justify-between mt-3 md:mt-5">
+                      <span className="text-white/90 text-[11px] md:text-xs font-medium">
+                        {count !== null ? `${count} ${t(count > 1 ? 'cat_annonces' : 'cat_annonce')}` : '…'}
+                      </span>
+                      <span className="inline-flex items-center gap-1 bg-white/20 group-hover:bg-white text-white group-hover:text-gray-900 text-[10px] md:text-xs font-bold px-2.5 md:px-3 py-1 md:py-1.5 rounded-full transition-colors">
+                        {locale === 'pt' ? 'Ver' : 'Explorer'}
+                        <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-0.5" />
+                      </span>
+                    </div>
+                  </div>
+                </Link>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
       {/* ============ CATEGORIES SECTION — Auto-Slide Multicolor Gradient Squares ============ */}
       <section className="pb-12 md:pb-16 overflow-hidden">
         <div className="container mx-auto px-4">
@@ -397,80 +442,6 @@ export default function HomePage() {
 
       {/* ============ BANNIÈRES SPONSORISÉES — publiées depuis l'admin (Annonces) ============ */}
       <HomepageSponsoredGrid />
-
-      {/* ============ CURRENT LISTINGS ============ */}
-      <section className="py-12 md:py-16">
-        <div className="container mx-auto px-4">
-          <div className="flex items-center justify-between mb-8">
-            <div>
-              <h2 className="text-xl md:text-2xl font-semibold text-foreground">
-                {t('recent_ads')}
-              </h2>
-              <p className="text-sm text-muted-foreground mt-1">
-                {t('recent_ads_desc')}
-              </p>
-            </div>
-            <Link href="/annuaire" className="hidden sm:flex items-center gap-1 text-sm font-medium text-primary hover:text-pebiss-blue transition-colors">
-              {t('see_all')} <ArrowRight className="h-4 w-4" />
-            </Link>
-          </div>
-
-          {/* Listing promo cards data */}
-          {(() => {
-            if (!businessesData) {
-              return (
-                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-                  {Array.from({ length: 8 }, (_, i) => (
-                    <BusinessCardSkeleton key={i} />
-                  ))}
-                </div>
-              );
-            }
-
-            if (businesses.length === 0) {
-              return (
-                <Card className="border-border">
-                  <CardContent className="p-12 text-center">
-                    <Building2 className="h-10 w-10 text-muted-foreground/30 mx-auto mb-4" />
-                    <h3 className="text-lg font-medium text-foreground mb-2">
-                      {t('no_ads')}
-                    </h3>
-                    <p className="text-sm text-muted-foreground mb-6">
-                      {t('no_ads_desc')}
-                    </p>
-                    <Link href="/register">
-                      <Button className="bg-primary hover:bg-primary/90 text-white text-sm">
-                        <UserPlus className="h-4 w-4 mr-2" />
-                        {t('register_business')}
-                      </Button>
-                    </Link>
-                  </CardContent>
-                </Card>
-              );
-            }
-
-            const biz = businesses.slice(0, 8);
-
-            return (
-              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-                {biz.map((business) => (
-                  <BusinessCard key={business.id} business={business} variant="grid" />
-                ))}
-              </div>
-            );
-          })()}
-
-          <div className="mt-6 text-center sm:hidden">
-            <Link href="/annuaire">
-              <Button variant="outline" className="text-sm text-primary">
-                {t('see_all_ads')} <ChevronRight className="h-4 w-4 ml-1" />
-              </Button>
-            </Link>
-          </div>
-        </div>
-      </section>
-
-
 
       {/* ============ ABOUT / EXPERIENCE SECTION ============ */}
       <section className="py-16 md:py-20">

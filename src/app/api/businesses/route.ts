@@ -45,7 +45,13 @@ export async function GET(request: NextRequest) {
     }
 
     if (category) {
-      where.category = { slug: category };
+      // Support multi-catégories : slugs joints par des virgules (rubriques d'accueil)
+      const slugs = category.split(',').map((s) => s.trim()).filter(Boolean);
+      if (slugs.length === 1) {
+        where.category = { slug: slugs[0] };
+      } else if (slugs.length > 1) {
+        where.category = { slug: { in: slugs } };
+      }
     }
 
     if (city) {

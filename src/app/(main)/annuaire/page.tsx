@@ -10,10 +10,13 @@ import { Badge } from '@/components/ui/badge';
 import {
   Select,
   SelectContent,
+  SelectGroup,
   SelectItem,
+  SelectLabel,
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import { RUBRIQUES, findRubriqueByCategory } from '@/lib/rubriques';
 import { Skeleton } from '@/components/ui/skeleton';
 import { BusinessCard } from '@/components/shared/business-card';
 import { BusinessCardSkeleton } from '@/components/shared/business-card-skeleton';
@@ -164,6 +167,17 @@ function AnnuaireContent() {
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="all">{t('annuaire_all_categories')}</SelectItem>
+                    {/* Rubriques d'accueil — regroupent plusieurs catégories */}
+                    <SelectGroup>
+                      <SelectLabel className="text-xs font-semibold text-muted-foreground">
+                        {locale === 'pt' ? 'Rubricas' : 'Rubriques'}
+                      </SelectLabel>
+                      {RUBRIQUES.filter((r) => r.categories.length > 0).map((r) => (
+                        <SelectItem key={r.key} value={r.categories.join(',')}>
+                          {r.labels[locale]}
+                        </SelectItem>
+                      ))}
+                    </SelectGroup>
                     {categories?.map((cat) => (
                       <SelectItem key={cat.id} value={cat.slug}>
                         {cat.slug && categoryTranslations[cat.slug] ? categoryTranslations[cat.slug][locale] : cat.name}
@@ -221,9 +235,12 @@ function AnnuaireContent() {
             )}
             {category && (
               <Badge variant="secondary" className="gap-1">
-                {categories?.find((c) => c.slug === category) && (() => {
-                  const cat = categories.find((c) => c.slug === category);
-                  return cat?.slug && categoryTranslations[cat.slug] ? categoryTranslations[cat.slug][locale] : cat?.name;
+                {(() => {
+                  // Rubrique multi-catégories (ex: Restos, Hôtels, Shoppings)
+                  const rubrique = findRubriqueByCategory(category);
+                  if (rubrique) return rubrique.labels[locale];
+                  const cat = categories?.find((c) => c.slug === category);
+                  return cat?.slug && categoryTranslations[cat.slug] ? categoryTranslations[cat.slug][locale] : cat?.name ?? category;
                 })()}
                 <button onClick={() => setCategory('')}>
                   <X className="h-3 w-3" />
