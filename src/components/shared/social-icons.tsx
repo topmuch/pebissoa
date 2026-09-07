@@ -17,11 +17,19 @@ const SOCIAL_SVGS: Record<string, string> = {
 };
 
 const SOCIALS = [
-  { key: 'facebook', label: 'Facebook', hoverClass: 'hover:bg-[#1877F2] hover:border-[#1877F2]' },
-  { key: 'instagram', label: 'Instagram', hoverClass: 'hover:bg-[#DD2A7B] hover:border-[#DD2A7B]' },
-  { key: 'tiktok', label: 'TikTok', hoverClass: 'hover:bg-black hover:border-black' },
-  { key: 'linkedin', label: 'LinkedIn', hoverClass: 'hover:bg-[#0A66C2] hover:border-[#0A66C2]' },
-  { key: 'whatsapp', label: 'WhatsApp', hoverClass: 'hover:bg-[#25D366] hover:border-[#25D366]' },
+  { key: 'facebook', label: 'Facebook', brandClass: 'bg-[#1877F2] border-transparent', brandStyle: undefined as React.CSSProperties | undefined },
+  {
+    key: 'instagram',
+    label: 'Instagram',
+    brandClass: 'border-transparent',
+    // Dégradé officiel Instagram (jaune → orange → rose → violet → bleu)
+    brandStyle: {
+      background: 'radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%)',
+    } as React.CSSProperties | undefined,
+  },
+  { key: 'tiktok', label: 'TikTok', brandClass: 'bg-black border-transparent', brandStyle: undefined as React.CSSProperties | undefined },
+  { key: 'linkedin', label: 'LinkedIn', brandClass: 'bg-[#0A66C2] border-transparent', brandStyle: undefined as React.CSSProperties | undefined },
+  { key: 'whatsapp', label: 'WhatsApp', brandClass: 'bg-[#25D366] border-transparent', brandStyle: undefined as React.CSSProperties | undefined },
 ];
 
 // Numéro WhatsApp par défaut (identique au bouton flottant)
@@ -64,7 +72,8 @@ export function SocialIconsRow() {
             rel={isExternal ? 'noopener noreferrer' : undefined}
             aria-label={social.label}
             title={social.label}
-            className={`w-11 h-11 md:w-12 md:h-12 rounded-full bg-white/10 border border-white/25 backdrop-blur-sm flex items-center justify-center text-white shadow-md transition-all duration-300 hover:scale-110 hover:border-transparent hover:shadow-lg ${social.hoverClass}`}
+            className={`w-11 h-11 md:w-12 md:h-12 rounded-full border flex items-center justify-center text-white shadow-md transition-all duration-300 hover:scale-110 hover:shadow-lg hover:brightness-110 ${social.brandClass}`}
+            style={social.brandStyle}
           >
             <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5 md:w-6 md:h-6" aria-hidden="true">
               <path d={SOCIAL_SVGS[social.key]} />
