@@ -100,7 +100,7 @@ export function PromoDuoBanners() {
           {/* ============ Bannière gauche — Inscription entreprise ============ */}
           <a
             href="/register"
-            className="group relative block overflow-hidden rounded-xl h-44 sm:h-52 md:h-60"
+            className="group relative block overflow-hidden rounded-xl h-64 sm:h-72 md:h-80"
           >
             <img
               src="/banners/promo-business.jpg"
@@ -110,23 +110,23 @@ export function PromoDuoBanners() {
             />
             <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/45 to-transparent" />
 
-            <div className="absolute inset-0 p-4 sm:p-5 md:p-6 flex flex-col items-start">
-              <span className="bg-red-600 text-white font-extrabold text-xs sm:text-sm md:text-base px-2.5 py-1 leading-none inline-flex items-center gap-1 rounded-sm">
-                PEBISSOA <Sparkles className="h-3 w-3 md:h-3.5 md:w-3.5" />
+            <div className="absolute inset-0 p-5 sm:p-6 md:p-8 flex flex-col items-start">
+              <span className="bg-red-600 text-white font-extrabold text-xs sm:text-sm md:text-base px-3 py-1.5 leading-none inline-flex items-center gap-1 rounded-sm">
+                PEBISSOA <Sparkles className="h-3.5 w-3.5 md:h-4 md:w-4" />
               </span>
 
-              <p className="mt-2 sm:mt-3 text-white font-extrabold uppercase leading-tight text-base sm:text-lg md:text-2xl drop-shadow-md max-w-[75%]">
+              <p className="mt-3 sm:mt-4 text-white font-extrabold uppercase leading-tight text-lg sm:text-2xl md:text-3xl drop-shadow-md max-w-[75%]">
                 Référencez votre entreprise{' '}
                 <span className="text-yellow-400">100% gratuitement</span>
               </p>
 
-              <span className="mt-3 sm:mt-auto inline-flex items-center gap-2 bg-white text-gray-900 text-[11px] sm:text-xs md:text-sm font-bold px-3.5 sm:px-4 py-2 rounded-full group-hover:bg-gray-100 transition-colors">
+              <span className="mt-4 sm:mt-auto inline-flex items-center gap-2 bg-white text-gray-900 text-xs sm:text-sm md:text-base font-bold px-4 sm:px-5 py-2.5 rounded-full group-hover:bg-gray-100 transition-colors">
                 J&apos;INSCRIS MON ENTREPRISE
-                <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
+                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
               </span>
             </div>
 
-            <p className="absolute bottom-2 right-3 text-[9px] sm:text-[10px] text-white/70 hidden sm:block">
+            <p className="absolute bottom-3 right-4 text-[10px] sm:text-xs text-white/70 hidden sm:block">
               Visible par des milliers de visiteurs chaque mois
             </p>
           </a>
@@ -134,7 +134,7 @@ export function PromoDuoBanners() {
           {/* ============ Bannière droite — Professionnels / visibilité ============ */}
           <a
             href="/publicite"
-            className="group relative block overflow-hidden rounded-xl h-44 sm:h-52 md:h-60"
+            className="group relative block overflow-hidden rounded-xl h-64 sm:h-72 md:h-80"
           >
             <img
               src="/banners/pro-dark.jpg"
@@ -144,19 +144,19 @@ export function PromoDuoBanners() {
             />
             <div className="absolute inset-0 bg-black/55 group-hover:bg-black/45 transition-colors" />
 
-            <div className="absolute inset-0 p-4 sm:p-5 md:p-6 flex flex-col items-center text-center">
-              <p className="text-white font-extrabold text-sm sm:text-base md:text-xl leading-tight drop-shadow">
+            <div className="absolute inset-0 p-5 sm:p-6 md:p-8 flex flex-col items-center text-center">
+              <p className="text-white font-extrabold text-base sm:text-lg md:text-2xl leading-tight drop-shadow">
                 Professionnels,<br />donnez plus de visibilité<br className="hidden sm:block" /> à votre entreprise sur PebissOa
               </p>
 
-              <div className="mt-2 sm:mt-3 bg-white/95 rounded-md px-3 py-2 flex items-center gap-2 shadow-lg">
-                <Store className="h-4 w-4 md:h-5 md:w-5 text-orange-600 shrink-0" />
-                <p className="text-[10px] sm:text-xs text-gray-900 font-semibold leading-tight text-left">
+              <div className="mt-3 sm:mt-4 bg-white/95 rounded-md px-4 py-2.5 flex items-center gap-2.5 shadow-lg">
+                <Store className="h-5 w-5 md:h-6 md:w-6 text-orange-600 shrink-0" />
+                <p className="text-xs sm:text-sm text-gray-900 font-semibold leading-tight text-left">
                   Votre entreprise<br />s&apos;affiche en grand
                 </p>
               </div>
 
-              <span className="mt-auto inline-flex items-center gap-1.5 bg-blue-600 group-hover:bg-blue-700 text-white text-[11px] sm:text-xs md:text-sm font-bold px-3.5 sm:px-4 py-2 rounded-full transition-colors">
+              <span className="mt-auto inline-flex items-center gap-1.5 bg-blue-600 group-hover:bg-blue-700 text-white text-xs sm:text-sm md:text-base font-bold px-4 sm:px-5 py-2.5 rounded-full transition-colors">
                 Bénéficier de PebissOa +
               </span>
             </div>
