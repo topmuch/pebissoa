@@ -167,6 +167,26 @@ export function PromoDuoBanners() {
   );
 }
 
+// HomepageSponsoredGrid — bannières publiées depuis l'admin (Annonces)
+// Affiche les bannières actives « Accueil — Milieu » (home / 336x280) sous les catégories
+export function HomepageSponsoredGrid() {
+  const { data: banners } = useBanners('home', '336x280');
+
+  if (!banners || banners.length === 0) return null;
+
+  return (
+    <section className="pb-12 md:pb-16">
+      <div className="container mx-auto px-4">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+          {banners.map((banner) => (
+            <BannerCard key={banner.id} banner={banner} />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 // HomepageFooterBanner — 728x90 leaderboard before footer on homepage
 // Desktop: full width | Mobile: full width, scales down maintaining aspect ratio
 export function HomepageFooterBanner() {

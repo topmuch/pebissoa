@@ -1,82 +1,57 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { writeFile } from 'fs/promises';
-import { getUploadsDir } from '@/lib/uploads';
+import { writeFile, mkdir } from 'fs/promises';
 import { join, extname } from 'path';
 import { randomUUID } from 'crypto';
+import { getUploadsDir } from '@/lib/uploads';
 
-// Allowed file types
-const ALLOWED_EXTENSIONS = new Set([
-  'jpg', 'jpeg', 'png', 'gif', 'webp', 'pdf',
-]);
+const ALLOWED_EXTENSIONS = ['.jpg', '.jpeg', '.png', '.gif', '.webp', '.pdf'];
+const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10 MB
 
-// Max file size: 5MB
-const MAX_SIZE = 5 * 1024 * 1024;
-
-// Content type mapping for security
-const CONTENT_TYPES: Record<string, string> = {
-  jpg: 'image/jpeg',
-  jpeg: 'image/jpeg',
-  png: 'image/png',
-  gif: 'image/gif',
-  webp: 'image/webp',
-  pdf: 'application/pdf',
-};
-
+// POST /api/upload - Upload one or more files (multipart/form-data, field name: "files")
+// Returns { urls: string[], url: string } — urls[0] served via /api/uploads/<filename>
 export async function POST(request: NextRequest) {
   try {
     const formData = await request.formData();
-    const file = formData.get('file') as File | null;
+    const files = formData.getAll('files').filter((f): f is File => f instanceof File);
 
-    if (!file) {
-      return NextResponse.json({ error: 'No file provided' }, { status: 400 });
-    }
-
-    // Check file size
-    if (file.size > MAX_SIZE) {
+    if (files.length === 0) {
       return NextResponse.json(
-        { error: 'File too large (max 5MB)' },
+        { error: 'Aucun fichier reçu (champ attendu : "files")' },
         { status: 400 }
       );
     }
 
-    // Check file extension
-    const ext = extname(file.name).toLowerCase().replace('.', '');
-    if (!ext || !ALLOWED_EXTENSIONS.has(ext)) {
-      return NextResponse.json(
-        { error: `File type not allowed. Allowed: ${[...ALLOWED_EXTENSIONS].join(', ')}` },
-        { status: 400 }
-      );
-    }
-
-    // Validate content type matches extension
-    const expectedType = CONTENT_TYPES[ext];
-    if (expectedType && file.type && !file.type.startsWith(expectedType.split('/')[0])) {
-      return NextResponse.json(
-        { error: 'File content type does not match extension' },
-        { status: 400 }
-      );
-    }
-
-    // Generate unique filename
-    const uniqueName = `${randomUUID()}.${ext}`;
     const uploadsDir = getUploadsDir();
-    const filePath = join(uploadsDir, uniqueName);
+    await mkdir(uploadsDir, { recursive: true });
 
-    // Write file
-    const bytes = await file.arrayBuffer();
-    await writeFile(filePath, Buffer.from(bytes));
+    const urls: string[] = [];
 
-    // Return the URL path (not the filesystem path)
-    return NextResponse.json({
-      url: `/api/serve-image/${uniqueName}`,
-      filename: uniqueName,
-      originalName: file.name,
-      size: file.size,
-    });
+    for (const file of files) {
+      const ext = extname(file.name || '').toLowerCase() || '.jpg';
+      if (!ALLOWED_EXTENSIONS.includes(ext)) {
+        return NextResponse.json(
+          { error: `Type de fichier non autorisé : ${ext}` },
+          { status: 400 }
+        );
+      }
+      if (file.size > MAX_FILE_SIZE) {
+        return NextResponse.json(
+          { error: `Fichier trop volumineux (max 10 Mo) : ${file.name}` },
+          { status: 400 }
+        );
+      }
+
+      const buffer = Buffer.from(await file.arrayBuffer());
+      const filename = `${randomUUID()}${ext}`;
+      await writeFile(join(uploadsDir, filename), buffer);
+      urls.push(`/api/uploads/${filename}`);
+    }
+
+    return NextResponse.json({ url: urls[0], urls });
   } catch (error) {
-    console.error('[upload] Error uploading file:', error);
+    console.error('Error uploading files:', error);
     return NextResponse.json(
-      { error: 'Failed to upload file' },
+      { error: 'Erreur lors du téléchargement du fichier' },
       { status: 500 }
     );
   }

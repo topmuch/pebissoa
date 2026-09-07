@@ -154,7 +154,7 @@ export async function POST(request: NextRequest) {
     }
 
     // Validate format
-    const validFormats = ['728x90', '336x280', '300x600'];
+    const validFormats = ['728x90', '336x280', '300x600', 'detail_728x90'];
     if (format && !validFormats.includes(format)) {
       return NextResponse.json(
         { error: 'Format invalide' },
