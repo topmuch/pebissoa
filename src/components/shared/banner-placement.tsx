@@ -283,7 +283,7 @@ function PromoSlider() {
               </div>
             ) : (
               <div className="absolute inset-0 p-5 sm:p-6 md:p-8 flex flex-col items-start">
-                <span className="bg-red-600 text-white font-extrabold text-xs sm:text-sm md:text-base px-3 py-1.5 leading-none inline-flex items-center gap-1 rounded-sm">
+                <span className="bg-[#0066CC] text-white font-extrabold text-xs sm:text-sm md:text-base px-3 py-1.5 leading-none inline-flex items-center gap-1 rounded-sm">
                   PEBISS <Sparkles className="h-3.5 w-3.5 md:h-4 md:w-4" />
                 </span>
 
