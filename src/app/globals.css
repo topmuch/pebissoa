@@ -152,6 +152,15 @@
   background: #999999;
 }
 
+/* Masquer la scrollbar (carrousels horizontaux style PagesJaunes) */
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
 /* Pebiss specific styles */
 .pebiss-gradient {
   background: linear-gradient(135deg, #0099FF, #0066CC);

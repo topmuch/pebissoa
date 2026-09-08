@@ -1,16 +1,17 @@
 'use client';
 
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { useTranslation } from '@/lib/i18n';
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
+import { BANNER_FORMATS } from '@/components/shared/banner-placement';
 import {
   Megaphone,
-  ExternalLink,
   ImageOff,
+  ChevronRight,
+  RectangleHorizontal,
   LayoutGrid,
-  ArrowRight,
 } from 'lucide-react';
 
 interface Banner {
@@ -25,193 +26,85 @@ interface Banner {
   createdAt: string;
 }
 
-// Professional banner formats per IAB standards
-const BANNER_FORMATS: Record<string, { label: string; w: number; h: number; usage: string; isWide: boolean }> = {
-  '728x90': { label: '728 × 90', w: 728, h: 90, usage: 'Leaderboard (avant footer)', isWide: true },
-  '336x280': { label: '336 × 280', w: 336, h: 280, usage: 'Rectangle (accueil milieu)', isWide: false },
-  '300x600': { label: '300 × 600', w: 300, h: 600, usage: 'Sidebar (détail annonce)', isWide: false },
-};
+const CTA_TEAL = 'bg-[#35C1C1] group-hover:bg-[#28A9A9]';
 
-export default function AnnoncesPage() {
-  const { t, locale } = useTranslation();
-  const [activeFilter, setActiveFilter] = useState('all');
-
-  const { data: banners, isLoading } = useQuery<Banner[]>({
-    queryKey: ['banners-all'],
-    queryFn: () => fetch('/api/banners?position=all').then((r) => r.json()),
-  });
-
-  const filteredBanners = activeFilter === 'all'
-    ? (banners || [])
-    : (banners || []).filter((b) => b.format === activeFilter || (!b.format && activeFilter === '300x250'));
-
-  const formatTabs = [
-    { value: 'all', label: t('banners_filter_all') },
-    ...Object.entries(BANNER_FORMATS).map(([key, fmt]) => ({
-      value: key,
-      label: `${fmt.label}`,
-    })),
-  ];
-
-  const wideBanners = filteredBanners.filter((b) => b.format === '728x90');
-  const gridBanners = filteredBanners.filter((b) => b.format === '336x280' || b.format === '300x600');
-
+/* ============ En-tête de section (style PagesJaunes) ============ */
+function SectionHeader({
+  icon: Icon,
+  label,
+  count,
+  ctaLabel,
+  onCta,
+}: {
+  icon: typeof Megaphone;
+  label: string;
+  count: number;
+  ctaLabel?: string;
+  onCta?: () => void;
+}) {
   return (
-    <div className="min-h-[60vh]">
-      {/* Page Header — dégradé + cercles décoratifs */}
-      <div className="pebiss-gradient relative overflow-hidden">
-        <div className="absolute -top-24 -right-16 h-64 w-64 rounded-full bg-white/10 pointer-events-none" />
-        <div className="absolute -bottom-28 -left-10 h-72 w-72 rounded-full bg-white/5 pointer-events-none" />
-        <div className="absolute top-8 right-1/4 h-14 w-14 rounded-full bg-white/10 hidden md:block pointer-events-none" />
-        <div className="container mx-auto px-4 pt-12 pb-16 md:pt-16 md:pb-20 text-center relative">
-          <span className="inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-white/15 backdrop-blur-sm mb-4 shadow-inner">
-            <Megaphone className="h-7 w-7 text-white" />
-          </span>
-          <h1 className="text-3xl md:text-4xl font-extrabold text-white mb-2 drop-shadow-sm">
-            {t('banners_page_title')}
-          </h1>
-          <p className="text-white/85 text-base md:text-lg max-w-xl mx-auto">
-            {t('banners_page_subtitle')}
-          </p>
-        </div>
-      </div>
-
-      <div className="container mx-auto px-4 pb-10">
-        {/* Toolbar — pastilles de filtre + compteur */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mt-6 mb-6">
-          <div className="flex flex-wrap gap-2">
-            {formatTabs.map((tab) => (
-              <button
-                key={tab.value}
-                onClick={() => setActiveFilter(tab.value)}
-                aria-pressed={activeFilter === tab.value}
-                className={`h-9 px-4 rounded-full text-sm font-medium border transition-all duration-300 ${
-                  activeFilter === tab.value
-                    ? 'bg-pebiss-orange text-white border-pebiss-orange shadow-md'
-                    : 'bg-white dark:bg-card text-muted-foreground border-border hover:border-pebiss-orange/50 hover:text-foreground'
-                }`}
-              >
-                {tab.label}
-              </button>
-            ))}
-          </div>
-          <p className="text-sm text-muted-foreground font-medium">
-            {t('banners_count', { count: filteredBanners.length })}
-          </p>
-        </div>
-
-        {/* Loading State */}
-        {isLoading && (
-          <div className="space-y-6">
-            <Skeleton className="w-full h-28 sm:h-36 md:h-44 rounded-2xl" />
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
-              {Array.from({ length: 6 }, (_, i) => (
-                <div key={i} className="bg-white dark:bg-card rounded-2xl border border-border/50 overflow-hidden shadow-sm">
-                  <Skeleton className="w-full aspect-[6/5] rounded-none" />
-                  <div className="p-4 space-y-2.5">
-                    <Skeleton className="h-4 w-3/4" />
-                    <Skeleton className="h-3 w-full" />
-                    <div className="flex items-center justify-between pt-2">
-                      <Skeleton className="h-6 w-20 rounded-full" />
-                      <Skeleton className="h-8 w-24 rounded-full" />
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
+    <div className="flex items-center justify-between gap-3 mb-4">
+      <h2 className="flex items-center gap-2 text-lg md:text-xl font-bold text-foreground min-w-0">
+        <span className="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-amber-100 text-amber-700 shrink-0">
+          <Icon className="h-5 w-5" />
+        </span>
+        <span className="truncate">{label}</span>
+      </h2>
+      <div className="flex items-center gap-2 shrink-0">
+        {ctaLabel && onCta && (
+          <button
+            onClick={onCta}
+            className="hidden sm:inline-flex h-9 px-4 items-center rounded-full border border-gray-300 dark:border-border bg-white dark:bg-card text-[13px] font-semibold text-foreground hover:border-gray-900 dark:hover:border-foreground transition-colors whitespace-nowrap"
+          >
+            {ctaLabel}
+          </button>
         )}
-
-        {/* Empty State */}
-        {!isLoading && filteredBanners.length === 0 && (
-          <div className="rounded-2xl border-2 border-dashed border-border bg-white dark:bg-card py-16 px-6 text-center">
-            <span className="inline-flex h-20 w-20 items-center justify-center rounded-full bg-muted mb-5">
-              <Megaphone className="h-9 w-9 text-muted-foreground/40" />
-            </span>
-            <h3 className="text-xl font-semibold text-foreground mb-2">
-              {t('banners_no_results')}
-            </h3>
-            <p className="text-muted-foreground mb-6 max-w-md mx-auto">
-              {t('banners_no_results_desc')}
-            </p>
-            <a href="/publicite">
-              <Button className="bg-pebiss-orange hover:bg-pebiss-orange/90 text-white rounded-full h-10 px-6">
-                {locale === 'pt' ? 'Quero anunciar' : 'Je veux faire ma publicité'}
-                <ArrowRight className="h-4 w-4 ml-2" />
-              </Button>
-            </a>
-          </div>
-        )}
-
-        {/* Banners Display */}
-        {!isLoading && filteredBanners.length > 0 && (
-          <div className="space-y-8">
-            {/* Wide banners (header/banner formats) */}
-            {wideBanners.length > 0 && (
-              <div className="space-y-4">
-                {wideBanners.map((banner) => (
-                  <WideBannerCard key={banner.id} banner={banner} />
-                ))}
-              </div>
-            )}
-
-            {/* Grid banners (square/rectangle formats) */}
-            {gridBanners.length > 0 && (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6">
-                {gridBanners.map((banner) => (
-                  <GridBannerCard key={banner.id} banner={banner} />
-                ))}
-              </div>
-            )}
-          </div>
-        )}
+        <span className="inline-flex h-9 px-3.5 items-center rounded-full border border-gray-300 dark:border-border bg-white dark:bg-card text-[13px] font-semibold text-muted-foreground whitespace-nowrap">
+          {count}
+        </span>
       </div>
     </div>
   );
 }
 
-/* ============ Bannière large (728x90) — pleine largeur, overlay à gauche ============ */
-function WideBannerCard({ banner }: { banner: Banner }) {
-  const { t } = useTranslation();
+/* ============ Carte bannière large — style PagesJaunes horizontal ============ */
+function PjWideBannerCard({ banner }: { banner: Banner }) {
+  const { t, locale } = useTranslation();
   const fmt = BANNER_FORMATS[banner.format] || { label: banner.format, w: 728, h: 90, usage: '', isWide: true };
 
   const content = (
-    <div className="group relative overflow-hidden rounded-2xl border border-border/50 shadow-sm hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 bg-white dark:bg-card cursor-pointer">
-      <div className="relative h-28 sm:h-36 md:h-44 overflow-hidden bg-muted">
+    <div className="group flex flex-col sm:flex-row bg-white dark:bg-card rounded-lg border border-border/70 shadow-[0_1px_3px_rgba(0,0,0,0.05)] hover:shadow-lg transition-all duration-300 overflow-hidden cursor-pointer">
+      {/* Visuel — object-contain pour préserver l'intégrité de la publicité */}
+      <div className="sm:w-[52%] shrink-0 bg-muted relative flex items-center justify-center p-3 min-h-[120px]">
         {banner.image ? (
           <img
             src={banner.image}
             alt={banner.title}
-            className="absolute inset-0 w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-500"
+            loading="lazy"
+            className="max-h-28 sm:max-h-36 w-auto max-w-full object-contain transition-transform duration-500 group-hover:scale-[1.02]"
           />
         ) : (
-          <div className="absolute inset-0 bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center">
-            <ImageOff className="h-8 w-8 text-white/30" />
+          <div className="flex items-center justify-center w-full h-28 sm:h-32">
+            <ImageOff className="h-8 w-8 text-muted-foreground/30" />
           </div>
         )}
-        {/* Voile pour la lisibilité */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/30 to-transparent" />
+      </div>
 
-        {/* Texte */}
-        <div className="absolute inset-0 p-4 sm:p-6 flex flex-col items-start justify-center">
-          <span className="inline-flex items-center gap-1 bg-white/95 dark:bg-card/95 text-foreground text-[10px] font-bold px-2.5 py-1 rounded-full shadow-sm mb-2">
-            <LayoutGrid className="h-3 w-3" />
-            {fmt.label}
-          </span>
-          <h3 className="text-white font-extrabold text-lg sm:text-xl md:text-2xl leading-tight drop-shadow-md max-w-[75%]">
-            {banner.title}
-          </h3>
-          {banner.description && (
-            <p className="text-white/80 text-xs md:text-sm line-clamp-1 mt-1 max-w-[65%]">
-              {banner.description}
-            </p>
-          )}
-        </div>
-
-        {/* Flèche CTA à droite (desktop) */}
-        <span className="hidden md:flex absolute right-5 top-1/2 -translate-y-1/2 h-11 w-11 rounded-full bg-white text-pebiss-orange items-center justify-center shadow-lg group-hover:translate-x-1 group-hover:bg-pebiss-orange group-hover:text-white transition-all duration-300">
-          <ArrowRight className="h-5 w-5" />
+      {/* Corps */}
+      <div className="flex-1 flex flex-col gap-1.5 p-4">
+        <span className="self-start text-[11px] font-medium px-2 py-0.5 rounded bg-emerald-50 text-emerald-700 border border-emerald-100 dark:bg-emerald-500/10 dark:text-emerald-400 dark:border-emerald-500/20">
+          {fmt.label}
         </span>
+        <h3 className="font-bold text-sm text-foreground line-clamp-1">{banner.title}</h3>
+        {banner.description && (
+          <p className="text-xs text-muted-foreground line-clamp-2 leading-relaxed">{banner.description}</p>
+        )}
+        <div className="mt-auto pt-2">
+          <span className={`inline-flex items-center gap-1.5 ${CTA_TEAL} text-white text-[13px] font-bold px-6 py-2 rounded-full transition-colors`}>
+            {t('banners_view_details')}
+            <ChevronRight className="h-3.5 w-3.5" />
+          </span>
+        </div>
       </div>
     </div>
   );
@@ -226,67 +119,52 @@ function WideBannerCard({ banner }: { banner: Banner }) {
   return content;
 }
 
-/* ============ Bannière grille (336x280 / 300x600) — carte avec image + corps ============ */
-function GridBannerCard({ banner }: { banner: Banner }) {
+/* ============ Carte bannière carrée / verticale — style PagesJaunes vertical ============ */
+function PjGridBannerCard({ banner }: { banner: Banner }) {
   const { t, locale } = useTranslation();
-  const fmt = BANNER_FORMATS[banner.format] || { label: banner.format, w: 300, h: 250, usage: '', isWide: false };
+  const fmt = BANNER_FORMATS[banner.format] || { label: banner.format, w: 336, h: 280, usage: '', isWide: false };
   // Bannières hautes (300x600) : hauteur plafonnée pour ne pas écraser la grille
   const isTall = fmt.h / fmt.w >= 2;
 
   const content = (
-    <div className="group h-full flex flex-col bg-white dark:bg-card rounded-2xl border border-border/50 overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 cursor-pointer">
-      {/* Image au ratio du format */}
+    <div className="group h-full flex flex-col bg-white dark:bg-card rounded-lg border border-border/70 shadow-[0_1px_3px_rgba(0,0,0,0.05)] hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 overflow-hidden cursor-pointer">
+      {/* Visuel — object-contain pour préserver l'intégrité de la publicité */}
       <div
-        className="relative overflow-hidden bg-muted"
-        style={isTall ? { height: '400px' } : { aspectRatio: `${fmt.w} / ${fmt.h}` }}
+        className="relative bg-muted flex items-center justify-center p-3 overflow-hidden"
+        style={isTall ? { height: '380px' } : { aspectRatio: `${fmt.w} / ${fmt.h}` }}
       >
         {banner.image ? (
           <img
             src={banner.image}
             alt={banner.title}
-            className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+            loading="lazy"
+            className="absolute inset-0 w-full h-full object-contain p-2 transition-transform duration-500 group-hover:scale-[1.02]"
           />
         ) : (
-          <div className="absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-br from-muted to-accent/40">
-            <ImageOff className="h-9 w-9 text-muted-foreground/30 mb-2" />
+          <div className="flex flex-col items-center justify-center gap-2">
+            <ImageOff className="h-8 w-8 text-muted-foreground/30" />
             <span className="text-xs text-muted-foreground font-medium">{fmt.label}</span>
           </div>
         )}
-        {/* Voile bas */}
-        <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-black/40 to-transparent pointer-events-none" />
-        {/* Format — pastille en haut à gauche */}
-        <span className="absolute top-3 left-3 inline-flex items-center gap-1 bg-white/95 dark:bg-card/95 backdrop-blur-sm text-foreground text-[10px] font-bold px-2.5 py-1 rounded-full shadow-sm">
-          {fmt.label}
-        </span>
-        {/* Titre sur l'image */}
-        <h3 className="absolute bottom-3 left-3 right-3 text-white font-bold text-sm md:text-base leading-tight drop-shadow-md line-clamp-2">
-          {banner.title}
-        </h3>
       </div>
 
       {/* Corps */}
-      <div className="flex-1 flex flex-col p-4">
+      <div className="flex-1 flex flex-col gap-1.5 p-3.5">
+        <span className="self-start text-[11px] font-medium px-2 py-0.5 rounded bg-emerald-50 text-emerald-700 border border-emerald-100 dark:bg-emerald-500/10 dark:text-emerald-400 dark:border-emerald-500/20">
+          {fmt.label}
+        </span>
+        <h3 className="font-bold text-sm text-foreground line-clamp-1">{banner.title}</h3>
         {banner.description ? (
-          <p className="text-sm text-muted-foreground line-clamp-2 leading-relaxed">
-            {banner.description}
-          </p>
+          <p className="text-xs text-muted-foreground line-clamp-2 leading-relaxed">{banner.description}</p>
         ) : (
-          <p className="text-sm text-muted-foreground/60 italic">
+          <p className="text-xs text-muted-foreground/60 italic">
             {locale === 'pt' ? 'Anúncio patrocinado' : 'Annonce sponsorisée'}
           </p>
         )}
-
-        {/* Pied : usage + CTA */}
-        <div className="mt-auto pt-3 flex items-center justify-between gap-2">
-          <span className="text-[10px] text-muted-foreground/70 font-medium truncate">
-            {fmt.usage}
+        <div className="mt-auto pt-2.5">
+          <span className={`block w-full text-center ${CTA_TEAL} text-white text-[13px] font-bold py-2 rounded-full transition-colors`}>
+            {locale === 'pt' ? 'Ver o anúncio' : "Voir l'annonce"}
           </span>
-          {banner.link && (
-            <span className="inline-flex shrink-0 items-center gap-1.5 bg-pebiss-orange/10 text-pebiss-orange text-xs font-bold px-3.5 py-2 rounded-full group-hover:bg-pebiss-orange group-hover:text-white transition-all duration-300">
-              {t('banners_view_details')}
-              <ExternalLink className="h-3 w-3" />
-            </span>
-          )}
         </div>
       </div>
     </div>
@@ -300,4 +178,214 @@ function GridBannerCard({ banner }: { banner: Banner }) {
     );
   }
   return content;
+}
+
+export default function AnnoncesPage() {
+  const { t, locale } = useTranslation();
+  const [activeFilter, setActiveFilter] = useState('all');
+  const chipsRef = useRef<HTMLDivElement>(null);
+
+  const { data: banners, isLoading } = useQuery<Banner[]>({
+    queryKey: ['banners-all'],
+    queryFn: () => fetch('/api/banners?position=all').then((r) => r.json()),
+  });
+
+  const filteredBanners = activeFilter === 'all'
+    ? (banners || [])
+    : (banners || []).filter((b) => b.format === activeFilter);
+
+  const wideBanners = filteredBanners.filter((b) => (BANNER_FORMATS[b.format]?.isWide ?? b.format === '728x90'));
+  const gridBanners = filteredBanners.filter((b) => !(BANNER_FORMATS[b.format]?.isWide ?? b.format === '728x90'));
+
+  const allWide = (banners || []).filter((b) => (BANNER_FORMATS[b.format]?.isWide ?? b.format === '728x90'));
+  const allGrid = (banners || []).filter((b) => !(BANNER_FORMATS[b.format]?.isWide ?? b.format === '728x90'));
+
+  const formatTabs = [
+    { value: 'all', label: t('banners_filter_all') },
+    ...Object.entries(BANNER_FORMATS).map(([key, fmt]) => ({
+      value: key,
+      label: fmt.label,
+    })),
+  ];
+
+  return (
+    <div className="min-h-[60vh]">
+      {/* ============ Bandeau jaune — style PagesJaunes ============ */}
+      <div className="bg-[#FFC600]">
+        <div className="container mx-auto px-4 py-10 md:py-14 text-center">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold uppercase tracking-tight text-gray-900 leading-tight">
+            {locale === 'pt' ? (
+              <>
+                Boas{' '}
+                <span className="inline-block bg-gray-900 text-white px-3 md:px-4 py-0.5 -rotate-2 rounded-sm align-middle">
+                  Promoções
+                </span>{' '}
+                <span className="inline-block border-b-[5px] md:border-b-[7px] border-gray-900/80 leading-none">?</span>
+              </>
+            ) : (
+              <>
+                Des{' '}
+                <span className="inline-block bg-gray-900 text-white px-3 md:px-4 py-0.5 -rotate-2 rounded-sm align-middle">
+                  Bons plans
+                </span>{' '}
+                <span className="inline-block border-b-[5px] md:border-b-[7px] border-gray-900/80 leading-none">?</span>
+              </>
+            )}
+          </h1>
+        </div>
+      </div>
+
+      {/* ============ Sous-barre grise ============ */}
+      <div className="bg-gray-100 dark:bg-muted/50 border-b border-border/60">
+        <div className="container mx-auto px-4 py-3 flex items-center justify-between gap-3">
+          <p className="text-sm font-semibold text-gray-900 dark:text-foreground truncate">
+            {isLoading
+              ? '…'
+              : `${filteredBanners.length} ${locale === 'pt' ? 'anúncios ativos' : 'annonces actives'}`}
+          </p>
+          <a
+            href="/publicite"
+            className="shrink-0 h-8 px-3.5 rounded-full bg-white dark:bg-card border border-gray-300 dark:border-border text-[13px] font-medium text-gray-900 dark:text-foreground hover:border-gray-900 dark:hover:border-foreground transition-colors inline-flex items-center"
+          >
+            {locale === 'pt' ? 'Publicar a minha publicidade' : 'Publier ma publicité'}
+          </a>
+        </div>
+      </div>
+
+      <div className="container mx-auto px-4 pb-10">
+        {/* ============ Chips de formats — style PagesJaunes ============ */}
+        <div className="relative mt-5">
+          <div ref={chipsRef} className="flex gap-2 overflow-x-auto no-scrollbar scroll-smooth pb-1 sm:pr-9">
+            {formatTabs.map((tab) => (
+              <button
+                key={tab.value}
+                onClick={() => setActiveFilter(tab.value)}
+                aria-pressed={activeFilter === tab.value}
+                className={`h-9 px-4 rounded-full border text-[13px] font-medium whitespace-nowrap transition-all ${
+                  activeFilter === tab.value
+                    ? 'bg-gray-900 dark:bg-foreground text-white dark:text-background border-gray-900 dark:border-transparent'
+                    : 'bg-white dark:bg-card border-gray-300 dark:border-border text-gray-700 dark:text-muted-foreground hover:border-gray-900 dark:hover:border-foreground'
+                }`}
+              >
+                {tab.label}
+              </button>
+            ))}
+          </div>
+          <button
+            onClick={() => chipsRef.current?.scrollBy({ left: 320, behavior: 'smooth' })}
+            aria-label={locale === 'pt' ? 'Mais formatos' : 'Plus de formats'}
+            className="hidden sm:inline-flex absolute right-0 top-0 h-9 w-9 items-center justify-center rounded-full border border-gray-300 dark:border-border bg-white dark:bg-card text-foreground hover:border-gray-900 dark:hover:border-foreground transition-colors shadow-sm"
+          >
+            <ChevronRight className="h-4 w-4" />
+          </button>
+        </div>
+
+        {/* Chargement */}
+        {isLoading && (
+          <div className="mt-6 space-y-8">
+            <div>
+              <Skeleton className="h-7 w-64 mb-4" />
+              <Skeleton className="w-full h-36 rounded-lg" />
+            </div>
+            <div>
+              <Skeleton className="h-7 w-64 mb-4" />
+              <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+                {Array.from({ length: 4 }, (_, i) => (
+                  <div key={i} className="bg-white dark:bg-card rounded-lg border border-border/70 overflow-hidden">
+                    <Skeleton className="w-full aspect-[6/5] rounded-none" />
+                    <div className="p-3.5 space-y-2">
+                      <Skeleton className="h-4 w-3/4" />
+                      <Skeleton className="h-3 w-full" />
+                      <Skeleton className="h-8 w-full rounded-full mt-3" />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Vide */}
+        {!isLoading && filteredBanners.length === 0 && (
+          <div className="mt-6 rounded-2xl border-2 border-dashed border-border bg-white dark:bg-card py-16 px-6 text-center">
+            <span className="inline-flex h-20 w-20 items-center justify-center rounded-full bg-muted mb-5">
+              <Megaphone className="h-9 w-9 text-muted-foreground/40" />
+            </span>
+            <h3 className="text-xl font-semibold text-foreground mb-2">
+              {t('banners_no_results')}
+            </h3>
+            <p className="text-muted-foreground mb-6 max-w-md mx-auto">
+              {t('banners_no_results_desc')}
+            </p>
+            <a href="/publicite">
+              <Button className="bg-gray-900 hover:bg-black text-white rounded-full h-10 px-6">
+                {locale === 'pt' ? 'Quero anunciar' : 'Je veux faire ma publicité'}
+                <ChevronRight className="h-4 w-4 ml-1" />
+              </Button>
+            </a>
+          </div>
+        )}
+
+        {/* ============ Affichage — sections style PagesJaunes ============ */}
+        {!isLoading && filteredBanners.length > 0 && (
+          <div className="mt-6 space-y-10">
+            {/* Filtre « tout » : 2 sections par forme */}
+            {activeFilter === 'all' && (
+              <>
+                {allWide.length > 0 && (
+                  <section>
+                    <SectionHeader
+                      icon={RectangleHorizontal}
+                      label={locale === 'pt' ? 'Banners largos' : 'Bannières larges'}
+                      count={allWide.length}
+                    />
+                    <div className="space-y-4">
+                      {allWide.map((banner) => (
+                        <PjWideBannerCard key={banner.id} banner={banner} />
+                      ))}
+                    </div>
+                  </section>
+                )}
+
+                {allGrid.length > 0 && (
+                  <section>
+                    <SectionHeader
+                      icon={LayoutGrid}
+                      label={locale === 'pt' ? 'Banners quadrados & verticais' : 'Bannières carrées & verticales'}
+                      count={allGrid.length}
+                    />
+                    <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5">
+                      {allGrid.map((banner) => (
+                        <PjGridBannerCard key={banner.id} banner={banner} />
+                      ))}
+                    </div>
+                  </section>
+                )}
+              </>
+            )}
+
+            {/* Filtre spécifique : un seul flux */}
+            {activeFilter !== 'all' && (
+              <>
+                {wideBanners.length > 0 && (
+                  <div className="space-y-4">
+                    {wideBanners.map((banner) => (
+                      <PjWideBannerCard key={banner.id} banner={banner} />
+                    ))}
+                  </div>
+                )}
+                {gridBanners.length > 0 && (
+                  <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5">
+                    {gridBanners.map((banner) => (
+                      <PjGridBannerCard key={banner.id} banner={banner} />
+                    ))}
+                  </div>
+                )}
+              </>
+            )}
+          </div>
+        )}
+      </div>
+    </div>
+  );
 }

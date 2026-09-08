@@ -5,12 +5,14 @@ import { ArrowRight, ChevronLeft, ChevronRight, Sparkles, Store } from 'lucide-r
 import { useEffect, useRef, useState } from 'react';
 import { useTranslation } from '@/lib/i18n';
 
-// Banner format definitions — 4 placements only
+// Banner format definitions — 6 placements
 export const BANNER_FORMATS: Record<string, { label: string; w: number; h: number; usage: string; isWide: boolean }> = {
   '336x280':  { label: '336 × 280',  w: 336,  h: 280,  usage: 'Accueil (milieu)',          isWide: false },
   '728x90':   { label: '728 × 90',   w: 728,  h: 90,   usage: 'Accueil (avant footer)',    isWide: true  },
   '300x600':  { label: '300 × 600',  w: 300,  h: 600,  usage: 'Détail (sidebar)',          isWide: false },
   'detail_728x90': { label: '728 × 90', w: 728, h: 90, usage: 'Détail (avant footer)',    isWide: true  },
+  'promo_gauche': { label: '1440 × 720', w: 1440, h: 720, usage: 'Accueil — Carrousel promo (gauche)', isWide: true },
+  'promo_droite': { label: '960 × 720',  w: 960,  h: 720, usage: 'Accueil — Bannière droite',          isWide: false },
 };
 
 // Map old format "728x90" used for enterprise footer to the new key
@@ -20,6 +22,8 @@ export const FORMAT_OPTIONS = [
   { key: '728x90',        label: 'Page d\'accueil — Avant footer',       dimensions: '728 × 90'  },
   { key: '300x600',       label: 'Page détail — Sidebar',                dimensions: '300 × 600' },
   { key: 'detail_728x90', label: 'Page détail — Avant footer',           dimensions: '728 × 90'  },
+  { key: 'promo_gauche',  label: 'Page d\'accueil — Carrousel promo (gauche)', dimensions: '1440 × 720' },
+  { key: 'promo_droite',  label: 'Page d\'accueil — Bannière droite',    dimensions: '960 × 720'  },
 ];
 
 interface BannerData {
@@ -142,14 +146,57 @@ const PROMO_SLIDES = [
 
 const SLIDE_INTERVAL_MS = 5000;
 
-// PromoSlider — carrousel auto (3 slides) avec points de navigation, flèches au survol,
-// pause au survol, balayage tactile et respect de prefers-reduced-motion
+// —— Slide résolue (textes selon la langue) ——
+interface ResolvedSlide {
+  key: string;
+  href: string;
+  image: string;
+  alt: string;
+  title: string;
+  highlight?: string;
+  cta?: string;
+  description?: string;
+  isAd?: boolean;
+}
+
+// PromoSlider — carrousel auto : affiche les publicités publiées depuis l'admin
+// (format « promo_gauche ») si elles existent, sinon les 3 slides promo par défaut.
+// Points de navigation, flèches au survol, pause au survol, balayage tactile,
+// respect de prefers-reduced-motion.
 function PromoSlider() {
   const { locale } = useTranslation();
+  const { data: adBanners } = useBanners('home', 'promo_gauche');
   const [active, setActive] = useState(0);
   const [paused, setPaused] = useState(false);
   const touchStartX = useRef<number | null>(null);
   const reducedMotion = useRef(false);
+
+  const adSlides: ResolvedSlide[] = (adBanners || [])
+    .filter((b) => !!b.image)
+    .map((b) => ({
+      key: b.id,
+      href: b.link || '#',
+      image: b.image as string,
+      alt: b.title,
+      title: b.title,
+      description: b.description || undefined,
+      isAd: true,
+    }));
+
+  const defaultSlides: ResolvedSlide[] = PROMO_SLIDES.map((slide) => ({
+    key: slide.href,
+    href: slide.href,
+    image: slide.image,
+    alt: slide.alt[locale],
+    title: locale === 'pt' ? slide.title.pt : slide.title.fr,
+    highlight: locale === 'pt' ? slide.title.highlightPt : slide.title.highlightFr,
+    cta: locale === 'pt' ? slide.cta.pt : slide.cta.fr,
+  }));
+
+  const slides = adSlides.length > 0 ? adSlides : defaultSlides;
+  const total = slides.length;
+  // Index actif sûr (évite un setState dans un effet quand la liste change)
+  const safeActive = total > 0 ? ((active % total) + total) % total : 0;
 
   useEffect(() => {
     if (typeof window !== 'undefined' && window.matchMedia) {
@@ -158,18 +205,18 @@ function PromoSlider() {
   }, []);
 
   useEffect(() => {
-    if (paused || reducedMotion.current) return;
+    if (paused || reducedMotion.current || total <= 1) return;
     const id = setInterval(() => {
-      setActive((a) => (a + 1) % PROMO_SLIDES.length);
+      setActive((a) => (a + 1) % total);
     }, SLIDE_INTERVAL_MS);
     return () => clearInterval(id);
-  }, [paused]);
+  }, [paused, total]);
 
-  const goTo = (i: number) => setActive(((i % PROMO_SLIDES.length) + PROMO_SLIDES.length) % PROMO_SLIDES.length);
+  const goTo = (i: number) => setActive(((i % total) + total) % total);
 
   return (
     <div
-      className="group relative block overflow-hidden rounded-xl h-64 sm:h-72 md:h-80"
+      className="group relative block overflow-hidden rounded-xl h-72 sm:h-80 md:h-96"
       role="region"
       aria-roledescription="carrousel"
       aria-label={locale === 'pt' ? 'Promoções PebissOa' : 'Promotions PebissOa'}
@@ -188,11 +235,11 @@ function PromoSlider() {
         setPaused(false);
       }}
     >
-      {PROMO_SLIDES.map((slide, i) => {
-        const isActive = i === active;
+      {slides.map((slide, i) => {
+        const isActive = i === safeActive;
         return (
           <a
-            key={slide.href}
+            key={slide.key}
             href={slide.href}
             aria-hidden={!isActive}
             className={`absolute inset-0 transition-opacity duration-700 ease-out ${
@@ -202,7 +249,7 @@ function PromoSlider() {
           >
             <img
               src={slide.image}
-              alt={slide.alt[locale]}
+              alt={slide.alt}
               className={`absolute inset-0 w-full h-full object-cover object-right transition-transform ease-out ${
                 isActive ? 'scale-105 duration-[7000ms]' : 'scale-100 duration-700'
               }`}
@@ -210,105 +257,227 @@ function PromoSlider() {
             />
             <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/45 to-transparent" />
 
-            <div className="absolute inset-0 p-5 sm:p-6 md:p-8 flex flex-col items-start">
-              <span className="bg-red-600 text-white font-extrabold text-xs sm:text-sm md:text-base px-3 py-1.5 leading-none inline-flex items-center gap-1 rounded-sm">
-                PEBISSOA <Sparkles className="h-3.5 w-3.5 md:h-4 md:w-4" />
-              </span>
-
-              <p className="mt-3 sm:mt-4 text-white font-extrabold uppercase leading-tight text-lg sm:text-2xl md:text-3xl drop-shadow-md max-w-[75%]">
-                {locale === 'pt' ? slide.title.pt : slide.title.fr}{' '}
-                <span className="text-yellow-400">
-                  {locale === 'pt' ? slide.title.highlightPt : slide.title.highlightFr}
+            {slide.isAd ? (
+              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 via-black/30 to-transparent p-5 sm:p-6 pt-12">
+                <h3 className="text-white font-extrabold text-lg sm:text-2xl leading-tight drop-shadow-md">
+                  {slide.title}
+                </h3>
+                {slide.description && (
+                  <p className="text-white/80 text-xs sm:text-sm mt-1 line-clamp-2">{slide.description}</p>
+                )}
+              </div>
+            ) : (
+              <div className="absolute inset-0 p-5 sm:p-6 md:p-8 flex flex-col items-start">
+                <span className="bg-red-600 text-white font-extrabold text-xs sm:text-sm md:text-base px-3 py-1.5 leading-none inline-flex items-center gap-1 rounded-sm">
+                  PEBISSOA <Sparkles className="h-3.5 w-3.5 md:h-4 md:w-4" />
                 </span>
-              </p>
 
-              <span className="mt-4 sm:mt-auto inline-flex items-center gap-2 bg-white text-gray-900 text-xs sm:text-sm md:text-base font-bold px-4 sm:px-5 py-2.5 rounded-full group-hover:bg-gray-100 transition-colors">
-                {locale === 'pt' ? slide.cta.pt : slide.cta.fr}
-                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-              </span>
-            </div>
+                <p className="mt-3 sm:mt-4 text-white font-extrabold uppercase leading-tight text-lg sm:text-2xl md:text-3xl drop-shadow-md max-w-[75%]">
+                  {slide.title}{' '}
+                  <span className="text-yellow-400">{slide.highlight}</span>
+                </p>
+
+                <span className="mt-4 sm:mt-auto inline-flex items-center gap-2 bg-white text-gray-900 text-xs sm:text-sm md:text-base font-bold px-4 sm:px-5 py-2.5 rounded-full group-hover:bg-gray-100 transition-colors">
+                  {slide.cta}
+                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+                </span>
+              </div>
+            )}
           </a>
         );
       })}
 
       {/* ============ Flèches précédent / suivant (survol desktop) ============ */}
-      <button
-        type="button"
-        onClick={() => goTo(active - 1)}
-        aria-label={locale === 'pt' ? 'Diapositiva anterior' : 'Diapositive précédente'}
-        className="absolute left-3 top-1/2 -translate-y-1/2 z-20 hidden sm:inline-flex h-9 w-9 items-center justify-center rounded-full bg-black/40 text-white opacity-0 group-hover:opacity-100 hover:bg-black/60 transition-all duration-300"
-      >
-        <ChevronLeft className="h-5 w-5" />
-      </button>
-      <button
-        type="button"
-        onClick={() => goTo(active + 1)}
-        aria-label={locale === 'pt' ? 'Próxima diapositiva' : 'Diapositive suivante'}
-        className="absolute right-3 top-1/2 -translate-y-1/2 z-20 hidden sm:inline-flex h-9 w-9 items-center justify-center rounded-full bg-black/40 text-white opacity-0 group-hover:opacity-100 hover:bg-black/60 transition-all duration-300"
-      >
-        <ChevronRight className="h-5 w-5" />
-      </button>
+      {total > 1 && (
+        <>
+          <button
+            type="button"
+            onClick={() => goTo(safeActive - 1)}
+            aria-label={locale === 'pt' ? 'Diapositiva anterior' : 'Diapositive précédente'}
+            className="absolute left-3 top-1/2 -translate-y-1/2 z-20 hidden sm:inline-flex h-9 w-9 items-center justify-center rounded-full bg-black/40 text-white opacity-0 group-hover:opacity-100 hover:bg-black/60 transition-all duration-300"
+          >
+            <ChevronLeft className="h-5 w-5" />
+          </button>
+          <button
+            type="button"
+            onClick={() => goTo(safeActive + 1)}
+            aria-label={locale === 'pt' ? 'Próxima diapositiva' : 'Diapositive suivante'}
+            className="absolute right-3 top-1/2 -translate-y-1/2 z-20 hidden sm:inline-flex h-9 w-9 items-center justify-center rounded-full bg-black/40 text-white opacity-0 group-hover:opacity-100 hover:bg-black/60 transition-all duration-300"
+          >
+            <ChevronRight className="h-5 w-5" />
+          </button>
+        </>
+      )}
 
       {/* ============ Points de navigation ============ */}
-      <div className="absolute bottom-3.5 right-4 sm:bottom-4 sm:right-5 z-20 flex items-center gap-2">
-        {PROMO_SLIDES.map((slide, i) => (
-          <button
-            key={slide.href}
-            type="button"
-            onClick={() => goTo(i)}
-            aria-label={locale === 'pt' ? `Ir para a diapositiva ${i + 1}` : `Aller à la diapositive ${i + 1}`}
-            aria-current={i === active}
-            className={`h-2.5 rounded-full transition-all duration-300 ${
-              i === active ? 'w-6 bg-white' : 'w-2.5 bg-white/50 hover:bg-white/80'
+      {total > 1 && (
+        <div className="absolute bottom-3.5 right-4 sm:bottom-4 sm:right-5 z-20 flex items-center gap-2">
+          {slides.map((slide, i) => (
+            <button
+              key={slide.key}
+              type="button"
+              onClick={() => goTo(i)}
+              aria-label={locale === 'pt' ? `Ir para a diapositiva ${i + 1}` : `Aller à la diapositive ${i + 1}`}
+              aria-current={i === safeActive}
+              className={`h-2.5 rounded-full transition-all duration-300 ${
+                i === safeActive ? 'w-6 bg-white' : 'w-2.5 bg-white/50 hover:bg-white/80'
+              }`}
+            />
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+// Bannière droite : publicités admin (format « promo_droite ») en rotation auto,
+// sinon contenu par défaut (professionnels / visibilité)
+function RightPromoBanner() {
+  const { locale } = useTranslation();
+  const { data: adBanners } = useBanners('home', 'promo_droite');
+  const ads = (adBanners || []).filter((b) => !!b.image);
+  const [active, setActive] = useState(0);
+  const [paused, setPaused] = useState(false);
+  const touchStartX = useRef<number | null>(null);
+  const reducedMotion = useRef(false);
+  const total = ads.length;
+  // Index actif sûr (évite un setState dans un effet quand la liste change)
+  const safeActive = total > 0 ? ((active % total) + total) % total : 0;
+
+  useEffect(() => {
+    if (typeof window !== 'undefined' && window.matchMedia) {
+      reducedMotion.current = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    }
+  }, []);
+
+  useEffect(() => {
+    if (paused || reducedMotion.current || total <= 1) return;
+    const id = setInterval(() => setActive((a) => (a + 1) % total), SLIDE_INTERVAL_MS);
+    return () => clearInterval(id);
+  }, [paused, total]);
+
+  const goTo = (i: number) => setActive(((i % total) + total) % total);
+
+  if (ads.length === 0) {
+    return (
+      <a
+        href="/publicite"
+        className="group relative block overflow-hidden rounded-xl h-72 sm:h-80 md:h-96"
+      >
+        <img
+          src="/banners/pro-dark.jpg"
+          alt="Commerce illuminé la nuit — donnez plus de visibilité à votre entreprise"
+          className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+          loading="lazy"
+        />
+        <div className="absolute inset-0 bg-black/55 group-hover:bg-black/45 transition-colors" />
+
+        <div className="absolute inset-0 p-5 sm:p-6 md:p-8 flex flex-col items-center text-center">
+          <p className="text-white font-extrabold text-base sm:text-lg md:text-2xl leading-tight drop-shadow">
+            Professionnels,<br />donnez plus de visibilité<br className="hidden sm:block" /> à votre entreprise sur PebissOa
+          </p>
+
+          <div className="mt-3 sm:mt-4 bg-white/95 rounded-md px-4 py-2.5 flex items-center gap-2.5 shadow-lg">
+            <Store className="h-5 w-5 md:h-6 md:w-6 text-orange-600 shrink-0" />
+            <p className="text-xs sm:text-sm text-gray-900 font-semibold leading-tight text-left">
+              Votre entreprise<br />s&apos;affiche en grand
+            </p>
+          </div>
+
+          <span className="mt-auto inline-flex items-center gap-1.5 bg-blue-600 group-hover:bg-blue-700 text-white text-xs sm:text-sm md:text-base font-bold px-4 sm:px-5 py-2.5 rounded-full transition-colors">
+            Bénéficier de PebissOa +
+          </span>
+        </div>
+      </a>
+    );
+  }
+
+  return (
+    <div
+      className="group relative block overflow-hidden rounded-xl h-72 sm:h-80 md:h-96"
+      role="region"
+      aria-roledescription="carrousel"
+      aria-label={locale === 'pt' ? 'Publicidade' : 'Publicités'}
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+      onTouchStart={(e) => {
+        touchStartX.current = e.touches[0].clientX;
+        setPaused(true);
+      }}
+      onTouchEnd={(e) => {
+        if (touchStartX.current !== null) {
+          const delta = e.changedTouches[0].clientX - touchStartX.current;
+          if (Math.abs(delta) > 40) goTo(active + (delta < 0 ? 1 : -1));
+          touchStartX.current = null;
+        }
+        setPaused(false);
+      }}
+    >
+      {ads.map((banner, i) => {
+        const isActive = i === safeActive;
+        return (
+          <a
+            key={banner.id}
+            href={banner.link || '#'}
+            aria-hidden={!isActive}
+            tabIndex={isActive ? 0 : -1}
+            className={`absolute inset-0 transition-opacity duration-700 ease-out ${
+              isActive ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'
             }`}
-          />
-        ))}
-      </div>
+          >
+            <img
+              src={banner.image as string}
+              alt={banner.title}
+              className={`absolute inset-0 w-full h-full object-cover transition-transform ease-out ${
+                isActive ? 'scale-105 duration-[7000ms]' : 'scale-100 duration-700'
+              }`}
+              loading={i === 0 ? 'eager' : 'lazy'}
+            />
+            <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 via-black/30 to-transparent p-4 sm:p-5 pt-12">
+              <h3 className="text-white font-extrabold text-base sm:text-lg leading-tight drop-shadow">
+                {banner.title}
+              </h3>
+              {banner.description && (
+                <p className="text-white/80 text-xs mt-0.5 line-clamp-2">{banner.description}</p>
+              )}
+            </div>
+          </a>
+        );
+      })}
+
+      {ads.length > 1 && (
+        <div className="absolute bottom-3.5 right-4 z-20 flex items-center gap-2">
+          {ads.map((banner, i) => (
+            <button
+              key={banner.id}
+              type="button"
+              onClick={() => goTo(i)}
+              aria-label={locale === 'pt' ? `Ir para a publicidade ${i + 1}` : `Aller à la publicité ${i + 1}`}
+              aria-current={i === safeActive}
+              className={`h-2.5 rounded-full transition-all duration-300 ${
+                i === safeActive ? 'w-6 bg-white' : 'w-2.5 bg-white/50 hover:bg-white/80'
+              }`}
+            />
+          ))}
+        </div>
+      )}
     </div>
   );
 }
 
 // PromoDuoBanners — 2 bannières côte à côte sous le hero (style PagesJaunes)
-// Gauche : CARROUSEL promo (inscription / visibilité / annonces) — auto toutes les 5 s
-// Droite : professionnels / visibilité (photo sombre + titre centré + CTA bleu)
+// Gauche : CARROUSEL promo / publicités admin (promo_gauche) — auto toutes les 5 s
+// Droite : publicités admin (promo_droite) en rotation, sinon carte professionnels
 export function PromoDuoBanners() {
   return (
     <section className="py-6 md:py-8">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-[7fr_5fr] gap-4">
-          {/* ============ Bannière gauche — Carrousel promo ============ */}
+          {/* ============ Bannière gauche — Carrousel promo / publicités ============ */}
           <PromoSlider />
 
-          {/* ============ Bannière droite — Professionnels / visibilité ============ */}
-          <a
-            href="/publicite"
-            className="group relative block overflow-hidden rounded-xl h-64 sm:h-72 md:h-80"
-          >
-            <img
-              src="/banners/pro-dark.jpg"
-              alt="Commerce illuminé la nuit — donnez plus de visibilité à votre entreprise"
-              className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
-              loading="lazy"
-            />
-            <div className="absolute inset-0 bg-black/55 group-hover:bg-black/45 transition-colors" />
-
-            <div className="absolute inset-0 p-5 sm:p-6 md:p-8 flex flex-col items-center text-center">
-              <p className="text-white font-extrabold text-base sm:text-lg md:text-2xl leading-tight drop-shadow">
-                Professionnels,<br />donnez plus de visibilité<br className="hidden sm:block" /> à votre entreprise sur PebissOa
-              </p>
-
-              <div className="mt-3 sm:mt-4 bg-white/95 rounded-md px-4 py-2.5 flex items-center gap-2.5 shadow-lg">
-                <Store className="h-5 w-5 md:h-6 md:w-6 text-orange-600 shrink-0" />
-                <p className="text-xs sm:text-sm text-gray-900 font-semibold leading-tight text-left">
-                  Votre entreprise<br />s&apos;affiche en grand
-                </p>
-              </div>
-
-              <span className="mt-auto inline-flex items-center gap-1.5 bg-blue-600 group-hover:bg-blue-700 text-white text-xs sm:text-sm md:text-base font-bold px-4 sm:px-5 py-2.5 rounded-full transition-colors">
-                Bénéficier de PebissOa +
-              </span>
-            </div>
-          </a>
+          {/* ============ Bannière droite — Publicités ou professionnels ============ */}
+          <RightPromoBanner />
         </div>
       </div>
     </section>
