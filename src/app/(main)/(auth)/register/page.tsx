@@ -324,7 +324,7 @@ export default function RegisterPage() {
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <Button
                 size="lg"
-                className="bg-[#FFC600] hover:bg-[#F0B900] text-[#1F1F1F] font-bold px-8"
+                className="bg-[#0066CC] hover:bg-[#0052A3] text-white font-bold px-8"
                 onClick={() => router.push('/dashboard/mon-entreprise')}
               >
                 <Sparkles className="mr-2 h-4 w-4" />
@@ -346,9 +346,9 @@ export default function RegisterPage() {
   }
 
   return (
-    <div className="bg-[#FBFAF6] dark:bg-background">
-      {/* ===== 1. Bandeau jaune (style PagesJaunes) ===== */}
-      <div className="relative overflow-hidden bg-[#FFC600]">
+    <div className="bg-[#F7FAFD] dark:bg-background">
+      {/* ===== 1. Bandeau bleu (couleur du logo) ===== */}
+      <div className="relative overflow-hidden bg-[#0066CC]">
         {/* Cercles décoratifs */}
         <div className="absolute -top-20 -right-16 h-64 w-64 rounded-full bg-white/25 pointer-events-none" aria-hidden="true" />
         <div className="absolute -bottom-24 -left-12 h-72 w-72 rounded-full bg-black/5 pointer-events-none" aria-hidden="true" />
@@ -357,28 +357,28 @@ export default function RegisterPage() {
           <div className="grid items-center gap-8 lg:gap-12 lg:grid-cols-[1.05fr_0.95fr]">
             {/* Textes */}
             <div className="text-center lg:text-left">
-              <h1 className="text-3xl md:text-4xl xl:text-[2.75rem] font-extrabold leading-tight text-[#1F1F1F] mb-5">
+              <h1 className="text-3xl md:text-4xl xl:text-[2.75rem] font-extrabold leading-tight text-white mb-5">
                 {t('register_hero_title1')}{' '}
                 <span className="relative inline-block whitespace-nowrap">
                   <span className="absolute inset-x-0 bottom-0.5 h-[0.32em] bg-white/90 rounded-sm" aria-hidden="true" />
                   <span className="relative">{t('register_hero_title2')}</span>
                 </span>
               </h1>
-              <p className="text-[#4A4234] text-base md:text-lg leading-relaxed max-w-xl mx-auto lg:mx-0 mb-7">
+              <p className="text-white/85 text-base md:text-lg leading-relaxed max-w-xl mx-auto lg:mx-0 mb-7">
                 {t('register_hero_desc')}
               </p>
               <div className="flex flex-wrap items-center justify-center lg:justify-start gap-3">
                 <Button
                   size="lg"
                   onClick={scrollToForm}
-                  className="h-12 rounded-full bg-[#1F1F1F] px-7 text-base font-bold text-white hover:bg-[#333333] shadow-lg"
+                  className="h-12 rounded-full bg-white px-7 text-base font-bold text-[#0066CC] hover:bg-[#EAF3FF] shadow-lg"
                 >
                   {t('register_create_button')}
                   <ArrowDown className="ml-2 h-4 w-4" />
                 </Button>
                 <Link
                   href="/login"
-                  className="inline-flex h-12 items-center rounded-full px-5 text-base font-bold text-[#1F1F1F] underline decoration-2 underline-offset-4 hover:bg-white/30 transition-colors"
+                  className="inline-flex h-12 items-center rounded-full px-5 text-base font-bold text-white underline decoration-2 underline-offset-4 hover:bg-white/20 transition-colors"
                 >
                   {t('register_login_link')}
                 </Link>
@@ -397,7 +397,7 @@ export default function RegisterPage() {
               />
               {/* Carte flottante « fiche bien notée » */}
               <div className="absolute -bottom-5 left-4 sm:-left-6 hidden sm:flex items-center gap-3 rounded-2xl bg-white p-4 shadow-xl shadow-black/10">
-                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#FFC600] text-xl font-extrabold text-[#1F1F1F]">
+                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#0066CC] text-xl font-extrabold text-white">
                   P
                 </div>
                 <div>
@@ -421,11 +421,11 @@ export default function RegisterPage() {
         <div className="mx-auto -mt-8 md:-mt-12 max-w-2xl scroll-mt-24">
           <Card className="border-border/40 shadow-2xl shadow-black/10 rounded-3xl overflow-hidden">
             {/* En-tête de la carte */}
-            <div className="border-b border-border/40 bg-gradient-to-r from-[#FFF8E1] to-white px-6 pt-6 pb-5 text-center md:px-8">
+            <div className="border-b border-border/40 bg-gradient-to-r from-[#EAF3FF] to-white px-6 pt-6 pb-5 text-center md:px-8">
               <h2 className="text-xl md:text-2xl font-extrabold text-foreground">
                 {t('register_form_card_title')}
               </h2>
-              <p className="mt-1.5 inline-flex items-center gap-1.5 rounded-full bg-[#FFC600]/20 px-3.5 py-1 text-xs font-bold text-[#8A6D00] dark:text-[#FFC600]">
+              <p className="mt-1.5 inline-flex items-center gap-1.5 rounded-full bg-[#0066CC]/10 px-3.5 py-1 text-xs font-bold text-[#0066CC] dark:text-[#66B2FF]">
                 <Sparkles className="h-3.5 w-3.5" />
                 {t('register_form_free')}
               </p>
@@ -685,7 +685,7 @@ export default function RegisterPage() {
                         <div
                           className={`border-2 border-dashed rounded-xl p-8 flex flex-col items-center justify-center cursor-pointer transition-all ${
                             coverPreview
-                              ? 'border-[#FFC600]/50 bg-[#FFC600]/5'
+                              ? 'border-[#0066CC]/50 bg-[#0066CC]/5'
                               : 'hover:bg-muted/50 hover:border-muted-foreground/30'
                           }`}
                           onClick={() => coverInputRef.current?.click()}
@@ -779,7 +779,7 @@ export default function RegisterPage() {
                   <Button
                     type="button"
                     onClick={goNext}
-                    className="gap-1 rounded-xl bg-[#FFC600] font-bold text-[#1F1F1F] hover:bg-[#F0B900] shadow-lg shadow-[#FFC600]/30"
+                    className="gap-1 rounded-xl bg-[#0066CC] font-bold text-white hover:bg-[#0052A3] shadow-lg shadow-[#0066CC]/30"
                   >
                     {t('onboarding_next')}
                     <ArrowRight className="h-4 w-4" />
@@ -789,7 +789,7 @@ export default function RegisterPage() {
                     type="button"
                     onClick={handleSubmit}
                     disabled={isLoading}
-                    className="rounded-xl bg-[#FFC600] px-8 font-bold text-[#1F1F1F] hover:bg-[#F0B900] shadow-lg shadow-[#FFC600]/30"
+                    className="rounded-xl bg-[#0066CC] px-8 font-bold text-white hover:bg-[#0052A3] shadow-lg shadow-[#0066CC]/30"
                   >
                     {isLoading ? (
                       <div className="flex items-center gap-2">
@@ -893,7 +893,7 @@ export default function RegisterPage() {
             <Button
               size="lg"
               onClick={scrollToForm}
-              className="h-12 rounded-full bg-[#FFC600] px-7 text-base font-bold text-[#1F1F1F] shadow-lg hover:bg-[#F0B900]"
+              className="h-12 rounded-full bg-white px-7 text-base font-bold text-[#0066CC] shadow-lg hover:bg-[#EAF3FF]"
             >
               {t('register_create_button')}
             </Button>

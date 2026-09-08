@@ -274,7 +274,7 @@ function PromoSlider() {
 
                 <p className="mt-3 sm:mt-4 text-white font-extrabold uppercase leading-tight text-lg sm:text-2xl md:text-3xl drop-shadow-md max-w-[75%]">
                   {slide.title}{' '}
-                  <span className="text-yellow-400">{slide.highlight}</span>
+                  <span className="text-[#4D9FFF]">{slide.highlight}</span>
                 </p>
 
                 <span className="mt-4 sm:mt-auto inline-flex items-center gap-2 bg-white text-gray-900 text-xs sm:text-sm md:text-base font-bold px-4 sm:px-5 py-2.5 rounded-full group-hover:bg-gray-100 transition-colors">

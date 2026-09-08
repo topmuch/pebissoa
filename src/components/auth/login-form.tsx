@@ -111,7 +111,7 @@ export function LoginForm({ variant }: LoginFormProps) {
     : [t('login_page_benefit1'), t('login_page_benefit2'), t('login_page_benefit3')];
 
   return (
-    <div className="flex min-h-[calc(100vh-4rem)] bg-[#FBFAF6] dark:bg-background">
+    <div className="flex min-h-[calc(100vh-4rem)] bg-[#F7FAFD] dark:bg-background">
       {/* ===== Panneau visuel gauche (desktop uniquement) ===== */}
       <div className="relative hidden w-[46%] lg:block" aria-hidden="true">
         <Image
@@ -135,7 +135,7 @@ export function LoginForm({ variant }: LoginFormProps) {
           <div>
             <span
               className={`mb-5 inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-bold uppercase tracking-wide ${
-                isAdmin ? 'bg-white text-[#1F1F1F]' : 'bg-[#FFC600] text-[#1F1F1F]'
+                isAdmin ? 'bg-white text-[#1F1F1F]' : 'bg-[#0066CC] text-white'
               }`}
             >
               {isAdmin ? (
@@ -154,7 +154,7 @@ export function LoginForm({ variant }: LoginFormProps) {
             <ul className="space-y-3.5">
               {benefits.map((b, i) => (
                 <li key={i} className="flex items-start gap-3 text-white/95 text-sm xl:text-base">
-                  <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-[#FFC600]" />
+                  <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-[#4D9FFF]" />
                   <span>{b}</span>
                 </li>
               ))}
@@ -176,7 +176,7 @@ export function LoginForm({ variant }: LoginFormProps) {
               className={`mb-3 inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 text-xs font-bold uppercase tracking-wide ${
                 isAdmin
                   ? 'bg-[#1F1F1F] text-white dark:bg-white dark:text-[#1F1F1F]'
-                  : 'bg-[#FFC600] text-[#1F1F1F]'
+                  : 'bg-[#0066CC] text-white'
               }`}
             >
               {isAdmin ? <ShieldCheck className="h-3.5 w-3.5" /> : <Building2 className="h-3.5 w-3.5" />}
@@ -194,7 +194,7 @@ export function LoginForm({ variant }: LoginFormProps) {
               className={`mb-4 inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-bold uppercase tracking-wide ${
                 isAdmin
                   ? 'bg-[#1F1F1F] text-white dark:bg-white dark:text-[#1F1F1F]'
-                  : 'bg-[#FFC600] text-[#1F1F1F]'
+                  : 'bg-[#0066CC] text-white'
               }`}
             >
               {isAdmin ? <ShieldCheck className="h-3.5 w-3.5" /> : <Building2 className="h-3.5 w-3.5" />}
@@ -255,7 +255,7 @@ export function LoginForm({ variant }: LoginFormProps) {
                 className={`h-12 w-full rounded-xl text-base font-bold shadow-lg transition-all hover:shadow-xl ${
                   isAdmin
                     ? 'bg-[#1F1F1F] text-white hover:bg-[#333333] shadow-black/10'
-                    : 'bg-[#FFC600] text-[#1F1F1F] hover:bg-[#F0B900] shadow-[#FFC600]/30'
+                    : 'bg-[#0066CC] text-white hover:bg-[#0052A3] shadow-[#0066CC]/30'
                 }`}
               >
                 {isLoading ? (

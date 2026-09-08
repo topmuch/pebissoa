@@ -2,7 +2,7 @@
 
 /**
  * Page /categories — refonte avec le même design « PagesJaunes » que /annuaire :
- * bandeau jaune #FFC600, sous-barre grise, chips de rubriques, carte de recherche
+ * bandeau bleu #0066CC (logo), sous-barre grise, chips de rubriques, carte de recherche
  * flottante et grille de cartes (image, compteur, bouton teal #35C1C1).
  * Accessible depuis le menu principal (« Catégories »).
  */
@@ -172,25 +172,25 @@ export default function CategoriesPage() {
 
   return (
     <div className="min-h-[60vh]">
-      {/* ============ Bandeau jaune — style PagesJaunes ============ */}
-      <div className="bg-[#FFC600]">
+      {/* ============ Bandeau bleu — couleur du logo ============ */}
+      <div className="bg-[#0066CC]">
         <div className="container mx-auto px-4 py-10 md:py-14 text-center">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold uppercase tracking-tight text-gray-900 leading-tight">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold uppercase tracking-tight text-white leading-tight">
             {locale === 'pt' ? (
               <>
                 Todas as{' '}
-                <span className="inline-block bg-gray-900 text-white px-3 md:px-4 py-0.5 -rotate-2 rounded-sm align-middle">
+                <span className="inline-block bg-white text-[#0066CC] px-3 md:px-4 py-0.5 -rotate-2 rounded-sm align-middle">
                   categorias
                 </span>{' '}
-                <span className="inline-block border-b-[5px] md:border-b-[7px] border-gray-900/80 leading-none">?</span>
+                <span className="inline-block border-b-[5px] md:border-b-[7px] border-white/80 leading-none">?</span>
               </>
             ) : (
               <>
                 Toutes les{' '}
-                <span className="inline-block bg-gray-900 text-white px-3 md:px-4 py-0.5 -rotate-2 rounded-sm align-middle">
+                <span className="inline-block bg-white text-[#0066CC] px-3 md:px-4 py-0.5 -rotate-2 rounded-sm align-middle">
                   catégories
                 </span>{' '}
-                <span className="inline-block border-b-[5px] md:border-b-[7px] border-gray-900/80 leading-none">?</span>
+                <span className="inline-block border-b-[5px] md:border-b-[7px] border-white/80 leading-none">?</span>
               </>
             )}
           </h1>

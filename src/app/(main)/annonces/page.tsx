@@ -45,7 +45,7 @@ function SectionHeader({
   return (
     <div className="flex items-center justify-between gap-3 mb-4">
       <h2 className="flex items-center gap-2 text-lg md:text-xl font-bold text-foreground min-w-0">
-        <span className="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-amber-100 text-amber-700 shrink-0">
+        <span className="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-[#0066CC]/10 text-[#0066CC] shrink-0">
           <Icon className="h-5 w-5" />
         </span>
         <span className="truncate">{label}</span>
@@ -210,25 +210,25 @@ export default function AnnoncesPage() {
 
   return (
     <div className="min-h-[60vh]">
-      {/* ============ Bandeau jaune — style PagesJaunes ============ */}
-      <div className="bg-[#FFC600]">
+      {/* ============ Bandeau bleu — couleur du logo ============ */}
+      <div className="bg-[#0066CC]">
         <div className="container mx-auto px-4 py-10 md:py-14 text-center">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold uppercase tracking-tight text-gray-900 leading-tight">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold uppercase tracking-tight text-white leading-tight">
             {locale === 'pt' ? (
               <>
                 Boas{' '}
-                <span className="inline-block bg-gray-900 text-white px-3 md:px-4 py-0.5 -rotate-2 rounded-sm align-middle">
+                <span className="inline-block bg-white text-[#0066CC] px-3 md:px-4 py-0.5 -rotate-2 rounded-sm align-middle">
                   Promoções
                 </span>{' '}
-                <span className="inline-block border-b-[5px] md:border-b-[7px] border-gray-900/80 leading-none">?</span>
+                <span className="inline-block border-b-[5px] md:border-b-[7px] border-white/80 leading-none">?</span>
               </>
             ) : (
               <>
                 Des{' '}
-                <span className="inline-block bg-gray-900 text-white px-3 md:px-4 py-0.5 -rotate-2 rounded-sm align-middle">
+                <span className="inline-block bg-white text-[#0066CC] px-3 md:px-4 py-0.5 -rotate-2 rounded-sm align-middle">
                   Bons plans
                 </span>{' '}
-                <span className="inline-block border-b-[5px] md:border-b-[7px] border-gray-900/80 leading-none">?</span>
+                <span className="inline-block border-b-[5px] md:border-b-[7px] border-white/80 leading-none">?</span>
               </>
             )}
           </h1>

@@ -281,10 +281,10 @@ export default function HomePage() {
                 />
               </div>
 
-              {/* Bouton jaune */}
+              {/* Bouton bleu — couleur du logo */}
               <button
                 type="submit"
-                className="shrink-0 inline-flex items-center justify-center gap-2 h-12 px-7 rounded-full bg-amber-400 hover:bg-amber-300 text-gray-900 text-sm font-bold transition-colors cursor-pointer"
+                className="shrink-0 inline-flex items-center justify-center gap-2 h-12 px-7 rounded-full bg-[#0066CC] hover:bg-[#0052A3] text-white text-sm font-bold transition-colors cursor-pointer"
               >
                 <Search className="h-4 w-4" strokeWidth={2.5} aria-hidden="true" />
                 {t('search_button')}
