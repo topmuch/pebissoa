@@ -19,6 +19,13 @@ import { Label } from '@/components/ui/label';
 import { useToast } from '@/hooks/use-toast';
 import { useTranslation } from '@/lib/i18n';
 import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from '@/components/ui/dialog';
+import {
   LogIn,
   Mail,
   Lock,
@@ -29,6 +36,8 @@ import {
   EyeOff,
   CheckCircle2,
   ArrowLeft,
+  KeyRound,
+  Send,
 } from 'lucide-react';
 
 interface LoginFormProps {
@@ -44,6 +53,54 @@ export function LoginForm({ variant }: LoginFormProps) {
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+
+  // ——— Mot de passe oublié ———
+  const [forgotOpen, setForgotOpen] = useState(false);
+  const [forgotEmail, setForgotEmail] = useState('');
+  const [forgotSending, setForgotSending] = useState(false);
+  const [forgotSent, setForgotSent] = useState(false);
+
+  async function handleForgotSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    const fpEmail = forgotEmail.trim();
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(fpEmail)) {
+      toast({
+        title: t('forgot_password_error'),
+        variant: 'destructive',
+      });
+      return;
+    }
+    setForgotSending(true);
+    try {
+      // La demande arrive dans l'onglet « Messages » du dashboard (type password_reset)
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          type: 'password_reset',
+          name: fpEmail,
+          email: fpEmail,
+          subject: t('forgot_password_title'),
+          message: `${t('forgot_password_title')} — ${fpEmail}`,
+        }),
+      });
+      if (!res.ok) throw new Error('forgot failed');
+      setForgotSent(true);
+    } catch {
+      toast({
+        title: t('forgot_password_error'),
+        variant: 'destructive',
+      });
+    } finally {
+      setForgotSending(false);
+    }
+  }
+
+  function openForgotDialog() {
+    setForgotSent(false);
+    setForgotEmail(email); // pré-remplit avec l'email déjà saisi
+    setForgotOpen(true);
+  }
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -249,6 +306,16 @@ export function LoginForm({ variant }: LoginFormProps) {
                 </div>
               </div>
 
+              <div className="flex justify-end">
+                <button
+                  type="button"
+                  onClick={openForgotDialog}
+                  className="text-sm font-medium text-[#0066CC] hover:text-[#0052A3] hover:underline transition-colors cursor-pointer"
+                >
+                  {t('login_forgot_password')}
+                </button>
+              </div>
+
               <Button
                 type="submit"
                 disabled={isLoading}
@@ -313,6 +380,77 @@ export function LoginForm({ variant }: LoginFormProps) {
           </div>
         </div>
       </div>
+
+      {/* ===== Dialog Mot de passe oublié ===== */}
+      <Dialog open={forgotOpen} onOpenChange={setForgotOpen}>
+        <DialogContent className="sm:max-w-md rounded-2xl">
+          <DialogHeader>
+            <DialogTitle className="flex items-center gap-2 text-xl">
+              <span className="inline-flex h-9 w-9 items-center justify-center rounded-xl bg-[#0066CC]/10 text-[#0066CC]">
+                <KeyRound className="h-4 w-4" />
+              </span>
+              {t('forgot_password_title')}
+            </DialogTitle>
+            <DialogDescription className="text-left">
+              {t('forgot_password_desc')}
+            </DialogDescription>
+          </DialogHeader>
+
+          {forgotSent ? (
+            <div className="flex flex-col items-center text-center py-6 space-y-4">
+              <div className="h-14 w-14 rounded-full bg-green-100 text-green-600 flex items-center justify-center">
+                <CheckCircle2 className="h-7 w-7" />
+              </div>
+              <div>
+                <h3 className="font-bold text-foreground">{t('forgot_password_success_title')}</h3>
+                <p className="text-sm text-muted-foreground mt-1.5">{t('forgot_password_success_msg')}</p>
+              </div>
+              <Button
+                className="bg-[#0066CC] hover:bg-[#0052A3] text-white rounded-full"
+                onClick={() => setForgotOpen(false)}
+              >
+                {t('login_title')}
+              </Button>
+            </div>
+          ) : (
+            <form onSubmit={handleForgotSubmit} className="space-y-4">
+              <div className="space-y-2">
+                <Label htmlFor="forgot-email">{t('login_email')}</Label>
+                <div className="relative">
+                  <Mail className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                  <Input
+                    id="forgot-email"
+                    type="email"
+                    placeholder="votre@email.com"
+                    value={forgotEmail}
+                    onChange={(e) => setForgotEmail(e.target.value)}
+                    className="h-12 pl-11 rounded-xl"
+                    autoComplete="email"
+                    required
+                  />
+                </div>
+              </div>
+              <Button
+                type="submit"
+                disabled={forgotSending}
+                className="w-full h-12 rounded-xl bg-[#0066CC] hover:bg-[#0052A3] text-white font-bold"
+              >
+                {forgotSending ? (
+                  <>
+                    <Loader2 className="h-4 w-4 animate-spin" />
+                    {t('forgot_password_sending')}
+                  </>
+                ) : (
+                  <>
+                    <Send className="h-4 w-4" />
+                    {t('forgot_password_submit')}
+                  </>
+                )}
+              </Button>
+            </form>
+          )}
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }

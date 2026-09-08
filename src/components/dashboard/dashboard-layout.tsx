@@ -25,6 +25,7 @@ import {
   Megaphone,
   Star,
   Settings,
+  MessageSquare,
   LogOut,
   Menu,
   ChevronLeft,
@@ -46,6 +47,7 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
     { href: '/dashboard/products', label: t('nav_products_services'), icon: Package },
     { href: '/dashboard/ads', label: t('nav_ads'), icon: Megaphone },
     { href: '/dashboard/reviews', label: t('nav_reviews'), icon: Star },
+    { href: '/dashboard/messages', label: t('nav_messages'), icon: MessageSquare },
     { href: '/dashboard/settings', label: t('nav_settings'), icon: Settings },
   ];
 
