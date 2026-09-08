@@ -153,8 +153,8 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Validate format
-    const validFormats = ['728x90', '336x280', '300x600', 'detail_728x90'];
+    // Validate format — includes the 2 hero banner slots (promo_gauche / promo_droite)
+    const validFormats = ['728x90', '336x280', '300x600', 'detail_728x90', 'promo_gauche', 'promo_droite'];
     if (format && !validFormats.includes(format)) {
       return NextResponse.json(
         { error: 'Format invalide' },

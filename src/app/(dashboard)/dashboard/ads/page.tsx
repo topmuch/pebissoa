@@ -45,14 +45,19 @@ const AD_TYPES = [
   { value: 'EVENT', label: 'Événement', color: 'bg-purple-100 text-purple-800' },
 ];
 
+// Emplacements réellement supportés par l'API (/api/ads) et affichés par le site.
+// Les 2 premiers = les grandes bannières publicitaires sous le hero de l'accueil.
 const BANNER_FORMATS = [
-  { value: '728x90', label: '728 × 90', usage: 'Header desktop' },
-  { value: '320x100', label: '320 × 100', usage: 'Header mobile' },
-  { value: '300x250', label: '300 × 250', usage: 'Liste / Sidebar / Détail' },
-  { value: '336x280', label: '336 × 280', usage: 'Détail annonce' },
-  { value: '970x250', label: '970 × 250', usage: 'Bannière large' },
-  { value: '300x600', label: '300 × 600', usage: 'Sidebar' },
+  { value: 'promo_gauche', label: '1440 × 720', usage: 'Accueil — Grande bannière gauche (carrousel)' },
+  { value: 'promo_droite', label: '960 × 720', usage: 'Accueil — Grande bannière droite' },
+  { value: '336x280', label: '336 × 280', usage: 'Accueil — Milieu' },
+  { value: '728x90', label: '728 × 90', usage: 'Accueil — Avant footer' },
+  { value: '300x600', label: '300 × 600', usage: 'Profil entreprise — Sidebar' },
+  { value: 'detail_728x90', label: '728 × 90', usage: 'Profil entreprise — Avant footer' },
 ];
+
+// La position est déduite du format : sidebar + avant-footer = pages profil entreprise
+const ENTERPRISE_FORMATS = ['300x600', 'detail_728x90'];
 
 export default function AdsPage() {
   const { t, locale } = useTranslation();
@@ -62,7 +67,7 @@ export default function AdsPage() {
   const [editingAd, setEditingAd] = useState<any>(null);
   const [deleteId, setDeleteId] = useState<string | null>(null);
   const [form, setForm] = useState({
-    title: '', description: '', type: 'SERVICE', categoryId: '', image: '', format: '300x250',
+    title: '', description: '', type: 'SERVICE', categoryId: '', image: '', format: 'promo_gauche', link: '',
   });
   const [imageFile, setImageFile] = useState<File | null>(null);
   const [imagePreview, setImagePreview] = useState<string | null>(null);
@@ -153,7 +158,8 @@ export default function AdsPage() {
       type: ad?.type || 'SERVICE',
       categoryId: ad?.categoryId || '',
       image: ad?.image || '',
-      format: ad?.format || '300x250',
+      format: ad?.format || 'promo_gauche',
+      link: ad?.link || '',
     });
     setImagePreview(ad?.image || null);
     setImageFile(null);
@@ -163,7 +169,7 @@ export default function AdsPage() {
   const closeDialog = () => {
     setDialogOpen(false);
     setEditingAd(null);
-    setForm({ title: '', description: '', type: 'SERVICE', categoryId: '', image: '', format: '300x250' });
+    setForm({ title: '', description: '', type: 'SERVICE', categoryId: '', image: '', format: 'promo_gauche', link: '' });
     setImagePreview(null);
     setImageFile(null);
   };
@@ -184,6 +190,9 @@ export default function AdsPage() {
       ...form,
       image: imageUrl,
       businessId: business!.id,
+      // La position est déduite du format : les formats « Profil entreprise »
+      // s'affichent sur la fiche de l'entreprise, les autres sur l'accueil.
+      position: ENTERPRISE_FORMATS.includes(form.format) ? 'enterprise' : 'home',
     };
 
     if (editingAd?.id) {
@@ -342,6 +351,9 @@ export default function AdsPage() {
                     ))}
                   </SelectContent>
                 </Select>
+                <p className="text-[11px] text-muted-foreground leading-snug">
+                  {t('dash_ads_format_hint')}
+                </p>
               </div>
               <div className="space-y-2">
                 <Label>{t('dash_ads_field_type')}</Label>
@@ -369,6 +381,17 @@ export default function AdsPage() {
                   </SelectContent>
                 </Select>
               </div>
+            </div>
+            <div className="space-y-2">
+              <Label>{t('admin_ads_field_link')}</Label>
+              <Input
+                value={form.link}
+                onChange={(e) => setForm({ ...form, link: e.target.value })}
+                placeholder="https://exemple.gw ou /annuaire"
+              />
+              <p className="text-[11px] text-muted-foreground leading-snug">
+                {t('dash_ads_link_hint')}
+              </p>
             </div>
             <div className="space-y-2">
               <Label>{t('dash_ads_field_image')}</Label>

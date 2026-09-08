@@ -54,10 +54,12 @@ const AD_TYPES: Record<string, string> = {
 };
 
 const BANNER_FORMATS: Record<string, { label: string; w: number; h: number; usage: string }> = {
+  'promo_gauche':  { label: '1440 × 720', w: 1440, h: 720, usage: 'Accueil — Grande bannière gauche (carrousel)' },
+  'promo_droite':  { label: '960 × 720',  w: 960,  h: 720, usage: 'Accueil — Grande bannière droite' },
   '336x280':       { label: '336 × 280', w: 336, h: 280, usage: 'Accueil — Milieu' },
   '728x90':        { label: '728 × 90',  w: 728, h: 90,  usage: 'Accueil — Avant footer' },
-  '300x600':       { label: '300 × 600', w: 300, h: 600, usage: 'Détail — Sidebar' },
-  'detail_728x90': { label: '728 × 90',  w: 728, h: 90,  usage: 'Détail — Avant footer' },
+  '300x600':       { label: '300 × 600', w: 300, h: 600, usage: 'Profil entreprise — Sidebar' },
+  'detail_728x90': { label: '728 × 90',  w: 728, h: 90,  usage: 'Profil entreprise — Avant footer' },
 };
 
 const POSITION_LABELS: Record<string, Record<string, string>> = {

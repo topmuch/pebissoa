@@ -99,6 +99,9 @@ export async function PUT(
       );
     }
 
+    // Note : pas de validation stricte du format en PUT — permet d'éditer des
+    // publicités historiques sans blocage. La création (POST) valide les formats.
+
     const ad = await db.ad.update({
       where: { id },
       data: {

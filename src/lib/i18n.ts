@@ -424,6 +424,8 @@ const fr: Record<string, string> = {
   'dash_ads_error_update': 'Erreur lors de la mise à jour',
   'dash_ads_error_delete': 'Erreur lors de la suppression',
   'dash_ads_error_upload': 'Erreur lors du téléchargement',
+  'dash_ads_format_hint': 'Choisissez « Grande bannière gauche ou droite » pour apparaître sous le slider de l\'accueil. Le format « Profil entreprise » s\'affiche sur votre fiche.',
+  'dash_ads_link_hint': 'Optionnel — page ouverte quand on clique sur votre publicité.',
   // Dashboard reviews page
   'dash_reviews_title': 'Avis',
   'dash_reviews_subtitle': 'Consultez et répondez aux avis de vos clients',
@@ -1362,6 +1364,8 @@ const pt: Record<string, string> = {
   'dash_ads_error_update': 'Erro ao atualizar',
   'dash_ads_error_delete': 'Erro ao eliminar',
   'dash_ads_error_upload': 'Erro ao carregar',
+  'dash_ads_format_hint': 'Escolha « Grande faixa esquerda ou direita » para aparecer sob o slider da página inicial. O formato « Perfil da empresa » aparece na sua ficha.',
+  'dash_ads_link_hint': 'Opcional — página aberta quando alguém clica na sua publicidade.',
   // Dashboard reviews page
   'dash_reviews_title': 'Avaliações',
   'dash_reviews_subtitle': 'Consulte e responda às avaliações dos seus clientes',
