@@ -468,11 +468,11 @@ export default function HomePage() {
       <section className="py-16 md:py-20 relative overflow-hidden">
         <div className="absolute inset-0">
           <img
-            src="/hero.png"
+            src="/cta-office.png"
             alt=""
             className="absolute inset-0 w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-black/70" />
+          <div className="absolute inset-0 bg-black/65" />
         </div>
         <div className="relative container mx-auto px-4 text-center">
           <h2 className="text-2xl md:text-4xl font-bold text-white mb-4">
