@@ -17,6 +17,7 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { RUBRIQUES, findRubriqueByCategory } from '@/lib/rubriques';
+import { categoryEmoji } from '@/lib/category-emojis';
 import { Skeleton } from '@/components/ui/skeleton';
 import { useTranslation, categoryTranslations } from '@/lib/i18n';
 import { RatingStars } from '@/components/shared/rating-stars';
@@ -62,46 +63,6 @@ const GUINEA_BISSAU_REGIONS = [
   'Quinara',
   'Bolama-Bijagós',
 ];
-
-// Émoji par catégorie (en-têtes de sections, style PagesJaunes)
-const CATEGORY_EMOJIS: Record<string, string> = {
-  'restaurants-alimentation': '🍽️',
-  'restaurants': '🍴',
-  'hotels': '🏨',
-  'tourisme-hotellerie': '✈️',
-  'tourisme': '🏖️',
-  'sante-bien-etre': '🏥',
-  'btp-construction': '🏗️',
-  'commerce-distribution': '🛒',
-  'immobilier': '🏠',
-  'transport-logistique': '🚚',
-  'technologie-informatique': '💻',
-  'informatiques': '🖥️',
-  'genie-logiciel': '👨‍💻',
-  'banques': '🏦',
-  'assurances-banques': '🏦',
-  'services-financiers': '💰',
-  'agriculture-agroalimentaire': '🌾',
-  'education-formation': '🎓',
-  'mode-textile': '👗',
-  'mode-accessoires': '👜',
-  'barbier-salon-de-coiffure': '💈',
-  'sport-loisirs': '⚽',
-  'arts-culture': '🎭',
-  'electroniques': '📱',
-  'telecom': '📡',
-  'marketing-communication': '📣',
-  'conseil-services': '💼',
-  'administration': '🏛️',
-  'energie-environnement': '⚡',
-  'droite': '⚖️',
-  'gestion-des-ressources-humaines': '👥',
-};
-const FALLBACK_EMOJI = '🏢';
-
-function categoryEmoji(slug?: string | null): string {
-  return (slug && CATEGORY_EMOJIS[slug]) || FALLBACK_EMOJI;
-}
 
 /* ============ Carte entreprise — style PagesJaunes ============ */
 function PjBusinessCard({ business }: { business: Business }) {
