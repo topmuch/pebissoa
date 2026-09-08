@@ -127,7 +127,7 @@ function PjBusinessCard({ business }: { business: Business }) {
           )}
 
           <div className="mt-auto pt-2.5">
-            <span className="block w-full text-center bg-[#35C1C1] group-hover:bg-[#28A9A9] text-white text-[13px] font-bold py-2 rounded-full transition-colors">
+            <span className="block w-full text-center bg-[#0066CC] group-hover:bg-[#0052A3] text-white text-[13px] font-bold py-2 rounded-full transition-colors">
               {tl({ fr: 'Voir la fiche', pt: 'Ver a ficha', en: 'View profile' })}
             </span>
           </div>

@@ -12,7 +12,7 @@ export const BANNER_FORMATS: Record<string, { label: string; w: number; h: numbe
   '300x600':  { label: '300 × 600',  w: 300,  h: 600,  usage: 'Détail (sidebar)',          isWide: false },
   'detail_728x90': { label: '728 × 90', w: 728, h: 90, usage: 'Détail (avant footer)',    isWide: true  },
   'promo_gauche': { label: '1440 × 720', w: 1440, h: 720, usage: 'Accueil — Carrousel promo (gauche)', isWide: true },
-  'promo_droite': { label: '960 × 720',  w: 960,  h: 720, usage: 'Accueil — Bannière droite',          isWide: false },
+  'promo_droite': { label: '1440 × 720', w: 1440, h: 720, usage: 'Accueil — Bannière droite (même taille que la gauche)', isWide: true },
 };
 
 // Map old format "728x90" used for enterprise footer to the new key
@@ -23,7 +23,7 @@ export const FORMAT_OPTIONS = [
   { key: '300x600',       label: 'Page détail — Sidebar',                dimensions: '300 × 600' },
   { key: 'detail_728x90', label: 'Page détail — Avant footer',           dimensions: '728 × 90'  },
   { key: 'promo_gauche',  label: 'Page d\'accueil — Carrousel promo (gauche)', dimensions: '1440 × 720' },
-  { key: 'promo_droite',  label: 'Page d\'accueil — Bannière droite',    dimensions: '960 × 720'  },
+  { key: 'promo_droite',  label: 'Page d\'accueil — Bannière droite',    dimensions: '1440 × 720' },
 ];
 
 interface BannerData {
@@ -487,11 +487,11 @@ export function PromoDuoBanners() {
   return (
     <section className="py-6 md:py-8">
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-[7fr_5fr] gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {/* ============ Bannière gauche — Carrousel promo / publicités ============ */}
           <PromoSlider />
 
-          {/* ============ Bannière droite — Publicités ou professionnels ============ */}
+          {/* ============ Bannière droite — Publicités ou professionnels (même taille que la gauche) ============ */}
           <RightPromoBanner />
         </div>
       </div>

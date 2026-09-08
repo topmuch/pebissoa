@@ -235,7 +235,7 @@ export function BusinessCard({ business, variant = 'grid' }: BusinessCardProps) 
           </div>
 
           {/* CTA révélé au survol (desktop) — espace réservé pour aligner les cartes */}
-          <div className="hidden sm:flex items-center justify-center gap-1.5 mt-3 h-8 rounded-xl bg-pebiss-orange/10 text-pebiss-orange text-xs font-semibold opacity-0 -translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
+          <div className="hidden sm:flex items-center justify-center gap-1.5 mt-3 h-8 rounded-xl bg-[#0066CC]/10 text-[#0066CC] text-xs font-semibold opacity-0 -translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
             {tl({ fr: 'Voir la fiche', pt: 'Ver a ficha', en: 'View profile' })}
             <ArrowRight className="h-3.5 w-3.5" />
           </div>

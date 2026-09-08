@@ -26,7 +26,7 @@ interface Banner {
   createdAt: string;
 }
 
-const CTA_TEAL = 'bg-[#35C1C1] group-hover:bg-[#28A9A9]';
+const CTA_BLUE = 'bg-[#0066CC] group-hover:bg-[#0052A3]';
 
 /* ============ En-tête de section (style PagesJaunes) ============ */
 function SectionHeader({
@@ -100,7 +100,7 @@ function PjWideBannerCard({ banner }: { banner: Banner }) {
           <p className="text-xs text-muted-foreground line-clamp-2 leading-relaxed">{banner.description}</p>
         )}
         <div className="mt-auto pt-2">
-          <span className={`inline-flex items-center gap-1.5 ${CTA_TEAL} text-white text-[13px] font-bold px-6 py-2 rounded-full transition-colors`}>
+          <span className={`inline-flex items-center gap-1.5 ${CTA_BLUE} text-white text-[13px] font-bold px-6 py-2 rounded-full transition-colors`}>
             {t('banners_view_details')}
             <ChevronRight className="h-3.5 w-3.5" />
           </span>
@@ -162,7 +162,7 @@ function PjGridBannerCard({ banner }: { banner: Banner }) {
           </p>
         )}
         <div className="mt-auto pt-2.5">
-          <span className={`block w-full text-center ${CTA_TEAL} text-white text-[13px] font-bold py-2 rounded-full transition-colors`}>
+          <span className={`block w-full text-center ${CTA_BLUE} text-white text-[13px] font-bold py-2 rounded-full transition-colors`}>
             {tl({ fr: "Voir l'annonce", pt: 'Ver o anúncio', en: 'View ad' })}
           </span>
         </div>

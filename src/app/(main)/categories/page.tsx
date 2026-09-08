@@ -3,7 +3,7 @@
 /**
  * Page /categories — refonte avec le même design « PagesJaunes » que /annuaire :
  * bandeau bleu #0066CC (logo), sous-barre grise, chips de rubriques, carte de recherche
- * flottante et grille de cartes (image, compteur, bouton teal #35C1C1).
+ * flottante et grille de cartes (image, compteur, bouton bleu logo #0066CC).
  * Accessible depuis le menu principal (« Catégories »).
  */
 
@@ -99,7 +99,7 @@ function PjCategoryCard({ cat, label }: { cat: Category; label: string }) {
           </p>
 
           <div className="mt-auto pt-2.5">
-            <span className="block w-full text-center bg-[#35C1C1] group-hover:bg-[#28A9A9] text-white text-[13px] font-bold py-2 rounded-full transition-colors">
+            <span className="block w-full text-center bg-[#0066CC] group-hover:bg-[#0052A3] text-white text-[13px] font-bold py-2 rounded-full transition-colors">
               {t('categories_page_explore')}
             </span>
           </div>

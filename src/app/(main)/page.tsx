@@ -375,11 +375,11 @@ export default function HomePage() {
       <section className="py-16 md:py-20">
         <div className="container mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
-            {/* Left: Image with badge */}
+            {/* Left: Image with badge — ancienne image restaurée (poignée de main) */}
             <div className="relative">
               <div className="overflow-hidden">
                 <img
-                  src="/hero.png"
+                  src="/about-quality.png"
                   alt={t('about_image_alt')}
                   className="w-full h-[300px] md:h-[400px] object-cover"
                 />

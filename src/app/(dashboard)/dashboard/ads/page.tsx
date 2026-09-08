@@ -49,7 +49,7 @@ const AD_TYPES = [
 // Les 2 premiers = les grandes bannières publicitaires sous le hero de l'accueil.
 const BANNER_FORMATS = [
   { value: 'promo_gauche', label: '1440 × 720', usage: 'Accueil — Grande bannière gauche (carrousel)' },
-  { value: 'promo_droite', label: '960 × 720', usage: 'Accueil — Grande bannière droite' },
+  { value: 'promo_droite', label: '1440 × 720', usage: 'Accueil — Grande bannière droite' },
   { value: '336x280', label: '336 × 280', usage: 'Accueil — Milieu' },
   { value: '728x90', label: '728 × 90', usage: 'Accueil — Avant footer' },
   { value: '300x600', label: '300 × 600', usage: 'Profil entreprise — Sidebar' },
