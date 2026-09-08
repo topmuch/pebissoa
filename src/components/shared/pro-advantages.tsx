@@ -7,12 +7,16 @@
  */
 
 import { useState } from 'react';
+import Link from 'next/link';
+import { ArrowRight } from 'lucide-react';
 import { useTranslation } from '@/lib/i18n';
 import type { Locale } from '@/lib/i18n';
 
 interface ProCard {
   /** Photo réelle affichée en haut de la carte (dans /public/pro-avantages) */
   image: string;
+  /** Page dédiée vers laquelle la carte pointe */
+  href: string;
   title: Record<Locale, string>;
   desc: Record<Locale, string>;
 }
@@ -41,6 +45,7 @@ function CardImage({ src, alt }: { src: string; alt: string }) {
 const CARDS: ProCard[] = [
   {
     image: '/pro-avantages/pro-reference.jpg',
+    href: '/reference-pros',
     title: {
       fr: 'La référence des pros du pays',
       pt: 'A referência dos profissionais do país',
@@ -54,6 +59,7 @@ const CARDS: ProCard[] = [
   },
   {
     image: '/pro-avantages/pro-fiches.jpg',
+    href: '/fiches-pros',
     title: {
       fr: 'Des fiches enrichies par les pros',
       pt: 'Fichas enriquecidas pelos profissionais',
@@ -67,6 +73,7 @@ const CARDS: ProCard[] = [
   },
   {
     image: '/pro-avantages/pro-avis.jpg',
+    href: '/avis-clients',
     title: {
       fr: 'Des avis pour vous aider à décider',
       pt: 'Avaliações para o ajudar a decidir',
@@ -80,6 +87,7 @@ const CARDS: ProCard[] = [
   },
   {
     image: '/pro-avantages/pro-services.jpg',
+    href: '/services-en-ligne',
     title: {
       fr: 'Des services en ligne pour vous faciliter la vie',
       pt: 'Serviços online para lhe facilitar a vida',
@@ -112,8 +120,10 @@ export function ProAdvantages() {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
           {CARDS.map((card) => (
-            <div
+            <Link
               key={card.title.fr}
+              href={card.href}
+              aria-label={card.title[locale]}
               className="group bg-white dark:bg-card rounded-2xl border border-border/60 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1 overflow-hidden flex flex-col"
             >
               {/* Photo réelle */}
@@ -125,14 +135,18 @@ export function ProAdvantages() {
 
               {/* Textes */}
               <div className="flex flex-1 flex-col px-4 py-4 md:px-5 md:py-5 text-center">
-                <h3 className="text-sm md:text-base font-bold text-foreground leading-snug mb-2">
+                <h3 className="text-sm md:text-base font-bold text-foreground leading-snug mb-2 group-hover:text-[#0066CC] transition-colors">
                   {card.title[locale]}
                 </h3>
                 <p className="text-xs md:text-sm text-muted-foreground leading-relaxed">
                   {card.desc[locale]}
                 </p>
+                <span className="mt-3 inline-flex items-center justify-center gap-1 text-xs font-bold text-[#0066CC] opacity-0 group-hover:opacity-100 translate-y-1 group-hover:translate-y-0 transition-all duration-300">
+                  {tl({ fr: 'En savoir plus', pt: 'Saber mais', en: 'Learn more' })}
+                  <ArrowRight className="h-3.5 w-3.5" />
+                </span>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
       </div>
