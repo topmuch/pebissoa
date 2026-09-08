@@ -513,7 +513,7 @@ export default function HomePage() {
       {/* ============ BANNER 728x90 Avant Footer ============ */}
       <HomepageFooterBanner />
 
-      {/* ============ POURQUOI PEBISSOA — 4 cartes avantages (juste avant le footer) ============ */}
+      {/* ============ POURQUOI PEBISS — 4 cartes avantages (juste avant le footer) ============ */}
       <ProAdvantages />
 
       {/* ============ FLOATING WHATSAPP BUTTON ============ */}

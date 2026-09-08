@@ -1,7 +1,7 @@
 'use client';
 
 /**
- * Section « Pourquoi PebissOa » — 4 cartes avantages avec IMAGES RÉELLES
+ * Section « Pourquoi Pebiss » — 4 cartes avantages avec IMAGES RÉELLES
  * (plus d'icônes). Placée tout en bas de la page d'accueil, juste avant le footer.
  * Pour changer une photo : remplacer le fichier dans /public/pro-avantages/.
  */
@@ -23,7 +23,7 @@ function CardImage({ src, alt }: { src: string; alt: string }) {
   if (failed) {
     return (
       <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-primary/20 via-primary/10 to-primary/25">
-        <span className="text-2xl font-extrabold text-primary/40">PebissOa</span>
+        <span className="text-2xl font-extrabold text-primary/40">Pebiss</span>
       </div>
     );
   }
@@ -84,8 +84,8 @@ export function ProAdvantages() {
           className="text-xl sm:text-2xl md:text-3xl font-extrabold text-center text-foreground mb-8 md:mb-10"
         >
           {locale === 'pt'
-            ? 'Com a PebissOa, encontre sempre o profissional certo perto de si !'
-            : 'Avec PebissOa, trouvez toujours le bon pro près de chez vous !'}
+            ? 'Com a Pebiss, encontre sempre o profissional certo perto de si !'
+            : 'Avec Pebiss, trouvez toujours le bon pro près de chez vous !'}
         </h2>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">

@@ -101,8 +101,8 @@ const PROMO_SLIDES = [
     href: '/register',
     image: '/banners/promo-business.jpg',
     alt: {
-      fr: 'Entrepreneure africaine dans sa boutique — inscrivez votre entreprise sur PebissOa',
-      pt: 'Empreendedora africana na sua loja — registe a sua empresa no PebissOa',
+      fr: 'Entrepreneure africaine dans sa boutique — inscrivez votre entreprise sur Pebiss',
+      pt: 'Empreendedora africana na sua loja — registe a sua empresa no Pebiss',
     },
     title: {
       fr: 'Référencez votre entreprise',
@@ -116,8 +116,8 @@ const PROMO_SLIDES = [
     href: '/annuaire',
     image: '/banners/promo-visibilite.jpg',
     alt: {
-      fr: 'Commerçant souriant dans sa boutique avec des clients — soyez visible sur PebissOa',
-      pt: 'Comerciante sorridente na sua loja com clientes — esteja visível no PebissOa',
+      fr: 'Commerçant souriant dans sa boutique avec des clients — soyez visible sur Pebiss',
+      pt: 'Comerciante sorridente na sua loja com clientes — esteja visível no Pebiss',
     },
     title: {
       fr: 'Des milliers de clients',
@@ -219,7 +219,7 @@ function PromoSlider() {
       className="group relative block overflow-hidden rounded-xl h-72 sm:h-80 md:h-96"
       role="region"
       aria-roledescription="carrousel"
-      aria-label={locale === 'pt' ? 'Promoções PebissOa' : 'Promotions PebissOa'}
+      aria-label={locale === 'pt' ? 'Promoções Pebiss' : 'Promotions Pebiss'}
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
       onTouchStart={(e) => {
@@ -269,7 +269,7 @@ function PromoSlider() {
             ) : (
               <div className="absolute inset-0 p-5 sm:p-6 md:p-8 flex flex-col items-start">
                 <span className="bg-red-600 text-white font-extrabold text-xs sm:text-sm md:text-base px-3 py-1.5 leading-none inline-flex items-center gap-1 rounded-sm">
-                  PEBISSOA <Sparkles className="h-3.5 w-3.5 md:h-4 md:w-4" />
+                  PEBISS <Sparkles className="h-3.5 w-3.5 md:h-4 md:w-4" />
                 </span>
 
                 <p className="mt-3 sm:mt-4 text-white font-extrabold uppercase leading-tight text-lg sm:text-2xl md:text-3xl drop-shadow-md max-w-[75%]">
@@ -374,7 +374,7 @@ function RightPromoBanner() {
 
         <div className="absolute inset-0 p-5 sm:p-6 md:p-8 flex flex-col items-center text-center">
           <p className="text-white font-extrabold text-base sm:text-lg md:text-2xl leading-tight drop-shadow">
-            Professionnels,<br />donnez plus de visibilité<br className="hidden sm:block" /> à votre entreprise sur PebissOa
+            Professionnels,<br />donnez plus de visibilité<br className="hidden sm:block" /> à votre entreprise sur Pebiss
           </p>
 
           <div className="mt-3 sm:mt-4 bg-white/95 rounded-md px-4 py-2.5 flex items-center gap-2.5 shadow-lg">
@@ -385,7 +385,7 @@ function RightPromoBanner() {
           </div>
 
           <span className="mt-auto inline-flex items-center gap-1.5 bg-blue-600 group-hover:bg-blue-700 text-white text-xs sm:text-sm md:text-base font-bold px-4 sm:px-5 py-2.5 rounded-full transition-colors">
-            Bénéficier de PebissOa +
+            Bénéficier de Pebiss +
           </span>
         </div>
       </a>
