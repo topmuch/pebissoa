@@ -34,7 +34,7 @@ function CategoryImage({ slug, name }: { slug: string; name: string }) {
   if (stage === 2) {
     return (
       <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-primary/15 via-primary/5 to-primary/15">
-        <Building2 className="h-7 w-7 text-primary/40" aria-hidden="true" />
+        <Building2 className="h-12 w-12 text-primary/40" aria-hidden="true" />
       </div>
     );
   }
@@ -53,13 +53,15 @@ function CategoryImage({ slug, name }: { slug: string; name: string }) {
 /** Squelette de chargement — même forme que les lignes réelles */
 function CategoryRowSkeleton() {
   return (
-    <div className="flex items-center gap-4 rounded-2xl border border-border/40 bg-card p-3 shadow-sm">
-      <Skeleton className="h-20 w-24 shrink-0 rounded-xl sm:h-24 sm:w-36" />
-      <div className="flex-1 space-y-2">
-        <Skeleton className="h-4 w-1/2" />
-        <Skeleton className="h-3 w-1/3" />
+    <div className="flex flex-col gap-3 rounded-2xl border border-border/40 bg-card p-3 shadow-sm sm:flex-row sm:items-center sm:gap-6 sm:p-4">
+      <Skeleton className="h-44 w-full shrink-0 rounded-xl sm:h-48 sm:w-72" />
+      <div className="flex flex-1 items-center justify-between gap-3">
+        <div className="flex-1 space-y-2">
+          <Skeleton className="h-4 w-1/2" />
+          <Skeleton className="h-3 w-1/3" />
+        </div>
+        <Skeleton className="h-11 w-11 rounded-full" />
       </div>
-      <Skeleton className="h-9 w-9 rounded-full" />
     </div>
   );
 }
@@ -134,13 +136,13 @@ export default function CategoriesPage() {
 
         {/* ===== Liste des catégories ===== */}
         {isLoading ? (
-          <div className="mx-auto max-w-3xl space-y-3">
+          <div className="mx-auto max-w-5xl space-y-4">
             {Array.from({ length: 8 }).map((_, i) => (
               <CategoryRowSkeleton key={i} />
             ))}
           </div>
         ) : filtered.length === 0 ? (
-          <div className="mx-auto max-w-3xl rounded-2xl border border-dashed border-border bg-card p-10 text-center">
+          <div className="mx-auto max-w-5xl rounded-2xl border border-dashed border-border bg-card p-10 text-center">
             <span className="inline-flex h-14 w-14 items-center justify-center rounded-full bg-muted mb-3">
               <Search className="h-6 w-6 text-muted-foreground" />
             </span>
@@ -151,44 +153,46 @@ export default function CategoriesPage() {
             </p>
           </div>
         ) : (
-          <ul className="mx-auto max-w-3xl space-y-3" aria-label={t('categories_page_title')}>
+          <ul className="mx-auto max-w-5xl space-y-4" aria-label={t('categories_page_title')}>
             {filtered.map((cat) => (
               <li key={cat.id}>
                 <Link
                   href={`/annuaire?category=${cat.slug}`}
-                  className="group flex items-center gap-3 sm:gap-4 rounded-2xl border border-border/40 bg-card p-3 sm:p-3.5 shadow-sm hover:shadow-lg hover:shadow-black/5 hover:-translate-y-0.5 transition-all duration-300"
+                  className="group flex flex-col gap-3 rounded-2xl border border-border/40 bg-card p-3 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-black/5 sm:flex-row sm:items-center sm:gap-6 sm:p-4"
                 >
-                  {/* Image réelle de la catégorie */}
-                  <div className="relative h-20 w-24 sm:h-24 sm:w-36 shrink-0 overflow-hidden rounded-xl bg-muted">
+                  {/* Image réelle de la catégorie — pleine largeur sur mobile */}
+                  <div className="relative h-44 w-full shrink-0 overflow-hidden rounded-xl bg-muted sm:h-48 sm:w-72">
                     <CategoryImage slug={cat.slug} name={categoryName(cat)} />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-transparent pointer-events-none" />
                   </div>
 
-                  {/* Textes */}
-                  <div className="min-w-0 flex-1">
-                    <h2 className="text-sm sm:text-base font-bold text-foreground leading-snug truncate">
-                      {categoryName(cat)}
-                    </h2>
-                    <p className="mt-1 flex items-center gap-1.5 text-xs sm:text-sm text-muted-foreground">
-                      <Building2 className="h-3.5 w-3.5 shrink-0" />
-                      {cat._count.businesses > 0 ? (
-                        <span>
-                          {t('categories_page_businesses', { count: cat._count.businesses })}
-                        </span>
-                      ) : (
-                        <span className="italic">{t('categories_page_empty')}</span>
-                      )}
-                    </p>
-                    <span className="mt-1.5 inline-flex items-center gap-1 text-[11px] sm:text-xs font-semibold text-primary opacity-0 -translate-x-1 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0">
-                      {t('categories_page_explore')}
-                      <ArrowRight className="h-3 w-3" />
+                  {/* Textes + flèche */}
+                  <div className="flex min-w-0 flex-1 items-center justify-between gap-3 pr-1 sm:gap-6 sm:pr-0">
+                    <div className="min-w-0">
+                      <h2 className="text-base sm:text-lg font-bold text-foreground leading-snug truncate">
+                        {categoryName(cat)}
+                      </h2>
+                      <p className="mt-1.5 flex items-center gap-1.5 text-sm sm:text-base text-muted-foreground">
+                        <Building2 className="h-3.5 w-3.5 shrink-0" />
+                        {cat._count.businesses > 0 ? (
+                          <span>
+                            {t('categories_page_businesses', { count: cat._count.businesses })}
+                          </span>
+                        ) : (
+                          <span className="italic">{t('categories_page_empty')}</span>
+                        )}
+                      </p>
+                      <span className="mt-1.5 inline-flex items-center gap-1 text-[11px] sm:text-xs font-semibold text-primary opacity-0 -translate-x-1 transition-all duration-300 group-hover:opacity-100 group-hover:translate-x-0">
+                        {t('categories_page_explore')}
+                        <ArrowRight className="h-3 w-3" />
+                      </span>
+                    </div>
+
+                    {/* Flèche */}
+                    <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-muted text-muted-foreground transition-all duration-300 group-hover:bg-primary group-hover:text-white">
+                      <ChevronRight className="h-5 w-5 transition-transform duration-300 group-hover:translate-x-0.5" />
                     </span>
                   </div>
-
-                  {/* Flèche */}
-                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-muted text-muted-foreground transition-all duration-300 group-hover:bg-primary group-hover:text-white">
-                    <ChevronRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" />
-                  </span>
                 </Link>
               </li>
             ))}
