@@ -67,7 +67,7 @@ function CategoryImage({ slug, name }: { slug: string; name: string }) {
 
 /* ============ Carte catégorie — même style que PjBusinessCard (/annuaire) ============ */
 function PjCategoryCard({ cat, label }: { cat: Category; label: string }) {
-  const { t, locale } = useTranslation();
+  const { t, tl } = useTranslation();
 
   return (
     <Link
@@ -94,7 +94,7 @@ function PjCategoryCard({ cat, label }: { cat: Category; label: string }) {
             {cat._count.businesses > 0 ? (
               <span>{t('categories_page_businesses', { count: cat._count.businesses })}</span>
             ) : (
-              <span className="italic">{locale === 'pt' ? 'Sem empresas por agora' : 'Aucune entreprise'}</span>
+              <span className="italic">{tl({ fr: 'Aucune entreprise', pt: 'Sem empresas por agora', en: 'No businesses yet' })}</span>
             )}
           </p>
 
@@ -124,7 +124,7 @@ function CategoryCardSkeleton() {
 }
 
 export default function CategoriesPage() {
-  const { t, locale } = useTranslation();
+  const { t, locale, tl } = useTranslation();
   const [filter, setFilter] = useState('');
   const [rubrique, setRubrique] = useState('');
 
@@ -176,23 +176,11 @@ export default function CategoriesPage() {
       <div className="bg-[#0066CC]">
         <div className="container mx-auto px-4 py-10 md:py-14 text-center">
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold uppercase tracking-tight text-white leading-tight">
-            {locale === 'pt' ? (
-              <>
-                Todas as{' '}
-                <span className="inline-block bg-white text-[#0066CC] px-3 md:px-4 py-0.5 -rotate-2 rounded-sm align-middle">
-                  categorias
-                </span>{' '}
-                <span className="inline-block border-b-[5px] md:border-b-[7px] border-white/80 leading-none">?</span>
-              </>
-            ) : (
-              <>
-                Toutes les{' '}
-                <span className="inline-block bg-white text-[#0066CC] px-3 md:px-4 py-0.5 -rotate-2 rounded-sm align-middle">
-                  catégories
-                </span>{' '}
-                <span className="inline-block border-b-[5px] md:border-b-[7px] border-white/80 leading-none">?</span>
-              </>
-            )}
+            {tl({ fr: 'Toutes les', pt: 'Todas as', en: 'All' })}{' '}
+            <span className="inline-block bg-white text-[#0066CC] px-3 md:px-4 py-0.5 -rotate-2 rounded-sm align-middle">
+              {tl({ fr: 'catégories', pt: 'categorias', en: 'categories' })}
+            </span>{' '}
+            <span className="inline-block border-b-[5px] md:border-b-[7px] border-white/80 leading-none">?</span>
           </h1>
         </div>
       </div>
@@ -204,19 +192,21 @@ export default function CategoriesPage() {
             {sorted.length > 0 ? (
               <>
                 {sorted.length}{' '}
-                {locale === 'pt'
-                  ? `categorias · ${totalBusinesses} empresas na Guiné-Bissau`
-                  : `catégories · ${totalBusinesses} entreprises en Guinée-Bissau`}
+                {tl({
+                  fr: `catégories · ${totalBusinesses} entreprises en Guinée-Bissau`,
+                  pt: `categorias · ${totalBusinesses} empresas na Guiné-Bissau`,
+                  en: `categories · ${totalBusinesses} businesses in Guinea-Bissau`,
+                })}
               </>
             ) : (
-              (locale === 'pt' ? 'Categorias na Guiné-Bissau' : 'Catégories en Guinée-Bissau')
+              tl({ fr: 'Catégories en Guinée-Bissau', pt: 'Categorias na Guiné-Bissau', en: 'Categories in Guinea-Bissau' })
             )}
           </p>
           <button
             onClick={scrollToSearch}
             className="shrink-0 h-8 px-3.5 rounded-full bg-white dark:bg-card border border-gray-300 dark:border-border text-[13px] font-medium text-gray-900 dark:text-foreground hover:border-gray-900 dark:hover:border-foreground transition-colors"
           >
-            {locale === 'pt' ? 'Procurar uma categoria' : 'Rechercher une catégorie'}
+            {tl({ fr: 'Rechercher une catégorie', pt: 'Procurar uma categoria', en: 'Search for a category' })}
           </button>
         </div>
       </div>
@@ -254,7 +244,7 @@ export default function CategoriesPage() {
           </div>
           <button
             onClick={() => chipsRef.current?.scrollBy({ left: 320, behavior: 'smooth' })}
-            aria-label={locale === 'pt' ? 'Mais categorias' : 'Plus de catégories'}
+            aria-label={tl({ fr: 'Plus de catégories', pt: 'Mais categorias', en: 'More categories' })}
             className="hidden sm:inline-flex absolute right-0 top-0 h-9 w-9 items-center justify-center rounded-full border border-gray-300 dark:border-border bg-white dark:bg-card text-foreground hover:border-gray-900 dark:hover:border-foreground transition-colors shadow-sm"
           >
             <ChevronRight className="h-4 w-4" />
@@ -275,8 +265,8 @@ export default function CategoriesPage() {
                     type="search"
                     value={filter}
                     onChange={(e) => setFilter(e.target.value)}
-                    placeholder={locale === 'pt' ? 'Procurar uma categoria…' : 'Rechercher une catégorie…'}
-                    aria-label={locale === 'pt' ? 'Procurar uma categoria' : 'Rechercher une catégorie'}
+                    placeholder={tl({ fr: 'Rechercher une catégorie…', pt: 'Procurar uma categoria…', en: 'Search for a category…' })}
+                    aria-label={tl({ fr: 'Rechercher une catégorie', pt: 'Procurar uma categoria', en: 'Search for a category' })}
                     className="pl-10 h-11 rounded-xl"
                   />
                 </div>
@@ -286,7 +276,7 @@ export default function CategoriesPage() {
                 >
                   <Search className="h-4 w-4" />
                   <span className="hidden sm:inline ml-2">
-                    {locale === 'pt' ? 'Procurar' : 'Rechercher'}
+                    {tl({ fr: 'Rechercher', pt: 'Procurar', en: 'Search' })}
                   </span>
                 </Button>
               </form>
@@ -331,13 +321,9 @@ export default function CategoriesPage() {
 
             <span className="text-sm text-muted-foreground font-medium">
               {filtered.length}{' '}
-              {locale === 'pt'
-                ? filtered.length === 1
-                  ? 'categoria'
-                  : 'categorias'
-                : filtered.length === 1
-                  ? 'catégorie'
-                  : 'catégories'}
+              {filtered.length === 1
+                ? tl({ fr: 'catégorie', pt: 'categoria', en: 'category' })
+                : tl({ fr: 'catégories', pt: 'categorias', en: 'categories' })}
             </span>
           </div>
         )}
@@ -362,9 +348,11 @@ export default function CategoriesPage() {
                 {t('annuaire_no_results')}
               </h3>
               <p className="text-muted-foreground mb-6 max-w-md mx-auto">
-                {locale === 'pt'
-                  ? 'Nenhuma categoria corresponde à sua pesquisa'
-                  : 'Aucune catégorie ne correspond à votre recherche'}
+                {tl({
+                  fr: 'Aucune catégorie ne correspond à votre recherche',
+                  pt: 'Nenhuma categoria corresponde à sua pesquisa',
+                  en: 'No category matches your search',
+                })}
               </p>
               {hasActiveFilters && (
                 <Button variant="outline" onClick={clearFilters} className="rounded-full">

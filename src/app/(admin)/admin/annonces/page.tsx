@@ -2,7 +2,7 @@
 
 import { useState, useRef } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { useTranslation } from '@/lib/i18n';
+import { useTranslation, type Locale } from '@/lib/i18n';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -62,9 +62,9 @@ const BANNER_FORMATS: Record<string, { label: string; w: number; h: number; usag
   'detail_728x90': { label: '728 × 90',  w: 728, h: 90,  usage: 'Profil entreprise — Avant footer' },
 };
 
-const POSITION_LABELS: Record<string, Record<string, string>> = {
-  home: { fr: 'Page d\'accueil', pt: 'Página inicial' },
-  enterprise: { fr: 'Page détail annonce', pt: 'Página detalhe' },
+const POSITION_LABELS: Record<string, Record<Locale, string>> = {
+  home: { fr: 'Page d\'accueil', pt: 'Página inicial', en: 'Homepage' },
+  enterprise: { fr: 'Page détail annonce', pt: 'Página detalhe', en: 'Ad detail page' },
 };
 
 export default function AdminAnnoncesPage() {
@@ -310,7 +310,7 @@ export default function AdminAnnoncesPage() {
                       </TableCell>
                       <TableCell className="text-sm">{ad.category?.name || '-'}</TableCell>
                       <TableCell className="text-sm text-muted-foreground">
-                        {new Date(ad.createdAt).toLocaleDateString(locale === 'fr' ? 'fr-FR' : 'pt-PT')}
+                        {new Date(ad.createdAt).toLocaleDateString(locale === 'fr' ? 'fr-FR' : locale === 'en' ? 'en-GB' : 'pt-PT')}
                       </TableCell>
                       <TableCell>
                         <div className="flex items-center justify-end">

@@ -189,7 +189,7 @@ export default function DashboardPage() {
                         </div>
                       </div>
                       <span className="text-xs text-muted-foreground">
-                        {new Date(review.createdAt).toLocaleDateString(locale === 'fr' ? 'fr-FR' : 'pt-PT')}
+                        {new Date(review.createdAt).toLocaleDateString(locale === 'fr' ? 'fr-FR' : locale === 'en' ? 'en-GB' : 'pt-PT')}
                       </span>
                     </div>
                     {review.comment && (

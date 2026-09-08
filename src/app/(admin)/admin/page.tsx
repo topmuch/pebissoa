@@ -98,7 +98,7 @@ export default function AdminDashboardPage() {
   const recentBusinesses = stats?.recentBusinesses || [];
   const monthlyMap: Record<string, number> = {};
   recentBusinesses.forEach((b: any) => {
-    const month = new Date(b.createdAt).toLocaleDateString(locale === 'fr' ? 'fr-FR' : 'pt-PT', { year: '2-digit', month: 'short' });
+    const month = new Date(b.createdAt).toLocaleDateString(locale === 'fr' ? 'fr-FR' : locale === 'en' ? 'en-GB' : 'pt-PT', { year: '2-digit', month: 'short' });
     monthlyMap[month] = (monthlyMap[month] || 0) + 1;
   });
   // Generate some baseline data
@@ -106,7 +106,7 @@ export default function AdminDashboardPage() {
   const months = [];
   for (let i = 5; i >= 0; i--) {
     const d = new Date(now.getFullYear(), now.getMonth() - i, 1);
-    const key = d.toLocaleDateString(locale === 'fr' ? 'fr-FR' : 'pt-PT', { year: '2-digit', month: 'short' });
+    const key = d.toLocaleDateString(locale === 'fr' ? 'fr-FR' : locale === 'en' ? 'en-GB' : 'pt-PT', { year: '2-digit', month: 'short' });
     months.push({ month: key, inscriptions: monthlyMap[key] || 0 });
   }
 
@@ -306,7 +306,7 @@ export default function AdminDashboardPage() {
                     <TableRow key={b.id}>
                       <TableCell className="font-medium text-sm truncate max-w-[180px]">{b.name}</TableCell>
                       <TableCell className="text-sm text-muted-foreground">
-                        {new Date(b.createdAt).toLocaleDateString(locale === 'fr' ? 'fr-FR' : 'pt-PT')}
+                        {new Date(b.createdAt).toLocaleDateString(locale === 'fr' ? 'fr-FR' : locale === 'en' ? 'en-GB' : 'pt-PT')}
                       </TableCell>
                     </TableRow>
                   ))}

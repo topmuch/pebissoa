@@ -280,7 +280,7 @@ export default function AdsPage() {
                           <p className="text-sm text-muted-foreground mt-1 line-clamp-2">{ad.description}</p>
                         )}
                         <p className="text-xs text-muted-foreground mt-2">
-                          {new Date(ad.createdAt).toLocaleDateString(locale === 'fr' ? 'fr-FR' : 'pt-PT')}
+                          {new Date(ad.createdAt).toLocaleDateString(locale === 'fr' ? 'fr-FR' : locale === 'en' ? 'en-GB' : 'pt-PT')}
                         </p>
                       </div>
                       <div className="flex gap-1 shrink-0">

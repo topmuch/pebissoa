@@ -77,7 +77,7 @@ function CoverImage({ src, alt, className }: { src: string; alt: string; classNa
 }
 
 export function BusinessCard({ business, variant = 'grid' }: BusinessCardProps) {
-  const { locale } = useTranslation();
+  const { locale, tl } = useTranslation();
   const categoryLabel = business.category
     ? (business.category.slug && categoryTranslations[business.category.slug]
         ? categoryTranslations[business.category.slug][locale]
@@ -236,7 +236,7 @@ export function BusinessCard({ business, variant = 'grid' }: BusinessCardProps) 
 
           {/* CTA révélé au survol (desktop) — espace réservé pour aligner les cartes */}
           <div className="hidden sm:flex items-center justify-center gap-1.5 mt-3 h-8 rounded-xl bg-pebiss-orange/10 text-pebiss-orange text-xs font-semibold opacity-0 -translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
-            {locale === 'pt' ? 'Ver a ficha' : 'Voir la fiche'}
+            {tl({ fr: 'Voir la fiche', pt: 'Ver a ficha', en: 'View profile' })}
             <ArrowRight className="h-3.5 w-3.5" />
           </div>
         </div>

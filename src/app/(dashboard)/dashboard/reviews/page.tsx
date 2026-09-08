@@ -147,7 +147,7 @@ export default function ReviewsPage() {
                     <div>
                       <p className="font-medium text-sm">{review.user?.name || t('dash_user_fallback')}</p>
                       <p className="text-xs text-muted-foreground">
-                        {new Date(review.createdAt).toLocaleDateString(locale === 'fr' ? 'fr-FR' : 'pt-PT', {
+                        {new Date(review.createdAt).toLocaleDateString(locale === 'fr' ? 'fr-FR' : locale === 'en' ? 'en-GB' : 'pt-PT', {
                           year: 'numeric',
                           month: 'long',
                           day: 'numeric',

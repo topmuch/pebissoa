@@ -6,7 +6,6 @@ import { useQuery } from '@tanstack/react-query';
 import { Button } from '@/components/ui/button';
 import { useTranslation, categoryTranslations } from '@/lib/i18n';
 import { RUBRIQUES } from '@/lib/rubriques';
-import { SocialIconsRow } from '@/components/shared/social-icons';
 import { PromoDuoBanners, HomepageFooterBanner } from '@/components/shared/banner-placement';
 import { ProAdvantages } from '@/components/shared/pro-advantages';
 import {
@@ -120,7 +119,7 @@ interface Business {
 
 export default function HomePage() {
   const router = useRouter();
-  const { t, locale } = useTranslation();
+  const { t, tl, locale } = useTranslation();
   const [searchQuery, setSearchQuery] = useState('');
   const [searchCity, setSearchCity] = useState('');
   const [searchCategory, setSearchCategory] = useState('');
@@ -197,7 +196,7 @@ export default function HomePage() {
         {/* Background Image */}
         <img
           src="/hero-banner.jpg"
-          alt="Équipe d'entrepreneurs africains se serrant la main — Pebiss, annuaire d'entreprises en Guinée-Bissau"
+          alt="Équipe d'entrepreneurs africains en réunion dans un bureau — Pebiss, annuaire d'entreprises en Guinée-Bissau"
           className="absolute inset-0 w-full h-full object-cover"
           loading="eager"
         />
@@ -303,14 +302,6 @@ export default function HomePage() {
                 );
               })}
             </div>
-
-            {/* Réseaux sociaux — gros icônes ronds */}
-            <div className="mt-5 sm:mt-6 flex flex-col items-center gap-2.5">
-              <span className="text-white/50 text-[10px] sm:text-xs font-semibold uppercase tracking-[0.2em]">
-                {locale === 'pt' ? 'Siga-nos' : 'Suivez-nous'}
-              </span>
-              <SocialIconsRow />
-            </div>
           </div>
         </div>
       </section>
@@ -323,12 +314,14 @@ export default function HomePage() {
         <div className="container mx-auto px-4">
           <div className="mb-6 md:mb-8">
             <h2 className="text-xl md:text-2xl font-semibold text-foreground">
-              {locale === 'pt' ? 'Os seus comércios de proximidade' : 'Vos commerces de proximité'}
+              {tl({ fr: 'Vos commerces de proximité', pt: 'Os seus comércios de proximidade', en: 'Your local businesses' })}
             </h2>
             <p className="text-sm text-muted-foreground mt-1">
-              {locale === 'pt'
-                ? 'Bons planos, restaurantes, hotéis, compras, saúde, imobiliário… — clique para ver os anúncios'
-                : 'Bons plans, restos, hôtels, shoppings, santé, immobilier… — cliquez pour voir les annonces'}
+              {tl({
+                fr: 'Bons plans, restos, hôtels, shoppings, santé, immobilier… — cliquez pour voir les annonces',
+                pt: 'Bons planos, restaurantes, hotéis, compras, saúde, imobiliário… — clique para ver os anúncios',
+                en: 'Great deals, restaurants, hotels, shopping, health, real estate… — click to see the ads',
+              })}
             </p>
           </div>
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-5">
@@ -367,7 +360,7 @@ export default function HomePage() {
                       {rubrique.subtitles[locale]}
                     </p>
                     <span className="inline-flex items-center gap-1 mt-2 md:mt-3 bg-white text-gray-900 text-[10px] md:text-xs font-bold px-2.5 md:px-3.5 py-1 md:py-1.5 rounded-full transition-colors group-hover:bg-primary group-hover:text-white">
-                      {locale === 'pt' ? 'Ver' : 'Explorer'}
+                      {tl({ fr: 'Explorer', pt: 'Ver', en: 'Explore' })}
                       <ArrowRight className="h-3 w-3 transition-transform group-hover:translate-x-0.5" />
                     </span>
                   </div>

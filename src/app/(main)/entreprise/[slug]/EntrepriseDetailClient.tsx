@@ -674,7 +674,7 @@ export default function EntrepriseDetailClient() {
                             <div className="flex items-center gap-2">
                               <RatingStars rating={review.rating} showValue={false} size="sm" />
                               <span className="text-xs text-[#6D6D6D]">
-                                {new Date(review.createdAt).toLocaleDateString(locale === 'fr' ? 'fr-FR' : 'pt-PT', {
+                                {new Date(review.createdAt).toLocaleDateString(locale === 'fr' ? 'fr-FR' : locale === 'en' ? 'en-GB' : 'pt-PT', {
                                   day: 'numeric',
                                   month: 'long',
                                   year: 'numeric',
@@ -743,7 +743,7 @@ export default function EntrepriseDetailClient() {
                 {/* Posted date */}
                 <div className="flex items-center gap-1.5 text-sm text-[#6D6D6D] mb-5">
                   <Calendar className="h-3.5 w-3.5" />
-                  {t('entreprise_published')} {new Date(business.createdAt).toLocaleDateString(locale === 'fr' ? 'fr-FR' : 'pt-PT', { day: 'numeric', month: 'long', year: 'numeric' })}
+                  {t('entreprise_published')} {new Date(business.createdAt).toLocaleDateString(locale === 'fr' ? 'fr-FR' : locale === 'en' ? 'en-GB' : 'pt-PT', { day: 'numeric', month: 'long', year: 'numeric' })}
                 </div>
 
                 {/* Action Buttons */}
@@ -799,7 +799,7 @@ export default function EntrepriseDetailClient() {
                   </div>
                 </div>
                 <p className="text-xs text-[#6D6D6D]">
-                  {t('entreprise_member_since')} {new Date(business.createdAt).toLocaleDateString(locale === 'fr' ? 'fr-FR' : 'pt-PT', { day: 'numeric', month: 'long', year: 'numeric' })}
+                  {t('entreprise_member_since')} {new Date(business.createdAt).toLocaleDateString(locale === 'fr' ? 'fr-FR' : locale === 'en' ? 'en-GB' : 'pt-PT', { day: 'numeric', month: 'long', year: 'numeric' })}
                 </p>
               </div>
             </div>

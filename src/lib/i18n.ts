@@ -1,6 +1,7 @@
 import { create } from 'zustand';
+import { en } from './i18n-en';
 
-export type Locale = 'pt' | 'fr';
+export type Locale = 'pt' | 'fr' | 'en';
 
 interface I18nState {
   locale: Locale;
@@ -649,6 +650,7 @@ const fr: Record<string, string> = {
   'admin_settings_select_lang': 'Sélectionner la langue',
   'admin_settings_lang_pt': 'Portugais (PT)',
   'admin_settings_lang_fr': 'Français (FR)',
+  'admin_settings_lang_en': 'Anglais',
   'admin_settings_logo': 'Logo du site',
   'admin_settings_upload_logo': 'Télécharger le logo',
   'admin_settings_contact_info': 'Coordonnées',
@@ -1589,6 +1591,7 @@ const pt: Record<string, string> = {
   'admin_settings_select_lang': 'Selecionar o idioma',
   'admin_settings_lang_pt': 'Português (PT)',
   'admin_settings_lang_fr': 'Francês (FR)',
+  'admin_settings_lang_en': 'Inglês',
   'admin_settings_logo': 'Logótipo do site',
   'admin_settings_upload_logo': 'Carregar logótipo',
   'admin_settings_contact_info': 'Contactos',
@@ -1897,57 +1900,57 @@ const pt: Record<string, string> = {
   'register_form_free': 'Grátis · 2 minutos · sem compromisso',
 };
 
-// Category name translation map: slug -> { fr: string, pt: string }
-export const categoryTranslations: Record<string, { fr: string; pt: string }> = {
-  'mode-textile': { fr: 'Mode & Textile', pt: 'Moda & Têxtil' },
-  'restaurants-alimentation': { fr: 'Restaurants & Alimentation', pt: 'Restaurantes & Alimentação' },
-  'tourisme-hotellerie': { fr: 'Tourisme & Hôtellerie', pt: 'Turismo & Hotelaria' },
-  'services-financiers': { fr: 'Services Financiers', pt: 'Serviços Financeiros' },
-  'agriculture-agroalimentaire': { fr: 'Agriculture & Agroalimentaire', pt: 'Agricultura & Agroalimentar' },
-  'commerce-distribution': { fr: 'Commerce & Distribution', pt: 'Comércio & Distribuição' },
-  'btp-construction': { fr: 'BTP & Construction', pt: 'Construção Civil' },
-  'sante-bien-etre': { fr: 'Santé & Bien-être', pt: 'Saúde & Bem-estar' },
-  'education-formation': { fr: 'Éducation & Formation', pt: 'Educação & Formação' },
-  'immobilier': { fr: 'Immobilier', pt: 'Imobiliário' },
-  'technologie-informatique': { fr: 'Technologie & Informatique', pt: 'Tecnologia & Informática' },
-  'transport-logistique': { fr: 'Transport & Logistique', pt: 'Transporte & Logística' },
-  'beaute-bien-etre': { fr: 'Beauté & Bien-être', pt: 'Beleza & Bem-estar' },
-  'artisanat': { fr: 'Artisanat', pt: 'Artesanato' },
-  'evenementiel': { fr: 'Événementiel', pt: 'Organização de Eventos' },
-  'telecommunications': { fr: 'Télécommunications', pt: 'Telecomunicações' },
-  'energie-mines': { fr: 'Énergie & Mines', pt: 'Energia & Minas' },
-  'justice-droit': { fr: 'Justice & Droit', pt: 'Justiça & Direito' },
-  'media-communication': { fr: 'Média & Communication', pt: 'Média & Comunicação' },
-  'ngo-assoc': { fr: 'ONG & Associations', pt: 'ONG & Associações' },
+// Category name translation map: slug -> { fr: string, pt: string, en: string }
+export const categoryTranslations: Record<string, { fr: string; pt: string; en: string }> = {
+  'mode-textile': { fr: 'Mode & Textile', pt: 'Moda & Têxtil', en: 'Fashion & Textile' },
+  'restaurants-alimentation': { fr: 'Restaurants & Alimentation', pt: 'Restaurantes & Alimentação', en: 'Restaurants & Food' },
+  'tourisme-hotellerie': { fr: 'Tourisme & Hôtellerie', pt: 'Turismo & Hotelaria', en: 'Tourism & Hospitality' },
+  'services-financiers': { fr: 'Services Financiers', pt: 'Serviços Financeiros', en: 'Financial Services' },
+  'agriculture-agroalimentaire': { fr: 'Agriculture & Agroalimentaire', pt: 'Agricultura & Agroalimentar', en: 'Agriculture & Agri-food' },
+  'commerce-distribution': { fr: 'Commerce & Distribution', pt: 'Comércio & Distribuição', en: 'Retail & Distribution' },
+  'btp-construction': { fr: 'BTP & Construction', pt: 'Construção Civil', en: 'Construction & Civil Engineering' },
+  'sante-bien-etre': { fr: 'Santé & Bien-être', pt: 'Saúde & Bem-estar', en: 'Health & Wellness' },
+  'education-formation': { fr: 'Éducation & Formation', pt: 'Educação & Formação', en: 'Education & Training' },
+  'immobilier': { fr: 'Immobilier', pt: 'Imobiliário', en: 'Real Estate' },
+  'technologie-informatique': { fr: 'Technologie & Informatique', pt: 'Tecnologia & Informática', en: 'Technology & IT' },
+  'transport-logistique': { fr: 'Transport & Logistique', pt: 'Transporte & Logística', en: 'Transport & Logistics' },
+  'beaute-bien-etre': { fr: 'Beauté & Bien-être', pt: 'Beleza & Bem-estar', en: 'Beauty & Wellness' },
+  'artisanat': { fr: 'Artisanat', pt: 'Artesanato', en: 'Craftsmanship' },
+  'evenementiel': { fr: 'Événementiel', pt: 'Organização de Eventos', en: 'Events' },
+  'telecommunications': { fr: 'Télécommunications', pt: 'Telecomunicações', en: 'Telecommunications' },
+  'energie-mines': { fr: 'Énergie & Mines', pt: 'Energia & Minas', en: 'Energy & Mining' },
+  'justice-droit': { fr: 'Justice & Droit', pt: 'Justiça & Direito', en: 'Justice & Law' },
+  'media-communication': { fr: 'Média & Communication', pt: 'Média & Comunicação', en: 'Media & Communication' },
+  'ngo-assoc': { fr: 'ONG & Associations', pt: 'ONG & Associações', en: 'NGOs & Associations' },
   // Catégories de la base (complément)
-  'administration': { fr: 'Administration', pt: 'Administração' },
-  'arts-culture': { fr: 'Arts & Culture', pt: 'Artes & Cultura' },
-  'assurances-banques': { fr: 'Assurances & Banques', pt: 'Seguros & Bancos' },
-  'banques': { fr: 'Banques', pt: 'Bancos' },
-  'barbier-salon-de-coiffure': { fr: 'Barbier & Salon de coiffure', pt: 'Barbearia & Cabeleireiro' },
-  'conseil-services': { fr: 'Conseil & Services', pt: 'Consultoria & Serviços' },
-  'droite': { fr: 'Droit & Justice', pt: 'Direito & Justiça' },
-  'electroniques': { fr: 'Électroniques', pt: 'Eletrónica' },
-  'gestion-des-ressources-humaines': { fr: 'Gestion des ressources humaines', pt: 'Gestão de Recursos Humanos' },
-  'genie-logiciel': { fr: 'Génie logiciel', pt: 'Engenharia de Software' },
-  'hotels': { fr: 'Hôtels', pt: 'Hotéis' },
-  'informatiques': { fr: 'Informatique', pt: 'Informática' },
-  'marketing-communication': { fr: 'Marketing & Communication', pt: 'Marketing & Comunicação' },
-  'mode-accessoires': { fr: 'Mode & Accessoires', pt: 'Moda & Acessórios' },
-  'restaurants': { fr: 'Restaurants', pt: 'Restaurantes' },
-  'sport-loisirs': { fr: 'Sport & Loisirs', pt: 'Desporto & Lazer' },
-  'tourisme': { fr: 'Tourisme', pt: 'Turismo' },
-  'telecom': { fr: 'Télécom', pt: 'Telecomunicações' },
-  'energie-environnement': { fr: 'Énergie & Environnement', pt: 'Energia & Ambiente' },
+  'administration': { fr: 'Administration', pt: 'Administração', en: 'Administration' },
+  'arts-culture': { fr: 'Arts & Culture', pt: 'Artes & Cultura', en: 'Arts & Culture' },
+  'assurances-banques': { fr: 'Assurances & Banques', pt: 'Seguros & Bancos', en: 'Insurance & Banks' },
+  'banques': { fr: 'Banques', pt: 'Bancos', en: 'Banks' },
+  'barbier-salon-de-coiffure': { fr: 'Barbier & Salon de coiffure', pt: 'Barbearia & Cabeleireiro', en: 'Barber & Hair Salon' },
+  'conseil-services': { fr: 'Conseil & Services', pt: 'Consultoria & Serviços', en: 'Consulting & Services' },
+  'droite': { fr: 'Droit & Justice', pt: 'Direito & Justiça', en: 'Law & Justice' },
+  'electroniques': { fr: 'Électroniques', pt: 'Eletrónica', en: 'Electronics' },
+  'gestion-des-ressources-humaines': { fr: 'Gestion des ressources humaines', pt: 'Gestão de Recursos Humanos', en: 'Human Resources Management' },
+  'genie-logiciel': { fr: 'Génie logiciel', pt: 'Engenharia de Software', en: 'Software Engineering' },
+  'hotels': { fr: 'Hôtels', pt: 'Hotéis', en: 'Hotels' },
+  'informatiques': { fr: 'Informatique', pt: 'Informática', en: 'Computing & IT' },
+  'marketing-communication': { fr: 'Marketing & Communication', pt: 'Marketing & Comunicação', en: 'Marketing & Communication' },
+  'mode-accessoires': { fr: 'Mode & Accessoires', pt: 'Moda & Acessórios', en: 'Fashion & Accessories' },
+  'restaurants': { fr: 'Restaurants', pt: 'Restaurantes', en: 'Restaurants' },
+  'sport-loisirs': { fr: 'Sport & Loisirs', pt: 'Desporto & Lazer', en: 'Sports & Leisure' },
+  'tourisme': { fr: 'Tourisme', pt: 'Turismo', en: 'Tourism' },
+  'telecom': { fr: 'Télécom', pt: 'Telecomunicações', en: 'Telecom' },
+  'energie-environnement': { fr: 'Énergie & Environnement', pt: 'Energia & Ambiente', en: 'Energy & Environment' },
 };
 
-const translations: Record<Locale, Record<string, string>> = { fr, pt };
+const translations: Record<Locale, Record<string, string>> = { fr, pt, en };
 
 export function t(key: string, replacements?: Record<string, string | number>): string {
   // We need to get locale from the store - but since this is a plain function,
   // we'll need to handle this differently
   const locale = (typeof window !== 'undefined' && (localStorage.getItem('pebiss-lang') as Locale)) || 'pt';
-  let text = translations[locale]?.[key] || translations['pt']?.[key] || key;
+  let text = translations[locale]?.[key] || translations.fr?.[key] || translations.pt?.[key] || key;
   if (replacements) {
     Object.entries(replacements).forEach(([k, v]) => {
       text = text.replace(`{${k}}`, String(v));
@@ -1961,7 +1964,7 @@ export function useTranslation() {
   return {
     locale,
     t: (key: string, replacements?: Record<string, string | number>): string => {
-      let text = translations[locale]?.[key] || translations['pt']?.[key] || key;
+      let text = translations[locale]?.[key] || translations.fr?.[key] || translations.pt?.[key] || key;
       if (replacements) {
         Object.entries(replacements).forEach(([k, v]) => {
           text = text.replace(`{${k}}`, String(v));
@@ -1969,6 +1972,8 @@ export function useTranslation() {
       }
       return text;
     },
+    // Traduit un littéral inline multi-langues (remplace les ternaires locale === 'pt' ? ... : ...)
+    tl: (texts: { fr: string; pt?: string; en?: string }): string => texts[locale] ?? texts.fr,
     setLocale: useI18n.getState().setLocale,
   };
 }

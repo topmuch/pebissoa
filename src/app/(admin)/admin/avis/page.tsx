@@ -160,7 +160,7 @@ export default function AdminAvisPage() {
                         {r.comment || '-'}
                       </TableCell>
                       <TableCell className="text-sm text-muted-foreground">
-                        {new Date(r.createdAt).toLocaleDateString(locale === 'fr' ? 'fr-FR' : 'pt-PT')}
+                        {new Date(r.createdAt).toLocaleDateString(locale === 'fr' ? 'fr-FR' : locale === 'en' ? 'en-GB' : 'pt-PT')}
                       </TableCell>
                       <TableCell>
                         <div className="flex items-center justify-end">

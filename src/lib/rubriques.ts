@@ -23,8 +23,8 @@ export interface Rubrique {
 export const RUBRIQUES: Rubrique[] = [
   {
     key: 'bons-plans',
-    labels: { fr: 'Bons plans', pt: 'Boas ofertas' },
-    subtitles: { fr: 'Toutes les bonnes affaires', pt: 'Todos os bons negócios' },
+    labels: { fr: 'Bons plans', pt: 'Boas ofertas', en: 'Great deals' },
+    subtitles: { fr: 'Toutes les bonnes affaires', pt: 'Todos os bons negócios', en: 'All the best deals' },
     categories: [],
     icon: Flame,
     image: '/rubriques/bons-plans.jpg',
@@ -33,8 +33,8 @@ export const RUBRIQUES: Rubrique[] = [
   },
   {
     key: 'restos',
-    labels: { fr: 'Restos', pt: 'Restaurantes' },
-    subtitles: { fr: 'Restaurants & alimentation', pt: 'Restaurantes & alimentação' },
+    labels: { fr: 'Restos', pt: 'Restaurantes', en: 'Eateries' },
+    subtitles: { fr: 'Restaurants & alimentation', pt: 'Restaurantes & alimentação', en: 'Restaurants & food' },
     categories: ['restaurants', 'restaurants-alimentation'],
     icon: UtensilsCrossed,
     image: '/rubriques/restos.jpg',
@@ -43,8 +43,8 @@ export const RUBRIQUES: Rubrique[] = [
   },
   {
     key: 'hotels',
-    labels: { fr: 'Hôtels', pt: 'Hotéis' },
-    subtitles: { fr: 'Hôtels & tourisme', pt: 'Hotéis & turismo' },
+    labels: { fr: 'Hôtels', pt: 'Hotéis', en: 'Hotels' },
+    subtitles: { fr: 'Hôtels & tourisme', pt: 'Hotéis & turismo', en: 'Hotels & tourism' },
     categories: ['hotels', 'tourisme-hotellerie', 'tourisme'],
     icon: BedDouble,
     image: '/rubriques/hotels.jpg',
@@ -53,8 +53,8 @@ export const RUBRIQUES: Rubrique[] = [
   },
   {
     key: 'shoppings',
-    labels: { fr: 'Shoppings', pt: 'Compras' },
-    subtitles: { fr: 'Mode & boutiques', pt: 'Moda & lojas' },
+    labels: { fr: 'Shoppings', pt: 'Compras', en: 'Shopping' },
+    subtitles: { fr: 'Mode & boutiques', pt: 'Moda & lojas', en: 'Fashion & shops' },
     categories: ['mode-textile', 'mode-accessoires', 'commerce-distribution', 'electroniques'],
     icon: ShoppingBag,
     image: '/rubriques/shoppings.jpg',
@@ -63,8 +63,8 @@ export const RUBRIQUES: Rubrique[] = [
   },
   {
     key: 'sante',
-    labels: { fr: 'Santé', pt: 'Saúde' },
-    subtitles: { fr: 'Pharmacies & bien-être', pt: 'Farmácias & bem-estar' },
+    labels: { fr: 'Santé', pt: 'Saúde', en: 'Health' },
+    subtitles: { fr: 'Pharmacies & bien-être', pt: 'Farmácias & bem-estar', en: 'Pharmacies & wellness' },
     categories: ['sante-bien-etre'],
     icon: HeartPulse,
     image: '/rubriques/sante.jpg',
@@ -73,8 +73,8 @@ export const RUBRIQUES: Rubrique[] = [
   },
   {
     key: 'immobilier',
-    labels: { fr: 'Immobilier', pt: 'Imobiliário' },
-    subtitles: { fr: 'Logements & agences', pt: 'Casas & agências' },
+    labels: { fr: 'Immobilier', pt: 'Imobiliário', en: 'Real Estate' },
+    subtitles: { fr: 'Logements & agences', pt: 'Casas & agências', en: 'Homes & agencies' },
     categories: ['immobilier'],
     icon: Home,
     image: '/rubriques/immobilier.jpg',
@@ -83,8 +83,8 @@ export const RUBRIQUES: Rubrique[] = [
   },
   {
     key: 'transport',
-    labels: { fr: 'Auto & transport', pt: 'Auto & transporte' },
-    subtitles: { fr: 'Taxis, bus & logistique', pt: 'Táxis & logística' },
+    labels: { fr: 'Auto & transport', pt: 'Auto & transporte', en: 'Auto & Transport' },
+    subtitles: { fr: 'Taxis, bus & logistique', pt: 'Táxis & logística', en: 'Taxis, buses & logistics' },
     categories: ['transport-logistique'],
     icon: Car,
     image: '/rubriques/transport.jpg',
@@ -93,8 +93,8 @@ export const RUBRIQUES: Rubrique[] = [
   },
   {
     key: 'travaux',
-    labels: { fr: 'Travaux & services', pt: 'Obras & serviços' },
-    subtitles: { fr: 'Bâtiment & artisans', pt: 'Construção & artesãos' },
+    labels: { fr: 'Travaux & services', pt: 'Obras & serviços', en: 'Works & Services' },
+    subtitles: { fr: 'Bâtiment & artisans', pt: 'Construção & artesãos', en: 'Building & craftsmen' },
     categories: ['btp-construction'],
     icon: HardHat,
     image: '/rubriques/travaux.jpg',

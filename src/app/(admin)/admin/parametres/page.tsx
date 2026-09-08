@@ -31,7 +31,7 @@ function TikTokIcon({ className = "h-5 w-5" }: { className?: string }) {
 }
 
 export default function AdminParametresPage() {
-  const { t, locale } = useTranslation();
+  const { t, tl } = useTranslation();
   const queryClient = useQueryClient();
   const logoInputRef = useRef<HTMLInputElement>(null);
   const seoImageInputRef = useRef<HTMLInputElement>(null);
@@ -180,7 +180,7 @@ export default function AdminParametresPage() {
 
   const handleTestEmail = async () => {
     if (!testEmail || !testEmail.includes('@')) {
-      toast.error(locale === 'fr' ? 'Veuillez entrer une adresse email valide' : 'Por favor, insira um endereço de email válido');
+      toast.error(tl({ fr: 'Veuillez entrer une adresse email valide', pt: 'Por favor, insira um endereço de email válido', en: 'Please enter a valid email address' }));
       return;
     }
     setTestEmailSending(true);
@@ -275,6 +275,7 @@ export default function AdminParametresPage() {
                     <SelectContent>
                       <SelectItem value="pt">{t('admin_settings_lang_pt')}</SelectItem>
                       <SelectItem value="fr">{t('admin_settings_lang_fr')}</SelectItem>
+                      <SelectItem value="en">{t('admin_settings_lang_en')}</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
@@ -374,7 +375,7 @@ export default function AdminParametresPage() {
                   placeholder={t('admin_settings_seo_title_label')}
                 />
                 <p className="text-xs text-muted-foreground">
-                  {locale === 'fr' ? 'Ce titre apparaît dans les résultats de recherche. Recommandé : 50-60 caractères.' : 'Este título aparece nos resultados de pesquisa. Recomendado: 50-60 caracteres.'}
+                  {tl({ fr: 'Ce titre apparaît dans les résultats de recherche. Recommandé : 50-60 caractères.', pt: 'Este título aparece nos resultados de pesquisa. Recomendado: 50-60 caracteres.', en: 'This title appears in search results. Recommended: 50-60 characters.' })}
                 </p>
               </div>
               <div className="space-y-2">
@@ -386,7 +387,7 @@ export default function AdminParametresPage() {
                   rows={3}
                 />
                 <p className="text-xs text-muted-foreground">
-                  {locale === 'fr' ? 'Cette description apparaît sous le titre dans les résultats. Recommandé : 150-160 caractères.' : 'Esta descrição aparece sob o título nos resultados. Recomendado: 150-160 caracteres.'}
+                  {tl({ fr: 'Cette description apparaît sous le titre dans les résultats. Recommandé : 150-160 caractères.', pt: 'Esta descrição aparece sob o título nos resultados. Recomendado: 150-160 caracteres.', en: 'This description appears under the title in search results. Recommended: 150-160 characters.' })}
                 </p>
               </div>
 
@@ -578,7 +579,7 @@ export default function AdminParametresPage() {
 
               <div className="space-y-3">
                 <div className="space-y-2">
-                  <Label>{locale === 'fr' ? 'Email de destination pour le test' : 'Email de destino para o teste'}</Label>
+                  <Label>{tl({ fr: 'Email de destination pour le test', pt: 'Email de destino para o teste', en: 'Destination email for test' })}</Label>
                   <Input
                     type="email"
                     value={testEmail}
@@ -586,9 +587,11 @@ export default function AdminParametresPage() {
                     placeholder="votre@email.com"
                   />
                   <p className="text-xs text-muted-foreground">
-                    {locale === 'fr'
-                      ? 'Entrez l\'adresse email où vous souhaitez recevoir l\'email de test.'
-                      : 'Insira o endereço de email onde deseja receber o email de teste.'}
+                    {tl({
+                      fr: 'Entrez l\'adresse email où vous souhaitez recevoir l\'email de test.',
+                      pt: 'Insira o endereço de email onde deseja receber o email de teste.',
+                      en: 'Enter the email address where you want to receive the test email.',
+                    })}
                   </p>
                 </div>
                 <Button
@@ -598,7 +601,7 @@ export default function AdminParametresPage() {
                 >
                   <Mail className="mr-2 h-4 w-4" />
                   {testEmailSending
-                    ? (locale === 'fr' ? 'Envoi en cours...' : 'Enviando...')
+                    ? tl({ fr: 'Envoi en cours...', pt: 'Enviando...', en: 'Sending...' })
                     : t('admin_settings_test_email')}
                 </Button>
               </div>

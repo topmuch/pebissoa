@@ -69,7 +69,7 @@ function SectionHeader({
 
 /* ============ Carte bannière large — style PagesJaunes horizontal ============ */
 function PjWideBannerCard({ banner }: { banner: Banner }) {
-  const { t, locale } = useTranslation();
+  const { t } = useTranslation();
   const fmt = BANNER_FORMATS[banner.format] || { label: banner.format, w: 728, h: 90, usage: '', isWide: true };
 
   const content = (
@@ -121,7 +121,7 @@ function PjWideBannerCard({ banner }: { banner: Banner }) {
 
 /* ============ Carte bannière carrée / verticale — style PagesJaunes vertical ============ */
 function PjGridBannerCard({ banner }: { banner: Banner }) {
-  const { t, locale } = useTranslation();
+  const { t, tl } = useTranslation();
   const fmt = BANNER_FORMATS[banner.format] || { label: banner.format, w: 336, h: 280, usage: '', isWide: false };
   // Bannières hautes (300x600) : hauteur plafonnée pour ne pas écraser la grille
   const isTall = fmt.h / fmt.w >= 2;
@@ -158,12 +158,12 @@ function PjGridBannerCard({ banner }: { banner: Banner }) {
           <p className="text-xs text-muted-foreground line-clamp-2 leading-relaxed">{banner.description}</p>
         ) : (
           <p className="text-xs text-muted-foreground/60 italic">
-            {locale === 'pt' ? 'Anúncio patrocinado' : 'Annonce sponsorisée'}
+            {tl({ fr: 'Annonce sponsorisée', pt: 'Anúncio patrocinado', en: 'Sponsored ad' })}
           </p>
         )}
         <div className="mt-auto pt-2.5">
           <span className={`block w-full text-center ${CTA_TEAL} text-white text-[13px] font-bold py-2 rounded-full transition-colors`}>
-            {locale === 'pt' ? 'Ver o anúncio' : "Voir l'annonce"}
+            {tl({ fr: "Voir l'annonce", pt: 'Ver o anúncio', en: 'View ad' })}
           </span>
         </div>
       </div>
@@ -181,7 +181,7 @@ function PjGridBannerCard({ banner }: { banner: Banner }) {
 }
 
 export default function AnnoncesPage() {
-  const { t, locale } = useTranslation();
+  const { t, tl } = useTranslation();
   const [activeFilter, setActiveFilter] = useState('all');
   const chipsRef = useRef<HTMLDivElement>(null);
 
@@ -214,23 +214,11 @@ export default function AnnoncesPage() {
       <div className="bg-[#0066CC]">
         <div className="container mx-auto px-4 py-10 md:py-14 text-center">
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold uppercase tracking-tight text-white leading-tight">
-            {locale === 'pt' ? (
-              <>
-                Boas{' '}
-                <span className="inline-block bg-white text-[#0066CC] px-3 md:px-4 py-0.5 -rotate-2 rounded-sm align-middle">
-                  Promoções
-                </span>{' '}
-                <span className="inline-block border-b-[5px] md:border-b-[7px] border-white/80 leading-none">?</span>
-              </>
-            ) : (
-              <>
-                Des{' '}
-                <span className="inline-block bg-white text-[#0066CC] px-3 md:px-4 py-0.5 -rotate-2 rounded-sm align-middle">
-                  Bons plans
-                </span>{' '}
-                <span className="inline-block border-b-[5px] md:border-b-[7px] border-white/80 leading-none">?</span>
-              </>
-            )}
+            {tl({ fr: 'Des', pt: 'Boas', en: 'Great' })}{' '}
+            <span className="inline-block bg-white text-[#0066CC] px-3 md:px-4 py-0.5 -rotate-2 rounded-sm align-middle">
+              {tl({ fr: 'Bons plans', pt: 'Promoções', en: 'deals' })}
+            </span>{' '}
+            <span className="inline-block border-b-[5px] md:border-b-[7px] border-white/80 leading-none">?</span>
           </h1>
         </div>
       </div>
@@ -241,13 +229,13 @@ export default function AnnoncesPage() {
           <p className="text-sm font-semibold text-gray-900 dark:text-foreground truncate">
             {isLoading
               ? '…'
-              : `${filteredBanners.length} ${locale === 'pt' ? 'anúncios ativos' : 'annonces actives'}`}
+              : `${filteredBanners.length} ${tl({ fr: 'annonces actives', pt: 'anúncios ativos', en: 'active ads' })}`}
           </p>
           <a
             href="/publicite"
             className="shrink-0 h-8 px-3.5 rounded-full bg-white dark:bg-card border border-gray-300 dark:border-border text-[13px] font-medium text-gray-900 dark:text-foreground hover:border-gray-900 dark:hover:border-foreground transition-colors inline-flex items-center"
           >
-            {locale === 'pt' ? 'Publicar a minha publicidade' : 'Publier ma publicité'}
+            {tl({ fr: 'Publier ma publicité', pt: 'Publicar a minha publicidade', en: 'Post my ad' })}
           </a>
         </div>
       </div>
@@ -273,7 +261,7 @@ export default function AnnoncesPage() {
           </div>
           <button
             onClick={() => chipsRef.current?.scrollBy({ left: 320, behavior: 'smooth' })}
-            aria-label={locale === 'pt' ? 'Mais formatos' : 'Plus de formats'}
+            aria-label={tl({ fr: 'Plus de formats', pt: 'Mais formatos', en: 'More formats' })}
             className="hidden sm:inline-flex absolute right-0 top-0 h-9 w-9 items-center justify-center rounded-full border border-gray-300 dark:border-border bg-white dark:bg-card text-foreground hover:border-gray-900 dark:hover:border-foreground transition-colors shadow-sm"
           >
             <ChevronRight className="h-4 w-4" />
@@ -319,7 +307,7 @@ export default function AnnoncesPage() {
             </p>
             <a href="/publicite">
               <Button className="bg-gray-900 hover:bg-black text-white rounded-full h-10 px-6">
-                {locale === 'pt' ? 'Quero anunciar' : 'Je veux faire ma publicité'}
+                {tl({ fr: 'Je veux faire ma publicité', pt: 'Quero anunciar', en: 'I want to advertise' })}
                 <ChevronRight className="h-4 w-4 ml-1" />
               </Button>
             </a>
@@ -336,7 +324,7 @@ export default function AnnoncesPage() {
                   <section>
                     <SectionHeader
                       icon={RectangleHorizontal}
-                      label={locale === 'pt' ? 'Banners largos' : 'Bannières larges'}
+                      label={tl({ fr: 'Bannières larges', pt: 'Banners largos', en: 'Wide banners' })}
                       count={allWide.length}
                     />
                     <div className="space-y-4">
@@ -351,7 +339,7 @@ export default function AnnoncesPage() {
                   <section>
                     <SectionHeader
                       icon={LayoutGrid}
-                      label={locale === 'pt' ? 'Banners quadrados & verticais' : 'Bannières carrées & verticales'}
+                      label={tl({ fr: 'Bannières carrées & verticales', pt: 'Banners quadrados & verticais', en: 'Square & vertical banners' })}
                       count={allGrid.length}
                     />
                     <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5">

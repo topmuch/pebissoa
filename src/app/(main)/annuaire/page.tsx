@@ -66,7 +66,7 @@ const GUINEA_BISSAU_REGIONS = [
 
 /* ============ Carte entreprise — style PagesJaunes ============ */
 function PjBusinessCard({ business }: { business: Business }) {
-  const { locale } = useTranslation();
+  const { locale, tl } = useTranslation();
   const catName = business.category?.slug && categoryTranslations[business.category.slug]
     ? categoryTranslations[business.category.slug][locale]
     : business.category?.name;
@@ -110,13 +110,13 @@ function PjBusinessCard({ business }: { business: Business }) {
               <RatingStars rating={business.avgRating} size="sm" showValue={false} />
               <span className="text-xs text-muted-foreground">
                 {business.avgRating.toFixed(1)} ({business._count?.reviews ?? 0}{' '}
-                {locale === 'pt' ? 'avaliações' : 'avis'})
+                {tl({ fr: 'avis', pt: 'avaliações', en: 'reviews' })})
               </span>
             </div>
           ) : (
             <span className="flex items-center gap-1 text-xs text-[#1B9AA4] dark:text-[#35C1C1]">
               <PencilLine className="h-3 w-3" />
-              {locale === 'pt' ? 'Escrever um comentário' : 'Écrire un avis'}
+              {tl({ fr: 'Écrire un avis', pt: 'Escrever um comentário', en: 'Write a review' })}
             </span>
           )}
 
@@ -128,7 +128,7 @@ function PjBusinessCard({ business }: { business: Business }) {
 
           <div className="mt-auto pt-2.5">
             <span className="block w-full text-center bg-[#35C1C1] group-hover:bg-[#28A9A9] text-white text-[13px] font-bold py-2 rounded-full transition-colors">
-              {locale === 'pt' ? 'Ver a ficha' : 'Voir la fiche'}
+              {tl({ fr: 'Voir la fiche', pt: 'Ver a ficha', en: 'View profile' })}
             </span>
           </div>
         </div>
@@ -153,7 +153,7 @@ function CategorySection({
   onSelect: () => void;
   loading?: boolean;
 }) {
-  const { locale } = useTranslation();
+  const { tl } = useTranslation();
   const rowRef = useRef<HTMLDivElement>(null);
 
   const scrollRow = (dir: -1 | 1) => {
@@ -173,19 +173,19 @@ function CategorySection({
             onClick={onSelect}
             className="hidden sm:inline-flex h-9 px-4 items-center rounded-full border border-gray-300 dark:border-border bg-white dark:bg-card text-[13px] font-semibold text-foreground hover:border-gray-900 dark:hover:border-foreground transition-colors whitespace-nowrap"
           >
-            {locale === 'pt' ? `Ver os ${count} resultados` : `Voir les ${count} résultats`}
+            {tl({ fr: `Voir les ${count} résultats`, pt: `Ver os ${count} resultados`, en: `See all ${count} results` })}
           </button>
           <div className="hidden sm:flex items-center gap-1.5">
             <button
               onClick={() => scrollRow(-1)}
-              aria-label={locale === 'pt' ? 'Anterior' : 'Précédent'}
+              aria-label={tl({ fr: 'Précédent', pt: 'Anterior', en: 'Previous' })}
               className="h-9 w-9 rounded-full border border-gray-300 dark:border-border bg-white dark:bg-card text-foreground hover:border-gray-900 dark:hover:border-foreground flex items-center justify-center transition-colors"
             >
               <ChevronLeft className="h-4 w-4" />
             </button>
             <button
               onClick={() => scrollRow(1)}
-              aria-label={locale === 'pt' ? 'Próximo' : 'Suivant'}
+              aria-label={tl({ fr: 'Suivant', pt: 'Próximo', en: 'Next' })}
               className="h-9 w-9 rounded-full border border-gray-300 dark:border-border bg-white dark:bg-card text-foreground hover:border-gray-900 dark:hover:border-foreground flex items-center justify-center transition-colors"
             >
               <ChevronRight className="h-4 w-4" />
@@ -223,7 +223,7 @@ function CategorySection({
 }
 
 function AnnuaireContent() {
-  const { t, locale } = useTranslation();
+  const { t, locale, tl } = useTranslation();
   const searchParams = useSearchParams();
   const [query, setQuery] = useState(searchParams.get('query') || '');
   const [city, setCity] = useState(searchParams.get('city') || '');
@@ -336,25 +336,12 @@ function AnnuaireContent() {
       <div className="bg-[#0066CC]">
         <div className="container mx-auto px-4 py-10 md:py-14 text-center">
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold uppercase tracking-tight text-white leading-tight">
-            {locale === 'pt' ? (
-              <>
-                Encontre um{' '}
-                <span className="inline-block bg-white text-[#0066CC] px-3 md:px-4 py-0.5 -rotate-2 rounded-sm align-middle">
-                  Bom
-                </span>{' '}
-                profissional{' '}
-                <span className="inline-block border-b-[5px] md:border-b-[7px] border-white/80 leading-none">?</span>
-              </>
-            ) : (
-              <>
-                Trouvez un{' '}
-                <span className="inline-block bg-white text-[#0066CC] px-3 md:px-4 py-0.5 -rotate-2 rounded-sm align-middle">
-                  Bon
-                </span>{' '}
-                pro{' '}
-                <span className="inline-block border-b-[5px] md:border-b-[7px] border-white/80 leading-none">?</span>
-              </>
-            )}
+            {tl({ fr: 'Trouvez un', pt: 'Encontre um', en: 'Find a' })}{' '}
+            <span className="inline-block bg-white text-[#0066CC] px-3 md:px-4 py-0.5 -rotate-2 rounded-sm align-middle">
+              {tl({ fr: 'Bon', pt: 'Bom', en: 'good' })}
+            </span>{' '}
+            {tl({ fr: 'pro', pt: 'profissional', en: 'pro' })}{' '}
+            <span className="inline-block border-b-[5px] md:border-b-[7px] border-white/80 leading-none">?</span>
           </h1>
         </div>
       </div>
@@ -365,17 +352,17 @@ function AnnuaireContent() {
           <p className="text-sm font-semibold text-gray-900 dark:text-foreground truncate">
             {total > 0 ? (
               <>
-                {total} {locale === 'pt' ? 'empresas na Guiné-Bissau' : 'entreprises en Guinée-Bissau'}
+                {total} {tl({ fr: 'entreprises en Guinée-Bissau', pt: 'empresas na Guiné-Bissau', en: 'businesses in Guinea-Bissau' })}
               </>
             ) : (
-              (locale === 'pt' ? 'Empresas na Guiné-Bissau' : 'Entreprises en Guinée-Bissau')
+              tl({ fr: 'Entreprises en Guinée-Bissau', pt: 'Empresas na Guiné-Bissau', en: 'Businesses in Guinea-Bissau' })
             )}
           </p>
           <button
             onClick={scrollToSearch}
             className="shrink-0 h-8 px-3.5 rounded-full bg-white dark:bg-card border border-gray-300 dark:border-border text-[13px] font-medium text-gray-900 dark:text-foreground hover:border-gray-900 dark:hover:border-foreground transition-colors"
           >
-            {locale === 'pt' ? 'Mudar a região' : 'Changer de région'}
+            {tl({ fr: 'Changer de région', pt: 'Mudar a região', en: 'Change region' })}
           </button>
         </div>
       </div>
@@ -393,7 +380,7 @@ function AnnuaireContent() {
                   : 'bg-white dark:bg-card border-gray-300 dark:border-border text-gray-700 dark:text-muted-foreground hover:border-gray-900 dark:hover:border-foreground'
               }`}
             >
-              {locale === 'pt' ? 'Todas' : 'Toutes'}
+              {tl({ fr: 'Toutes', pt: 'Todas', en: 'All' })}
             </button>
             {categories?.map((cat) => (
               <button
@@ -413,7 +400,7 @@ function AnnuaireContent() {
           </div>
           <button
             onClick={() => chipsRef.current?.scrollBy({ left: 320, behavior: 'smooth' })}
-            aria-label={locale === 'pt' ? 'Mais categorias' : 'Plus de catégories'}
+            aria-label={tl({ fr: 'Plus de catégories', pt: 'Mais categorias', en: 'More categories' })}
             className="hidden sm:inline-flex absolute right-0 top-0 h-9 w-9 items-center justify-center rounded-full border border-gray-300 dark:border-border bg-white dark:bg-card text-foreground hover:border-gray-900 dark:hover:border-foreground transition-colors shadow-sm"
           >
             <ChevronRight className="h-4 w-4" />
@@ -453,7 +440,7 @@ function AnnuaireContent() {
                       {/* Rubriques d'accueil — uniquement multi-catégories (les mono dupliquent les catégories → clés Radix en conflit) */}
                       <SelectGroup>
                         <SelectLabel className="text-xs font-semibold text-muted-foreground">
-                          {locale === 'pt' ? 'Rubricas' : 'Rubriques'}
+                          {tl({ fr: 'Rubriques', pt: 'Rubricas', en: 'Topics' })}
                         </SelectLabel>
                         {RUBRIQUES.filter((r) => r.categories.length > 1).map((r) => (
                           <SelectItem key={r.key} value={r.categories.join(',')}>

@@ -103,14 +103,19 @@ const PROMO_SLIDES = [
     alt: {
       fr: 'Entrepreneure africaine dans sa boutique — inscrivez votre entreprise sur Pebiss',
       pt: 'Empreendedora africana na sua loja — registe a sua empresa no Pebiss',
+      en: 'African entrepreneur in her shop — list your business on Pebiss',
     },
     title: {
       fr: 'Référencez votre entreprise',
-      highlightFr: '100% gratuitement',
       pt: 'Registe a sua empresa',
-      highlightPt: '100% grátis',
+      en: 'List your business',
     },
-    cta: { fr: "J'INSCRIS MON ENTREPRISE", pt: 'REGISTAR A MINHA EMPRESA' },
+    highlight: {
+      fr: '100% gratuitement',
+      pt: '100% grátis',
+      en: '100% free',
+    },
+    cta: { fr: "J'INSCRIS MON ENTREPRISE", pt: 'REGISTAR A MINHA EMPRESA', en: 'LIST MY BUSINESS' },
   },
   {
     href: '/annuaire',
@@ -118,14 +123,19 @@ const PROMO_SLIDES = [
     alt: {
       fr: 'Commerçant souriant dans sa boutique avec des clients — soyez visible sur Pebiss',
       pt: 'Comerciante sorridente na sua loja com clientes — esteja visível no Pebiss',
+      en: 'Smiling shopkeeper in his store with customers — get visible on Pebiss',
     },
     title: {
       fr: 'Des milliers de clients',
-      highlightFr: 'vous trouvent chaque jour',
       pt: 'Milhares de clientes',
-      highlightPt: 'encontram a sua empresa',
+      en: 'Thousands of customers',
     },
-    cta: { fr: "DÉCOUVREZ L'ANNUAIRE", pt: 'DESCOBRIR O DIRETÓRIO' },
+    highlight: {
+      fr: 'vous trouvent chaque jour',
+      pt: 'encontram a sua empresa',
+      en: 'find you every day',
+    },
+    cta: { fr: "DÉCOUVREZ L'ANNUAIRE", pt: 'DESCOBRIR O DIRETÓRIO', en: 'EXPLORE THE DIRECTORY' },
   },
   {
     href: '/annonces',
@@ -133,14 +143,19 @@ const PROMO_SLIDES = [
     alt: {
       fr: 'Vendeuse photographiant ses produits au marché avec un smartphone — publiez vos annonces gratuites',
       pt: 'Vendedora a fotografar os seus produtos no mercado com um smartphone — publique os seus anúncios grátis',
+      en: 'Vendor photographing her market products with a smartphone — post your free ads',
     },
     title: {
       fr: 'Vendez plus vite avec vos',
-      highlightFr: 'annonces gratuites',
       pt: 'Venda mais rápido com os seus',
-      highlightPt: 'anúncios grátis',
+      en: 'Sell faster with your',
     },
-    cta: { fr: 'PUBLIER UNE ANNONCE', pt: 'PUBLICAR UM ANÚNCIO' },
+    highlight: {
+      fr: 'annonces gratuites',
+      pt: 'anúncios grátis',
+      en: 'free ads',
+    },
+    cta: { fr: 'PUBLIER UNE ANNONCE', pt: 'PUBLICAR UM ANÚNCIO', en: 'POST AN AD' },
   },
 ] as const;
 
@@ -164,7 +179,7 @@ interface ResolvedSlide {
 // Points de navigation, flèches au survol, pause au survol, balayage tactile,
 // respect de prefers-reduced-motion.
 function PromoSlider() {
-  const { locale } = useTranslation();
+  const { locale, tl } = useTranslation();
   const { data: adBanners } = useBanners('home', 'promo_gauche');
   const [active, setActive] = useState(0);
   const [paused, setPaused] = useState(false);
@@ -188,9 +203,9 @@ function PromoSlider() {
     href: slide.href,
     image: slide.image,
     alt: slide.alt[locale],
-    title: locale === 'pt' ? slide.title.pt : slide.title.fr,
-    highlight: locale === 'pt' ? slide.title.highlightPt : slide.title.highlightFr,
-    cta: locale === 'pt' ? slide.cta.pt : slide.cta.fr,
+    title: tl(slide.title),
+    highlight: tl(slide.highlight),
+    cta: tl(slide.cta),
   }));
 
   const slides = adSlides.length > 0 ? adSlides : defaultSlides;
@@ -219,7 +234,7 @@ function PromoSlider() {
       className="group relative block overflow-hidden rounded-xl h-72 sm:h-80 md:h-96"
       role="region"
       aria-roledescription="carrousel"
-      aria-label={locale === 'pt' ? 'Promoções Pebiss' : 'Promotions Pebiss'}
+      aria-label={tl({ fr: 'Promotions Pebiss', pt: 'Promoções Pebiss', en: 'Pebiss promotions' })}
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
       onTouchStart={(e) => {
@@ -293,7 +308,7 @@ function PromoSlider() {
           <button
             type="button"
             onClick={() => goTo(safeActive - 1)}
-            aria-label={locale === 'pt' ? 'Diapositiva anterior' : 'Diapositive précédente'}
+            aria-label={tl({ fr: 'Diapositive précédente', pt: 'Diapositiva anterior', en: 'Previous slide' })}
             className="absolute left-3 top-1/2 -translate-y-1/2 z-20 hidden sm:inline-flex h-9 w-9 items-center justify-center rounded-full bg-black/40 text-white opacity-0 group-hover:opacity-100 hover:bg-black/60 transition-all duration-300"
           >
             <ChevronLeft className="h-5 w-5" />
@@ -301,7 +316,7 @@ function PromoSlider() {
           <button
             type="button"
             onClick={() => goTo(safeActive + 1)}
-            aria-label={locale === 'pt' ? 'Próxima diapositiva' : 'Diapositive suivante'}
+            aria-label={tl({ fr: 'Diapositive suivante', pt: 'Próxima diapositiva', en: 'Next slide' })}
             className="absolute right-3 top-1/2 -translate-y-1/2 z-20 hidden sm:inline-flex h-9 w-9 items-center justify-center rounded-full bg-black/40 text-white opacity-0 group-hover:opacity-100 hover:bg-black/60 transition-all duration-300"
           >
             <ChevronRight className="h-5 w-5" />
@@ -317,7 +332,7 @@ function PromoSlider() {
               key={slide.key}
               type="button"
               onClick={() => goTo(i)}
-              aria-label={locale === 'pt' ? `Ir para a diapositiva ${i + 1}` : `Aller à la diapositive ${i + 1}`}
+              aria-label={tl({ fr: `Aller à la diapositive ${i + 1}`, pt: `Ir para a diapositiva ${i + 1}`, en: `Go to slide ${i + 1}` })}
               aria-current={i === safeActive}
               className={`h-2.5 rounded-full transition-all duration-300 ${
                 i === safeActive ? 'w-6 bg-white' : 'w-2.5 bg-white/50 hover:bg-white/80'
@@ -333,7 +348,7 @@ function PromoSlider() {
 // Bannière droite : publicités admin (format « promo_droite ») en rotation auto,
 // sinon contenu par défaut (professionnels / visibilité)
 function RightPromoBanner() {
-  const { locale } = useTranslation();
+  const { tl } = useTranslation();
   const { data: adBanners } = useBanners('home', 'promo_droite');
   const ads = (adBanners || []).filter((b) => !!b.image);
   const [active, setActive] = useState(0);
@@ -397,7 +412,7 @@ function RightPromoBanner() {
       className="group relative block overflow-hidden rounded-xl h-72 sm:h-80 md:h-96"
       role="region"
       aria-roledescription="carrousel"
-      aria-label={locale === 'pt' ? 'Publicidade' : 'Publicités'}
+      aria-label={tl({ fr: 'Publicités', pt: 'Publicidade', en: 'Ads' })}
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
       onTouchStart={(e) => {
@@ -452,7 +467,7 @@ function RightPromoBanner() {
               key={banner.id}
               type="button"
               onClick={() => goTo(i)}
-              aria-label={locale === 'pt' ? `Ir para a publicidade ${i + 1}` : `Aller à la publicité ${i + 1}`}
+              aria-label={tl({ fr: `Aller à la publicité ${i + 1}`, pt: `Ir para a publicidade ${i + 1}`, en: `Go to ad ${i + 1}` })}
               aria-current={i === safeActive}
               className={`h-2.5 rounded-full transition-all duration-300 ${
                 i === safeActive ? 'w-6 bg-white' : 'w-2.5 bg-white/50 hover:bg-white/80'

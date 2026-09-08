@@ -41,40 +41,60 @@ function CardImage({ src, alt }: { src: string; alt: string }) {
 const CARDS: ProCard[] = [
   {
     image: '/pro-avantages/pro-reference.jpg',
-    title: { fr: 'La référence des pros du pays', pt: 'A referência dos profissionais do país' },
+    title: {
+      fr: 'La référence des pros du pays',
+      pt: 'A referência dos profissionais do país',
+      en: 'The go-to directory for local pros',
+    },
     desc: {
       fr: 'Des centaines de professionnels inscrits, partout en Guinée-Bissau',
       pt: 'Centenas de profissionais inscritos, em toda a Guiné-Bissau',
+      en: 'Hundreds of registered professionals, all across Guinea-Bissau',
     },
   },
   {
     image: '/pro-avantages/pro-fiches.jpg',
-    title: { fr: 'Des fiches enrichies par les pros', pt: 'Fichas enriquecidas pelos profissionais' },
+    title: {
+      fr: 'Des fiches enrichies par les pros',
+      pt: 'Fichas enriquecidas pelos profissionais',
+      en: 'Listings enriched by the pros',
+    },
     desc: {
       fr: 'Horaires, prestations, actus, coordonnées, itinéraire… des informations mises à jour chaque jour',
       pt: 'Horários, serviços, notícias, contactos, itinerário… informações atualizadas todos os dias',
+      en: 'Opening hours, services, news, contact details, directions… information updated daily',
     },
   },
   {
     image: '/pro-avantages/pro-avis.jpg',
-    title: { fr: 'Des avis pour vous aider à décider', pt: 'Avaliações para o ajudar a decidir' },
+    title: {
+      fr: 'Des avis pour vous aider à décider',
+      pt: 'Avaliações para o ajudar a decidir',
+      en: 'Reviews to help you decide',
+    },
     desc: {
       fr: 'Notes et avis des utilisateurs, photos, badges qualité et certifications…',
       pt: 'Notas e opiniões dos utilizadores, fotos, selos de qualidade e certificações…',
+      en: 'User ratings and reviews, photos, quality badges and certifications…',
     },
   },
   {
     image: '/pro-avantages/pro-services.jpg',
-    title: { fr: 'Des services en ligne pour vous faciliter la vie', pt: 'Serviços online para lhe facilitar a vida' },
+    title: {
+      fr: 'Des services en ligne pour vous faciliter la vie',
+      pt: 'Serviços online para lhe facilitar a vida',
+      en: 'Online services to make life easier',
+    },
     desc: {
       fr: 'Demande de devis, prise de rendez-vous, réservation, messagerie…',
       pt: 'Pedidos de orçamento, marcações, reservas, mensagens…',
+      en: 'Quote requests, appointments, bookings, messaging…',
     },
   },
 ];
 
 export function ProAdvantages() {
-  const { locale } = useTranslation();
+  const { locale, tl } = useTranslation();
 
   return (
     <section className="py-12 md:py-16" aria-labelledby="pro-advantages-title">
@@ -83,9 +103,11 @@ export function ProAdvantages() {
           id="pro-advantages-title"
           className="text-xl sm:text-2xl md:text-3xl font-extrabold text-center text-foreground mb-8 md:mb-10"
         >
-          {locale === 'pt'
-            ? 'Com a Pebiss, encontre sempre o profissional certo perto de si !'
-            : 'Avec Pebiss, trouvez toujours le bon pro près de chez vous !'}
+          {tl({
+            fr: 'Avec Pebiss, trouvez toujours le bon pro près de chez vous !',
+            pt: 'Com a Pebiss, encontre sempre o profissional certo perto de si !',
+            en: 'With Pebiss, always find the right pro near you!',
+          })}
         </h2>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">

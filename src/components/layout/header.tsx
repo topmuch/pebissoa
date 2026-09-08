@@ -105,6 +105,12 @@ export function Header() {
               >
                 🇫🇷 Français
               </DropdownMenuItem>
+              <DropdownMenuItem
+                onClick={() => setLocale('en')}
+                className={locale === 'en' ? 'bg-muted font-medium' : ''}
+              >
+                🇬🇧 English
+              </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
 
@@ -213,10 +219,10 @@ export function Header() {
                     variant="outline"
                     size="sm"
                     className="flex-1 text-xs"
-                    onClick={() => setLocale(locale === 'pt' ? 'fr' : 'pt')}
+                    onClick={() => setLocale(locale === 'pt' ? 'fr' : locale === 'fr' ? 'en' : 'pt')}
                   >
                     <Languages className="h-3 w-3 mr-1" />
-                    {locale === 'pt' ? '🇵🇹 PT' : '🇫🇷 FR'}
+                    {locale === 'pt' ? '🇵🇹 PT' : locale === 'fr' ? '🇫🇷 FR' : '🇬🇧 EN'}
                   </Button>
                   <Button
                     variant="outline"

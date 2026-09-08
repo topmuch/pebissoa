@@ -41,7 +41,7 @@ const FALLBACK_WHATSAPP = 'https://wa.me/245956007371';
  *  - WhatsApp → wa.me/245956007371
  *  - autres   → page /reseaux-sociaux
  */
-export function SocialIconsRow() {
+export function SocialIconsRow({ align = 'center' }: { align?: 'center' | 'start' }) {
   const [links, setLinks] = useState<Record<string, string>>({ whatsapp: FALLBACK_WHATSAPP });
 
   useEffect(() => {
@@ -60,7 +60,7 @@ export function SocialIconsRow() {
   }, []);
 
   return (
-    <nav aria-label="Réseaux sociaux" className="flex items-center justify-center gap-2.5 sm:gap-3.5">
+    <nav aria-label="Réseaux sociaux" className={`flex items-center gap-2.5 sm:gap-3.5 ${align === 'start' ? 'justify-start' : 'justify-center'}`}>
       {SOCIALS.map((social) => {
         const url = links[social.key] || '/reseaux-sociaux';
         const isExternal = url.startsWith('http');
