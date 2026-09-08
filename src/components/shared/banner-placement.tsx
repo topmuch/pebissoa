@@ -1,7 +1,9 @@
 'use client';
 
 import { useQuery } from '@tanstack/react-query';
-import { ArrowRight, Sparkles, Store } from 'lucide-react';
+import { ArrowRight, ChevronLeft, ChevronRight, Sparkles, Store } from 'lucide-react';
+import { useEffect, useRef, useState } from 'react';
+import { useTranslation } from '@/lib/i18n';
 
 // Banner format definitions — 4 placements only
 export const BANNER_FORMATS: Record<string, { label: string; w: number; h: number; usage: string; isWide: boolean }> = {
@@ -89,24 +91,122 @@ export function useBanners(position: string, format?: string) {
   });
 }
 
-// PromoDuoBanners — 2 bannières côte à côte sous le hero (style PagesJaunes)
-// Gauche : promo inscription entreprise (photo claire + bloc rouge + CTA blanc)
-// Droite : professionnels / visibilité (photo sombre + titre centré + CTA bleu)
-export function PromoDuoBanners() {
+// —— Slides du carrousel promo (bannière gauche sous le hero) ——
+const PROMO_SLIDES = [
+  {
+    href: '/register',
+    image: '/banners/promo-business.jpg',
+    alt: {
+      fr: 'Entrepreneure africaine dans sa boutique — inscrivez votre entreprise sur PebissOa',
+      pt: 'Empreendedora africana na sua loja — registe a sua empresa no PebissOa',
+    },
+    title: {
+      fr: 'Référencez votre entreprise',
+      highlightFr: '100% gratuitement',
+      pt: 'Registe a sua empresa',
+      highlightPt: '100% grátis',
+    },
+    cta: { fr: "J'INSCRIS MON ENTREPRISE", pt: 'REGISTAR A MINHA EMPRESA' },
+  },
+  {
+    href: '/annuaire',
+    image: '/banners/promo-visibilite.jpg',
+    alt: {
+      fr: 'Commerçant souriant dans sa boutique avec des clients — soyez visible sur PebissOa',
+      pt: 'Comerciante sorridente na sua loja com clientes — esteja visível no PebissOa',
+    },
+    title: {
+      fr: 'Des milliers de clients',
+      highlightFr: 'vous trouvent chaque jour',
+      pt: 'Milhares de clientes',
+      highlightPt: 'encontram a sua empresa',
+    },
+    cta: { fr: "DÉCOUVREZ L'ANNUAIRE", pt: 'DESCOBRIR O DIRETÓRIO' },
+  },
+  {
+    href: '/annonces',
+    image: '/banners/promo-annonces.jpg',
+    alt: {
+      fr: 'Vendeuse photographiant ses produits au marché avec un smartphone — publiez vos annonces gratuites',
+      pt: 'Vendedora a fotografar os seus produtos no mercado com um smartphone — publique os seus anúncios grátis',
+    },
+    title: {
+      fr: 'Vendez plus vite avec vos',
+      highlightFr: 'annonces gratuites',
+      pt: 'Venda mais rápido com os seus',
+      highlightPt: 'anúncios grátis',
+    },
+    cta: { fr: 'PUBLIER UNE ANNONCE', pt: 'PUBLICAR UM ANÚNCIO' },
+  },
+] as const;
+
+const SLIDE_INTERVAL_MS = 5000;
+
+// PromoSlider — carrousel auto (3 slides) avec points de navigation, flèches au survol,
+// pause au survol, balayage tactile et respect de prefers-reduced-motion
+function PromoSlider() {
+  const { locale } = useTranslation();
+  const [active, setActive] = useState(0);
+  const [paused, setPaused] = useState(false);
+  const touchStartX = useRef<number | null>(null);
+  const reducedMotion = useRef(false);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined' && window.matchMedia) {
+      reducedMotion.current = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    }
+  }, []);
+
+  useEffect(() => {
+    if (paused || reducedMotion.current) return;
+    const id = setInterval(() => {
+      setActive((a) => (a + 1) % PROMO_SLIDES.length);
+    }, SLIDE_INTERVAL_MS);
+    return () => clearInterval(id);
+  }, [paused]);
+
+  const goTo = (i: number) => setActive(((i % PROMO_SLIDES.length) + PROMO_SLIDES.length) % PROMO_SLIDES.length);
+
   return (
-    <section className="py-6 md:py-8">
-      <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-[7fr_5fr] gap-4">
-          {/* ============ Bannière gauche — Inscription entreprise ============ */}
+    <div
+      className="group relative block overflow-hidden rounded-xl h-64 sm:h-72 md:h-80"
+      role="region"
+      aria-roledescription="carrousel"
+      aria-label={locale === 'pt' ? 'Promoções PebissOa' : 'Promotions PebissOa'}
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+      onTouchStart={(e) => {
+        touchStartX.current = e.touches[0].clientX;
+        setPaused(true);
+      }}
+      onTouchEnd={(e) => {
+        if (touchStartX.current !== null) {
+          const delta = e.changedTouches[0].clientX - touchStartX.current;
+          if (Math.abs(delta) > 40) goTo(active + (delta < 0 ? 1 : -1));
+          touchStartX.current = null;
+        }
+        setPaused(false);
+      }}
+    >
+      {PROMO_SLIDES.map((slide, i) => {
+        const isActive = i === active;
+        return (
           <a
-            href="/register"
-            className="group relative block overflow-hidden rounded-xl h-64 sm:h-72 md:h-80"
+            key={slide.href}
+            href={slide.href}
+            aria-hidden={!isActive}
+            className={`absolute inset-0 transition-opacity duration-700 ease-out ${
+              isActive ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'
+            }`}
+            tabIndex={isActive ? 0 : -1}
           >
             <img
-              src="/banners/promo-business.jpg"
-              alt="Entrepreneure africaine dans sa boutique — inscrivez votre entreprise sur PebissOa"
-              className="absolute inset-0 w-full h-full object-cover object-right transition-transform duration-500 group-hover:scale-[1.03]"
-              loading="eager"
+              src={slide.image}
+              alt={slide.alt[locale]}
+              className={`absolute inset-0 w-full h-full object-cover object-right transition-transform ease-out ${
+                isActive ? 'scale-105 duration-[7000ms]' : 'scale-100 duration-700'
+              }`}
+              loading={i === 0 ? 'eager' : 'lazy'}
             />
             <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/45 to-transparent" />
 
@@ -116,20 +216,68 @@ export function PromoDuoBanners() {
               </span>
 
               <p className="mt-3 sm:mt-4 text-white font-extrabold uppercase leading-tight text-lg sm:text-2xl md:text-3xl drop-shadow-md max-w-[75%]">
-                Référencez votre entreprise{' '}
-                <span className="text-yellow-400">100% gratuitement</span>
+                {locale === 'pt' ? slide.title.pt : slide.title.fr}{' '}
+                <span className="text-yellow-400">
+                  {locale === 'pt' ? slide.title.highlightPt : slide.title.highlightFr}
+                </span>
               </p>
 
               <span className="mt-4 sm:mt-auto inline-flex items-center gap-2 bg-white text-gray-900 text-xs sm:text-sm md:text-base font-bold px-4 sm:px-5 py-2.5 rounded-full group-hover:bg-gray-100 transition-colors">
-                J&apos;INSCRIS MON ENTREPRISE
+                {locale === 'pt' ? slide.cta.pt : slide.cta.fr}
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
               </span>
             </div>
-
-            <p className="absolute bottom-3 right-4 text-[10px] sm:text-xs text-white/70 hidden sm:block">
-              Visible par des milliers de visiteurs chaque mois
-            </p>
           </a>
+        );
+      })}
+
+      {/* ============ Flèches précédent / suivant (survol desktop) ============ */}
+      <button
+        type="button"
+        onClick={() => goTo(active - 1)}
+        aria-label={locale === 'pt' ? 'Diapositiva anterior' : 'Diapositive précédente'}
+        className="absolute left-3 top-1/2 -translate-y-1/2 z-20 hidden sm:inline-flex h-9 w-9 items-center justify-center rounded-full bg-black/40 text-white opacity-0 group-hover:opacity-100 hover:bg-black/60 transition-all duration-300"
+      >
+        <ChevronLeft className="h-5 w-5" />
+      </button>
+      <button
+        type="button"
+        onClick={() => goTo(active + 1)}
+        aria-label={locale === 'pt' ? 'Próxima diapositiva' : 'Diapositive suivante'}
+        className="absolute right-3 top-1/2 -translate-y-1/2 z-20 hidden sm:inline-flex h-9 w-9 items-center justify-center rounded-full bg-black/40 text-white opacity-0 group-hover:opacity-100 hover:bg-black/60 transition-all duration-300"
+      >
+        <ChevronRight className="h-5 w-5" />
+      </button>
+
+      {/* ============ Points de navigation ============ */}
+      <div className="absolute bottom-3.5 right-4 sm:bottom-4 sm:right-5 z-20 flex items-center gap-2">
+        {PROMO_SLIDES.map((slide, i) => (
+          <button
+            key={slide.href}
+            type="button"
+            onClick={() => goTo(i)}
+            aria-label={locale === 'pt' ? `Ir para a diapositiva ${i + 1}` : `Aller à la diapositive ${i + 1}`}
+            aria-current={i === active}
+            className={`h-2.5 rounded-full transition-all duration-300 ${
+              i === active ? 'w-6 bg-white' : 'w-2.5 bg-white/50 hover:bg-white/80'
+            }`}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// PromoDuoBanners — 2 bannières côte à côte sous le hero (style PagesJaunes)
+// Gauche : CARROUSEL promo (inscription / visibilité / annonces) — auto toutes les 5 s
+// Droite : professionnels / visibilité (photo sombre + titre centré + CTA bleu)
+export function PromoDuoBanners() {
+  return (
+    <section className="py-6 md:py-8">
+      <div className="container mx-auto px-4">
+        <div className="grid grid-cols-1 md:grid-cols-[7fr_5fr] gap-4">
+          {/* ============ Bannière gauche — Carrousel promo ============ */}
+          <PromoSlider />
 
           {/* ============ Bannière droite — Professionnels / visibilité ============ */}
           <a
