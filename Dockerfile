@@ -2,7 +2,8 @@
 FROM node:20-alpine
 
 # Install required packages
-RUN apk add --no-cache git libc6-compat sqlite
+# openssl : requis par les query engines Prisma sur alpine (musl)
+RUN apk add --no-cache git libc6-compat sqlite openssl
 RUN npm install -g bun
 
 WORKDIR /app
