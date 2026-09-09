@@ -105,9 +105,9 @@ export function Footer() {
         <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-white/40">
           <p>{t('copyright', { year: currentYear })}</p>
           <div className="flex gap-6">
-            <Link href="#" className="hover:text-white transition-colors">{t('legal')}</Link>
-            <Link href="#" className="hover:text-white transition-colors">{t('privacy')}</Link>
-            <Link href="#" className="hover:text-white transition-colors">{t('terms')}</Link>
+            <Link href="/mentions-legales" className="hover:text-white transition-colors">{t('legal')}</Link>
+            <Link href="/politique-confidentialite" className="hover:text-white transition-colors">{t('privacy')}</Link>
+            <Link href="/cgu" className="hover:text-white transition-colors">{t('terms')}</Link>
           </div>
         </div>
       </div>
