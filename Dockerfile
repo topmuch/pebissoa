@@ -17,9 +17,15 @@ RUN bun install
 RUN npx prisma generate
 
 # Build the application
+# - NODE_OPTIONS : plafonne le heap V8 pour éviter le "heap out of memory"
+#   et forcer un GC plus agressif sur les petits serveurs
+# - next build --webpack : le build Turbopack (défaut Next 16) a un pic mémoire
+#   très élevé (~2 Go) qui tue le conteneur de build (OOM) sur les VPS limités.
+#   Webpack consomme ~500 Mo de moins au pic (build ~20 s plus lent mais fiable).
 ENV NEXT_TELEMETRY_DISABLED=1
+ENV NODE_OPTIONS="--max-old-space-size=2048"
 ENV DATABASE_URL=file:/app/data/pebiss.db
-RUN mkdir -p /app/data && npx prisma db push --skip-generate && bun run build
+RUN mkdir -p /app/data && npx prisma db push --skip-generate && bun x next build --webpack && cp -r .next/static .next/standalone/.next/ && cp -r public .next/standalone/
 
 # Copy static assets for standalone mode
 RUN cp -r public .next/standalone/public && cp -r .next/static .next/standalone/.next/static
