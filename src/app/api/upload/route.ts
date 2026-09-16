@@ -8,13 +8,14 @@ const ALLOWED_EXTENSIONS = ['.jpg', '.jpeg', '.png', '.gif', '.webp', '.pdf'];
 const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10 MB
 
 // POST /api/upload - Upload one or more files (multipart/form-data, field name: "files")
-// Returns { urls: string[], url: string } — urls[0] served via /api/uploads/<filename>
+// Returns { urls: string[], url: string, files: [{ url, filename, originalName, size }] }
+// — urls[0] / files[i].url served via /api/uploads/<filename>
 export async function POST(request: NextRequest) {
   try {
     const formData = await request.formData();
-    const files = formData.getAll('files').filter((f): f is File => f instanceof File);
+    const submitted = formData.getAll('files').filter((f): f is File => f instanceof File);
 
-    if (files.length === 0) {
+    if (submitted.length === 0) {
       return NextResponse.json(
         { error: 'Aucun fichier reçu (champ attendu : "files")' },
         { status: 400 }
@@ -25,8 +26,9 @@ export async function POST(request: NextRequest) {
     await mkdir(uploadsDir, { recursive: true });
 
     const urls: string[] = [];
+    const files: { url: string; filename: string; originalName: string; size: number }[] = [];
 
-    for (const file of files) {
+    for (const file of submitted) {
       const ext = extname(file.name || '').toLowerCase() || '.jpg';
       if (!ALLOWED_EXTENSIONS.includes(ext)) {
         return NextResponse.json(
@@ -45,9 +47,17 @@ export async function POST(request: NextRequest) {
       const filename = `${randomUUID()}${ext}`;
       await writeFile(join(uploadsDir, filename), buffer);
       urls.push(`/api/uploads/${filename}`);
+      files.push({
+        url: `/api/uploads/${filename}`,
+        filename,
+        originalName: file.name,
+        size: file.size,
+      });
     }
 
-    return NextResponse.json({ url: urls[0], urls });
+    // "files" est attendu par certains consommateurs (dialog d'édition admin,
+    // upload multi-photos du dashboard) — ne pas retirer.
+    return NextResponse.json({ url: urls[0], urls, files });
   } catch (error) {
     console.error('Error uploading files:', error);
     return NextResponse.json(
