@@ -6,7 +6,7 @@ import { useQuery } from '@tanstack/react-query';
 import { Button } from '@/components/ui/button';
 import { useTranslation, categoryTranslations } from '@/lib/i18n';
 import { RUBRIQUES } from '@/lib/rubriques';
-import { PromoDuoBanners, HomepageFooterBanner } from '@/components/shared/banner-placement';
+import { PromoDuoBanners, HomepageFooterBanner, HomepageSponsoredGrid } from '@/components/shared/banner-placement';
 import { ProAdvantages } from '@/components/shared/pro-advantages';
 import {
   Search,
@@ -370,6 +370,9 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* ============ ANNONCES SPONSORISÉES (Accueil — Milieu, 336x280) ============ */}
+      <HomepageSponsoredGrid />
 
       {/* ============ ABOUT / EXPERIENCE SECTION ============ */}
       <section className="py-16 md:py-20">

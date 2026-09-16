@@ -165,7 +165,7 @@ const SLIDE_INTERVAL_MS = 5000;
 interface ResolvedSlide {
   key: string;
   href: string;
-  image: string;
+  image?: string;
   alt: string;
   title: string;
   highlight?: string;
@@ -186,12 +186,13 @@ function PromoSlider() {
   const touchStartX = useRef<number | null>(null);
   const reducedMotion = useRef(false);
 
+  // Toutes les annonces publiées sont affichées — sans image, on utilise un
+  // fond dégradé avec le titre (une annonce invisible serait un piège).
   const adSlides: ResolvedSlide[] = (adBanners || [])
-    .filter((b) => !!b.image)
     .map((b) => ({
       key: b.id,
       href: b.link || '#',
-      image: b.image as string,
+      image: b.image || undefined,
       alt: b.title,
       title: b.title,
       description: b.description || undefined,
@@ -262,15 +263,24 @@ function PromoSlider() {
             }`}
             tabIndex={isActive ? 0 : -1}
           >
-            <img
-              src={slide.image}
-              alt={slide.alt}
-              className={`absolute inset-0 w-full h-full object-cover object-right transition-transform ease-out ${
-                isActive ? 'scale-105 duration-[7000ms]' : 'scale-100 duration-700'
-              }`}
-              loading={i === 0 ? 'eager' : 'lazy'}
-            />
-            <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/45 to-transparent" />
+            {slide.image ? (
+              <>
+                <img
+                  src={slide.image}
+                  alt={slide.alt}
+                  className={`absolute inset-0 w-full h-full object-cover object-right transition-transform ease-out ${
+                    isActive ? 'scale-105 duration-[7000ms]' : 'scale-100 duration-700'
+                  }`}
+                  loading={i === 0 ? 'eager' : 'lazy'}
+                />
+                {/* Assombrissement latéral pour la lisibilité des slides promo par défaut */}
+                {!slide.isAd && (
+                  <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/45 to-transparent" />
+                )}
+              </>
+            ) : (
+              <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-gray-800 to-black" />
+            )}
 
             {slide.isAd ? (
               <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 via-black/30 to-transparent p-5 sm:p-6 pt-12">
@@ -281,7 +291,7 @@ function PromoSlider() {
                   <p className="text-white/80 text-xs sm:text-sm mt-1 line-clamp-2">{slide.description}</p>
                 )}
               </div>
-            ) : (
+            ) : slide.image ? (
               <div className="absolute inset-0 p-5 sm:p-6 md:p-8 flex flex-col items-start">
                 <span className="bg-[#0066CC] text-white font-extrabold text-xs sm:text-sm md:text-base px-3 py-1.5 leading-none inline-flex items-center gap-1 rounded-sm">
                   PEBISS <Sparkles className="h-3.5 w-3.5 md:h-4 md:w-4" />
@@ -297,7 +307,7 @@ function PromoSlider() {
                   <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
                 </span>
               </div>
-            )}
+            ) : null}
           </a>
         );
       })}
@@ -350,7 +360,8 @@ function PromoSlider() {
 function RightPromoBanner() {
   const { tl } = useTranslation();
   const { data: adBanners } = useBanners('home', 'promo_droite');
-  const ads = (adBanners || []).filter((b) => !!b.image);
+  // Toutes les annonces publiées sont affichées — fond dégradé si pas d'image.
+  const ads = adBanners || [];
   const [active, setActive] = useState(0);
   const [paused, setPaused] = useState(false);
   const touchStartX = useRef<number | null>(null);
@@ -440,14 +451,18 @@ function RightPromoBanner() {
               isActive ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'
             }`}
           >
-            <img
-              src={banner.image as string}
-              alt={banner.title}
-              className={`absolute inset-0 w-full h-full object-cover transition-transform ease-out ${
-                isActive ? 'scale-105 duration-[7000ms]' : 'scale-100 duration-700'
-              }`}
-              loading={i === 0 ? 'eager' : 'lazy'}
-            />
+            {banner.image ? (
+              <img
+                src={banner.image}
+                alt={banner.title}
+                className={`absolute inset-0 w-full h-full object-cover transition-transform ease-out ${
+                  isActive ? 'scale-105 duration-[7000ms]' : 'scale-100 duration-700'
+                }`}
+                loading={i === 0 ? 'eager' : 'lazy'}
+              />
+            ) : (
+              <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-gray-800 to-black" />
+            )}
             <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 via-black/30 to-transparent p-4 sm:p-5 pt-12">
               <h3 className="text-white font-extrabold text-base sm:text-lg leading-tight drop-shadow">
                 {banner.title}
