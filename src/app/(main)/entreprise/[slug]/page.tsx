@@ -140,6 +140,7 @@ export default async function BusinessDetailPage({ params }: Props) {
     business = await db.business.findUnique({
       where: { slug, isActive: true, isSuspended: false },
       select: {
+        id: true,
         slug: true,
         name: true,
         description: true,
@@ -157,13 +158,23 @@ export default async function BusinessDetailPage({ params }: Props) {
         logo: true,
         coverImage: true,
         category: { select: { name: true, slug: true } },
-        avgRating: true,
         hours: {
           select: { dayOfWeek: true, openTime: true, closeTime: true, isClosed: true },
         },
         _count: { select: { reviews: true } },
       },
     })
+
+    if (business) {
+      // avgRating n'existe pas sur le modèle Business — calcul via agrégat des avis
+      const ratingAgg = await db.review.aggregate({
+        where: { businessId: business.id },
+        _avg: { rating: true },
+      })
+      business.avgRating = ratingAgg._avg.rating
+        ? Math.round(ratingAgg._avg.rating * 10) / 10
+        : 0
+    }
   } catch (error) {
     console.error('[entreprise/slug] Error fetching business:', error);
   }

@@ -63,48 +63,65 @@ export async function POST(request: NextRequest) {
     // Hash password
     const hashedPassword = await bcrypt.hash(password, 12);
 
-    // Create user with ENTERPRISE role
-    const user = await db.user.create({
-      data: {
-        name,
-        email,
-        password: hashedPassword,
-        phone,
-        role: 'ENTERPRISE',
-      },
-    });
-
     // Generate business slug
-    const slug = businessName
+    const slugBase = businessName
       .toLowerCase()
       .normalize('NFD')
       .replace(/[\u0300-\u036f]/g, '')
       .replace(/[^a-z0-9]+/g, '-')
       .replace(/^-|-$/g, '');
 
-    // Create the business linked to the user with all provided fields
-    const business = await db.business.create({
-      data: {
-        name: businessName,
-        slug,
-        ownerId: user.id,
-        isActive: true,
-        ...(description && { description }),
-        ...(categoryId && { categoryId }),
-        ...(address && { address }),
-        ...(city && { city }),
-        ...(businessPhone && { phone: businessPhone }),
-        ...(businessEmail && { email: businessEmail }),
-        ...(website && { website }),
-        ...(facebook && { facebook }),
-        ...(instagram && { instagram }),
-        ...(twitter && { twitter }),
-        ...(linkedin && { linkedin }),
-        ...(whatsapp && { whatsapp }),
-        ...(tiktok && { tiktok }),
-        ...(coverImage && { coverImage }),
-        ...(country && { country }),
-      },
+    // Ensure slug uniqueness (suffix -2, -3, ... if already taken) — otherwise
+    // business.create fails with P2002 and the whole registration breaks.
+    let slug = slugBase || 'entreprise';
+    let counter = 2;
+    while (await db.business.findUnique({ where: { slug }, select: { id: true } })) {
+      slug = `${slugBase}-${counter}`;
+      counter += 1;
+      if (counter > 100) {
+        slug = `${slugBase}-${Date.now().toString(36)}`;
+        break;
+      }
+    }
+
+    // Create the user and the business atomically: if the business insert
+    // fails, the user must not be left orphaned in the database.
+    const { user, business } = await db.$transaction(async (tx) => {
+      const createdUser = await tx.user.create({
+        data: {
+          name,
+          email,
+          password: hashedPassword,
+          phone,
+          role: 'ENTERPRISE',
+        },
+      });
+
+      const createdBusiness = await tx.business.create({
+        data: {
+          name: businessName,
+          slug,
+          ownerId: createdUser.id,
+          isActive: true,
+          ...(description && { description }),
+          ...(categoryId && { categoryId }),
+          ...(address && { address }),
+          ...(city && { city }),
+          ...(businessPhone && { phone: businessPhone }),
+          ...(businessEmail && { email: businessEmail }),
+          ...(website && { website }),
+          ...(facebook && { facebook }),
+          ...(instagram && { instagram }),
+          ...(twitter && { twitter }),
+          ...(linkedin && { linkedin }),
+          ...(whatsapp && { whatsapp }),
+          ...(tiktok && { tiktok }),
+          ...(coverImage && { coverImage }),
+          ...(country && { country }),
+        },
+      });
+
+      return { user: createdUser, business: createdBusiness };
     });
 
     return NextResponse.json(
