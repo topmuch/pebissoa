@@ -68,3 +68,23 @@ Stage Summary:
 - Inscription entreprise 100% fonctionnelle même avec un nom d'entreprise homonyme
 - Page entreprise : JSON-LD SEO réparé (avgRating calculé par agrégation)
 - Fichiers modifiés : src/app/api/auth/register/route.ts, src/app/(main)/entreprise/[slug]/page.tsx
+
+---
+Task ID: 4
+Agent: Z.ai Code (main)
+Task: Corriger « j'ai créé un poste sur rubrique assurance mais il ne s'affiche pas dans assurance sur la page d'accueil »
+
+Work Log:
+- Vérifié en base + dev.log : AUCUNE donnée créée par l'utilisateur sur ce sandbox (tout est du seed) — son annonce a été créée sur son déploiement (production), le bug est donc dans le code poussé
+- Analyse de l'affichage des annonces sur l'accueil : 3 placements (carrousel promo_gauche, bannière promo_droite, grille 336x280 « Accueil — Milieu »)
+- BUG 1 (reproduit) : PromoSlider/RightPromoBanner filtraient `.filter((b) => !!b.image)` → toute annonce publiée SANS image était silencieusement ignorée (l'API la renvoyait bien, count: 1, mais elle n'était jamais rendue)
+- BUG 2 (reproduit) : HomepageSponsoredGrid (annonces 336x280 « Accueil — Milieu ») défini dans banner-placement.tsx mais jamais importé ni rendu dans page.tsx → ces annonces n'apparaissaient NULLE PART
+- FIX 1 : banner-placement.tsx — suppression des filtres par image ; les annonces sans image utilisent un fond dégradé (from-gray-900 via-gray-800 to-black) avec titre+description ; overlay latéral conservé pour les slides promo par défaut avec image (lisibilité)
+- FIX 2 : page.tsx — import + rendu de <HomepageSponsoredGrid /> juste après la section rubriques (avant ABOUT)
+- E2E Agent Browser : annonce sans image (format promo_gauche) visible dans le carrousel « Promotions Pebiss » de l'accueil + annonce avec image (format 336x280) visible dans la grille sponsorisée — 0 erreur console
+- Nettoyé les 2 annonces de test — DB à l'état seed (10 ads)
+
+Stage Summary:
+- Toute annonce publiée (avec ou sans image, quel que soit le format d'accueil) est désormais visible sur la page d'accueil
+- L'utilisateur devra redéployer (docker build) pour bénéficier du fix sur sa production
+- Fichiers modifiés : src/app/(main)/page.tsx, src/components/shared/banner-placement.tsx
