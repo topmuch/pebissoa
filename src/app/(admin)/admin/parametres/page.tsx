@@ -20,7 +20,7 @@ import {
 } from '@/components/ui/select';
 import { Switch } from '@/components/ui/switch';
 import { Separator } from '@/components/ui/separator';
-import { Settings, Globe, Search, Share2, Mail, Bell, ImageIcon, Upload, Wrench, AlertTriangle } from 'lucide-react';
+import { Settings, Globe, Search, Share2, Mail, Bell, ImageIcon, Upload, Wrench, AlertTriangle, CalendarDays, CalendarClock } from 'lucide-react';
 import { toast } from 'sonner';
 
 function TikTokIcon({ className = "h-5 w-5" }: { className?: string }) {
@@ -80,6 +80,7 @@ export default function AdminParametresPage() {
     // Maintenance
     maintenanceMode: false,
     maintenanceMessage: '',
+    maintenanceStartTime: '',
     maintenanceEndTime: '',
   });
 
@@ -119,7 +120,8 @@ export default function AdminParametresPage() {
         notifWelcome: config.notifWelcome ?? true,
         maintenanceMode: config.maintenanceMode ?? false,
         maintenanceMessage: config.maintenanceMessage || '',
-        maintenanceEndTime: config.maintenanceEndTime ? new Date(config.maintenanceEndTime).toISOString().slice(0, 16) : '',
+        maintenanceStartTime: toLocalInput(config.maintenanceStartTime),
+        maintenanceEndTime: toLocalInput(config.maintenanceEndTime),
       });
       setInitialized(true);
     }
@@ -127,6 +129,15 @@ export default function AdminParametresPage() {
 
   const updateField = (field: string, value: string | boolean) => {
     setForm((prev) => ({ ...prev, [field]: value }));
+  };
+
+  // Convertit une date ISO en valeur pour input datetime-local (heure locale du navigateur)
+  const toLocalInput = (iso?: string | null) => {
+    if (!iso) return '';
+    const d = new Date(iso);
+    if (isNaN(d.getTime())) return '';
+    const pad = (n: number) => String(n).padStart(2, '0');
+    return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}`;
   };
 
   const uploadMutation = useMutation({
@@ -166,7 +177,16 @@ export default function AdminParametresPage() {
   });
 
   const handleSave = () => {
-    saveMutation.mutate(form);
+    saveMutation.mutate({
+      ...form,
+      // datetime-local → ISO explicite avec fuseau, pour un stockage sans ambiguïté
+      maintenanceStartTime: form.maintenanceStartTime
+        ? new Date(form.maintenanceStartTime).toISOString()
+        : '',
+      maintenanceEndTime: form.maintenanceEndTime
+        ? new Date(form.maintenanceEndTime).toISOString()
+        : '',
+    });
   };
 
   const [testEmail, setTestEmail] = useState('');
@@ -720,17 +740,37 @@ export default function AdminParametresPage() {
                 />
               </div>
 
-              {/* End time */}
-              <div className="space-y-2">
-                <Label>{t('admin_settings_maintenance_end_time')}</Label>
-                <Input
-                  type="datetime-local"
-                  value={form.maintenanceEndTime}
-                  onChange={(e) => updateField('maintenanceEndTime', e.target.value)}
-                />
-                <p className="text-xs text-muted-foreground">
-                  {t('admin_settings_maintenance_end_time_hint')}
-                </p>
+              {/* Day + time (start & end) */}
+              <div className="grid gap-4 md:grid-cols-2">
+                <div className="space-y-2">
+                  <Label className="flex items-center gap-2">
+                    <CalendarDays className="h-4 w-4 text-pebiss-orange" />
+                    {t('admin_settings_maintenance_start_time')}
+                  </Label>
+                  <Input
+                    type="datetime-local"
+                    value={form.maintenanceStartTime}
+                    onChange={(e) => updateField('maintenanceStartTime', e.target.value)}
+                  />
+                  <p className="text-xs text-muted-foreground">
+                    {t('admin_settings_maintenance_start_time_hint')}
+                  </p>
+                </div>
+
+                <div className="space-y-2">
+                  <Label className="flex items-center gap-2">
+                    <CalendarClock className="h-4 w-4 text-pebiss-orange" />
+                    {t('admin_settings_maintenance_end_time')}
+                  </Label>
+                  <Input
+                    type="datetime-local"
+                    value={form.maintenanceEndTime}
+                    onChange={(e) => updateField('maintenanceEndTime', e.target.value)}
+                  />
+                  <p className="text-xs text-muted-foreground">
+                    {t('admin_settings_maintenance_end_time_hint')}
+                  </p>
+                </div>
               </div>
             </CardContent>
           </Card>

@@ -9,7 +9,9 @@ export async function GET() {
       select: {
         maintenanceMode: true,
         maintenanceMessage: true,
+        maintenanceStartTime: true,
         maintenanceEndTime: true,
+        logo: true,
       },
     });
 
@@ -28,7 +30,9 @@ export async function GET() {
     return NextResponse.json({
       active: true,
       message: config.maintenanceMessage,
+      startTime: config.maintenanceStartTime,
       endTime: config.maintenanceEndTime,
+      logo: config.logo,
     });
   } catch (error) {
     console.error('Error checking maintenance status:', error);

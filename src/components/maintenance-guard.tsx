@@ -3,12 +3,14 @@
 import { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import { useTranslation } from '@/lib/i18n';
-import { Wrench, Clock, RefreshCw } from 'lucide-react';
+import { Wrench, Clock, CalendarDays, RefreshCw } from 'lucide-react';
 
 interface MaintenanceData {
   active: boolean;
   message?: string;
-  endTime?: string;
+  startTime?: string | null;
+  endTime?: string | null;
+  logo?: string | null;
 }
 
 function calculateTimeLeft(endTime: number) {
@@ -24,7 +26,7 @@ function calculateTimeLeft(endTime: number) {
 }
 
 function MaintenanceScreen({ data }: { data: MaintenanceData }) {
-  const { t } = useTranslation();
+  const { t, locale } = useTranslation();
   const endTimeMs = data.endTime ? new Date(data.endTime).getTime() : null;
   const [timeLeft, setTimeLeft] = useState(() =>
     endTimeMs ? calculateTimeLeft(endTimeMs) : null
@@ -45,38 +47,92 @@ function MaintenanceScreen({ data }: { data: MaintenanceData }) {
 
   const message = data.message || t('maintenance_default_message');
 
+  // Formatage jour + heure selon la langue courante (ex : "dimanche 21 septembre 2026 à 14:30")
+  const dateLocale = locale === 'pt' ? 'pt-PT' : locale === 'en' ? 'en-US' : 'fr-FR';
+  const formatDay = (iso?: string | null) => {
+    if (!iso) return null;
+    const d = new Date(iso);
+    if (isNaN(d.getTime())) return null;
+    const day = new Intl.DateTimeFormat(dateLocale, {
+      weekday: 'long',
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric',
+    }).format(d);
+    const hour = new Intl.DateTimeFormat(dateLocale, {
+      hour: '2-digit',
+      minute: '2-digit',
+    }).format(d);
+    return { day, hour };
+  };
+  const start = formatDay(data.startTime);
+  const end = formatDay(data.endTime);
+
   return (
-    <div className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-gradient-to-br from-orange-50 via-white to-orange-50 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950 p-6">
+    <div className="fixed inset-0 z-[9999] overflow-y-auto bg-gradient-to-br from-orange-50 via-white to-orange-50 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950">
       <div className="absolute -top-32 -right-32 w-96 h-96 rounded-full bg-pebiss-orange/10 animate-pulse" />
       <div className="absolute -bottom-48 -left-48 w-[500px] h-[500px] rounded-full bg-pebiss-orange/10 animate-pulse" style={{ animationDelay: '2s' }} />
 
-      <div className="relative z-10 w-full max-w-lg text-center space-y-8">
-        <div className="mx-auto w-24 h-24 rounded-full bg-pebiss-orange/10 flex items-center justify-center animate-spin" style={{ animationDuration: '20s' }}>
-          <Wrench className="w-12 h-12 text-pebiss-orange" />
-        </div>
+      <div className="relative z-10 min-h-full w-full max-w-lg mx-auto flex flex-col items-center justify-center text-center space-y-6 px-6 py-8">
+        {/* Logo du site au milieu */}
+        {data.logo ? (
+          <img
+            src={data.logo}
+            alt="Logo"
+            className="h-20 w-auto max-w-[200px] object-contain rounded-2xl bg-white dark:bg-gray-800 shadow-xl border border-gray-100 dark:border-gray-700 p-2"
+          />
+        ) : (
+          <div className="w-20 h-20 rounded-full bg-pebiss-orange/10 flex items-center justify-center animate-spin" style={{ animationDuration: '20s' }}>
+            <Wrench className="w-10 h-10 text-pebiss-orange" />
+          </div>
+        )}
 
-        <div className="space-y-3">
-          <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-gray-900 dark:text-white">
+        <div className="space-y-2">
+          <h1 className="text-3xl md:text-4xl font-bold tracking-tight text-gray-900 dark:text-white">
             {t('maintenance_title')}
           </h1>
-          <p className="text-lg text-muted-foreground max-w-md mx-auto">
+          <p className="text-base md:text-lg text-muted-foreground max-w-md mx-auto">
             {message}
           </p>
         </div>
 
+        {/* Jour et heure de la maintenance */}
+        {(start || end) && (
+          <div className="w-full max-w-md space-y-1.5 rounded-2xl border border-orange-100 dark:border-gray-800 bg-white/70 dark:bg-gray-900/70 backdrop-blur p-3.5 shadow-sm">
+            {start && (
+              <div className="flex items-center justify-center gap-2 text-sm text-gray-700 dark:text-gray-200">
+                <CalendarDays className="w-4 h-4 text-pebiss-orange shrink-0" />
+                <span>
+                  <span className="font-semibold">{t('maintenance_starts_on')}</span>{' '}
+                  {start.day} {t('maintenance_at_time')} {start.hour}
+                </span>
+              </div>
+            )}
+            {end && (
+              <div className="flex items-center justify-center gap-2 text-sm text-gray-700 dark:text-gray-200">
+                <Clock className="w-4 h-4 text-pebiss-orange shrink-0" />
+                <span>
+                  <span className="font-semibold">{t('maintenance_back_on')}</span>{' '}
+                  {end.day} {t('maintenance_at_time')} {end.hour}
+                </span>
+              </div>
+            )}
+          </div>
+        )}
+
         {timeLeft && (
-          <div className="flex items-center justify-center gap-3 md:gap-4">
+          <div className="flex items-center justify-center gap-2 md:gap-3">
             <TimeUnit value={timeLeft.days} label={t('maintenance_days')} />
-            <span className="text-2xl md:text-3xl font-bold text-pebiss-orange mb-5 animate-pulse">:</span>
+            <span className="text-2xl font-bold text-pebiss-orange mb-5 animate-pulse">:</span>
             <TimeUnit value={timeLeft.hours} label={t('maintenance_hours')} />
-            <span className="text-2xl md:text-3xl font-bold text-pebiss-orange mb-5 animate-pulse">:</span>
+            <span className="text-2xl font-bold text-pebiss-orange mb-5 animate-pulse">:</span>
             <TimeUnit value={timeLeft.minutes} label={t('maintenance_minutes')} />
-            <span className="text-2xl md:text-3xl font-bold text-pebiss-orange mb-5 animate-pulse">:</span>
+            <span className="text-2xl font-bold text-pebiss-orange mb-5 animate-pulse">:</span>
             <TimeUnit value={timeLeft.seconds} label={t('maintenance_seconds')} />
           </div>
         )}
 
-        <div className="space-y-3">
+        <div className="space-y-2">
           <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
             <Clock className="w-4 h-4" />
             <span>{t('maintenance_progress')}</span>
@@ -105,12 +161,12 @@ function MaintenanceScreen({ data }: { data: MaintenanceData }) {
 function TimeUnit({ value, label }: { value: number; label: string }) {
   return (
     <div className="flex flex-col items-center">
-      <div className="w-16 h-16 md:w-20 md:h-20 rounded-2xl bg-white dark:bg-gray-800 shadow-lg border border-gray-100 dark:border-gray-700 flex items-center justify-center">
-        <span className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white tabular-nums">
+      <div className="w-14 h-14 md:w-16 md:h-16 rounded-2xl bg-white dark:bg-gray-800 shadow-lg border border-gray-100 dark:border-gray-700 flex items-center justify-center">
+        <span className="text-xl md:text-2xl font-bold text-gray-900 dark:text-white tabular-nums">
           {String(value).padStart(2, '0')}
         </span>
       </div>
-      <span className="mt-2 text-xs font-medium text-muted-foreground uppercase tracking-wider">
+      <span className="mt-1.5 text-[10px] md:text-xs font-medium text-muted-foreground uppercase tracking-wider">
         {label}
       </span>
     </div>

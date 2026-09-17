@@ -121,6 +121,7 @@ export async function PUT(request: NextRequest) {
       notifWelcome,
       maintenanceMode,
       maintenanceMessage,
+      maintenanceStartTime,
       maintenanceEndTime,
     } = body;
 
@@ -158,6 +159,7 @@ export async function PUT(request: NextRequest) {
           notifWelcome: notifWelcome ?? true,
           maintenanceMode: maintenanceMode ?? false,
           maintenanceMessage,
+          maintenanceStartTime: maintenanceStartTime ? new Date(maintenanceStartTime) : null,
           maintenanceEndTime: maintenanceEndTime ? new Date(maintenanceEndTime) : null,
         },
       });
@@ -195,6 +197,9 @@ export async function PUT(request: NextRequest) {
           ...(notifWelcome !== undefined && { notifWelcome }),
           ...(maintenanceMode !== undefined && { maintenanceMode }),
           ...(maintenanceMessage !== undefined && { maintenanceMessage }),
+          ...(maintenanceStartTime !== undefined && {
+            maintenanceStartTime: maintenanceStartTime ? new Date(maintenanceStartTime) : null,
+          }),
           ...(maintenanceEndTime !== undefined && {
             maintenanceEndTime: maintenanceEndTime ? new Date(maintenanceEndTime) : null,
           }),

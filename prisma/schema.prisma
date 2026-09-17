@@ -190,6 +190,7 @@ model SiteConfig {
   // Maintenance mode
   maintenanceMode      Boolean   @default(false)
   maintenanceMessage   String?
+  maintenanceStartTime DateTime?
   maintenanceEndTime   DateTime?
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
