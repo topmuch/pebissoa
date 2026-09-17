@@ -376,3 +376,21 @@ Stage Summary:
 - La config volume Coolify est CORRECTE désormais (/app/uploads persistant, writable) — le seul problème restant est le build obsolète
 - Le prochain Redeploy est GARANTI à jour : la ligne ADD (nouvelle URL) force l'exécution du clone
 - Vérification post-deploy attendue : uploads.files ≈ 111, bundled.files ≈ 111, missingNowhere ≈ 5 (re-uploads : Banco Atlântico ×2, Agência nova esperança ×2, Coris Bank ×1)
+
+---
+Task ID: 17
+Agent: Z.ai Code (main)
+Task: Restauration manuelle des images prod via Terminal Coolify (contournement du build figé)
+
+Work Log:
+- 3 déploiements Coolify "Success" (21:22/21:30/21:35, ~1min30 chacun) sans AUCUN effet sur le conteneur : health inchangé (files=3, bundled=null) → le build utilise un Dockerfile FIGÉ (pas celui du repo à jour) ; durées 1m30 ≠ 3-6min d'un build complet avec cache-bust
+- Contournement via Terminal Coolify (conteneur en marche) :
+  - 1re tentative `cp -rn repo/uploads/. /app/uploads/` → copie SILENCIEUSEMENT 0 fichier (bizarrerie busybox cp -n), comptage 3
+  - 2e tentative `cp -rf repo/uploads/* /app/uploads/` → 111 images copiées, volume = 114 fichiers ✓
+- Health post-restauration (22:04) : uploads.files=114, imageIntegrity {referenced:113, presentInVolume:108, missingNowhere:5} — les 5 restantes = Banco Atlântico ×2, Agência nova esperança ×2, Coris Bank ×1 (à re-uploader)
+- E2E agent-browser : accueil 27 imgs / 0 cassée ; annuaire 46 imgs / 0 cassée ; captures /tmp/preuve-images-restaurees-{accueil,annuaire}.png
+- Note : le code prod reste OBSOLÈTE (Next log port:80, sans copy-bundled-uploads ni fix annuaire adf81f9) — le build Coolify doit être réparé (en attente : git log -1 du terminal + capture General de la config)
+
+Stage Summary:
+- IMAGES RESTAURÉES EN PROD SANS REBUILD : volume /app/uploads = 114 fichiers persistants
+- Le problème de build obsolète Coolify reste ouvert — diagnostic à confirmer par la config General
