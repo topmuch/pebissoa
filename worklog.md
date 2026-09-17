@@ -257,3 +257,25 @@ Stage Summary:
 - Pendant la maintenance : les visiteurs non connectés voient l'écran de maintenance ; l'admin connecté parcourt tout le site et effectue ses modifications sans aucune interruption, avec un rappel discret que le mode est actif
 - Les routes /admin, /dashboard, /login, /register restaient déjà exemptées pour tous ; la nouveauté est le bypass par rôle ADMIN sur les pages publiques
 - Fichiers : src/components/maintenance-guard.tsx, src/lib/i18n.ts, src/lib/i18n-en.ts
+
+---
+Task ID: 12
+Agent: Z.ai Code (main)
+Task: Photos cassées partout + upload de nouvelles photos impossible depuis le dashboard admin
+
+Work Log:
+- Diagnostic : 2 causes distinctes
+  1) L'espace de travail avait été réinitialisé (13:25) : `src/app/api/upload/route.ts` avait DISPARU du disque (présent dans git HEAD) → POST /api/upload = 404 → tout upload photo échouait (édition annonce admin, inscription, logo…). La DB locale db/custom.db était aussi VIDE (0 lignes).
+  2) `.env` sans NEXTAUTH_SECRET → next-auth v4 dérivait des fallbacks de secret DIFFÉRENTS selon le module → « JWEDecryptionFailed » dans getServerSession → 401 sur TOUTES les écritures authentifiées (PUT /api/ads/[id], /api/stats…) alors que le login et l'upload (sans auth) passaient.
+- Restaurations : `git checkout -- src/app/api/upload/route.ts` (route upload revenue, POST 200) ; `node scripts/init-production.cjs` (admin + SiteConfig + 31 catégories + 43 entreprises + photos/produits/services/horaires/avis + 6 annonces) ; recréation admin@pebiss.sn / Admin@123456 ; `git checkout -- uploads/` (1 fichier manquant revenu, 108 fichiers).
+- Scan images DB vs disque : 89 refs valides, 1 cassée — logo de « Aéroport international Osvaldo Vieira de Bissau » pointait vers /uploads/9a6607b6….webp jamais commitée → réparé localement (logo = coverImage de l'entreprise), corrigé dans prisma/production-data.json, + étape de réparation idempotente ajoutée à scripts/init-production.cjs (s'exécute à CHAQUE boot → répare la prod au prochain Redeploy).
+- Fix auth : NEXTAUTH_SECRET fort + NEXTAUTH_URL ajoutés au .env local ; src/lib/auth.ts → `secret: process.env.NEXTAUTH_SECRET || 'pebissOa-fallback-secret-2026-stable-…'` (fallback déterministe identique partout : les sessions marchent même sans la variable d'env, y compris en prod Coolify) ; serveur dev redémarré.
+- E2E avec preuves : POST /api/upload avec vraie image → 200 + url servie 200 image/jpeg ; login admin → /admin/annonces → Modifier « GRUPO DAF EM PROMO » → upload magenta test → POST /api/upload 200, aperçu affiché → Enregistrer → **PUT /api/ads/… 200** (avant le fix : 401) → DB vérifiée {image: /api/uploads/2ef3c73e….jpg} → vignette magenta visible dans la liste (capture /tmp/e2e-admin-annonce-modifiee.png) ; annonce + fichiers de test restaurés ensuite.
+- Balayage « images cassées » sur 10 pages (/, /annuaire, /annonces, /categories, /entreprise/[slug] aéroport, /apropos, /avis-clients, /publicite, /contact + mobile 375×667) : **0 image cassée partout** (ex : accueil 27 imgs/0, catégories 33/0) ; console sans erreur ; lint 0 erreur.
+
+Stage Summary:
+- Upload de photos rétabli partout (la route POST /api/upload avait disparu du disque — restaurée depuis git)
+- Toutes les actions authentifiées marchent à nouveau (401 « decryption operation failed » corrigé par un secret stable) — c'est ce qui bloquait l'enregistrement des annonces avec nouvelles photos
+- La seule image réellement cassée (logo aéroport, absente du dépôt) est réparée en DB locale, dans le seed, et le boot prod la réparera automatiquement
+- Prod Coolify : Redeploy → copy-bundled-uploads remplira /app/uploads (108 images embarquées) + init-production.cjs réparera le logo ; recommandé d'ajouter NEXTAUTH_SECRET dans les variables Coolify (le fallback code couvre son absence)
+- Fichiers : src/app/api/upload/route.ts (restauré), src/lib/auth.ts, scripts/init-production.cjs, prisma/production-data.json

@@ -57,6 +57,19 @@ async function main() {
     }
 
     // =============================================
+    // 1bis. Réparation d'images cassées (idempotent, à chaque boot)
+    // L'image d'origine de ce logo n'a jamais été commitée dans le dépôt :
+    // on pointe le logo vers la photo de couverture de l'entreprise (valide).
+    // =============================================
+    const BROKEN_LOGO = '/uploads/9a6607b6-6908-4d42-bd5f-7ab2abc72868.webp';
+    const brokenBiz = await prisma.business.findFirst({ where: { logo: BROKEN_LOGO } });
+    if (brokenBiz) {
+      const fallbackLogo = brokenBiz.coverImage || '/api/uploads/9fd6625e-0c32-41a2-bd3c-1471971e57a0.webp';
+      await prisma.business.update({ where: { id: brokenBiz.id }, data: { logo: fallbackLogo } });
+      console.log(`  🔧 Logo cassé réparé pour « ${brokenBiz.name} » → ${fallbackLogo}`);
+    }
+
+    // =============================================
     // 2. Déjà initialisée ? (idempotent)
     // =============================================
     const businessCount = await prisma.business.count();

@@ -83,5 +83,12 @@ export const authOptions: NextAuthOptions = {
     strategy: 'jwt',
     maxAge: 7 * 24 * 60 * 60, // 7 days
   },
-  secret: process.env.NEXTAUTH_SECRET,
+  // IMPORTANT : un secret STABLE doit être partagé par toutes les routes.
+  // Sans secret explicite, next-auth v4 dérive un fallback différent selon le
+  // module appelant → « decryption operation failed » dans getServerSession
+  // (le cookie de session est posé par /api/auth/* mais illisible dans
+  // /api/ads, /api/stats… → 401 sur toutes les actions authentifiées).
+  // D'où : NEXTAUTH_SECRET (recommandé) + fallback déterministe identique
+  // partout, pour que les sessions marchent même si la variable d'env manque.
+  secret: process.env.NEXTAUTH_SECRET || 'pebissOa-fallback-secret-2026-stable-do-not-rotate-lightly',
 };
