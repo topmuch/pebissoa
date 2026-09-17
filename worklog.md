@@ -201,3 +201,24 @@ Stage Summary:
 - Quelle que soit la cause du files:3 (build périmé / étape muette), les images de production s'affichent désormais via le fallback embarqué, et les uploads utilisateurs (prouvés atterrir dans le volume) se servent normalement
 - Le prochain déploiement montrera dans les logs : le commit buildé + le nombre d'images copiées dans le volume
 - Fichiers : src/lib/uploads.ts, src/app/api/serve-image/[filename]/route.ts, src/app/api/uploads/[...path]/route.ts, src/app/api/health/route.ts, Dockerfile
+
+---
+Task ID: 9
+Agent: Z.ai Code (main)
+Task: Mode maintenance dans les paramètres admin avec jour/heure et logo au milieu de l'écran
+
+Work Log:
+- Inventaire : mode maintenance préexistant (switch + message + heure de fin dans /admin/parametres, /api/maintenance, MaintenanceGuard avec icône clé à molette) — le logo n'était jamais affiché et pas de jour/heure de début
+- Prisma : ajout SiteConfig.maintenanceStartTime (DateTime?) + bun run db:push + redémarrage du serveur dev (client Prisma rechargé — le 500 « Unknown argument maintenanceStartTime » vient de l'ancien client en mémoire)
+- API : PUT /api/settings accepte maintenanceStartTime (stocké ISO explicite) ; GET /api/maintenance renvoie désormais {startTime, logo} en plus de {message, endTime}
+- Admin /admin/parametres (onglet Maintenance) : champ « Jour et heure de début » (datetime-local, CalendarDays) à côté de « Date/heure de fin » (CalendarClock) en grille responsive ; helper toLocalInput (ISO → heure locale du navigateur) ; handleSave convertit datetime-local → toISOString() pour un stockage sans ambiguïté de fuseau
+- Écran public maintenance-guard.tsx : logo du site affiché AU MILIEU (img centrée, carte blanche shadow-xl ; fallback icône clé si aucun logo) ; bloc « Début prévu le [jour] à [heure] » / « Retour prévu le [jour] à [heure] » formaté Intl.DateTimeFormat selon la langue (fr-FR/pt-PT/en-US) ; conteneur overflow-y-auto + mise en page compacte (le contenu débordait du viewport 578px → coupé) ; compte à rebours conservé
+- i18n : clés maintenance_starts_on, maintenance_back_on, maintenance_at_time + admin_settings_maintenance_start_time(_hint) en fr/pt/en
+- E2E Agent Browser avec preuves : login admin → onglet Maintenance → switch ON → message + début 2026-09-21T09:00 + fin 17:30 → Enregistrer → PUT /api/settings 200 → DB vérifiée {maintenanceMode:true, maintenanceStartTime:2026-09-21T09:00Z, maintenanceEndTime:17:30Z} → GET /api/maintenance {active:true, startTime, endTime, logo} → page d'accueil visiteur = écran maintenance avec logo PeBiss centré + jours/heures + compte à rebours (captures /tmp/preuve-maintenance-desktop.png 1280x900, /tmp/preuve-maintenance-mobile.png 375x667, fallback sans logo /tmp/preuve-maintenance-fallback.png) → switch OFF → site public restauré → 0 erreur console, lint 0 erreur
+- État de la DB locale restauré après tests (maintenanceMode:false, logo:'') ; push GitHub c2697f0
+
+Stage Summary:
+- L'admin peut programmer une maintenance avec jour + heure de début ET de fin ; les visiteurs voient l'écran de maintenance avec le logo du site au milieu, le jour et l'heure prévus, et un compte à rebours
+- Le logo affiché est celui configuré dans Paramètres > Général (upload logo) ; s'il est absent, l'icône clé historique s'affiche
+- Déploiement prod Coolify : Redeploy (commit c2697f0), db push se fera au boot (Dockerfile) — aucune variable d'env nouvelle
+- Fichiers : prisma/schema.prisma, src/app/api/settings/route.ts, src/app/api/maintenance/route.ts, src/components/maintenance-guard.tsx, src/app/(admin)/admin/parametres/page.tsx, src/lib/i18n.ts, src/lib/i18n-en.ts
