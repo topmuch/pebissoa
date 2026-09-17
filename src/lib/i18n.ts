@@ -855,6 +855,10 @@ const fr: Record<string, string> = {
   'admin_ads_error_delete': 'Erreur lors de la suppression',
   'admin_ads_created_msg': 'Annonce créée avec succès',
   'admin_ads_error_create': 'Erreur lors de la création',
+  'admin_ads_edit': 'Modifier',
+  'admin_ads_edit_title': "Modifier l'annonce",
+  'admin_ads_updated_msg': 'Annonce modifiée avec succès',
+  'admin_ads_error_update': 'Erreur lors de la modification',
   // Ad banner shared
   'ad_badge': 'Publicité',
   'ad_close_label': 'Fermer',
@@ -1837,6 +1841,10 @@ const pt: Record<string, string> = {
   'admin_ads_error_delete': 'Erro ao eliminar',
   'admin_ads_created_msg': 'Anúncio criado com sucesso',
   'admin_ads_error_create': 'Erro ao criar',
+  'admin_ads_edit': 'Editar',
+  'admin_ads_edit_title': 'Editar anúncio',
+  'admin_ads_updated_msg': 'Anúncio atualizado com sucesso',
+  'admin_ads_error_update': 'Erro ao atualizar',
   // Ad banner shared
   'ad_badge': 'Publicidade',
   'ad_close_label': 'Fechar',

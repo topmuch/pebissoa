@@ -147,3 +147,22 @@ Stage Summary:
 - Déployer avec 2 volumes persistants est maintenant SÛR : /app/uploads (images) et /app/data (SQLite) — au 1er boot le volume uploads est rempli automatiquement avec les 105 images de production, sans jamais écraser les uploads utilisateurs
 - UPLOADS_DIR=/app/uploads est déjà défini dans le Dockerfile (ENV + export CMD) : aucune variable d'env supplémentaire requise côté Coolify
 - Fichiers : Dockerfile, scripts/copy-bundled-uploads.cjs
+
+---
+Task ID: 7
+Agent: Z.ai Code (main)
+Task: Superadmin — pouvoir cliquer pour modifier une annonce (photo + texte) dans le dashboard admin
+
+Work Log:
+- Audit : l'API PUT /api/ads/[id] existait déjà (ADMIN autorisé, tous champs : title, description, image, type, categoryId, format, position, link, isActive, dates) — seul le frontend admin manquait
+- Page admin/annonces : bouton crayon « Modifier » dans la colonne Actions + ligne entière cliquable (cursor-pointer, hover) pour ouvrir l'édition ; stopPropagation pour ne pas déclencher l'édition en cliquant supprimer
+- Dialog unique create/edit : mode édition pré-remplit tous les champs (titre, description, type, catégorie, format, position, lien, actif, dates au format input date, image avec aperçu) ; titre « Modifier l'annonce » ; bouton « Enregistrer » (vs « Créer »)
+- updateMutation → PUT /api/ads/[id] avec gestion d'erreur réelle (toast avec message serveur) ; upload de photo fonctionnel en mode édition (uploadFiles → aperçu → PUT)
+- i18n : clés admin_ads_edit / admin_ads_edit_title / admin_ads_updated_msg / admin_ads_error_update en fr + pt + en ; factorisation emptyForm + toDateInput
+- E2E Agent Browser : login admin@pebiss.sn → /admin/annonces → crayon → dialog pré-rempli (« Eval Test Banner ») → modification titre + description + upload PNG → Enregistrer → table mise à jour ; édition par clic ligne OK ; image servie HTTP 200 ; DB vérifiée (title/description/image/updatedAt)
+- Nettoyage : annonce de test + fichier uploadé supprimés ; lint 0 erreur
+
+Stage Summary:
+- Le superadmin peut maintenant modifier n'importe quelle annonce (texte + photo + tous les paramètres) en cliquant sur la ligne ou le crayon dans /admin/annonces
+- Aucune modification backend nécessaire (PUT /api/ads/[id] déjà complet)
+- Fichiers : src/app/(admin)/admin/annonces/page.tsx, src/lib/i18n.ts, src/lib/i18n-en.ts

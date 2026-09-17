@@ -44,7 +44,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog';
-import { Search, Trash2, Megaphone, Plus, Upload } from 'lucide-react';
+import { Search, Trash2, Megaphone, Plus, Upload, Pencil } from 'lucide-react';
 import { toast } from 'sonner';
 
 const AD_TYPES: Record<string, string> = {
@@ -68,6 +68,23 @@ const POSITION_LABELS: Record<string, Record<Locale, string>> = {
   enterprise: { fr: 'Page détail annonce', pt: 'Página detalhe', en: 'Ad detail page' },
 };
 
+const emptyForm = {
+  title: '',
+  description: '',
+  type: 'SERVICE',
+  categoryId: '',
+  image: '',
+  link: '',
+  position: 'home',
+  format: '336x280',
+  isActive: true,
+  startDate: '',
+  endDate: '',
+};
+
+const toDateInput = (value: string | null | undefined) =>
+  value ? new Date(value).toISOString().slice(0, 10) : '';
+
 export default function AdminAnnoncesPage() {
   const { t, locale } = useTranslation();
   const queryClient = useQueryClient();
@@ -75,21 +92,10 @@ export default function AdminAnnoncesPage() {
   const [typeFilter, setTypeFilter] = useState('all');
   const [deleteId, setDeleteId] = useState<string | null>(null);
   const [dialogOpen, setDialogOpen] = useState(false);
+  const [editingId, setEditingId] = useState<string | null>(null);
   const imageInputRef = useRef<HTMLInputElement>(null);
 
-  const [form, setForm] = useState({
-    title: '',
-    description: '',
-    type: 'SERVICE',
-    categoryId: '',
-    image: '',
-    link: '',
-    position: 'home',
-    format: '336x280',
-    isActive: true,
-    startDate: '',
-    endDate: '',
-  });
+  const [form, setForm] = useState({ ...emptyForm });
 
   const { data, isLoading } = useQuery({
     queryKey: ['admin-ads', search, typeFilter],
@@ -154,21 +160,49 @@ export default function AdminAnnoncesPage() {
     onError: (err) => toast.error(err.message || t('admin_ads_error_create')),
   });
 
+  const updateMutation = useMutation({
+    mutationFn: async ({ id, data }: { id: string; data: typeof form }) => {
+      const res = await fetch(`/api/ads/${id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({}));
+        throw new Error(err.error || 'Erreur');
+      }
+      return res.json();
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['admin-ads'] });
+      toast.success(t('admin_ads_updated_msg'));
+      closeDialog();
+    },
+    onError: (err) => toast.error(err.message || t('admin_ads_error_update')),
+  });
+
+  const openEdit = (ad: any) => {
+    setEditingId(ad.id);
+    setForm({
+      title: ad.title || '',
+      description: ad.description || '',
+      type: ad.type || 'SERVICE',
+      categoryId: ad.categoryId || '',
+      image: ad.image || '',
+      link: ad.link || '',
+      position: ad.position || 'home',
+      format: ad.format || '336x280',
+      isActive: ad.isActive !== false,
+      startDate: toDateInput(ad.startDate),
+      endDate: toDateInput(ad.endDate),
+    });
+    setDialogOpen(true);
+  };
+
   const closeDialog = () => {
     setDialogOpen(false);
-    setForm({
-      title: '',
-      description: '',
-      type: 'SERVICE',
-      categoryId: '',
-      image: '',
-      link: '',
-      position: 'home',
-      format: '336x280',
-      isActive: true,
-      startDate: '',
-      endDate: '',
-    });
+    setEditingId(null);
+    setForm({ ...emptyForm });
   };
 
   const updateField = (field: string, value: string | boolean) => {
@@ -185,9 +219,13 @@ export default function AdminAnnoncesPage() {
     }
   };
 
-  const handleCreate = async () => {
+  const handleSave = async () => {
     try {
-      await createMutation.mutateAsync(form);
+      if (editingId) {
+        await updateMutation.mutateAsync({ id: editingId, data: form });
+      } else {
+        await createMutation.mutateAsync(form);
+      }
     } catch {
       // Error handled by onError callback
     }
@@ -270,7 +308,7 @@ export default function AdminAnnoncesPage() {
                   </TableRow>
                 ) : (
                   ads.map((ad: any) => (
-                    <TableRow key={ad.id}>
+                    <TableRow key={ad.id} className="cursor-pointer hover:bg-muted/50" onClick={() => openEdit(ad)}>
                       <TableCell>
                         <div className="flex items-center gap-2">
                           {ad.image ? (
@@ -280,7 +318,7 @@ export default function AdminAnnoncesPage() {
                               <Megaphone className="h-3 w-3 text-muted-foreground" />
                             </div>
                           )}
-                          <span className="font-medium text-sm truncate max-w-[150px]">{ad.title}</span>
+                          <span className="font-medium text-sm truncate max-w-[150px] group-hover:underline">{ad.title}</span>
                         </div>
                       </TableCell>
                       <TableCell>
@@ -307,14 +345,30 @@ export default function AdminAnnoncesPage() {
                         {new Date(ad.createdAt).toLocaleDateString(locale === 'fr' ? 'fr-FR' : locale === 'en' ? 'en-GB' : 'pt-PT')}
                       </TableCell>
                       <TableCell>
-                        <div className="flex items-center justify-end">
+                        <div className="flex items-center justify-end gap-1">
+                          <Button
+                            variant="ghost"
+                            size="icon"
+                            className="h-8 w-8"
+                            title={t('admin_ads_edit')}
+                            aria-label={`${t('admin_ads_edit')} — ${ad.title}`}
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              openEdit(ad);
+                            }}
+                          >
+                            <Pencil className="h-3 w-3" />
+                          </Button>
                           <AlertDialog open={deleteId === ad.id} onOpenChange={(open) => !open && setDeleteId(null)}>
                             <AlertDialogTrigger asChild>
                               <Button
                                 variant="ghost"
                                 size="icon"
                                 className="h-8 w-8 text-destructive"
-                                onClick={() => setDeleteId(ad.id)}
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  setDeleteId(ad.id);
+                                }}
                               >
                                 <Trash2 className="h-3 w-3" />
                               </Button>
@@ -348,11 +402,11 @@ export default function AdminAnnoncesPage() {
         </CardContent>
       </Card>
 
-      {/* Add Ad Dialog */}
+      {/* Add / Edit Ad Dialog */}
       <Dialog open={dialogOpen} onOpenChange={(open) => { if (!open) closeDialog(); }}>
         <DialogContent className="max-w-lg max-h-[90vh] overflow-y-auto">
           <DialogHeader>
-            <DialogTitle>{t('dash_ads_create')}</DialogTitle>
+            <DialogTitle>{editingId ? t('admin_ads_edit_title') : t('dash_ads_create')}</DialogTitle>
           </DialogHeader>
           <div className="space-y-4">
             <div className="space-y-2">
@@ -520,14 +574,19 @@ export default function AdminAnnoncesPage() {
               <Button type="button" variant="outline" onClick={closeDialog}>{t('common_cancel')}</Button>
               <Button
                 type="button"
-                onClick={handleCreate}
+                onClick={handleSave}
                 disabled={
                   !form.title.trim() ||
-                  createMutation.isPending
+                  createMutation.isPending ||
+                  updateMutation.isPending
                 }
                 className="bg-pebiss-orange hover:bg-pebiss-orange/90 text-white"
               >
-                {createMutation.isPending ? t('admin_ads_creating') : t('dash_ads_create')}
+                {(createMutation.isPending || updateMutation.isPending)
+                  ? t('admin_ads_creating')
+                  : editingId
+                    ? t('common_save')
+                    : t('dash_ads_create')}
               </Button>
             </div>
           </div>
