@@ -342,3 +342,20 @@ Stage Summary:
 - La config Coolify actuelle : DB persistante ✅ mais uploads NON persistants ❌ (volume images monté au mauvais chemin /app/public/uploads avec la source de la DB) + DB téléchargeable publiquement 🚨 (corrigé en code)
 - Instructions données à l'utilisateur : Volume 2 → Source /var/lib/coolify/volumes/pebissoa-uploads (dir DÉDIÉ, différent de la DB), Destination /app/uploads ; puis Redeploy ; au boot le volume sera rempli (108 seed + 3 sauvetées)
 - 8 fichiers perdus à re-uploader via l'admin (dont logo + cover Orange, logo Banco Atlântico)
+
+---
+Task ID: 15
+Agent: Z.ai Code (main)
+Task: Vérifier la persistance Coolify AVANT Redeploy (demande: "avant de deployer verifie les persistence" + "si je met /app/uploads les images vont disparaitre")
+
+Work Log:
+- Analyse capture Coolify (upload/screencapture-...persistent-storage-2026-09-17-20_49_40.png) : 2 volumes — /app/data ✓ DB ; volume images monté sur /app/public/uploads avec la MÊME source que la DB (pebissoa-data) = 2 erreurs
+- curl /api/health : uploads.dir=/app/uploads (111 fichiers, couche éphémère), bundled=null (conteneur = vieille image sans .bundled-uploads), imageIntegrity {referenced:113, presentInVolume:105, recoverable:0, missingNowhere:8}
+- node scripts/harvest-prod-images.cjs : 113 refs → 105 déjà dans git (bundle), 0 à sauver, 8 déjà perdues (placeholder actuel)
+- Association des 8 perdues : Orange ×3, Banco Atlântico ×2, Agência nova esperança ×2, Coris Bank ×1
+- Push commit en attente ab02ebc (f1ee6d5..ab02ebc) via askpass one-off, token supprimé après
+
+Stage Summary:
+- VERDICT : ajouter le volume /app/uploads ne fait PAS disparaître les images — c'est l'inverse (sans volume, tout est effacé à chaque Redeploy). Les 105 images affichées sont déjà dans git → restaurées au 1er boot par copy-bundled-uploads.cjs depuis .bundled-uploads
+- Config Coolify corrigée à appliquer : volume images → Source /var/lib/coolify/volumes/pebissoa-uploads (distincte de la DB), Destination /app/uploads (pas /app/public/uploads)
+- 8 images (4 entreprises) à re-uploader : perdues dans le conteneur ACTUEL, indépendamment du volume
