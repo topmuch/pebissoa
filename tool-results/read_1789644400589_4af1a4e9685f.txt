@@ -1,0 +1,755 @@
+     1→     1→'use client';
+     2→     2→
+     3→     3→import { useState, useRef, useEffect } from 'react';
+     4→     4→import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+     5→     5→import { useTranslation } from '@/lib/i18n';
+     6→     6→import { uploadFiles, uploadErrorMessage } from '@/lib/upload-client';
+     7→     7→import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
+     8→     8→import { Button } from '@/components/ui/button';
+     9→     9→import { Input } from '@/components/ui/input';
+    10→    10→import { Label } from '@/components/ui/label';
+    11→    11→import { Textarea } from '@/components/ui/textarea';
+    12→    12→import { Skeleton } from '@/components/ui/skeleton';
+    13→    13→import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+    14→    14→import {
+    15→    15→  Select,
+    16→    16→  SelectContent,
+    17→    17→  SelectItem,
+    18→    18→  SelectTrigger,
+    19→    19→  SelectValue,
+    20→    20→} from '@/components/ui/select';
+    21→    21→import { Switch } from '@/components/ui/switch';
+    22→    22→import { Separator } from '@/components/ui/separator';
+    23→    23→import { Settings, Globe, Search, Share2, Mail, Bell, ImageIcon, Upload, Wrench, AlertTriangle } from 'lucide-react';
+    24→    24→import { toast } from 'sonner';
+    25→    25→
+    26→    26→function TikTokIcon({ className = "h-5 w-5" }: { className?: string }) {
+    27→    27→  return (
+    28→    28→    <svg className={className} viewBox="0 0 24 24" fill="currentColor">
+    29→    29→      <path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.88-2.88 2.89 2.89 0 012.88-2.88c.28 0 .54.04.79.1v-3.5a6.37 6.37 0 00-.79-.05A6.34 6.34 0 003.15 15a6.34 6.34 0 0010.68 4.61V12.7a8.28 8.28 0 005.76 2.29V11.5a4.83 4.83 0 01-3.77-1.58V6.69h3.77z"/>
+    30→    30→    </svg>
+    31→    31→  );
+    32→    32→}
+    33→    33→
+    34→    34→export default function AdminParametresPage() {
+    35→    35→  const { t, tl } = useTranslation();
+    36→    36→  const queryClient = useQueryClient();
+    37→    37→  const logoInputRef = useRef<HTMLInputElement>(null);
+    38→    38→  const seoImageInputRef = useRef<HTMLInputElement>(null);
+    39→    39→
+    40→    40→  const { data: config, isLoading } = useQuery({
+    41→    41→    queryKey: ['site-config'],
+    42→    42→    queryFn: async () => {
+    43→    43→      const res = await fetch('/api/admin/settings');
+    44→    44→      if (!res.ok) throw new Error('Erreur');
+    45→    45→      return res.json();
+    46→    46→    },
+    47→    47→  });
+    48→    48→
+    49→    49→  const [form, setForm] = useState({
+    50→    50→    siteName: '',
+    51→    51→    logo: '',
+    52→    52→    favicon: '',
+    53→    53→    address: '',
+    54→    54→    phone: '',
+    55→    55→    email: '',
+    56→    56→    seoTitle: '',
+    57→    57→    seoDescription: '',
+    58→    58→    seoImage: '',
+    59→    59→    defaultLang: 'pt',
+    60→    60→    facebook: '',
+    61→    61→    instagram: '',
+    62→    62→    twitter: '',
+    63→    63→    linkedin: '',
+    64→    64→    whatsapp: '',
+    65→    65→    tiktok: '',
+    66→    66→    // SMTP
+    67→    67→    smtpHost: '',
+    68→    68→    smtpPort: '',
+    69→    69→    smtpUser: '',
+    70→    70→    smtpPassword: '',
+    71→    71→    smtpFromName: '',
+    72→    72→    smtpFromEmail: '',
+    73→    73→    smtpEncryption: 'none',
+    74→    74→    // Notifications
+    75→    75→    notifNewAd: true,
+    76→    76→    notifNewReview: true,
+    77→    77→    notifWeeklyReport: false,
+    78→    78→    notifAdApproved: true,
+    79→    79→    notifWelcome: true,
+    80→    80→    // Maintenance
+    81→    81→    maintenanceMode: false,
+    82→    82→    maintenanceMessage: '',
+    83→    83→    maintenanceEndTime: '',
+    84→    84→  });
+    85→    85→
+    86→    86→  const [initialized, setInitialized] = useState(false);
+    87→    87→
+    88→    88→  // Initialize form when data loads (useEffect to avoid setState during render)
+    89→    89→  useEffect(() => {
+    90→    90→    if (config && !initialized) {
+    91→    91→      setForm({
+    92→    92→        siteName: config.siteName || '',
+    93→    93→        logo: config.logo || '',
+    94→    94→        favicon: config.favicon || '',
+    95→    95→        address: config.address || '',
+    96→    96→        phone: config.phone || '',
+    97→    97→        email: config.email || '',
+    98→    98→        seoTitle: config.seoTitle || '',
+    99→    99→        seoDescription: config.seoDescription || '',
+   100→   100→        seoImage: config.seoImage || '',
+   101→   101→        defaultLang: config.defaultLang || 'pt',
+   102→   102→        facebook: config.facebook || '',
+   103→   103→        instagram: config.instagram || '',
+   104→   104→        twitter: config.twitter || '',
+   105→   105→        linkedin: config.linkedin || '',
+   106→   106→        whatsapp: config.whatsapp || '',
+   107→   107→        tiktok: config.tiktok || '',
+   108→   108→        smtpHost: config.smtpHost || '',
+   109→   109→        smtpPort: config.smtpPort || '',
+   110→   110→        smtpUser: config.smtpUser || '',
+   111→   111→        smtpPassword: config.smtpPassword || '',
+   112→   112→        smtpFromName: config.smtpFromName || '',
+   113→   113→        smtpFromEmail: config.smtpFromEmail || '',
+   114→   114→        smtpEncryption: config.smtpEncryption || 'none',
+   115→   115→        notifNewAd: config.notifNewAd ?? true,
+   116→   116→        notifNewReview: config.notifNewReview ?? true,
+   117→   117→        notifWeeklyReport: config.notifWeeklyReport ?? false,
+   118→   118→        notifAdApproved: config.notifAdApproved ?? true,
+   119→   119→        notifWelcome: config.notifWelcome ?? true,
+   120→   120→        maintenanceMode: config.maintenanceMode ?? false,
+   121→   121→        maintenanceMessage: config.maintenanceMessage || '',
+   122→   122→        maintenanceEndTime: config.maintenanceEndTime ? new Date(config.maintenanceEndTime).toISOString().slice(0, 16) : '',
+   123→   123→      });
+   124→   124→      setInitialized(true);
+   125→   125→    }
+   126→   126→  }, [config, initialized]);
+   127→   127→
+   128→   128→  const updateField = (field: string, value: string | boolean) => {
+   129→   129→    setForm((prev) => ({ ...prev, [field]: value }));
+   130→   130→  };
+   131→   131→
+   132→   132→  const uploadMutation = useMutation({
+   133→   133→    mutationFn: async (file: File) => {
+   134→   134→      return uploadFiles(file);
+   135→   135→    },
+   136→   136→  });
+   137→   137→
+   138→   138→  const handleUpload = async (field: 'logo' | 'seoImage', file: File) => {
+   139→   139→    try {
+   140→   140→      const result = await uploadMutation.mutateAsync(file);
+   141→   141→      updateField(field, result.url);
+   142→   142→      toast.success(t('admin_settings_image_uploaded'));
+   143→   143→    } catch (err) {
+   144→   144→      toast.error(uploadErrorMessage(err, t('admin_settings_upload_error')));
+   145→   145→    }
+   146→   146→  };
+   147→   147→
+   148→   148→  const saveMutation = useMutation({
+   149→   149→    mutationFn: async (data: typeof form) => {
+   150→   150→      const res = await fetch('/api/settings', {
+   151→   151→        method: 'PUT',
+   152→   152→        headers: { 'Content-Type': 'application/json' },
+   153→   153→        body: JSON.stringify(data),
+   154→   154→      });
+   155→   155→      if (!res.ok) {
+   156→   156→        const err = await res.json().catch(() => ({}));
+   157→   157→        throw new Error(err.error || 'Erreur');
+   158→   158→      }
+   159→   159→      return res.json();
+   160→   160→    },
+   161→   161→    onSuccess: () => {
+   162→   162→      queryClient.invalidateQueries({ queryKey: ['site-config'] });
+   163→   163→      toast.success(t('admin_settings_saved'));
+   164→   164→    },
+   165→   165→    onError: (err) => toast.error(err.message || t('admin_settings_save_error')),
+   166→   166→  });
+   167→   167→
+   168→   168→  const handleSave = () => {
+   169→   169→    saveMutation.mutate(form);
+   170→   170→  };
+   171→   171→
+   172→   172→  const [testEmail, setTestEmail] = useState('');
+   173→   173→  const [testEmailSending, setTestEmailSending] = useState(false);
+   174→   174→
+   175→   175→  const handleTestEmail = async () => {
+   176→   176→    if (!testEmail || !testEmail.includes('@')) {
+   177→   177→      toast.error(tl({ fr: 'Veuillez entrer une adresse email valide', pt: 'Por favor, insira um endereço de email válido', en: 'Please enter a valid email address' }));
+   178→   178→      return;
+   179→   179→    }
+   180→   180→    setTestEmailSending(true);
+   181→   181→    try {
+   182→   182→      const res = await fetch('/api/settings/test-email', {
+   183→   183→        method: 'POST',
+   184→   184→        headers: { 'Content-Type': 'application/json' },
+   185→   185→        body: JSON.stringify({ email: testEmail }),
+   186→   186→      });
+   187→   187→      if (!res.ok) {
+   188→   188→        const err = await res.json().catch(() => ({}));
+   189→   189→        throw new Error(err.error || 'Erreur');
+   190→   190→      }
+   191→   191→      toast.success(t('admin_settings_test_email_success'));
+   192→   192→    } catch (err: any) {
+   193→   193→      toast.error(err.message || t('admin_settings_test_email_error'));
+   194→   194→    } finally {
+   195→   195→      setTestEmailSending(false);
+   196→   196→    }
+   197→   197→  };
+   198→   198→
+   199→   199→  if (isLoading) {
+   200→   200→    return (
+   201→   201→      <div className="space-y-6">
+   202→   202→        <div>
+   203→   203→          <Skeleton className="h-8 w-48" />
+   204→   204→          <Skeleton className="h-4 w-72 mt-2" />
+   205→   205→        </div>
+   206→   206→        <Skeleton className="h-96 w-full" />
+   207→   207→      </div>
+   208→   208→    );
+   209→   209→  }
+   210→   210→
+   211→   211→  return (
+   212→   212→    <div className="space-y-6">
+   213→   213→      <div>
+   214→   214→        <h1 className="text-2xl font-bold tracking-tight">{t('admin_settings_title')}</h1>
+   215→   215→        <p className="text-muted-foreground">{t('admin_settings_subtitle')}</p>
+   216→   216→      </div>
+   217→   217→
+   218→   218→      <Tabs defaultValue="general" className="space-y-6">
+   219→   219→        <TabsList className="flex-wrap h-auto gap-1">
+   220→   220→          <TabsTrigger value="general" className="gap-2">
+   221→   221→            <Globe className="h-4 w-4" />
+   222→   222→            {t('admin_settings_tab_general')}
+   223→   223→          </TabsTrigger>
+   224→   224→          <TabsTrigger value="seo" className="gap-2">
+   225→   225→            <Search className="h-4 w-4" />
+   226→   226→            {t('admin_settings_tab_seo')}
+   227→   227→          </TabsTrigger>
+   228→   228→          <TabsTrigger value="social" className="gap-2">
+   229→   229→            <Share2 className="h-4 w-4" />
+   230→   230→            {t('admin_settings_tab_social')}
+   231→   231→          </TabsTrigger>
+   232→   232→          <TabsTrigger value="email" className="gap-2">
+   233→   233→            <Mail className="h-4 w-4" />
+   234→   234→            {t('admin_settings_tab_email')}
+   235→   235→          </TabsTrigger>
+   236→   236→          <TabsTrigger value="notifications" className="gap-2">
+   237→   237→            <Bell className="h-4 w-4" />
+   238→   238→            {t('admin_settings_tab_notifications')}
+   239→   239→          </TabsTrigger>
+   240→   240→          <TabsTrigger value="maintenance" className="gap-2">
+   241→   241→            <Wrench className="h-4 w-4" />
+   242→   242→            {t('admin_settings_tab_maintenance')}
+   243→   243→          </TabsTrigger>
+   244→   244→        </TabsList>
+   245→   245→
+   246→   246→        {/* General Tab */}
+   247→   247→        <TabsContent value="general" className="space-y-6">
+   248→   248→          <Card>
+   249→   249→            <CardHeader>
+   250→   250→              <CardTitle className="text-lg">{t('admin_settings_site_info')}</CardTitle>
+   251→   251→              <CardDescription>{t('admin_settings_subtitle')}</CardDescription>
+   252→   252→            </CardHeader>
+   253→   253→            <CardContent className="space-y-6">
+   254→   254→              <div className="grid gap-6 md:grid-cols-2">
+   255→   255→                <div className="space-y-2">
+   256→   256→                  <Label>{t('admin_settings_site_name')}</Label>
+   257→   257→                  <Input
+   258→   258→                    value={form.siteName}
+   259→   259→                    onChange={(e) => updateField('siteName', e.target.value)}
+   260→   260→                    placeholder={t('admin_settings_site_name')}
+   261→   261→                  />
+   262→   262→                </div>
+   263→   263→                <div className="space-y-2">
+   264→   264→                  <Label>{t('admin_settings_default_lang')}</Label>
+   265→   265→                  <Select value={form.defaultLang} onValueChange={(v) => updateField('defaultLang', v)}>
+   266→   266→                    <SelectTrigger>
+   267→   267→                      <SelectValue placeholder={t('admin_settings_select_lang')} />
+   268→   268→                    </SelectTrigger>
+   269→   269→                    <SelectContent>
+   270→   270→                      <SelectItem value="pt">{t('admin_settings_lang_pt')}</SelectItem>
+   271→   271→                      <SelectItem value="fr">{t('admin_settings_lang_fr')}</SelectItem>
+   272→   272→                      <SelectItem value="en">{t('admin_settings_lang_en')}</SelectItem>
+   273→   273→                    </SelectContent>
+   274→   274→                  </Select>
+   275→   275→                </div>
+   276→   276→              </div>
+   277→   277→
+   278→   278→              <Separator />
+   279→   279→
+   280→   280→              {/* Logo */}
+   281→   281→              <div className="space-y-3">
+   282→   282→                <Label>{t('admin_settings_logo')}</Label>
+   283→   283→                {form.logo && (
+   284→   284→                  <div className="relative inline-block">
+   285→   285→                    <img
+   286→   286→                      src={form.logo}
+   287→   287→                      alt="Logo"
+   288→   288→                      className="h-16 w-auto rounded-lg border object-contain bg-white p-1"
+   289→   289→                    />
+   290→   290→                  </div>
+   291→   291→                )}
+   292→   292→                <div className="flex gap-2">
+   293→   293→                  <Button
+   294→   294→                    variant="outline"
+   295→   295→                    onClick={() => logoInputRef.current?.click()}
+   296→   296→                    disabled={uploadMutation.isPending}
+   297→   297→                  >
+   298→   298→                    <Upload className="mr-2 h-4 w-4" />
+   299→   299→                    {uploadMutation.isPending ? t('dash_photos_uploading') : t('admin_settings_upload_logo')}
+   300→   300→                  </Button>
+   301→   301→                  {form.logo && (
+   302→   302→                    <Button variant="ghost" onClick={() => updateField('logo', '')}>
+   303→   303→                      {t('common_delete')}
+   304→   304→                    </Button>
+   305→   305→                  )}
+   306→   306→                  <input
+   307→   307→                    ref={logoInputRef}
+   308→   308→                    type="file"
+   309→   309→                    accept="image/*"
+   310→   310→                    className="hidden"
+   311→   311→                    onChange={(e) => {
+   312→   312→                      const file = e.target.files?.[0];
+   313→   313→                      if (file) handleUpload('logo', file);
+   314→   314→                    }}
+   315→   315→                  />
+   316→   316→                </div>
+   317→   317→              </div>
+   318→   318→
+   319→   319→              <Separator />
+   320→   320→
+   321→   321→              {/* Contact Info */}
+   322→   322→              <div>
+   323→   323→                <h3 className="text-sm font-semibold mb-4">{t('admin_settings_contact_info')}</h3>
+   324→   324→                <div className="grid gap-4 md:grid-cols-2">
+   325→   325→                  <div className="space-y-2">
+   326→   326→                    <Label>{t('admin_settings_address')}</Label>
+   327→   327→                    <Input
+   328→   328→                      value={form.address}
+   329→   329→                      onChange={(e) => updateField('address', e.target.value)}
+   330→   330→                      placeholder={t('admin_settings_address')}
+   331→   331→                    />
+   332→   332→                  </div>
+   333→   333→                  <div className="space-y-2">
+   334→   334→                    <Label>{t('admin_settings_phone')}</Label>
+   335→   335→                    <Input
+   336→   336→                      value={form.phone}
+   337→   337→                      onChange={(e) => updateField('phone', e.target.value)}
+   338→   338→                      placeholder="+245 XX XXX XXXX"
+   339→   339→                    />
+   340→   340→                  </div>
+   341→   341→                  <div className="space-y-2 md:col-span-2">
+   342→   342→                    <Label>{t('admin_settings_email')}</Label>
+   343→   343→                    <Input
+   344→   344→                      type="email"
+   345→   345→                      value={form.email}
+   346→   346→                      onChange={(e) => updateField('email', e.target.value)}
+   347→   347→                      placeholder="contact@pebiss.com"
+   348→   348→                    />
+   349→   349→                  </div>
+   350→   350→                </div>
+   351→   351→              </div>
+   352→   352→            </CardContent>
+   353→   353→          </Card>
+   354→   354→        </TabsContent>
+   355→   355→
+   356→   356→        {/* SEO Tab */}
+   357→   357→        <TabsContent value="seo" className="space-y-6">
+   358→   358→          <Card>
+   359→   359→            <CardHeader>
+   360→   360→              <CardTitle className="text-lg">{t('admin_settings_seo_title')}</CardTitle>
+   361→   361→              <CardDescription>{t('admin_settings_seo_desc')}</CardDescription>
+   362→   362→            </CardHeader>
+   363→   363→            <CardContent className="space-y-6">
+   364→   364→              <div className="space-y-2">
+   365→   365→                <Label>{t('admin_settings_seo_title_label')}</Label>
+   366→   366→                <Input
+   367→   367→                  value={form.seoTitle}
+   368→   368→                  onChange={(e) => updateField('seoTitle', e.target.value)}
+   369→   369→                  placeholder={t('admin_settings_seo_title_label')}
+   370→   370→                />
+   371→   371→                <p className="text-xs text-muted-foreground">
+   372→   372→                  {tl({ fr: 'Ce titre apparaît dans les résultats de recherche. Recommandé : 50-60 caractères.', pt: 'Este título aparece nos resultados de pesquisa. Recomendado: 50-60 caracteres.', en: 'This title appears in search results. Recommended: 50-60 characters.' })}
+   373→   373→                </p>
+   374→   374→              </div>
+   375→   375→              <div className="space-y-2">
+   376→   376→                <Label>{t('admin_settings_seo_desc_label')}</Label>
+   377→   377→                <Textarea
+   378→   378→                  value={form.seoDescription}
+   379→   379→                  onChange={(e) => updateField('seoDescription', e.target.value)}
+   380→   380→                  placeholder={t('admin_settings_seo_desc_label')}
+   381→   381→                  rows={3}
+   382→   382→                />
+   383→   383→                <p className="text-xs text-muted-foreground">
+   384→   384→                  {tl({ fr: 'Cette description apparaît sous le titre dans les résultats. Recommandé : 150-160 caractères.', pt: 'Esta descrição aparece sob o título nos resultados. Recomendado: 150-160 caracteres.', en: 'This description appears under the title in search results. Recommended: 150-160 characters.' })}
+   385→   385→                </p>
+   386→   386→              </div>
+   387→   387→
+   388→   388→              <Separator />
+   389→   389→
+   390→   390→              {/* SEO Image */}
+   391→   391→              <div className="space-y-3">
+   392→   392→                <Label>{t('admin_settings_seo_image')}</Label>
+   393→   393→                {form.seoImage && (
+   394→   394→                  <div className="relative inline-block">
+   395→   395→                    <img
+   396→   396→                      src={form.seoImage}
+   397→   397→                      alt="SEO"
+   398→   398→                      className="h-24 w-40 rounded-lg border object-cover"
+   399→   399→                    />
+   400→   400→                  </div>
+   401→   401→                )}
+   402→   402→                <div className="flex gap-2">
+   403→   403→                  <Button
+   404→   404→                    variant="outline"
+   405→   405→                    onClick={() => seoImageInputRef.current?.click()}
+   406→   406→                    disabled={uploadMutation.isPending}
+   407→   407→                  >
+   408→   408→                    <ImageIcon className="mr-2 h-4 w-4" />
+   409→   409→                    {uploadMutation.isPending ? t('dash_photos_uploading') : t('admin_settings_upload_seo_image')}
+   410→   410→                  </Button>
+   411→   411→                  {form.seoImage && (
+   412→   412→                    <Button variant="ghost" onClick={() => updateField('seoImage', '')}>
+   413→   413→                      {t('common_delete')}
+   414→   414→                    </Button>
+   415→   415→                  )}
+   416→   416→                  <input
+   417→   417→                    ref={seoImageInputRef}
+   418→   418→                    type="file"
+   419→   419→                    accept="image/*"
+   420→   420→                    className="hidden"
+   421→   421→                    onChange={(e) => {
+   422→   422→                      const file = e.target.files?.[0];
+   423→   423→                      if (file) handleUpload('seoImage', file);
+   424→   424→                    }}
+   425→   425→                  />
+   426→   426→                </div>
+   427→   427→                <p className="text-xs text-muted-foreground">
+   428→   428→                  {t('admin_settings_seo_image_desc')}
+   429→   429→                </p>
+   430→   430→              </div>
+   431→   431→            </CardContent>
+   432→   432→          </Card>
+   433→   433→        </TabsContent>
+   434→   434→
+   435→   435→        {/* Social Tab */}
+   436→   436→        <TabsContent value="social" className="space-y-6">
+   437→   437→          <Card>
+   438→   438→            <CardHeader>
+   439→   439→              <CardTitle className="text-lg">{t('admin_settings_tab_social')}</CardTitle>
+   440→   440→              <CardDescription>{t('biz_social_info')}</CardDescription>
+   441→   441→            </CardHeader>
+   442→   442→            <CardContent className="space-y-4">
+   443→   443→              <div className="space-y-2">
+   444→   444→                <Label>Facebook</Label>
+   445→   445→                <Input
+   446→   446→                  value={form.facebook}
+   447→   447→                  onChange={(e) => updateField('facebook', e.target.value)}
+   448→   448→                  placeholder="https://facebook.com/pebiss"
+   449→   449→                />
+   450→   450→              </div>
+   451→   451→              <div className="space-y-2">
+   452→   452→                <Label>Instagram</Label>
+   453→   453→                <Input
+   454→   454→                  value={form.instagram}
+   455→   455→                  onChange={(e) => updateField('instagram', e.target.value)}
+   456→   456→                  placeholder="https://instagram.com/pebiss"
+   457→   457→                />
+   458→   458→              </div>
+   459→   459→              <div className="space-y-2">
+   460→   460→                <Label>Twitter / X</Label>
+   461→   461→                <Input
+   462→   462→                  value={form.twitter}
+   463→   463→                  onChange={(e) => updateField('twitter', e.target.value)}
+   464→   464→                  placeholder="https://twitter.com/pebiss"
+   465→   465→                />
+   466→   466→              </div>
+   467→   467→              <div className="space-y-2">
+   468→   468→                <Label>LinkedIn</Label>
+   469→   469→                <Input
+   470→   470→                  value={form.linkedin}
+   471→   471→                  onChange={(e) => updateField('linkedin', e.target.value)}
+   472→   472→                  placeholder="https://linkedin.com/company/pebiss"
+   473→   473→                />
+   474→   474→              </div>
+   475→   475→              <div className="space-y-2">
+   476→   476→                <Label>WhatsApp</Label>
+   477→   477→                <Input
+   478→   478→                  value={form.whatsapp}
+   479→   479→                  onChange={(e) => updateField('whatsapp', e.target.value)}
+   480→   480→                  placeholder="+245 XX XXX XXXX"
+   481→   481→                />
+   482→   482→              </div>
+   483→   483→              <div className="space-y-2">
+   484→   484→                <Label className="flex items-center gap-2">
+   485→   485→                  <TikTokIcon className="h-4 w-4" />
+   486→   486→                  TikTok
+   487→   487→                </Label>
+   488→   488→                <Input
+   489→   489→                  value={form.tiktok}
+   490→   490→                  onChange={(e) => updateField('tiktok', e.target.value)}
+   491→   491→                  placeholder="https://tiktok.com/@pebiss"
+   492→   492→                />
+   493→   493→              </div>
+   494→   494→            </CardContent>
+   495→   495→          </Card>
+   496→   496→        </TabsContent>
+   497→   497→
+   498→   498→        {/* Email Tab */}
+   499→   499→        <TabsContent value="email" className="space-y-6">
+   500→   500→          <Card>
+   501→   501→            <CardHeader>
+   502→   502→              <CardTitle className="text-lg">{t('admin_settings_email_config')}</CardTitle>
+   503→   503→              <CardDescription>{t('admin_settings_email_desc')}</CardDescription>
+   504→   504→            </CardHeader>
+   505→   505→            <CardContent className="space-y-6">
+   506→   506→              <div className="grid gap-4 md:grid-cols-2">
+   507→   507→                <div className="space-y-2 md:col-span-2">
+   508→   508→                  <Label>{t('admin_settings_smtp_host')}</Label>
+   509→   509→                  <Input
+   510→   510→                    value={form.smtpHost}
+   511→   511→                    onChange={(e) => updateField('smtpHost', e.target.value)}
+   512→   512→                    placeholder="smtp.example.com"
+   513→   513→                  />
+   514→   514→                </div>
+   515→   515→                <div className="space-y-2">
+   516→   516→                  <Label>{t('admin_settings_smtp_port')}</Label>
+   517→   517→                  <Input
+   518→   518→                    value={form.smtpPort}
+   519→   519→                    onChange={(e) => updateField('smtpPort', e.target.value)}
+   520→   520→                    placeholder="587"
+   521→   521→                  />
+   522→   522→                </div>
+   523→   523→                <div className="space-y-2">
+   524→   524→                  <Label>{t('admin_settings_smtp_encryption')}</Label>
+   525→   525→                  <Select value={form.smtpEncryption} onValueChange={(v) => updateField('smtpEncryption', v)}>
+   526→   526→                    <SelectTrigger>
+   527→   527→                      <SelectValue />
+   528→   528→                    </SelectTrigger>
+   529→   529→                    <SelectContent>
+   530→   530→                      <SelectItem value="none">{t('admin_settings_smtp_encryption_none')}</SelectItem>
+   531→   531→                      <SelectItem value="tls">{t('admin_settings_smtp_encryption_tls')}</SelectItem>
+   532→   532→                      <SelectItem value="ssl">{t('admin_settings_smtp_encryption_ssl')}</SelectItem>
+   533→   533→                    </SelectContent>
+   534→   534→                  </Select>
+   535→   535→                </div>
+   536→   536→                <div className="space-y-2">
+   537→   537→                  <Label>{t('admin_settings_smtp_user')}</Label>
+   538→   538→                  <Input
+   539→   539→                    value={form.smtpUser}
+   540→   540→                    onChange={(e) => updateField('smtpUser', e.target.value)}
+   541→   541→                    placeholder="user@example.com"
+   542→   542→                  />
+   543→   543→                </div>
+   544→   544→                <div className="space-y-2">
+   545→   545→                  <Label>{t('admin_settings_smtp_password')}</Label>
+   546→   546→                  <Input
+   547→   547→                    type="password"
+   548→   548→                    value={form.smtpPassword}
+   549→   549→                    onChange={(e) => updateField('smtpPassword', e.target.value)}
+   550→   550→                    placeholder="•••••••"
+   551→   551→                  />
+   552→   552→                </div>
+   553→   553→                <div className="space-y-2">
+   554→   554→                  <Label>{t('admin_settings_smtp_from_name')}</Label>
+   555→   555→                  <Input
+   556→   556→                    value={form.smtpFromName}
+   557→   557→                    onChange={(e) => updateField('smtpFromName', e.target.value)}
+   558→   558→                    placeholder={t('admin_settings_site_name')}
+   559→   559→                  />
+   560→   560→                </div>
+   561→   561→                <div className="space-y-2">
+   562→   562→                  <Label>{t('admin_settings_smtp_from_email')}</Label>
+   563→   563→                  <Input
+   564→   564→                    type="email"
+   565→   565→                    value={form.smtpFromEmail}
+   566→   566→                    onChange={(e) => updateField('smtpFromEmail', e.target.value)}
+   567→   567→                    placeholder="noreply@pebiss.com"
+   568→   568→                  />
+   569→   569→                </div>
+   570→   570→              </div>
+   571→   571→
+   572→   572→              <Separator />
+   573→   573→
+   574→   574→              <div className="space-y-3">
+   575→   575→                <div className="space-y-2">
+   576→   576→                  <Label>{tl({ fr: 'Email de destination pour le test', pt: 'Email de destino para o teste', en: 'Destination email for test' })}</Label>
+   577→   577→                  <Input
+   578→   578→                    type="email"
+   579→   579→                    value={testEmail}
+   580→   580→                    onChange={(e) => setTestEmail(e.target.value)}
+   581→   581→                    placeholder="votre@email.com"
+   582→   582→                  />
+   583→   583→                  <p className="text-xs text-muted-foreground">
+   584→   584→                    {tl({
+   585→   585→                      fr: 'Entrez l\'adresse email où vous souhaitez recevoir l\'email de test.',
+   586→   586→                      pt: 'Insira o endereço de email onde deseja receber o email de teste.',
+   587→   587→                      en: 'Enter the email address where you want to receive the test email.',
+   588→   588→                    })}
+   589→   589→                  </p>
+   590→   590→                </div>
+   591→   591→                <Button
+   592→   592→                  variant="outline"
+   593→   593→                  onClick={handleTestEmail}
+   594→   594→                  disabled={!form.smtpHost || !form.smtpUser || !form.smtpPassword || !testEmail || testEmailSending}
+   595→   595→                >
+   596→   596→                  <Mail className="mr-2 h-4 w-4" />
+   597→   597→                  {testEmailSending
+   598→   598→                    ? tl({ fr: 'Envoi en cours...', pt: 'Enviando...', en: 'Sending...' })
+   599→   599→                    : t('admin_settings_test_email')}
+   600→   600→                </Button>
+   601→   601→              </div>
+   602→   602→            </CardContent>
+   603→   603→          </Card>
+   604→   604→        </TabsContent>
+   605→   605→
+   606→   606→        {/* Notifications Tab */}
+   607→   607→        <TabsContent value="notifications" className="space-y-6">
+   608→   608→          <Card>
+   609→   609→            <CardHeader>
+   610→   610→              <CardTitle className="text-lg">{t('admin_settings_notifications_config')}</CardTitle>
+   611→   611→              <CardDescription>{t('admin_settings_notifications_desc')}</CardDescription>
+   612→   612→            </CardHeader>
+   613→   613→            <CardContent className="space-y-6">
+   614→   614→              <div className="space-y-4">
+   615→   615→                <div className="flex items-center justify-between p-4 rounded-lg border">
+   616→   616→                  <div className="space-y-0.5">
+   617→   617→                    <p className="font-medium text-sm">{t('admin_settings_notif_new_ad')}</p>
+   618→   618→                    <p className="text-xs text-muted-foreground">{t('admin_settings_notif_new_ad_desc')}</p>
+   619→   619→                  </div>
+   620→   620→                  <Switch
+   621→   621→                    checked={form.notifNewAd}
+   622→   622→                    onCheckedChange={(checked) => updateField('notifNewAd', checked)}
+   623→   623→                  />
+   624→   624→                </div>
+   625→   625→
+   626→   626→                <div className="flex items-center justify-between p-4 rounded-lg border">
+   627→   627→                  <div className="space-y-0.5">
+   628→   628→                    <p className="font-medium text-sm">{t('admin_settings_notif_new_review')}</p>
+   629→   629→                    <p className="text-xs text-muted-foreground">{t('admin_settings_notif_new_review_desc')}</p>
+   630→   630→                  </div>
+   631→   631→                  <Switch
+   632→   632→                    checked={form.notifNewReview}
+   633→   633→                    onCheckedChange={(checked) => updateField('notifNewReview', checked)}
+   634→   634→                  />
+   635→   635→                </div>
+   636→   636→
+   637→   637→                <div className="flex items-center justify-between p-4 rounded-lg border">
+   638→   638→                  <div className="space-y-0.5">
+   639→   639→                    <p className="font-medium text-sm">{t('admin_settings_notif_weekly_report')}</p>
+   640→   640→                    <p className="text-xs text-muted-foreground">{t('admin_settings_notif_weekly_report_desc')}</p>
+   641→   641→                  </div>
+   642→   642→                  <Switch
+   643→   643→                    checked={form.notifWeeklyReport}
+   644→   644→                    onCheckedChange={(checked) => updateField('notifWeeklyReport', checked)}
+   645→   645→                  />
+   646→   646→                </div>
+   647→   647→
+   648→   648→                <div className="flex items-center justify-between p-4 rounded-lg border">
+   649→   649→                  <div className="space-y-0.5">
+   650→   650→                    <p className="font-medium text-sm">{t('admin_settings_notif_ad_approved')}</p>
+   651→   651→                    <p className="text-xs text-muted-foreground">{t('admin_settings_notif_ad_approved_desc')}</p>
+   652→   652→                  </div>
+   653→   653→                  <Switch
+   654→   654→                    checked={form.notifAdApproved}
+   655→   655→                    onCheckedChange={(checked) => updateField('notifAdApproved', checked)}
+   656→   656→                  />
+   657→   657→                </div>
+   658→   658→
+   659→   659→                <div className="flex items-center justify-between p-4 rounded-lg border">
+   660→   660→                  <div className="space-y-0.5">
+   661→   661→                    <p className="font-medium text-sm">{t('admin_settings_notif_welcome')}</p>
+   662→   662→                    <p className="text-xs text-muted-foreground">{t('admin_settings_notif_welcome_desc')}</p>
+   663→   663→                  </div>
+   664→   664→                  <Switch
+   665→   665→                    checked={form.notifWelcome}
+   666→   666→                    onCheckedChange={(checked) => updateField('notifWelcome', checked)}
+   667→   667→                  />
+   668→   668→                </div>
+   669→   669→              </div>
+   670→   670→            </CardContent>
+   671→   671→          </Card>
+   672→   672→        </TabsContent>
+   673→   673→
+   674→   674→        {/* Maintenance Tab */}
+   675→   675→        <TabsContent value="maintenance" className="space-y-6">
+   676→   676→          <Card>
+   677→   677→            <CardHeader>
+   678→   678→              <CardTitle className="text-lg">{t('admin_settings_maintenance_title')}</CardTitle>
+   679→   679→              <CardDescription>{t('admin_settings_maintenance_desc')}</CardDescription>
+   680→   680→            </CardHeader>
+   681→   681→            <CardContent className="space-y-6">
+   682→   682→              {/* Toggle */}
+   683→   683→              <div className="flex items-center justify-between p-4 rounded-lg border">
+   684→   684→                <div className="space-y-0.5">
+   685→   685→                  <p className="font-medium text-sm">
+   686→   686→                    {form.maintenanceMode
+   687→   687→                      ? t('admin_settings_maintenance_active')
+   688→   688→                      : t('admin_settings_maintenance_disable')}
+   689→   689→                  </p>
+   690→   690→                  <p className="text-xs text-muted-foreground">
+   691→   691→                    {t('admin_settings_maintenance_enable')}
+   692→   692→                  </p>
+   693→   693→                </div>
+   694→   694→                <Switch
+   695→   695→                  checked={form.maintenanceMode}
+   696→   696→                  onCheckedChange={(checked) => updateField('maintenanceMode', checked)}
+   697→   697→                />
+   698→   698→              </div>
+   699→   699→
+   700→   700→              {/* Warning */}
+   701→   701→              {form.maintenanceMode && (
+   702→   702→                <div className="flex items-start gap-3 p-4 rounded-lg border border-amber-200 bg-amber-50 dark:bg-amber-950/30 dark:border-amber-800">
+   703→   703→                  <AlertTriangle className="h-5 w-5 text-amber-600 dark:text-amber-400 mt-0.5 shrink-0" />
+   704→   704→                  <p className="text-sm text-amber-800 dark:text-amber-200">
+   705→   705→                    {t('admin_settings_maintenance_warning')}
+   706→   706→                  </p>
+   707→   707→                </div>
+   708→   708→              )}
+   709→   709→
+   710→   710→              <Separator />
+   711→   711→
+   712→   712→              {/* Message */}
+   713→   713→              <div className="space-y-2">
+   714→   714→                <Label>{t('admin_settings_maintenance_message')}</Label>
+   715→   715→                <Textarea
+   716→   716→                  value={form.maintenanceMessage}
+   717→   717→                  onChange={(e) => updateField('maintenanceMessage', e.target.value)}
+   718→   718→                  placeholder={t('admin_settings_maintenance_message_placeholder')}
+   719→   719→                  rows={3}
+   720→   720→                />
+   721→   721→              </div>
+   722→   722→
+   723→   723→              {/* End time */}
+   724→   724→              <div className="space-y-2">
+   725→   725→                <Label>{t('admin_settings_maintenance_end_time')}</Label>
+   726→   726→                <Input
+   727→   727→                  type="datetime-local"
+   728→   728→                  value={form.maintenanceEndTime}
+   729→   729→                  onChange={(e) => updateField('maintenanceEndTime', e.target.value)}
+   730→   730→                />
+   731→   731→                <p className="text-xs text-muted-foreground">
+   732→   732→                  {t('admin_settings_maintenance_end_time_hint')}
+   733→   733→                </p>
+   734→   734→              </div>
+   735→   735→            </CardContent>
+   736→   736→          </Card>
+   737→   737→        </TabsContent>
+   738→   738→      </Tabs>
+   739→   739→
+   740→   740→      {/* Save Button */}
+   741→   741→      <div className="flex justify-end sticky bottom-6">
+   742→   742→        <Button
+   743→   743→          onClick={handleSave}
+   744→   744→          disabled={saveMutation.isPending}
+   745→   745→          className="bg-pebiss-orange hover:bg-pebiss-orange/90 text-white"
+   746→   746→          size="lg"
+   747→   747→        >
+   748→   748→          <Settings className="mr-2 h-4 w-4" />
+   749→   749→          {saveMutation.isPending ? t('admin_settings_saving') : t('admin_settings_save')}
+   750→   750→        </Button>
+   751→   751→      </div>
+   752→   752→    </div>
+   753→   753→  );
+   754→   754→}
+   755→   755→
