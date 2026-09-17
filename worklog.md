@@ -222,3 +222,22 @@ Stage Summary:
 - Le logo affiché est celui configuré dans Paramètres > Général (upload logo) ; s'il est absent, l'icône clé historique s'affiche
 - Déploiement prod Coolify : Redeploy (commit c2697f0), db push se fera au boot (Dockerfile) — aucune variable d'env nouvelle
 - Fichiers : prisma/schema.prisma, src/app/api/settings/route.ts, src/app/api/maintenance/route.ts, src/components/maintenance-guard.tsx, src/app/(admin)/admin/parametres/page.tsx, src/lib/i18n.ts, src/lib/i18n-en.ts
+
+---
+Task ID: 10
+Agent: Z.ai Code (main)
+Task: Bouton « Activer le mode maintenance » bien visible + bouton connexion administrateur sur l'écran de maintenance
+
+Work Log:
+- Retour utilisateur : « ya pas de bouton activer le mode maintenance » + « mettre un bouton connexion pour que l'administrateur puisse se connecter » (l'admin était bloqué par l'écran de maintenance quand déloggé)
+- Admin /admin/parametres (onglet Maintenance) : ajout d'un gros bouton Power « Activer le mode maintenance » (orange) — au clic : updateField + handleSave({maintenanceMode:true}) → activation ET enregistrement en 1 clic ; devient bouton vert « Désactiver le mode maintenance » quand actif ; hints explicites sous le bouton ; handleSave refactoré pour accepter des overrides (Partial<form>) ; Save global passé à onClick={() => handleSave()}
+- Écran public maintenance-guard.tsx : lien discret « Connexion administrateur » (LogIn, text-xs, muted) sous le copyright → /login/admin (route exemptée de la maintenance) ; i18n maintenance_admin_login fr/pt/en
+- i18n : admin_settings_maintenance_activate_btn/_hint, admin_settings_maintenance_deactivate_btn/_hint (fr/pt/en)
+- Fix au passage : le bouton n'actualisait pas l'état local du formulaire (restait sur « Activer » après activation) → updateField avant handleSave
+- E2E avec preuves : clic Activer → PUT /api/settings 200 + /api/maintenance {active:true} + bouton bascule en « Désactiver » ; écran visiteur = maintenance avec lien « Connexion administrateur » en bas (/tmp/preuve-connexion-admin-bouton.png) ; clic → /login/admin chargé pendant la maintenance → login admin@pebiss.sn → redirect /admin ; clic Désactiver → /api/maintenance {active:false} + site restauré (GET / 200, /tmp/preuve-bouton-desactiver.png, /tmp/preuve-site-restaure.png) ; lint 0 erreur
+- DB locale restaurée (maintenanceMode:false) ; push GitHub 41ec8de
+
+Stage Summary:
+- L'admin dispose d'un vrai bouton visible qui active/désactive la maintenance en un clic (sans chercher l'interrupteur ni revenir sur Enregistrer)
+- En cas de maintenance, l'admin déloggé peut se connecter via le lien « Connexion administrateur » en bas de l'écran de maintenance
+- Fichiers : src/app/(admin)/admin/parametres/page.tsx, src/components/maintenance-guard.tsx, src/lib/i18n.ts, src/lib/i18n-en.ts
