@@ -342,6 +342,7 @@ export const en: Record<string, string> = {
   'dash_recent_ads': 'Recent ads',
   'dash_no_ads': 'No ads yet.',
   'dash_manage_ads': 'Manage my ads →',
+  'dash_view_my_ads': 'View my ads',
   'biz_title': 'My business',
   'biz_subtitle': 'Manage your business information',
   'biz_no_business': 'No business found.',

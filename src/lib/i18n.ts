@@ -371,6 +371,7 @@ const fr: Record<string, string> = {
   'dash_recent_ads': 'Annonces récentes',
   'dash_no_ads': 'Aucune annonce pour le moment.',
   'dash_manage_ads': 'Gérer mes annonces →',
+  'dash_view_my_ads': 'Voir mes annonces',
   // Mon-entreprise page
   'biz_title': 'Mon entreprise',
   'biz_subtitle': 'Gérez les informations de votre entreprise',
@@ -1351,6 +1352,7 @@ const pt: Record<string, string> = {
   'dash_recent_ads': 'Anúncios recentes',
   'dash_no_ads': 'Sem anúncios por enquanto.',
   'dash_manage_ads': 'Gerir os meus anúncios →',
+  'dash_view_my_ads': 'Ver os meus anúncios',
   // Mon-entreprise page
   'biz_title': 'A minha empresa',
   'biz_subtitle': 'Gerir as informações da sua empresa',

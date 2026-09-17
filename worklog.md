@@ -88,3 +88,25 @@ Stage Summary:
 - Toute annonce publiée (avec ou sans image, quel que soit le format d'accueil) est désormais visible sur la page d'accueil
 - L'utilisateur devra redéployer (docker build) pour bénéficier du fix sur sa production
 - Fichiers modifiés : src/app/(main)/page.tsx, src/components/shared/banner-placement.tsx
+
+---
+Task ID: 5
+Agent: Z.ai Code (main)
+Task: Synchroniser la version locale avec GitHub (topmuch/pebissoa) + bouton « Voir mes annonces » dans le dashboard client
+
+Work Log:
+- Synchronisation : `git fetch` puis `git reset --hard origin/main` — supprimé l'auto-commit sandbox f6cd21f (.zscripts/, tool-results/, uploads de test) et les changements de mode de fichiers (100644→100755) ; local = GitHub à 0e951fb ; db/ et .env non trackés donc intacts
+- Analyse : le dashboard (/dashboard) est réservé ENTERPRISE/ADMIN (layout redirige les autres vers /) ; « la page profil du client » = page publique /entreprise/[slug] où ses annonces (bannières position=enterprise : sidebar 300x600 + footer detail_728x90) sont affichées
+- i18n : nouvelle clé `dash_view_my_ads` dans les 3 langues — fr « Voir mes annonces », pt « Ver os meus anúncios », en « View my ads » (src/lib/i18n.ts ×2 sections, src/lib/i18n-en.ts)
+- Dashboard (src/app/(dashboard)/dashboard/page.tsx) : bouton « Voir mes annonces » (icône Eye, variante outline) en 2 emplacements — en-tête à droite du titre (flex responsive, pleine largeur sur mobile) et carte « Actions rapides » sous « Créer une annonce » ; lien `/entreprise/${slug}`, rendu conditionnel sur slug existant
+- Bug mobile détecté au passage (préexistant, vérifié par git stash) : débordement horizontal 457px vs 390px — cause : min-content du titre d'annonce `truncate` (nowrap, 307px) qui remonte via min-width:auto des flex/grid items jusqu'au conteneur racine
+- Fix responsive : `min-w-0` sur le conteneur principal du DashboardLayout (flex-1 flex-col) + sur les 2 items de la grille lg:grid-cols-3 (Card avis lg:col-span-2 et colonne droite space-y-6) → scrollWidth 390 = innerWidth 390
+- Identifiants démo mis à jour : la base actuelle est seedée avec comptes .sn (seed-production.ts), mot de passe vérifié par bcrypt = ent123
+- E2E Agent Browser : connexion dakar-digital-solutions@pebiss.sn → /dashboard → bouton visible (en-tête + actions rapides) → clic → redirection OK vers /entreprise/dakar-digital-solutions ; vérifié desktop 1440px et mobile 390px (screenshots) ; 0 erreur console
+- Lint ESLint : 0 erreur
+- Note : 404 préexistants sur /uploads/*.png (placeholders seed de 70 octets jamais committés sur GitHub) — cosmétique, hors périmètre
+
+Stage Summary:
+- Le dashboard client dispose d'un bouton « Voir mes annonces » qui redirige vers la page profil public de l'entreprise où ses annonces sont visibles
+- Débordement horizontal mobile du dashboard corrigé (préexistant)
+- Fichiers modifiés : src/app/(dashboard)/dashboard/page.tsx, src/components/dashboard/dashboard-layout.tsx, src/lib/i18n.ts, src/lib/i18n-en.ts

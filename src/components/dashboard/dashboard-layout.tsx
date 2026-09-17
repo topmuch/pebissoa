@@ -184,7 +184,7 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
       </Sheet>
 
       {/* Main content */}
-      <div className="flex-1 flex flex-col min-h-screen">
+      <div className="flex-1 flex flex-col min-h-screen min-w-0">
         {/* Mobile header */}
         <header className="lg:hidden sticky top-0 z-40 flex items-center gap-3 border-b bg-card/95 backdrop-blur px-4 h-14">
           <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>

@@ -128,11 +128,21 @@ export default function DashboardPage() {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div>
-        <h1 className="text-2xl font-bold tracking-tight">{t('dash_title')}</h1>
-        <p className="text-muted-foreground">
-          {t('dash_welcome', { name: session?.user?.name || t('dash_user_fallback') })}
-        </p>
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+        <div>
+          <h1 className="text-2xl font-bold tracking-tight">{t('dash_title')}</h1>
+          <p className="text-muted-foreground">
+            {t('dash_welcome', { name: session?.user?.name || t('dash_user_fallback') })}
+          </p>
+        </div>
+        {slug && (
+          <Link href={`/entreprise/${slug}`} className="shrink-0">
+            <Button variant="outline" className="gap-2 w-full sm:w-auto">
+              <Eye className="h-4 w-4" />
+              {t('dash_view_my_ads')}
+            </Button>
+          </Link>
+        )}
       </div>
 
       {/* Stats Cards */}
@@ -159,7 +169,7 @@ export default function DashboardPage() {
 
       <div className="grid gap-6 lg:grid-cols-3">
         {/* Recent Reviews */}
-        <Card className="lg:col-span-2">
+        <Card className="lg:col-span-2 min-w-0">
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <MessageSquare className="h-5 w-5" />
@@ -251,7 +261,7 @@ export default function DashboardPage() {
         </Card>
 
         {/* Quick Actions + Recent Ads */}
-        <div className="space-y-6">
+        <div className="space-y-6 min-w-0">
           <Card>
             <CardHeader>
               <CardTitle>{t('dash_quick_actions')}</CardTitle>
@@ -275,6 +285,14 @@ export default function DashboardPage() {
                   {t('dash_create_ad')}
                 </Button>
               </Link>
+              {slug && (
+                <Link href={`/entreprise/${slug}`} className="block">
+                  <Button variant="outline" className="w-full justify-start gap-2">
+                    <Eye className="h-4 w-4" />
+                    {t('dash_view_my_ads')}
+                  </Button>
+                </Link>
+              )}
             </CardContent>
           </Card>
 
