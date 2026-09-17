@@ -302,3 +302,22 @@ Stage Summary:
 - La prod récupérera TOUTES les images de l'ancien volume dès qu'il sera remonté : au boot, copy-bundled-uploads.cjs les recopie dans /app/uploads (ne jamais écraser) ; /api/health donnera le décompte exact
 - Action utilisateur Coolify : remonter l'ancien volume (/app/public/uploads) en plus de /app/uploads puis Redeploy — ou copier les fichiers de l'ancien volume vers le nouveau (commande docker fournie dans le rapport)
 - Fichiers : src/lib/uploads.ts, src/app/api/serve-image/[filename]/route.ts, src/app/api/uploads/[...path]/route.ts, src/app/api/health/route.ts, scripts/copy-bundled-uploads.cjs, scripts/init-production.cjs, prisma/production-data.json
+
+---
+Task ID: 14
+Agent: Z.ai Code (main)
+Task: « J'ai créé une annonce mais dans la catégorie sur la page d'accueil l'annonce apparaît mais l'image n'apparaît pas »
+
+Work Log:
+- Diagnostic prod (pebiss.com) : l'« annonce » est en réalité l'entreprise « Societe General Guinéé Bissau » créée le 17/09 20:24 UTC via l'inscription — cover OUI (/api/uploads/9982a364….jpg, servie correctement), logo NULL. Le formulaire /register ne propose que coverImage (pas de logo) → toute entreprise créée par inscription a logo=null.
+- Cause : la carte annuaire (PjBusinessCard) n'affichait QUE business.logo → si logo null, icône grise même quand une cover existe → « l'annonce apparaît mais l'image n'apparaît pas ». La page /categories (images statiques) et l'accueil (aucune carte entreprise, vérifié : 27 imgs/0 cassée, « Societe General » absente) écartés.
+- Constat prod additionnel : le logo d'« Orange » (uploadé 16/09) renvoie le placeholder SVG (X-Image-Missing:1) → le fichier uploadé a disparu du volume au Redeploy (volume recréé ?) ; la cover d'aujourd'hui (uploadée APRÈS le boot) est bien servie. Problème de persistance Coolify à signaler, non corrigeable en code.
+- Fixes : (1) PjBusinessCard : image = logo || coverImage || icône (+ champ coverImage ajouté à l'interface Business) ; (2) fiche entreprise sidebar : même fallback ; (3) admin/annonces : bouton Enregistrer désactivé pendant l'upload (prévention bannière créée sans image).
+- Workspace sandbox réinitialisé une 3e fois (DB vide) → restauration : init-production.cjs (31 catégories, 43 entreprises, 6 pubs, admin), NEXTAUTH_SECRET vérifié, src/app/api/upload/route.ts restauré de git AVANT commit (sinon le push l'aurait supprimé du dépôt !).
+- E2E avec preuves : entreprise de test locale logo=null+cover existante → carte annuaire affiche la cover (imgLoaded:true, /tmp/preuve-fix-cover-annuaire.png), fiche affiche la cover en sidebar (2 occurrences, /tmp/preuve-fix-cover-fiche.png) ; entreprises avec logo inchangées (logo prioritaire) ; 0 image cassée sur l'annuaire ; 0 erreur dev.log ; lint 0 erreur ; entreprise de test supprimée.
+- Push GitHub adf81f9 (3 fichiers). Redeploy Coolify requis pour la prod.
+
+Stage Summary:
+- Les entreprises créées via l'inscription (cover sans logo) affichent désormais leur photo dans l'annuaire et sur leur fiche — fin des cartes grises sans image
+- Prévention : impossible d'enregistrer une bannière admin pendant un upload en cours
+- ⚠️ À signaler à l'utilisateur : le logo d'Orange uploadé le 16/09 a disparu au Redeploy (le volume /app/uploads ne persiste pas ?) — vérifier dans Coolify que le volume /app/uploads est bien un volume persistant, sinon TOUT fichier uploadé disparaît à chaque Redeploy
