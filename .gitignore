@@ -59,3 +59,7 @@ db/*.db-journal
 db/*.db-wal
 db/*.db-shm
 
+
+# Temporaire sauvetage images
+.harvest-tmp
+.harvest-report.json

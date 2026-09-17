@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { readFile, stat } from 'fs/promises';
-import { resolveUploadFilePath, imagePlaceholderSvg } from '@/lib/uploads';
+import { resolveUploadFilePath, imagePlaceholderSvg, isServableFilename } from '@/lib/uploads';
 
 // Content type mapping
 const CONTENT_TYPES: Record<string, string> = {
@@ -46,6 +46,13 @@ export async function GET(
     // Prevent path traversal attacks
     if (filename.includes('..') || filename.includes('/') || filename.includes('\\')) {
       return NextResponse.json({ error: 'Invalid filename' }, { status: 400 });
+    }
+
+    // Extension whitelist — refuse ANY non-media file (db, wal, shm, archives…)
+    // before touching the filesystem. Blocks database downloads when a
+    // misconfigured legacy volume exposes the data directory.
+    if (!isServableFilename(filename)) {
+      return NextResponse.json({ error: 'Not found' }, { status: 404 });
     }
 
     const filePath = await resolveUploadFilePath(filename);

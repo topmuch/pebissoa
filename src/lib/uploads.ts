@@ -2,6 +2,23 @@ import { join } from 'path';
 import { mkdirSync, existsSync } from 'fs';
 
 /**
+ * Extensions servables publiquement par les routes d'images.
+ * TOUT autre extension est refusée (404) AVANT toute résolution de fichier :
+ * indispensable quand un volume legacy mal ciblé expose des fichiers
+ * sensibles (ex : pebiss.db, pebiss.db-wal — base de données téléchargeable).
+ */
+export const SERVABLE_EXTENSIONS = new Set([
+  '.jpg', '.jpeg', '.jfif', '.png', '.gif', '.webp', '.avif', '.svg', '.pdf',
+]);
+
+export function isServableFilename(filename: string): boolean {
+  const dot = filename.lastIndexOf('.');
+  if (dot <= 0) return false; // pas d'extension ou nom vide avant le point
+  const ext = filename.slice(dot).toLowerCase();
+  return SERVABLE_EXTENSIONS.has(ext);
+}
+
+/**
  * Resolve the uploads directory.
  *
  * Priority:

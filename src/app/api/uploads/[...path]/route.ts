@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { readFile, stat } from 'fs/promises';
-import { resolveUploadFilePath, imagePlaceholderSvg } from '@/lib/uploads';
+import { resolveUploadFilePath, imagePlaceholderSvg, isServableFilename } from '@/lib/uploads';
 
 // Content type mapping
 const CONTENT_TYPES: Record<string, string> = {
@@ -45,6 +45,12 @@ export async function GET(
     // Prevent path traversal attacks
     if (filename.includes('..') || filename.startsWith('/')) {
       return NextResponse.json({ error: 'Invalid path' }, { status: 400 });
+    }
+
+    // Extension whitelist — refuse ANY non-media file (db, wal, shm…)
+    // before touching the filesystem (same hardening as /api/serve-image).
+    if (!isServableFilename(filename)) {
+      return NextResponse.json({ error: 'Not found' }, { status: 404 });
     }
 
     const filePath = await resolveUploadFilePath(filename);
