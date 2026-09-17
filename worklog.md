@@ -241,3 +241,19 @@ Stage Summary:
 - L'admin dispose d'un vrai bouton visible qui active/désactive la maintenance en un clic (sans chercher l'interrupteur ni revenir sur Enregistrer)
 - En cas de maintenance, l'admin déloggé peut se connecter via le lien « Connexion administrateur » en bas de l'écran de maintenance
 - Fichiers : src/app/(admin)/admin/parametres/page.tsx, src/components/maintenance-guard.tsx, src/lib/i18n.ts, src/lib/i18n-en.ts
+
+---
+Task ID: 11
+Agent: Z.ai Code (main)
+Task: Admin connecté doit pouvoir travailler pendant la maintenance (écran de maintenance ne doit plus le bloquer)
+
+Work Log:
+- Retour utilisateur : « lorsque l'admin est connecté en mode maintenance, si il essaye de modifier un fichier le mode maintenance s'affiche » — le MaintenanceGuard bloquait TOUS les visiteurs des pages publiques, y compris l'admin connecté
+- src/components/maintenance-guard.tsx : ajout useSession (next-auth/react, SessionProvider global) — si session.user.role === 'ADMIN', l'écran de maintenance ne s'affiche JAMAIS ; anti-flash (le rendu attend la résolution de la session avant d'afficher l'écran) ; sur les pages publiques pendant la maintenance, l'admin voit un badge discret ambre « Mode maintenance actif — invisible pour les visiteurs » avec lien Gérer → /admin/parametres ; i18n fr/pt/en (maintenance_active_badge, maintenance_active_badge_manage)
+- E2E avec preuves : maintenance ON via bouton admin → admin connecté navigue sur /, /annonces, /annuaire : 0 écran de maintenance, badge visible (/tmp/preuve-admin-bypass-maintenance.png) ; modification réelle d'une annonce pendant la maintenance : /admin/annonces → clic ligne → titre modifié → Enregistrer → PUT /api/ads/… 200 → DB vérifiée « API Test Banner — MAJ PENDANT MAINTENANCE » (titre restauré ensuite) ; session visiteur séparée (agent-browser --session visitor, non authentifiée) → écran « Site en maintenance » affiché (/tmp/preuve-visiteur-maintenance.png) ; Désactiver → {active:false}, 0 erreur console ; lint 0 erreur
+- Push GitHub e7030e1
+
+Stage Summary:
+- Pendant la maintenance : les visiteurs non connectés voient l'écran de maintenance ; l'admin connecté parcourt tout le site et effectue ses modifications sans aucune interruption, avec un rappel discret que le mode est actif
+- Les routes /admin, /dashboard, /login, /register restaient déjà exemptées pour tous ; la nouveauté est le bypass par rôle ADMIN sur les pages publiques
+- Fichiers : src/components/maintenance-guard.tsx, src/lib/i18n.ts, src/lib/i18n-en.ts
