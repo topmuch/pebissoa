@@ -878,6 +878,8 @@ export const en: Record<string, string> = {
   'maintenance_back_on': 'Expected back on',
   'maintenance_at_time': 'at',
   'maintenance_admin_login': 'Administrator login',
+  'maintenance_active_badge': 'Maintenance mode active — invisible to visitors',
+  'maintenance_active_badge_manage': 'Manage',
   'admin_settings_tab_maintenance': 'Maintenance',
   'admin_settings_maintenance_title': 'Maintenance mode',
   'admin_settings_maintenance_desc': 'Enable maintenance mode to temporarily make the site inaccessible.',

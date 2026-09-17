@@ -934,6 +934,8 @@ const fr: Record<string, string> = {
   'maintenance_back_on': 'Retour prévu le',
   'maintenance_at_time': 'à',
   'maintenance_admin_login': 'Connexion administrateur',
+  'maintenance_active_badge': 'Mode maintenance actif — invisible pour les visiteurs',
+  'maintenance_active_badge_manage': 'Gérer',
   // Maintenance settings (admin)
   'admin_settings_tab_maintenance': 'Maintenance',
   'admin_settings_maintenance_title': 'Mode maintenance',
@@ -1930,6 +1932,8 @@ const pt: Record<string, string> = {
   'maintenance_back_on': 'Retorno previsto para',
   'maintenance_at_time': 'às',
   'maintenance_admin_login': 'Login do administrador',
+  'maintenance_active_badge': 'Modo manutenção ativo — invisível para os visitantes',
+  'maintenance_active_badge_manage': 'Gerir',
   // Maintenance settings (admin)
   'admin_settings_tab_maintenance': 'Manutenção',
   'admin_settings_maintenance_title': 'Modo manutenção',

@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
+import { useSession } from 'next-auth/react';
 import { useTranslation } from '@/lib/i18n';
 import { Wrench, Clock, CalendarDays, RefreshCw, LogIn } from 'lucide-react';
 import Link from 'next/link';
@@ -185,6 +186,9 @@ function TimeUnit({ value, label }: { value: number; label: string }) {
 
 export function MaintenanceGuard({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
+  const { t } = useTranslation();
+  const { data: session, status: sessionStatus } = useSession();
+  const isAdmin = (session?.user as { role?: string } | undefined)?.role === 'ADMIN';
   const exemptPaths = ['/admin', '/dashboard', '/login', '/register', '/maintenance'];
   const isExempt = exemptPaths.some((p) => pathname.startsWith(p));
   const [status, setStatus] = useState<'loading' | 'active' | 'inactive'>(isExempt ? 'inactive' : 'loading');
@@ -209,11 +213,34 @@ export function MaintenanceGuard({ children }: { children: React.ReactNode }) {
     return () => { cancelled = true; };
   }, [pathname, isExempt]);
 
-  if (status === 'loading') {
+  // On attend aussi la session avant d'afficher l'écran de maintenance,
+  // pour éviter un flash de l'écran pour un admin connecté
+  if (status === 'loading' || (!isExempt && sessionStatus === 'loading')) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-pebiss-orange" />
       </div>
+    );
+  }
+
+  // Admin connecté : le site reste accessible pendant la maintenance
+  // (badge discret pour lui rappeler que les visiteurs voient l'écran)
+  if (status === 'active' && data && isAdmin) {
+    if (isExempt) return <>{children}</>;
+    return (
+      <>
+        <div className="fixed bottom-4 left-4 z-[9998] flex items-center gap-2 rounded-full border border-amber-300 bg-amber-50 px-4 py-2 shadow-lg text-xs font-medium text-amber-800 dark:border-amber-800 dark:bg-amber-950/90 dark:text-amber-200">
+          <Wrench className="h-3.5 w-3.5 shrink-0" />
+          <span>{t('maintenance_active_badge')}</span>
+          <Link
+            href="/admin/parametres"
+            className="underline underline-offset-2 hover:no-underline"
+          >
+            {t('maintenance_active_badge_manage')}
+          </Link>
+        </div>
+        {children}
+      </>
     );
   }
 
