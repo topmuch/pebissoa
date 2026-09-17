@@ -8,12 +8,14 @@ RUN npm install -g bun
 
 WORKDIR /app
 
-# CACHE-BUST : re-télécharge ce fichier à chaque build (l'API GitHub renvoie un
-# contenu différent à chaque nouveau commit) → invalide le cache Docker de la
-# couche git clone ci-dessous. SANS CELA, Docker réutilisait le clone du build
-# précédent et l'application tournait sur du CODE OBSOLÈTE (bug du 17/09 :
-# Redeploy avec bundled=null → 110 images manquantes).
-ADD https://api.github.com/repos/topmuch/pebissoa/commits/main /tmp/upstream-commit.json
+# CACHE-BUST : re-télécharge ce feed à chaque build (son contenu change à chaque
+# nouveau commit) → invalide le cache Docker de la couche git clone ci-dessous.
+# SANS CELA, Docker réutilisait le clone du build précédent et l'application
+# tournait sur du CODE OBSOLÈTE (bug du 17/09 : Redeploy avec bundled=null →
+# 110 images manquantes).
+# NB : on utilise le feed Atom github.com et PAS l'API api.github.com — celle-ci
+# est rate-limitée (60 req/h/IP) et renvoyait "API rate limit exceeded" sur le VPS.
+ADD https://github.com/topmuch/pebissoa/commits/main.atom /tmp/upstream-commit.atom
 
 # Clone the repository into /tmp then move to /app (`git clone <repo> .` exige
 # un dossier vide, or l'ADD du cache-bust a déjà déposé un fichier dans /tmp)
