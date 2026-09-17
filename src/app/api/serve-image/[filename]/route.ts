@@ -1,15 +1,17 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { readFile, stat } from 'fs/promises';
-import { getUploadsDir, getBundledUploadsDir } from '@/lib/uploads';
-import { join } from 'path';
+import { resolveUploadFilePath, imagePlaceholderSvg } from '@/lib/uploads';
 
 // Content type mapping
 const CONTENT_TYPES: Record<string, string> = {
   jpg: 'image/jpeg',
   jpeg: 'image/jpeg',
+  jfif: 'image/jpeg',
   png: 'image/png',
   gif: 'image/gif',
   webp: 'image/webp',
+  avif: 'image/avif',
+  svg: 'image/svg+xml',
   pdf: 'application/pdf',
 };
 
@@ -18,9 +20,22 @@ function getContentType(filename: string): string {
   return CONTENT_TYPES[ext] || 'application/octet-stream';
 }
 
+function isImage(filename: string): boolean {
+  const ext = filename.split('.').pop()?.toLowerCase() || '';
+  return ext !== 'pdf';
+}
+
 // GET /api/serve-image/[filename] - Reliable image serving (single segment, no catch-all)
 // This route works reliably in Next.js standalone mode (Docker/Coolify)
-// Falls back from /api/uploads/[...path] which can be unreliable in standalone builds
+//
+// Ordre de recherche du fichier :
+//   1. volume persistant UPLOADS_DIR (/app/uploads)
+//   2. copie embarquée dans l'image Docker (/app/.bundled-uploads)
+//   3. anciens volumes legacy (/app/public/uploads — volume Coolify historique)
+//
+// Si le fichier est introuvable PARTOUT : placeholder SVG (HTTP 200,
+// no-store) au lieu d'un 404 — le site ne montre plus d'« image cassée »
+// et l'image réapparaît automatiquement dès qu'elle est restaurée.
 export async function GET(
   request: NextRequest,
   { params }: { params: Promise<{ filename: string }> }
@@ -33,38 +48,22 @@ export async function GET(
       return NextResponse.json({ error: 'Invalid filename' }, { status: 400 });
     }
 
-    // Persistent uploads directory (same volume as database)
-    const uploadsDir = getUploadsDir();
-    let filePath = join(uploadsDir, filename);
-
-    // Check file exists and get its stats — fall back to the pristine copy
-    // baked into the Docker image (/app/.bundled-uploads) when the file is
-    // missing from the volume (e.g. volume fill failed at first boot)
-    let fileStat = null;
-    try {
-      const s = await stat(filePath);
-      if (s.isFile()) fileStat = s;
-    } catch {
-      // not in the volume — try the bundled copy below
-    }
-    if (!fileStat) {
-      const bundledDir = getBundledUploadsDir();
-      if (bundledDir) {
-        const bundledPath = join(bundledDir, filename);
-        try {
-          const s = await stat(bundledPath);
-          if (s.isFile()) {
-            filePath = bundledPath;
-            fileStat = s;
-          }
-        } catch {
-          // not in the bundled copy either
-        }
+    const filePath = await resolveUploadFilePath(filename);
+    if (!filePath) {
+      if (isImage(filename)) {
+        return new NextResponse(imagePlaceholderSvg(), {
+          status: 200,
+          headers: {
+            'Content-Type': 'image/svg+xml; charset=utf-8',
+            'Cache-Control': 'no-store, must-revalidate',
+            'X-Image-Missing': '1',
+          },
+        });
       }
-    }
-    if (!fileStat) {
       return NextResponse.json({ error: 'Not found' }, { status: 404 });
     }
+
+    const fileStat = await stat(filePath);
 
     // Read and serve file
     const fileBuffer = await readFile(filePath);
