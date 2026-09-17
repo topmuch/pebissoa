@@ -166,3 +166,21 @@ Stage Summary:
 - Le superadmin peut maintenant modifier n'importe quelle annonce (texte + photo + tous les paramètres) en cliquant sur la ligne ou le crayon dans /admin/annonces
 - Aucune modification backend nécessaire (PUT /api/ads/[id] déjà complet)
 - Fichiers : src/app/(admin)/admin/annonces/page.tsx, src/lib/i18n.ts, src/lib/i18n-en.ts
+
+---
+Task ID: 8
+Agent: Z.ai Code (main)
+Task: « le bouton modifier est présent mais l'upload des photos ne marche pas » — durcissement prod + diagnostics + preuves
+
+Work Log:
+- Audit : le client (upload-client.ts) et POST /api/upload fonctionnent (preuve réseau locale) ; suspect principal pour la production = la route catch-all /api/uploads/[...path] « unreliable in standalone builds » (commentaire du repo lui-même) JAMAIS contournée : les URLs /uploads/* et /api/uploads/* y passaient toutes
+- middleware.ts : /uploads/* ET /api/uploads/* sont maintenant réécrits vers /api/serve-image/[filename] (route single-segment fiable en standalone) ; matcher étendu à /api/uploads/:path* ; le catch-all reste en secours
+- src/app/api/health/route.ts (NOUVEAU) : endpoint de diagnostic public { ok, db, uploads: { dir, writable, files } } avec test d'écriture réel — permet de PROUVER l'état du volume uploads sur le déploiement Coolify
+- api/upload/route.ts : la réponse 500 inclut maintenant le vrai message d'erreur serveur (ex : EACCES) au lieu d'un générique
+- Preuves E2E (Agent Browser, réseau + DB) : POST /api/upload 200 → GET /api/uploads/ee36b2f5….png 200 (aperçu immédiat) → PUT /api/ads/… 200 → GET /api/ads 200 ; DB { image: /api/uploads/ee36b2f5…, updatedAt } ; curl image persistée HTTP 200 image/png ; screenshot /tmp/preuve-upload-ok.png ; 0 erreur console ; les 3 chemins de service (/, /api/serve-image, /api/uploads) vérifiés 200 en curl ; /api/health {"ok":true,"db":"ok","files":107,"writable":true}
+- Nettoyage : fichier test supprimé, annonce API Test Banner restaurée (image=null) ; lint 0 erreur
+
+Stage Summary:
+- Le service d'images passe par la route fiable standalone (/api/serve-image) pour TOUS les formats d'URL (historiques /uploads/ et nouveaux /api/uploads/)
+- /api/health permet à l'utilisateur de vérifier son déploiement prod en 1 URL (volume inscriptible ? nb fichiers ? DB ok ?)
+- Fichiers : src/middleware.ts, src/app/api/health/route.ts (nouveau), src/app/api/upload/route.ts

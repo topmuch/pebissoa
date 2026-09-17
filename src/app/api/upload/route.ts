@@ -66,8 +66,9 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ url: urls[0], urls, files });
   } catch (error) {
     console.error('Error uploading files:', error);
+    const detail = error instanceof Error ? error.message : String(error);
     return NextResponse.json(
-      { error: 'Erreur lors du téléchargement du fichier' },
+      { error: `Erreur lors du téléchargement du fichier (${detail})` },
       { status: 500 }
     );
   }
