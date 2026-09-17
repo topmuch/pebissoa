@@ -45,6 +45,7 @@ interface Business {
   slug: string;
   description?: string | null;
   logo?: string | null;
+  coverImage?: string | null;
   city?: string | null;
   views: number;
   avgRating?: number;
@@ -78,11 +79,12 @@ function PjBusinessCard({ business }: { business: Business }) {
       aria-label={business.name}
     >
       <div className="h-full flex flex-col bg-white dark:bg-card rounded-lg border border-border/70 shadow-[0_1px_3px_rgba(0,0,0,0.05)] hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 overflow-hidden">
-        {/* Image */}
+        {/* Image — le logo d'abord, sinon la photo de couverture (les entreprises créées
+            via l'inscription n'ont qu'une cover), sinon icône générique */}
         <div className="relative aspect-[4/3] bg-muted overflow-hidden">
-          {business.logo ? (
+          {(business.logo || business.coverImage) ? (
             <img
-              src={business.logo}
+              src={business.logo || business.coverImage!}
               alt={business.name}
               loading="lazy"
               className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"

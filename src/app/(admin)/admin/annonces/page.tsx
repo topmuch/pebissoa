@@ -578,11 +578,14 @@ export default function AdminAnnoncesPage() {
                 disabled={
                   !form.title.trim() ||
                   createMutation.isPending ||
-                  updateMutation.isPending
+                  updateMutation.isPending ||
+                  uploadMutation.isPending
                 }
                 className="bg-pebiss-orange hover:bg-pebiss-orange/90 text-white"
               >
-                {(createMutation.isPending || updateMutation.isPending)
+                {uploadMutation.isPending
+                  ? t('dash_photos_uploading')
+                  : (createMutation.isPending || updateMutation.isPending)
                   ? t('admin_ads_creating')
                   : editingId
                     ? t('common_save')

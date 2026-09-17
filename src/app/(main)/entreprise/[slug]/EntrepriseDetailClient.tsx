@@ -713,8 +713,12 @@ export default function EntrepriseDetailClient() {
               <div className="px-5 py-4">
                 {/* Logo + Title */}
                 <div className="flex items-start gap-3.5 mb-4">
-                  {business.logo ? (
-                    <img src={business.logo} alt={business.name} className="h-14 w-14 rounded object-cover shrink-0" />
+                  {(business.logo || business.coverImage) ? (
+                    <img
+                      src={business.logo || business.coverImage!}
+                      alt={business.name}
+                      className="h-14 w-14 rounded object-cover shrink-0"
+                    />
                   ) : (
                     <div className="h-14 w-14 rounded bg-primary/10 flex items-center justify-center shrink-0">
                       <Building2 className="h-7 w-7 text-primary" />
