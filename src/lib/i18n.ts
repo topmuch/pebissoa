@@ -933,6 +933,7 @@ const fr: Record<string, string> = {
   'maintenance_starts_on': 'Début prévu le',
   'maintenance_back_on': 'Retour prévu le',
   'maintenance_at_time': 'à',
+  'maintenance_admin_login': 'Connexion administrateur',
   // Maintenance settings (admin)
   'admin_settings_tab_maintenance': 'Maintenance',
   'admin_settings_maintenance_title': 'Mode maintenance',
@@ -946,6 +947,10 @@ const fr: Record<string, string> = {
   'admin_settings_maintenance_end_time_hint': 'Laissez vide pour une durée indéterminée. Le minuteur s\'arrêtera automatiquement à l\'heure indiquée.',
   'admin_settings_maintenance_start_time': 'Jour et heure de début',
   'admin_settings_maintenance_start_time_hint': 'Jour et heure auxquels la maintenance commence (affichés aux visiteurs).',
+  'admin_settings_maintenance_activate_btn': 'Activer le mode maintenance',
+  'admin_settings_maintenance_activate_hint': 'Le site passera immédiatement en maintenance après enregistrement.',
+  'admin_settings_maintenance_deactivate_btn': 'Désactiver le mode maintenance',
+  'admin_settings_maintenance_deactivate_hint': 'Le site redeviendra immédiatement accessible.',
   'admin_settings_maintenance_warning': 'Attention : quand le mode maintenance est activé, seuls les administrateurs et le tableau de bord restent accessibles.',
   // Page Catégories
   'categories_page': 'Catégories',
@@ -1924,6 +1929,7 @@ const pt: Record<string, string> = {
   'maintenance_starts_on': 'Início previsto para',
   'maintenance_back_on': 'Retorno previsto para',
   'maintenance_at_time': 'às',
+  'maintenance_admin_login': 'Login do administrador',
   // Maintenance settings (admin)
   'admin_settings_tab_maintenance': 'Manutenção',
   'admin_settings_maintenance_title': 'Modo manutenção',
@@ -1937,6 +1943,10 @@ const pt: Record<string, string> = {
   'admin_settings_maintenance_end_time_hint': 'Deixe vazio para duração indeterminada. O temporizador parará automaticamente na hora indicada.',
   'admin_settings_maintenance_start_time': 'Dia e hora de início',
   'admin_settings_maintenance_start_time_hint': 'Dia e hora em que a manutenção começa (mostrado aos visitantes).',
+  'admin_settings_maintenance_activate_btn': 'Ativar o modo manutenção',
+  'admin_settings_maintenance_activate_hint': 'O site entrará imediatamente em manutenção após a gravação.',
+  'admin_settings_maintenance_deactivate_btn': 'Desativar o modo manutenção',
+  'admin_settings_maintenance_deactivate_hint': 'O site voltará imediatamente a ficar acessível.',
   'admin_settings_maintenance_warning': 'Atenção : quando o modo manutenção está ativado, apenas os administradores e o painel permanecem acessíveis.',
   // Page Categorias
   'categories_page': 'Categorias',

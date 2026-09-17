@@ -20,7 +20,7 @@ import {
 } from '@/components/ui/select';
 import { Switch } from '@/components/ui/switch';
 import { Separator } from '@/components/ui/separator';
-import { Settings, Globe, Search, Share2, Mail, Bell, ImageIcon, Upload, Wrench, AlertTriangle, CalendarDays, CalendarClock } from 'lucide-react';
+import { Settings, Globe, Search, Share2, Mail, Bell, ImageIcon, Upload, Wrench, AlertTriangle, CalendarDays, CalendarClock, Power, PowerOff } from 'lucide-react';
 import { toast } from 'sonner';
 
 function TikTokIcon({ className = "h-5 w-5" }: { className?: string }) {
@@ -176,15 +176,16 @@ export default function AdminParametresPage() {
     onError: (err) => toast.error(err.message || t('admin_settings_save_error')),
   });
 
-  const handleSave = () => {
+  const handleSave = (overrides?: Partial<typeof form>) => {
+    const data = { ...form, ...overrides };
     saveMutation.mutate({
-      ...form,
+      ...data,
       // datetime-local → ISO explicite avec fuseau, pour un stockage sans ambiguïté
-      maintenanceStartTime: form.maintenanceStartTime
-        ? new Date(form.maintenanceStartTime).toISOString()
+      maintenanceStartTime: data.maintenanceStartTime
+        ? new Date(data.maintenanceStartTime).toISOString()
         : '',
-      maintenanceEndTime: form.maintenanceEndTime
-        ? new Date(form.maintenanceEndTime).toISOString()
+      maintenanceEndTime: data.maintenanceEndTime
+        ? new Date(data.maintenanceEndTime).toISOString()
         : '',
     });
   };
@@ -717,6 +718,41 @@ export default function AdminParametresPage() {
                 />
               </div>
 
+              {/* Bouton d'activation / désactivation immédiate */}
+              <div className="flex flex-col items-center gap-2">
+                {form.maintenanceMode ? (
+                  <Button
+                    onClick={() => {
+                      updateField('maintenanceMode', false);
+                      handleSave({ maintenanceMode: false });
+                    }}
+                    disabled={saveMutation.isPending}
+                    variant="outline"
+                    className="w-full sm:w-auto gap-2 border-emerald-300 text-emerald-700 hover:bg-emerald-50 hover:text-emerald-800 dark:border-emerald-800 dark:text-emerald-400 dark:hover:bg-emerald-950 cursor-pointer"
+                  >
+                    <PowerOff className="h-4 w-4" />
+                    {t('admin_settings_maintenance_deactivate_btn')}
+                  </Button>
+                ) : (
+                  <Button
+                    onClick={() => {
+                      updateField('maintenanceMode', true);
+                      handleSave({ maintenanceMode: true });
+                    }}
+                    disabled={saveMutation.isPending}
+                    className="w-full sm:w-auto gap-2 bg-pebiss-orange hover:bg-pebiss-orange/90 text-white shadow-lg shadow-pebiss-orange/25 cursor-pointer"
+                  >
+                    <Power className="h-4 w-4" />
+                    {t('admin_settings_maintenance_activate_btn')}
+                  </Button>
+                )}
+                <p className="text-xs text-muted-foreground">
+                  {form.maintenanceMode
+                    ? t('admin_settings_maintenance_deactivate_hint')
+                    : t('admin_settings_maintenance_activate_hint')}
+                </p>
+              </div>
+
               {/* Warning */}
               {form.maintenanceMode && (
                 <div className="flex items-start gap-3 p-4 rounded-lg border border-amber-200 bg-amber-50 dark:bg-amber-950/30 dark:border-amber-800">
@@ -780,7 +816,7 @@ export default function AdminParametresPage() {
       {/* Save Button */}
       <div className="flex justify-end sticky bottom-6">
         <Button
-          onClick={handleSave}
+          onClick={() => handleSave()}
           disabled={saveMutation.isPending}
           className="bg-pebiss-orange hover:bg-pebiss-orange/90 text-white"
           size="lg"

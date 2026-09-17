@@ -3,7 +3,8 @@
 import { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import { useTranslation } from '@/lib/i18n';
-import { Wrench, Clock, CalendarDays, RefreshCw } from 'lucide-react';
+import { Wrench, Clock, CalendarDays, RefreshCw, LogIn } from 'lucide-react';
+import Link from 'next/link';
 
 interface MaintenanceData {
   active: boolean;
@@ -153,6 +154,15 @@ function MaintenanceScreen({ data }: { data: MaintenanceData }) {
         <p className="text-xs text-muted-foreground">
           Pebiss &copy; {new Date().getFullYear()}
         </p>
+
+        {/* Accès administrateur pendant la maintenance */}
+        <Link
+          href="/login/admin"
+          className="inline-flex items-center gap-1.5 text-xs text-muted-foreground/60 hover:text-pebiss-orange transition-colors cursor-pointer"
+        >
+          <LogIn className="w-3.5 h-3.5" />
+          {t('maintenance_admin_login')}
+        </Link>
       </div>
     </div>
   );
