@@ -58,15 +58,29 @@ async function main() {
 
     // =============================================
     // 1bis. Réparation d'images cassées (idempotent, à chaque boot)
-    // L'image d'origine de ce logo n'a jamais été commitée dans le dépôt :
-    // on pointe le logo vers la photo de couverture de l'entreprise (valide).
+    // Fichiers référencés par la base mais JAMAIS commités dans le dépôt :
+    // on les repointe vers une image valide de la même entité.
+    // (Volontairement LIMITÉ à ces cas connus — ne jamais réparer
+    // automatiquement les autres références : elles doivent conserver leur
+    // nom de fichier pour guérir seules quand l'ancien volume est restauré.)
     // =============================================
-    const BROKEN_LOGO = '/uploads/9a6607b6-6908-4d42-bd5f-7ab2abc72868.webp';
-    const brokenBiz = await prisma.business.findFirst({ where: { logo: BROKEN_LOGO } });
-    if (brokenBiz) {
-      const fallbackLogo = brokenBiz.coverImage || '/api/uploads/9fd6625e-0c32-41a2-bd3c-1471971e57a0.webp';
-      await prisma.business.update({ where: { id: brokenBiz.id }, data: { logo: fallbackLogo } });
-      console.log(`  🔧 Logo cassé réparé pour « ${brokenBiz.name} » → ${fallbackLogo}`);
+    const fileExistsSomewhere = (name) =>
+      [process.env.UPLOADS_DIR || '/app/uploads', '/app/.bundled-uploads', '/app/public/uploads']
+        .some((d) => { try { return fs.existsSync(path.join(d, name)); } catch { return false; } });
+
+    const airportBiz = await prisma.business.findFirst({ where: { logo: { contains: '9a6607b6-6908-4d42' } } });
+    if (airportBiz && !fileExistsSomewhere('9a6607b6-6908-4d42-bd5f-7ab2abc72868.webp')) {
+      const fallbackLogo = airportBiz.coverImage || '/api/uploads/9fd6625e-0c32-41a2-bd3c-1471971e57a0.webp';
+      await prisma.business.update({ where: { id: airportBiz.id }, data: { logo: fallbackLogo } });
+      console.log(`  🔧 Logo cassé réparé pour « ${airportBiz.name} »`);
+    }
+    const orphanPhoto = await prisma.businessPhoto.findFirst({ where: { url: { contains: '32c6c05f-8c19-47d4' } } });
+    if (orphanPhoto && !fileExistsSomewhere('32c6c05f-8c19-47d4-b80c-35d0a8325c20.jpg')) {
+      const owner = await prisma.business.findUnique({ where: { id: orphanPhoto.businessId } });
+      if (owner?.coverImage) {
+        await prisma.businessPhoto.update({ where: { id: orphanPhoto.id }, data: { url: owner.coverImage } });
+        console.log(`  🔧 Photo orpheline réparée (entreprise « ${owner.name} »)`);
+      }
     }
 
     // =============================================

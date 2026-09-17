@@ -279,3 +279,26 @@ Stage Summary:
 - La seule image réellement cassée (logo aéroport, absente du dépôt) est réparée en DB locale, dans le seed, et le boot prod la réparera automatiquement
 - Prod Coolify : Redeploy → copy-bundled-uploads remplira /app/uploads (108 images embarquées) + init-production.cjs réparera le logo ; recommandé d'ajouter NEXTAUTH_SECRET dans les variables Coolify (le fallback code couvre son absence)
 - Fichiers : src/app/api/upload/route.ts (restauré), src/lib/auth.ts, scripts/init-production.cjs, prisma/production-data.json
+
+---
+Task ID: 13
+Agent: Z.ai Code (main)
+Task: Prod — 100+ annonces avec images cassées ; rendre le système d'images résilient + récupération
+
+Work Log:
+- Retour utilisateur : le site en production affiche 100+ annonces avec images cassées. Cause : les images uploadées/utilisées en prod vivent (ou vivaient) dans l'ANCIEN volume Coolify (/app/public/uploads) ; le nouveau volume /app/uploads n'a jamais reçu ces fichiers (health historique : files:3). Elles ne sont ni dans git ni dans la copie embarquée.
+- Vérifié : pebiss.com ne sert plus ces fichiers (404 JSON) → récupération impossible depuis l'origine ; seule l'ancien volume peut les rendre.
+- Résilience implémentée :
+  - src/lib/uploads.ts : resolveUploadFilePath unifié (volume → embarqué /app/.bundled-uploads → volumes legacy /app/public/uploads + LEGACY_UPLOADS_DIR) + imagePlaceholderSvg (placeholder élégant 480×320)
+  - Routes serve-image + uploads catch-all : fichier introuvable partout → SVG placeholder HTTP 200 (Cache-Control: no-store, X-Image-Missing: 1) au lieu du 404 → PLUS AUCUNE icône « image cassée » sur le site ; l'image réapparaît seule dès que le fichier est restauré
+  - copy-bundled-uploads.cjs : au boot, copie vers le volume non seulement les images embarquées MAIS AUSSI celles des anciens volumes legacy détectés (récupération automatique si l'ancien volume est remonté)
+  - /api/health : rapport imageIntegrity {referenced, presentInVolume, recoverableFromBundledOrLegacy, missingNowhere, missingSample} + liste des volumes legacy détectés → diagnostic chiffré avant/après Redeploy
+- Nouvelle image jamais commitée découverte via le rapport (32c6c05f…jpg, photo galerie « Orange Bissau ») : réparée en DB locale + production-data.json + cas ajouté à la réparation au boot de init-production.cjs (volontairement limité aux cas connus pour ne pas toucher aux refs qui doivent guérir via l'ancien volume)
+- E2E avec preuves : annonce avec image inexistante → /api/uploads/... renvoie 200 SVG placeholder (headers no-store) → page /annonces : 0 icône cassée, placeholder affiché (capture /tmp/preuve-placeholder.png) ; annonce pointant un fichier présent UNIQUEMENT dans un dossier legacy simulé → image servie 200 image/jpeg depuis le legacy ; après nettoyage des tests : imageIntegrity 103 référencées / 103 présentes / 0 manquantes ; lint 0 erreur
+- NB : l'espace de travail sandbox a été réinitialisé une 2e fois pendant la tâche (DB vidée, upload route effacée, .env perdu) — tout a été restauré (route, seed 43 entreprises/6 annonces, admin@pebiss.sn, uploads 108, NEXTAUTH_SECRET) ; code commis AVANT pour le protéger
+
+Stage Summary:
+- Fini les icônes d'images cassées : toute image absente affiche un placeholder propre et redevient visible automatiquement dès que le fichier existe à nouveau
+- La prod récupérera TOUTES les images de l'ancien volume dès qu'il sera remonté : au boot, copy-bundled-uploads.cjs les recopie dans /app/uploads (ne jamais écraser) ; /api/health donnera le décompte exact
+- Action utilisateur Coolify : remonter l'ancien volume (/app/public/uploads) en plus de /app/uploads puis Redeploy — ou copier les fichiers de l'ancien volume vers le nouveau (commande docker fournie dans le rapport)
+- Fichiers : src/lib/uploads.ts, src/app/api/serve-image/[filename]/route.ts, src/app/api/uploads/[...path]/route.ts, src/app/api/health/route.ts, scripts/copy-bundled-uploads.cjs, scripts/init-production.cjs, prisma/production-data.json
