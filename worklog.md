@@ -321,3 +321,24 @@ Stage Summary:
 - Les entreprises créées via l'inscription (cover sans logo) affichent désormais leur photo dans l'annuaire et sur leur fiche — fin des cartes grises sans image
 - Prévention : impossible d'enregistrer une bannière admin pendant un upload en cours
 - ⚠️ À signaler à l'utilisateur : le logo d'Orange uploadé le 16/09 a disparu au Redeploy (le volume /app/uploads ne persiste pas ?) — vérifier dans Coolify que le volume /app/uploads est bien un volume persistant, sinon TOUT fichier uploadé disparaît à chaque Redeploy
+
+---
+Task ID: 15
+Agent: Z.ai Code (main)
+Task: Avant Redeploy — vérifier la persistance Coolify (capture Persistent Storage fournie par l'utilisateur)
+
+Work Log:
+- Analyse de la capture Coolify : Volume 1 (source /var/lib/coolify/volumes/pebissoa-data → /app/data) ; Volume 2 (MÊME source → /app/public/uploads). Le code écrit les uploads dans /app/uploads (UPLOADS_DIR, Dockerfile) où AUCUN volume n'est monté → uploads éphémères, détruits à chaque Redeploy (confirme la perte du logo Orange et les 8 manquantes de /api/health).
+- PREUVE : /api/health prod = 113 référencées / 105 présentes / 8 perdues, recoverableFromBundledOrLegacy: 0.
+- TROU DE SÉCURITÉ DÉCOUVERT ET PREUVÉ : les 2 volumes partageant la même source, /app/public/uploads expose le répertoire de la DB → https://pebiss.com/api/uploads/pebiss.db renvoyait la DB SQLite COMPLÈTE (HTTP 200, 172 Ko, « SQLite 3.x database » confirmé par file) — utilisateurs + hashes téléchargeables par n'importe qui.
+- Fix sécurité : SERVABLE_EXTENSIONS + isServableFilename() dans src/lib/uploads.ts ; refus 404 AVANT résolution fichier dans /api/serve-image/[filename] ET /api/uploads/[...path]. E2E local : custom.db → 404, pebiss.db → 404, image existante → 200 image/jpeg, image manquante → placeholder SVG intact, sans extension → 404.
+- SAUVETAGE DES DONNÉES avant Redeploy (les 111 fichiers actuels de /app/uploads vivent dans la couche éphémère et mourraient au Redeploy) : scripts/harvest-prod-images.cjs balaie les APIs publiques (51 entreprises + fiches + bannières + réglages) → 113/113 références (= compte health exact), 102 déjà dans git, 3 téléchargées et committées dans uploads/ (dont 9982a364 = cover « Societe General » créée aujourd'hui, + 87551321, 78aa429f) → le Dockerfile les embarque et copy-bundled-uploads.cjs les restaurera dans le volume au boot.
+- 8 images DÉFINITIVEMENT perdues (re-uploader) : 3663d8dd (logo Orange), 87fd7a50 (cover Orange), f88b8d42 (logo Banco Atlântico), 5830514a, 1c98026f, 92ec235f, 5e8b076d, 380e18da.
+- Scan régression local : annuaire 41 imgs/0 cassée, accueil 27/0 ; lint 0 erreur ; dev.log propre.
+- Workspace encore réinitialisé pendant la tâche (DB vide) → re-restauré (init-production.cjs + admin). Route /api/upload revérifiée présente avant commit.
+- Push GitHub f1ee6d5.
+
+Stage Summary:
+- La config Coolify actuelle : DB persistante ✅ mais uploads NON persistants ❌ (volume images monté au mauvais chemin /app/public/uploads avec la source de la DB) + DB téléchargeable publiquement 🚨 (corrigé en code)
+- Instructions données à l'utilisateur : Volume 2 → Source /var/lib/coolify/volumes/pebissoa-uploads (dir DÉDIÉ, différent de la DB), Destination /app/uploads ; puis Redeploy ; au boot le volume sera rempli (108 seed + 3 sauvetées)
+- 8 fichiers perdus à re-uploader via l'admin (dont logo + cover Orange, logo Banco Atlântico)
