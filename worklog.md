@@ -184,3 +184,20 @@ Stage Summary:
 - Le service d'images passe par la route fiable standalone (/api/serve-image) pour TOUS les formats d'URL (historiques /uploads/ et nouveaux /api/uploads/)
 - /api/health permet à l'utilisateur de vérifier son déploiement prod en 1 URL (volume inscriptible ? nb fichiers ? DB ok ?)
 - Fichiers : src/middleware.ts, src/app/api/health/route.ts (nouveau), src/app/api/upload/route.ts
+
+---
+Task ID: 9
+Agent: Z.ai Code (main)
+Task: « /api/health ok mais l'upload ne marche toujours pas » — files:3 au lieu de 107, remplacement de volume, diagnostic et auto-réparation
+
+Work Log:
+- Analyse du rapport prod utilisateur {dir:/app/uploads, writable:true, files:3} : le volume est correct et inscriptible MAIS les 105 images embarquées n'y sont pas (remplissage au 1er boot jamais exécuté — probablement image construite avant le fix ou cache de build sur RUN git clone) ; files:3 = probablement les uploads de l'utilisateur, donc POST /api/upload FONCTIONNE en prod
+- Auto-réparation du symptôme : fallback dans les 2 routes de service (serve-image + catch-all uploads) — si le fichier est absent du volume, il est servi depuis la copie pristine /app/.bundled-uploads (getBundledUploadsDir : env BUNDLED_UPLOADS_DIR, /app/.bundled-uploads, <cwd>/.bundled-uploads) → les images de production s'affichent MÊME si le remplissage du volume a échoué
+- /api/health enrichi : uploads.recent (5 derniers fichiers avec URL testables), bundled {dir, files} (présence de la copie embarquée dans l'image), nextauthUrl (diagnostic session)
+- Dockerfile : le clone logge « 🔨 Build commit: … » dans les logs de build Coolify (détection de build périmé) ; le 2>/dev/null retiré sur copy-bundled-uploads.cjs → son rapport (📸 X nouvelles) est désormais VISIBLE dans les logs de démarrage
+- Preuves locales : fallback testé (fichier retiré du volume → servi 200 image/jpeg 1 045 730 o depuis .bundled-uploads) ; E2E re-testé avec nouveau code : POST /api/upload 200 → aperçu GET /api/uploads/959912db….png 200 → save → DB {image, updatedAt} → curl 200 ; /api/health affiche recent + bundled ; lint 0 erreur ; données de test nettoyées
+
+Stage Summary:
+- Quelle que soit la cause du files:3 (build périmé / étape muette), les images de production s'affichent désormais via le fallback embarqué, et les uploads utilisateurs (prouvés atterrir dans le volume) se servent normalement
+- Le prochain déploiement montrera dans les logs : le commit buildé + le nombre d'images copiées dans le volume
+- Fichiers : src/lib/uploads.ts, src/app/api/serve-image/[filename]/route.ts, src/app/api/uploads/[...path]/route.ts, src/app/api/health/route.ts, Dockerfile

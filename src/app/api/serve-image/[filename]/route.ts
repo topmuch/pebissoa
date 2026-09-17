@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { readFile, stat } from 'fs/promises';
-import { getUploadsDir } from '@/lib/uploads';
+import { getUploadsDir, getBundledUploadsDir } from '@/lib/uploads';
 import { join } from 'path';
 
 // Content type mapping
@@ -35,11 +35,34 @@ export async function GET(
 
     // Persistent uploads directory (same volume as database)
     const uploadsDir = getUploadsDir();
-    const filePath = join(uploadsDir, filename);
+    let filePath = join(uploadsDir, filename);
 
-    // Check file exists and get its stats
-    const fileStat = await stat(filePath);
-    if (!fileStat.isFile()) {
+    // Check file exists and get its stats — fall back to the pristine copy
+    // baked into the Docker image (/app/.bundled-uploads) when the file is
+    // missing from the volume (e.g. volume fill failed at first boot)
+    let fileStat = null;
+    try {
+      const s = await stat(filePath);
+      if (s.isFile()) fileStat = s;
+    } catch {
+      // not in the volume — try the bundled copy below
+    }
+    if (!fileStat) {
+      const bundledDir = getBundledUploadsDir();
+      if (bundledDir) {
+        const bundledPath = join(bundledDir, filename);
+        try {
+          const s = await stat(bundledPath);
+          if (s.isFile()) {
+            filePath = bundledPath;
+            fileStat = s;
+          }
+        } catch {
+          // not in the bundled copy either
+        }
+      }
+    }
+    if (!fileStat) {
       return NextResponse.json({ error: 'Not found' }, { status: 404 });
     }
 

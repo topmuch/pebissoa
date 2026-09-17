@@ -34,3 +34,22 @@ export function getUploadsDir(): string {
   }
   return _uploadsDir;
 }
+
+/**
+ * Pristine copy of the production images baked into the Docker image
+ * (/app/.bundled-uploads, created by the Dockerfile). Used as a FALLBACK
+ * by the image-serving routes when a file is missing from the persistent
+ * volume — so seeded images always display even if the volume fill failed.
+ * Returns null when no bundled copy exists (local dev without it).
+ */
+export function getBundledUploadsDir(): string | null {
+  const candidates = [
+    process.env.BUNDLED_UPLOADS_DIR,
+    '/app/.bundled-uploads',
+    join(process.cwd(), '.bundled-uploads'),
+  ].filter((v): v is string => !!v);
+  for (const dir of candidates) {
+    if (existsSync(dir)) return dir;
+  }
+  return null;
+}

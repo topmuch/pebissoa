@@ -8,8 +8,8 @@ RUN npm install -g bun
 
 WORKDIR /app
 
-# Clone the repository
-RUN git clone https://github.com/topmuch/pebissoa.git .
+# Clone the repository (log the commit in build logs to detect stale builds)
+RUN git clone https://github.com/topmuch/pebissoa.git . && echo "🔨 Build commit: $(git log -1 --format='%h %s')"
 
 # Keep a pristine copy of the bundled production images OUTSIDE /app/uploads.
 # When a persistent volume is mounted on /app/uploads (empty at first boot),
@@ -48,4 +48,4 @@ ENV DATABASE_URL=file:/app/data/pebiss.db
 ENV UPLOADS_DIR=/app/uploads
 
 # Start command - init db, images and start server
-CMD sh -c "mkdir -p /app/data /app/uploads && export DATABASE_URL=file:/app/data/pebiss.db && export UPLOADS_DIR=/app/uploads && npx prisma db push --skip-generate 2>/dev/null || true && node scripts/copy-bundled-uploads.cjs 2>/dev/null || true && node scripts/init-production.cjs 2>/dev/null || true && exec node .next/standalone/server.js"
+CMD sh -c "mkdir -p /app/data /app/uploads && export DATABASE_URL=file:/app/data/pebiss.db && export UPLOADS_DIR=/app/uploads && npx prisma db push --skip-generate 2>/dev/null || true && node scripts/copy-bundled-uploads.cjs || true && node scripts/init-production.cjs 2>/dev/null || true && exec node .next/standalone/server.js"
