@@ -23,7 +23,8 @@ function copyMissing(srcDir, destDir) {
     if (entry.isDirectory()) {
       copied += copyMissing(src, dest);
     } else {
-      if (fs.existsSync(dest) && fs.statSync(dest).size > 0) {
+      // Skip anything that already exists (never overwrite user uploads)
+      if (fs.existsSync(dest)) {
         skipped++;
       } else {
         fs.copyFileSync(src, dest);

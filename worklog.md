@@ -130,3 +130,20 @@ Stage Summary:
 - Formats élargis : .jfif et .avif acceptés ; garde-fou explicite pour HEIC
 - Volume /app/uploads ajouté au compose → persistance des images en production Coolify
 - Fichiers : src/lib/upload-client.ts (nouveau), api/upload/route.ts, register, 5 pages dashboard, dialog admin, 3 pages admin, i18n.ts, i18n-en.ts, compose.yml
+
+---
+Task ID: 6
+Agent: Z.ai Code (main)
+Task: Persistance des uploads en production — l'utilisateur déploie et déclare « je dois mettre /app/uploads dans les variables de persistance »
+
+Work Log:
+- Diagnostic : la démarche utilisateur est correcte (volume persistant sur /app/uploads), MAIS le Dockerfile avait un défaut bloquant dans ce scénario
+- Trouvé : scripts/copy-bundled-uploads.cjs (remplissage du volume avec les images embarquées) n'était JAMAIS appelé et /app/.bundled-uploads n'était jamais créé dans l'image → au 1er boot avec volume, le volume vide masque les 105 images de l'image Docker → toutes les photos de production 404
+- Dockerfile : ajout de `RUN mkdir -p /app/.bundled-uploads && cp -r uploads/. /app/.bundled-uploads/` (copie pristine hors du chemin monté) + appel de `node scripts/copy-bundled-uploads.cjs` dans le CMD avant init-production.cjs
+- scripts/copy-bundled-uploads.cjs : condition de skip = existsSync (au lieu de size>0) → plus de re-copie des fichiers vides (.gitkeep) à chaque boot, logs propres
+- Tests locaux : simulation volume vide (BUNDLED_UPLOADS_DIR/UPLOADS_DIR) → 108 fichiers copiés au 1er passage, 0 au 2e (idempotent) ; lint 0 erreur ; suppression d'un auto-commit sandbox parasite (a394e0b) par reset --hard origin/main
+
+Stage Summary:
+- Déployer avec 2 volumes persistants est maintenant SÛR : /app/uploads (images) et /app/data (SQLite) — au 1er boot le volume uploads est rempli automatiquement avec les 105 images de production, sans jamais écraser les uploads utilisateurs
+- UPLOADS_DIR=/app/uploads est déjà défini dans le Dockerfile (ENV + export CMD) : aucune variable d'env supplémentaire requise côté Coolify
+- Fichiers : Dockerfile, scripts/copy-bundled-uploads.cjs

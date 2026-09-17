@@ -11,6 +11,12 @@ WORKDIR /app
 # Clone the repository
 RUN git clone https://github.com/topmuch/pebissoa.git .
 
+# Keep a pristine copy of the bundled production images OUTSIDE /app/uploads.
+# When a persistent volume is mounted on /app/uploads (empty at first boot),
+# scripts/copy-bundled-uploads.cjs fills the volume from this folder at startup
+# (it never overwrites user uploads — only missing files are copied).
+RUN mkdir -p /app/.bundled-uploads && cp -r uploads/. /app/.bundled-uploads/
+
 # Install dependencies
 RUN bun install
 
@@ -42,4 +48,4 @@ ENV DATABASE_URL=file:/app/data/pebiss.db
 ENV UPLOADS_DIR=/app/uploads
 
 # Start command - init db, images and start server
-CMD sh -c "mkdir -p /app/data /app/uploads && export DATABASE_URL=file:/app/data/pebiss.db && export UPLOADS_DIR=/app/uploads && npx prisma db push --skip-generate 2>/dev/null || true && node scripts/init-production.cjs 2>/dev/null || true && exec node .next/standalone/server.js"
+CMD sh -c "mkdir -p /app/data /app/uploads && export DATABASE_URL=file:/app/data/pebiss.db && export UPLOADS_DIR=/app/uploads && npx prisma db push --skip-generate 2>/dev/null || true && node scripts/copy-bundled-uploads.cjs 2>/dev/null || true && node scripts/init-production.cjs 2>/dev/null || true && exec node .next/standalone/server.js"
