@@ -359,3 +359,20 @@ Stage Summary:
 - VERDICT : ajouter le volume /app/uploads ne fait PAS disparaître les images — c'est l'inverse (sans volume, tout est effacé à chaque Redeploy). Les 105 images affichées sont déjà dans git → restaurées au 1er boot par copy-bundled-uploads.cjs depuis .bundled-uploads
 - Config Coolify corrigée à appliquer : volume images → Source /var/lib/coolify/volumes/pebissoa-uploads (distincte de la DB), Destination /app/uploads (pas /app/public/uploads)
 - 8 images (4 entreprises) à re-uploader : perdues dans le conteneur ACTUEL, indépendamment du volume
+
+---
+Task ID: 16
+Agent: Z.ai Code (main)
+Task: Persistance Coolify — Redeploy #1 sur vieux code (cache Docker), fix cache-bust
+
+Work Log:
+- Health post-Redeploy utilisateur (21:13) : volume /app/uploads monté et writable ✓ MAIS files=3, bundled=null → le build a réutilisé le CLONE GIT EN CACHE (Docker layer cache) = vieux code sans .bundled-uploads → 110/113 images manquantes
+- Les 3 fichiers présents = images Orange (3663d8dd, 87fd7a50, 380e18da) — servies 200 image/* depuis le volume ; origine exacte non élucidée (jamais commitées, absentes du seed) mais elles persistent dans le volume
+- Fix 1 (874a804) : cache-bust Dockerfile via ADD https://api.github.com/...commits/main
+- Découverte : VPS Coolify (8.212.10.159) RATE-LIMITÉ par l'API GitHub → ADD téléchargerait le message d'erreur constant → cache-bust non fiable → Fix 2 : remplacé par le feed Atom https://github.com/topmuch/pebissoa/commits/main.atom (200 OK, contenu change à chaque commit, pas rate-limité)
+- worklog commit 50ac1f7 poussé précédemment
+
+Stage Summary:
+- La config volume Coolify est CORRECTE désormais (/app/uploads persistant, writable) — le seul problème restant est le build obsolète
+- Le prochain Redeploy est GARANTI à jour : la ligne ADD (nouvelle URL) force l'exécution du clone
+- Vérification post-deploy attendue : uploads.files ≈ 111, bundled.files ≈ 111, missingNowhere ≈ 5 (re-uploads : Banco Atlântico ×2, Agência nova esperança ×2, Coris Bank ×1)
