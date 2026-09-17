@@ -3,6 +3,7 @@
 import { useState, useRef, useCallback } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useBusinessSlug } from '@/hooks/use-business-slug';
+import { uploadFiles, uploadErrorMessage } from '@/lib/upload-client';
 import { useTranslation } from '@/lib/i18n';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -47,14 +48,7 @@ export default function PhotosPage() {
 
   const uploadMutation = useMutation({
     mutationFn: async (files: File[]) => {
-      const fd = new FormData();
-      files.forEach((file) => fd.append('files', file));
-      const res = await fetch('/api/upload', {
-        method: 'POST',
-        body: fd,
-      });
-      if (!res.ok) throw new Error('Erreur');
-      return res.json();
+      return uploadFiles(files);
     },
     onSuccess: async (data) => {
       const urls = data.files?.map((f: any) => f.url) || (data.url ? [data.url] : []);
@@ -69,8 +63,8 @@ export default function PhotosPage() {
       queryClient.invalidateQueries({ queryKey: ['my-business'] });
       toast.success(`${urls.length} ${t('dash_photos_added')}`);
     },
-    onError: () => {
-      toast.error(t('dash_photos_upload_error'));
+    onError: (err) => {
+      toast.error(uploadErrorMessage(err, t('dash_photos_upload_error')));
     },
   });
 

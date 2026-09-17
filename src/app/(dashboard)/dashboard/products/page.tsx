@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useBusinessSlug } from '@/hooks/use-business-slug';
+import { uploadFiles, uploadErrorMessage } from '@/lib/upload-client';
 import { useTranslation } from '@/lib/i18n';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -62,11 +63,7 @@ export default function ProductsPage() {
 
   const uploadMutation = useMutation({
     mutationFn: async (file: File) => {
-      const fd = new FormData();
-      fd.append('files', file);
-      const res = await fetch('/api/upload', { method: 'POST', body: fd });
-      if (!res.ok) throw new Error('Erreur');
-      return res.json();
+      return uploadFiles(file);
     },
   });
 
@@ -175,8 +172,8 @@ export default function ProductsPage() {
       try {
         const result = await uploadMutation.mutateAsync(imageFile);
         imageUrl = result.urls?.[0] || result.url;
-      } catch {
-        toast.error(t('dash_products_upload_error'));
+      } catch (err) {
+        toast.error(uploadErrorMessage(err, t('dash_products_upload_error')));
         return;
       }
     }

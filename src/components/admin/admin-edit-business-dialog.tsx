@@ -161,14 +161,8 @@ export function AdminEditBusinessDialog({ open, onOpenChange, business }: AdminE
     if (!files || files.length === 0) return;
     setUploadingPhoto(true);
     try {
-      const fd = new FormData();
-      for (let i = 0; i < files.length; i++) {
-        fd.append('files', files[i]);
-      }
-      const uploadRes = await fetch('/api/upload', { method: 'POST', body: fd });
-      if (!uploadRes.ok) throw new Error('Upload failed');
-      const uploadData = await uploadRes.json();
-      const urls = uploadData.files?.map((f: any) => f.url) || [];
+      const uploadRes = await uploadFiles(Array.from(files));
+      const urls = uploadRes.files?.map((f: any) => f.url) || [];
 
       for (const url of urls) {
         await fetch(`/api/businesses/${business.slug}`, {
@@ -179,8 +173,8 @@ export function AdminEditBusinessDialog({ open, onOpenChange, business }: AdminE
       }
       queryClient.invalidateQueries({ queryKey: ['business', business.slug] });
       toast.success(t('admin_ent_photo_added'));
-    } catch {
-      toast.error(t('admin_ent_photo_error'));
+    } catch (err) {
+      toast.error(uploadErrorMessage(err, t('admin_ent_photo_error')));
     } finally {
       setUploadingPhoto(false);
       if (fileInputRef.current) fileInputRef.current.value = '';

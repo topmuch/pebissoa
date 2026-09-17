@@ -37,6 +37,7 @@ import {
 } from '@/components/ui/alert-dialog';
 import { Megaphone, Plus, Pencil, Trash2, Upload } from 'lucide-react';
 import { toast } from 'sonner';
+import { uploadFiles, uploadErrorMessage } from '@/lib/upload-client';
 
 const AD_TYPES = [
   { value: 'SERVICE', label: 'Service', color: 'bg-blue-100 text-blue-800' },
@@ -93,11 +94,7 @@ export default function AdsPage() {
 
   const uploadMutation = useMutation({
     mutationFn: async (file: File) => {
-      const fd = new FormData();
-      fd.append('files', file);
-      const res = await fetch('/api/upload', { method: 'POST', body: fd });
-      if (!res.ok) throw new Error('Erreur');
-      return res.json();
+      return uploadFiles(file);
     },
   });
 
@@ -180,8 +177,8 @@ export default function AdsPage() {
       try {
         const result = await uploadMutation.mutateAsync(imageFile);
         imageUrl = result.urls?.[0] || result.url;
-      } catch {
-        toast.error(t('dash_ads_error_upload'));
+      } catch (err) {
+        toast.error(uploadErrorMessage(err, t('dash_ads_error_upload')));
         return;
       }
     }

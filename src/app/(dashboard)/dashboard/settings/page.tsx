@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useSession } from 'next-auth/react';
 import { useMutation } from '@tanstack/react-query';
 import { useTranslation } from '@/lib/i18n';
+import { uploadFiles, uploadErrorMessage } from '@/lib/upload-client';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -76,18 +77,14 @@ export default function SettingsPage() {
 
   const avatarMutation = useMutation({
     mutationFn: async (file: File) => {
-      const fd = new FormData();
-      fd.append('files', file);
-      const res = await fetch('/api/upload', { method: 'POST', body: fd });
-      if (!res.ok) throw new Error('Erreur');
-      return res.json();
+      return uploadFiles(file);
     },
     onSuccess: (data) => {
       const url = data.urls?.[0] || data.url;
       profileMutation.mutate({ avatar: url });
     },
-    onError: () => {
-      toast.error(t('biz_upload_error'));
+    onError: (err) => {
+      toast.error(uploadErrorMessage(err, t('biz_upload_error')));
     },
   });
 

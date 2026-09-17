@@ -3,6 +3,7 @@
 import { useState, useRef } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useTranslation, categoryTranslations } from '@/lib/i18n';
+import { uploadFiles, uploadErrorMessage } from '@/lib/upload-client';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -290,22 +291,12 @@ export default function DemoDataPage() {
 
   // Upload handler
   const handleUpload = async (file: File, field: 'logo' | 'coverImage') => {
-    const formData = new FormData();
-    formData.append('files', file);
     try {
-      const res = await fetch('/api/upload', {
-        method: 'POST',
-        body: formData,
-      });
-      if (res.ok) {
-        const data = await res.json();
-        setForm((prev) => ({ ...prev, [field]: data.url }));
-        toast.success(t('demo_image_uploaded'));
-      } else {
-        toast.error(t('demo_upload_error'));
-      }
-    } catch {
-      toast.error(t('demo_upload_error'));
+      const data = await uploadFiles(file);
+      setForm((prev) => ({ ...prev, [field]: data.url }));
+      toast.success(t('demo_image_uploaded'));
+    } catch (err) {
+      toast.error(uploadErrorMessage(err, t('demo_upload_error')));
     }
   };
 

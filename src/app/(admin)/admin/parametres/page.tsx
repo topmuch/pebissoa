@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useTranslation } from '@/lib/i18n';
+import { uploadFiles, uploadErrorMessage } from '@/lib/upload-client';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -130,14 +131,7 @@ export default function AdminParametresPage() {
 
   const uploadMutation = useMutation({
     mutationFn: async (file: File) => {
-      const formData = new FormData();
-      formData.append('files', file);
-      const res = await fetch('/api/upload', {
-        method: 'POST',
-        body: formData,
-      });
-      if (!res.ok) throw new Error(t('admin_settings_upload_error'));
-      return res.json();
+      return uploadFiles(file);
     },
   });
 
@@ -146,8 +140,8 @@ export default function AdminParametresPage() {
       const result = await uploadMutation.mutateAsync(file);
       updateField(field, result.url);
       toast.success(t('admin_settings_image_uploaded'));
-    } catch {
-      toast.error(t('admin_settings_upload_error'));
+    } catch (err) {
+      toast.error(uploadErrorMessage(err, t('admin_settings_upload_error')));
     }
   };
 

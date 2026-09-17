@@ -4,7 +4,7 @@ import { join, extname } from 'path';
 import { randomUUID } from 'crypto';
 import { getUploadsDir } from '@/lib/uploads';
 
-const ALLOWED_EXTENSIONS = ['.jpg', '.jpeg', '.png', '.gif', '.webp', '.pdf'];
+const ALLOWED_EXTENSIONS = ['.jpg', '.jpeg', '.jfif', '.png', '.gif', '.webp', '.avif', '.pdf'];
 const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10 MB
 
 // POST /api/upload - Upload one or more files (multipart/form-data, field name: "files")
@@ -30,9 +30,15 @@ export async function POST(request: NextRequest) {
 
     for (const file of submitted) {
       const ext = extname(file.name || '').toLowerCase() || '.jpg';
+      if (ext === '.heic' || ext === '.heif') {
+        return NextResponse.json(
+          { error: `${file.name} : les photos iPhone (HEIC) ne sont pas supportées. Convertissez-les en JPG.` },
+          { status: 400 }
+        );
+      }
       if (!ALLOWED_EXTENSIONS.includes(ext)) {
         return NextResponse.json(
-          { error: `Type de fichier non autorisé : ${ext}` },
+          { error: `Format non supporté (${ext}) : ${file.name}. Utilisez JPG, PNG, GIF, WebP ou AVIF.` },
           { status: 400 }
         );
       }

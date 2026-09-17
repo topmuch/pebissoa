@@ -28,6 +28,7 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { useToast } from '@/hooks/use-toast';
+import { uploadFiles, validateImageFile, uploadErrorMessage } from '@/lib/upload-client';
 import {
   Building2,
   Mail,
@@ -178,14 +179,10 @@ export default function RegisterPage() {
   };
 
   const handleCoverUpload = useCallback(async (file: File) => {
-    // Validate file
-    const allowedTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
-    if (!allowedTypes.includes(file.type)) {
-      toast({ title: t('register_error'), description: 'Format non supporté. Utilisez JPG, PNG ou WebP.', variant: 'destructive' });
-      return;
-    }
-    if (file.size > 5 * 1024 * 1024) {
-      toast({ title: t('register_error'), description: 'Fichier trop volumineux. Maximum 5MB.', variant: 'destructive' });
+    // Validate file (message explicite en cas de HEIC / MIME manquant / taille)
+    const problem = validateImageFile(file);
+    if (problem) {
+      toast({ title: t('register_error'), description: problem, variant: 'destructive' });
       return;
     }
 
@@ -197,14 +194,10 @@ export default function RegisterPage() {
     // Upload to server
     setIsUploading(true);
     try {
-      const fd = new FormData();
-      fd.append('files', file);
-      const res = await fetch('/api/upload', { method: 'POST', body: fd });
-      if (!res.ok) throw new Error('Upload failed');
-      const data = await res.json();
+      const data = await uploadFiles(file);
       setCoverImage(data.url || data.urls?.[0]);
-    } catch {
-      toast({ title: t('register_error'), description: 'Erreur lors de l\'envoi de la photo', variant: 'destructive' });
+    } catch (err) {
+      toast({ title: t('register_error'), description: uploadErrorMessage(err, 'Erreur lors de l\'envoi de la photo'), variant: 'destructive' });
       setCoverPreview(null);
     } finally {
       setIsUploading(false);

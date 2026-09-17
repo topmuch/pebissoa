@@ -110,3 +110,23 @@ Stage Summary:
 - Le dashboard client dispose d'un bouton « Voir mes annonces » qui redirige vers la page profil public de l'entreprise où ses annonces sont visibles
 - Débordement horizontal mobile du dashboard corrigé (préexistant)
 - Fichiers modifiés : src/app/(dashboard)/dashboard/page.tsx, src/components/dashboard/dashboard-layout.tsx, src/lib/i18n.ts, src/lib/i18n-en.ts
+
+---
+Task ID: 6
+Agent: Z.ai Code (main)
+Task: Corriger « impossible de mettre des images — erreur téléchargement »
+
+Work Log:
+- Diagnostic : API /api/upload fonctionne (curl 200 + fichier servi 200), et TOUS les écrans testés fonctionnent en E2E sur le sandbox (photos dashboard 3→4, dialog annonces POST 201 + image, wizard inscription étape photo) → l'échec utilisateur est lié au TYPE/TAILLE de fichier ou à son déploiement, et les UI masquaient la cause réelle derrière « Erreur lors du téléchargement »
+- Nouveau helper partagé src/lib/upload-client.ts : uploadFiles() (lance une Error avec le message serveur précis), validateImageFile() (pré-check client : taille 10 Mo, HEIC, MIME vide → fallback extension), uploadErrorMessage() (message d'erreur ou fallback i18n)
+- API upload : extensions .jfif (JPEG WhatsApp/mobiles) et .avif acceptées ; message dédié pour .heic/.heif (« photos iPhone (HEIC) non supportées, convertissez en JPG ») ; messages d'erreur incluant le nom du fichier
+- 9 consommateurs migrés vers le helper + affichage de l'erreur réelle dans les toasts : register/page.tsx (validation MIME remplacée par validateImageFile — corrige le rejet des fichiers avec file.type vide, fréquent sur mobile), dashboard photos/ads/products/mon-entreprise/settings, admin-edit-business-dialog, admin annonces/demo-data/parametres
+- Tailles alignées à 10 Mo (API était à 10 Mo, register bloquait à 5 Mo côté client) : hints i18n onboarding_step4_hint / dash_photos_format / dash_settings_avatar_format en fr+pt+en
+- compose.yml : ajout du volume pebissoa-uploads:/app/uploads manquant (le README-DEPLOY demandait 2 volumes mais le compose n'en avait qu'1 → images perdues à chaque redéploiement)
+- Tests : curl .jfif accepté, .heic message clair, .exe rejet clair ; E2E UI : toast affichant le message HEIC complet, upload .jfif via dropzone photos OK (4→5) ; lint 0 erreur ; photos/annonces de test nettoyées
+
+Stage Summary:
+- Les échecs d'upload affichent maintenant la VRAIE raison (format, HEIC, taille) au lieu d'un message générique
+- Formats élargis : .jfif et .avif acceptés ; garde-fou explicite pour HEIC
+- Volume /app/uploads ajouté au compose → persistance des images en production Coolify
+- Fichiers : src/lib/upload-client.ts (nouveau), api/upload/route.ts, register, 5 pages dashboard, dialog admin, 3 pages admin, i18n.ts, i18n-en.ts, compose.yml

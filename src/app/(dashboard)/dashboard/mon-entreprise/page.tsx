@@ -4,6 +4,7 @@ import { useState, useEffect, useRef, useCallback } from 'react';
 import { useSession } from 'next-auth/react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useBusinessSlug } from '@/hooks/use-business-slug';
+import { uploadFiles, uploadErrorMessage } from '@/lib/upload-client';
 import { useTranslation } from '@/lib/i18n';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -151,14 +152,7 @@ export default function MonEntreprisePage() {
 
   const uploadMutation = useMutation({
     mutationFn: async (file: File) => {
-      const fd = new FormData();
-      fd.append('files', file);
-      const res = await fetch('/api/upload', {
-        method: 'POST',
-        body: fd,
-      });
-      if (!res.ok) throw new Error('Erreur');
-      return res.json();
+      return uploadFiles(file);
     },
   });
 
@@ -171,8 +165,8 @@ export default function MonEntreprisePage() {
       setLogoPreview(url);
       updateMutation.mutate({ logo: url });
       toast.success(t('biz_logo_updated'));
-    } catch {
-      toast.error(t('biz_upload_error'));
+    } catch (err) {
+      toast.error(uploadErrorMessage(err, t('biz_upload_error')));
     }
   };
 
@@ -185,8 +179,8 @@ export default function MonEntreprisePage() {
       setCoverPreview(url);
       updateMutation.mutate({ coverImage: url });
       toast.success(t('biz_cover_updated'));
-    } catch {
-      toast.error(t('biz_upload_error'));
+    } catch (err) {
+      toast.error(uploadErrorMessage(err, t('biz_upload_error')));
     }
   };
 
