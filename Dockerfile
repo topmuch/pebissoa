@@ -8,8 +8,17 @@ RUN npm install -g bun
 
 WORKDIR /app
 
-# Clone the repository (log the commit in build logs to detect stale builds)
-RUN git clone https://github.com/topmuch/pebissoa.git . && echo "🔨 Build commit: $(git log -1 --format='%h %s')"
+# CACHE-BUST : re-télécharge ce fichier à chaque build (l'API GitHub renvoie un
+# contenu différent à chaque nouveau commit) → invalide le cache Docker de la
+# couche git clone ci-dessous. SANS CELA, Docker réutilisait le clone du build
+# précédent et l'application tournait sur du CODE OBSOLÈTE (bug du 17/09 :
+# Redeploy avec bundled=null → 110 images manquantes).
+ADD https://api.github.com/repos/topmuch/pebissoa/commits/main /tmp/upstream-commit.json
+
+# Clone the repository into /tmp then move to /app (`git clone <repo> .` exige
+# un dossier vide, or l'ADD du cache-bust a déjà déposé un fichier dans /tmp)
+# Le log du commit permet de détecter un build obsolète dans les logs Coolify.
+RUN git clone https://github.com/topmuch/pebissoa.git /tmp/repo && cp -a /tmp/repo/. /app/ && rm -rf /tmp/repo && echo "🔨 Build commit: $(git log -1 --format='%h %s')"
 
 # Keep a pristine copy of the bundled production images OUTSIDE /app/uploads.
 # When a persistent volume is mounted on /app/uploads (empty at first boot),
