@@ -4,6 +4,14 @@ import { useQuery } from '@tanstack/react-query';
 import { ArrowRight, ChevronLeft, ChevronRight, Sparkles, Store } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import { useTranslation } from '@/lib/i18n';
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+  type CarouselApi,
+} from '@/components/ui/carousel';
 
 // Banner format definitions — 6 placements
 export const BANNER_FORMATS: Record<string, { label: string; w: number; h: number; usage: string; isWide: boolean }> = {
@@ -515,19 +523,118 @@ export function PromoDuoBanners() {
 }
 
 // HomepageSponsoredGrid — bannières publiées depuis l'admin (Annonces)
-// Affiche les bannières actives « Accueil — Milieu » (home / 336x280) sous les catégories
+// Affiche les bannières actives « Accueil — Milieu » (home / 336x280) sous les catégories.
+// → CARROUSEL DÉFILANT : autoplay en boucle (3,5 s), pause au survol/tactile,
+//   flèches au survol, points de navigation, swipe natif (embla), responsive :
+//   2 cartes (mobile) / 3 (tablette) / 4 (desktop), respect prefers-reduced-motion.
 export function HomepageSponsoredGrid() {
+  const { tl } = useTranslation();
   const { data: banners } = useBanners('home', '336x280');
+  const items = banners || [];
 
-  if (!banners || banners.length === 0) return null;
+  const [api, setApi] = useState<CarouselApi>();
+  const [current, setCurrent] = useState(0);
+  const [snapCount, setSnapCount] = useState(0);
+  const [paused, setPaused] = useState(false);
+  const reducedMotion = useRef(false);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined' && window.matchMedia) {
+      reducedMotion.current = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    }
+  }, []);
+
+  // Suivi de la page active — recalculé aussi quand le nombre de pages change (resize)
+  useEffect(() => {
+    if (!api) return;
+    const update = () => {
+      setCurrent(api.selectedScrollSnap());
+      setSnapCount(api.scrollSnapList().length);
+    };
+    update();
+    api.on('select', update);
+    api.on('reInit', update);
+    return () => {
+      api.off('select', update);
+      api.off('reInit', update);
+    };
+  }, [api]);
+
+  // Défilement automatique — pause au survol/tactile, onglet caché et
+  // prefers-reduced-motion respectés
+  useEffect(() => {
+    if (paused || reducedMotion.current || items.length <= 1 || !api) return;
+    const id = setInterval(() => {
+      if (document.hidden) return;
+      if (api.canScrollNext()) api.scrollNext();
+      else api.scrollTo(0);
+    }, 3500);
+    return () => clearInterval(id);
+  }, [api, paused, items.length]);
+
+  if (items.length === 0) return null;
 
   return (
-    <section className="pb-12 md:pb-16">
+    <section
+      className="pb-12 md:pb-16"
+      aria-label={tl({ fr: 'Publicités sponsorisées', pt: 'Anúncios patrocinados', en: 'Sponsored ads' })}
+    >
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-          {banners.map((banner) => (
-            <BannerCard key={banner.id} banner={banner} />
-          ))}
+        <div
+          className="group relative"
+          onMouseEnter={() => setPaused(true)}
+          onMouseLeave={() => setPaused(false)}
+          onTouchStart={() => setPaused(true)}
+          onTouchEnd={() => setPaused(false)}
+        >
+          <Carousel
+            setApi={setApi}
+            opts={{ align: 'start', loop: items.length >= 5 }}
+            className="relative"
+          >
+            <CarouselContent className="-ml-3 py-1">
+              {items.map((banner) => (
+                <CarouselItem
+                  key={banner.id}
+                  className="pl-3 basis-1/2 md:basis-1/3 xl:basis-1/4"
+                >
+                  <BannerCard banner={banner} />
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+
+            {/* Flèches précédent / suivant (survol desktop, comme le PromoSlider) */}
+            {items.length > 1 && (
+              <>
+                <CarouselPrevious
+                  aria-label={tl({ fr: 'Publicités précédentes', pt: 'Anúncios anteriores', en: 'Previous ads' })}
+                  className="hidden sm:inline-flex -left-3 lg:-left-4 h-9 w-9 rounded-full border-none bg-black/40 text-white opacity-0 group-hover:opacity-100 hover:bg-black/60 transition-all duration-300 disabled:opacity-0"
+                />
+                <CarouselNext
+                  aria-label={tl({ fr: 'Publicités suivantes', pt: 'Próximos anúncios', en: 'Next ads' })}
+                  className="hidden sm:inline-flex -right-3 lg:-right-4 h-9 w-9 rounded-full border-none bg-black/40 text-white opacity-0 group-hover:opacity-100 hover:bg-black/60 transition-all duration-300 disabled:opacity-0"
+                />
+              </>
+            )}
+          </Carousel>
+
+          {/* Points de navigation — page active en primary, comme le reste du site */}
+          {snapCount > 1 && (
+            <div className="mt-5 flex items-center justify-center gap-2">
+              {Array.from({ length: snapCount }).map((_, i) => (
+                <button
+                  key={i}
+                  type="button"
+                  onClick={() => api?.scrollTo(i)}
+                  aria-label={tl({ fr: `Aller à la page ${i + 1} des publicités`, pt: `Ir para a página ${i + 1} dos anúncios`, en: `Go to ads page ${i + 1}` })}
+                  aria-current={i === current}
+                  className={`h-2.5 rounded-full transition-all duration-300 ${
+                    i === current ? 'w-6 bg-primary' : 'w-2.5 bg-muted-foreground/30 hover:bg-muted-foreground/50'
+                  }`}
+                />
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </section>
