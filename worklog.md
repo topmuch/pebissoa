@@ -394,3 +394,21 @@ Work Log:
 Stage Summary:
 - IMAGES RESTAURÉES EN PROD SANS REBUILD : volume /app/uploads = 114 fichiers persistants
 - Le problème de build obsolète Coolify reste ouvert — diagnostic à confirmer par la config General
+
+---
+Task ID: 18
+Agent: Z.ai Code (main)
+Task: Synchroniser local↔GitHub + transformer les 6 cards de publicités de l'accueil en slider défilant
+
+Work Log:
+- git fetch : divergence ahead 1 / behind 1 (worklog re-commité 9e187ad après reset sandbox) → résolu par reset --hard origin/main (c8cfa8f) : local == GitHub
+- Localisation : les 6 cards = HomepageSponsoredGrid (banner-placement.tsx), section « Accueil — Milieu » format 336x280, entre les rubriques et « Pourquoi nous sommes axés sur la qualité »
+- Implémentation : Carousel embla (shadcn ui/carousel) — autoplay 3,5 s en boucle (scrollNext / retour début si pas de loop), pause au survol + tactile, onglet caché et prefers-reduced-motion respectés, flèches au survol (style PromoSlider : bg-black/40 → hover bg-black/60), points de navigation centrés (actif w-6 bg-primary), responsive basis-1/2 (mobile) / md:basis-1/3 / xl:basis-1/4
+- DB locale sans bannières (API banners [] ) → seed one-off de 6 annonces Ad de test (position=home, format=336x280, images statiques /banners et /ad-banners) dans db/custom.db (non commité)
+- E2E agent-browser : section montée avec 6 items, autoplay prouvé (dot actif 0 → 5 après ~4,5 s), desktop 4 cartes visibles, mobile 390px 2 cartes (185px ≈ 50 %), 0 débordement horizontal, lint 0 erreur
+- Captures : /tmp/slider-desktop.png, /tmp/slider-mobile-v2.png
+
+Stage Summary:
+- Commit 3497b52 poussé : main synchronisée avec origin
+- La grille statique 6 cards est remplacée par un carrousel défilant en dessous des rubriques, avant la section « Pourquoi nous… »
+- Reste ouvert : build Coolify obsolète (Task ID 16) — le déploiement du nouveau code attend la config Coolify (source/build pack)
